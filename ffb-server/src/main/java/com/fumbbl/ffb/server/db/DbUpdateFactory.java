@@ -75,7 +75,8 @@ public class DbUpdateFactory implements IDbStatementFactory {
 	}
 
 	public void closeDbConnection() throws SQLException {
-		if (getDbConnectionManager().isStandalone()) {
+		if (getDbConnectionManager().isStandalone()
+			&& !Boolean.parseBoolean(getServer().getProperty("server.local"))) {
 			fDbConnection.createStatement().executeUpdate("SHUTDOWN");
 		}
 		getDbConnectionManager().closeDbConnection(fDbConnection);

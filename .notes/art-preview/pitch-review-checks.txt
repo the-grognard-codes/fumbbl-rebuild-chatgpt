@@ -1,0 +1,17 @@
+PASS: 390 equal square cells
+PASS: End zones occupy exactly one column each, with unchanged square size
+PASS: Dotted wide-zone boundaries span the pitch at rows 4 and 11
+PASS: All 12 tokens anchor to their declared square centers
+PASS: Coordinates default off and count outwards 1–13 when enabled
+PASS: Skill master toggle hides all badges
+PASS: Custom skill abbreviations and restore-defaults affect displayed tokens
+PASS: Per-skill visibility hides Mighty Blow badges
+PASS: Zoom changes the view only; cell-center transforms remain intact
+PASS: Keyboard panning adjusts viewBox and Fit restores it
+PASS: Log exposes 48 entries and Match start / Latest navigation
+PASS: Chat toggles into the shared panel and can be hidden
+PASS: History expands and collapses
+PASS: Bench drawer opens and closes
+PASS: Settings panel opens and closes
+PASS: Smaller usable-height control changes preview app budget
+16 offline checks passed. JavaScript evaluated against a minimal simulated DOM; this is not browser rendering, CSS layout, accessibility, or viewport-fit verification.

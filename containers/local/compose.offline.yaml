@@ -1,0 +1,6 @@
+# Proves the same JVM/fixtures work with no external network route.
+# Docker Desktop cannot publish a host port from an internal-only network.
+services:
+  server:
+    networks: !override [isolated]
+    ports: !reset []

@@ -1,0 +1,45 @@
+Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+Maven home: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.tools\apache-maven-3.9.9
+Java version: 1.8.0_504, vendor: Temurin, runtime: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.tools\jdk8u504-b01\jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] ffb                                                                [pom]
+[INFO] ffb-common                                                         [jar]
+[INFO] ffb-server                                                         [jar]
+[INFO] ffb-statetest                                                      [jar]
+[INFO] 
+[INFO] -------------------------< com.fumbbl.ffb:ffb >-------------------------
+[INFO] Building ffb 3.4.0                                                 [1/4]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ---------------------< com.fumbbl.ffb:ffb-common >----------------------
+[INFO] Building ffb-common 3.4.0                                          [2/4]
+[INFO]   from ffb-common\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for ffb 3.4.0:
+[INFO] 
+[INFO] ffb ................................................ SUCCESS [  0.002 s]
+[INFO] ffb-common ......................................... FAILURE [  5.395 s]
+[INFO] ffb-server ......................................... SKIPPED
+[INFO] ffb-statetest ...................................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.536 s
+[INFO] Finished at: 2026-09-06T23:35:15-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Plugin org.apache.maven.plugins:maven-resources-plugin:3.3.1 or one of its dependencies could not be resolved:
+[ERROR] 	The following artifacts could not be resolved: org.apache.maven.plugins:maven-resources-plugin:pom:3.3.1 (absent): Could not transfer artifact org.apache.maven.plugins:maven-resources-plugin:pom:3.3.1 from/to central (https://repo.maven.apache.org/maven2): Permission denied: connect
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException

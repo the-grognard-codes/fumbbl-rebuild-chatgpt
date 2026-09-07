@@ -1,0 +1,20 @@
+# Allow only server build inputs into the context, including intermediate stages.
+*
+!pom.xml
+!ffb-common/
+!ffb-common/**
+!ffb-server/
+!ffb-server/**
+!ffb-tools/
+!ffb-tools/pom.xml
+!ffb-client/
+!ffb-client/pom.xml
+!ffb-client-logic/
+!ffb-client-logic/pom.xml
+!ffb-resources/
+!ffb-resources/pom.xml
+!ffb-statetest/
+!ffb-statetest/pom.xml
+**/target
+**/dependency-reduced-pom.xml
+**/*.iml

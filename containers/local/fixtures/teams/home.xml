@@ -1,0 +1,11 @@
+<team id="fixture-home"><coach>FixtureHome</coach><name>Fixture home</name><race>Human</race><rosterId>fixture.human</rosterId><reRolls>2</reRolls><fanFactor>1</fanFactor><apothecaries>0</apothecaries><treasury>0</treasury><teamValue>650000</teamValue><player nr="1" id="fixture-home-1"><name>Fixture 1</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="2" id="fixture-home-2"><name>Fixture 2</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="3" id="fixture-home-3"><name>Fixture 3</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="4" id="fixture-home-4"><name>Fixture 4</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="5" id="fixture-home-5"><name>Fixture 5</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="6" id="fixture-home-6"><name>Fixture 6</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="7" id="fixture-home-7"><name>Fixture 7</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="8" id="fixture-home-8"><name>Fixture 8</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="9" id="fixture-home-9"><name>Fixture 9</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="10" id="fixture-home-10"><name>Fixture 10</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player>
+<player nr="11" id="fixture-home-11"><name>Fixture 11</name><gender>male</gender><positionId>fixture.lineman</positionId><skillList/><playerStatistics currentSpps="0"/></player></team>

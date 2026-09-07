@@ -39,6 +39,7 @@ Prefer crisp 2D player sprites with a restrained pitch and clean DOM/vector cont
 | [08 Evidence and coverage index](08-evidence-index.md) | Scope checklist, machine-readable data, source methodology and remaining uncertainty |
 | [09 Implementation kickoff](09-implementation-kickoff.md) | Accepted owner decisions, local setup needs, session-sized slices and first engineering prompt |
 | [10 Local container environment](10-container-environment.md) | Authorized Docker installation, verified MariaDB image and remaining server-container work |
+| [11 Independent startup](11-independent-startup.md) | M0b startup trace, isolated fixture lifecycle, server image and actual acceptance evidence |
 | [Preliminary art previews](../art-preview/README.md) | Human/Orc concepts and rough pitch, dugout and match UI |
 | [Contact-sheet gallery](assets/README.md) | All 18 image categories with labeled source samples |
 

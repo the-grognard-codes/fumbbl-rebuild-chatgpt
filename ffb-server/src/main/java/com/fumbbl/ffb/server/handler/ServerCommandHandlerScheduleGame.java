@@ -9,6 +9,7 @@ import com.fumbbl.ffb.server.GameCache;
 import com.fumbbl.ffb.server.GameStartMode;
 import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.ServerMode;
+import com.fumbbl.ffb.server.local.LocalGameLifecycle;
 import com.fumbbl.ffb.server.net.ReceivedCommand;
 import com.fumbbl.ffb.server.net.commands.InternalServerCommandScheduleGame;
 import com.fumbbl.ffb.server.request.fumbbl.FumbblRequestLoadTeam;
@@ -32,6 +33,11 @@ public class ServerCommandHandlerScheduleGame extends ServerCommandHandler {
 				.getCommand();
 		GameCache gameCache = getServer().getGameCache();
 		GameState gameState = gameCache.createGameState(GameStartMode.SCHEDULE_GAME);
+		if (new LocalGameLifecycle().isLocal(getServer())) {
+			new LocalGameLifecycle().configureOptions(gameState);
+			gameState.initRulesDependentMembers();
+			gameState.getGame().initializeRules();
+		}
 		if (ServerMode.FUMBBL == getServer().getMode()) {
 			FumbblRequestLoadTeam requestHomeTeam = new FumbblRequestLoadTeam(gameState, null,
 					scheduleGameCommand.getTeamHomeId(), true, null, new ArrayList<>());

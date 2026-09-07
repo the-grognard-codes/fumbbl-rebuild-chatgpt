@@ -1,5 +1,31 @@
 # Preliminary art generation prompts
 
+## Position additions — 2026-09-07
+
+Built-in image-generation tool; no CLI/API fallback. The original approved sheet
+for each team was inspected and supplied as a reference. Outputs were visually
+inspected and copied into this directory without replacing the originals.
+
+### Orcs — orcs-additions-v1.png
+
+Use case: stylized-concept.
+Asset type: supplemental ORC TEAM concept sheet, landscape 1536 x 1024.
+Input image 1 is the approved Orc art STYLE AND PALETTE reference. Preserve its crisp detailed pixel clusters, dark neutral charcoal presentation background, upright front three-quarter sports sprite camera, lighting, heavy outlines, riveted rust-orange and charcoal armor, worn leather, muted green skin and ivory lettering.
+Create a companion sheet adding exactly two NEW positions, title "ORCS / TROLL + GOBLIN". Large main row: a towering hulking TROLL on the left with extremely long heavy arms, hunched shoulders, broad dull-green face, jutting lower jaw, restrained tusks, oversized patched rust/charcoal football shoulder pads; and a clearly much smaller wiry green GOBLIN on the right with long pointed ears, cunning expressive face, small leather helmet and matching rust/charcoal football kit. No weapons. Troll should be about twice normal Orc height; goblin about half normal Orc height. Distinct silhouettes, same team and production style. Keep both subjects well within the image, grounded and anatomically coherent.
+Exact labels "TROLL" and "GOBLIN". Under the main art, show their matching smaller upright sprites each centered over a separate IDENTICALLY SIZED single square grass tile: emphasize that both occupy one board square despite the different silhouette sizes. Troll may be taller visually but its footprint is centered on just one tile. Goblin should remain markedly small. Lower right restrained uniform swatch strip matching the reference.
+This is preliminary concept art, not a sprite atlas. Do not redesign or recolor the approved Orc kit, do not smooth into painting, do not invent numeric pixel-size labels, team branding, stats, other new positions, 3D or isometric ground, logos or watermarks.
+
+### Humans — humans-additions-v1.png
+
+Use case: stylized-concept.
+Asset type: supplemental HUMAN TEAM concept sheet, landscape 1536 x 1024.
+Input image 1 is the approved Human art STYLE AND PALETTE reference. Match its crisp detailed pixel clusters, dark neutral presentation background, upright front three-quarter sports sprite camera, light direction, heavy outlines, worn royal-blue and warm-ivory football armor, warm brown leather and silver steel. Preserve the approved blue/ivory colors exactly in spirit.
+Create a companion sheet adding exactly two NEW positions, title "HUMANS / OGRE + HALFLING". Large main row: a towering powerful OGRE on the left, bald or short-haired heavy humanlike head with a broad nose and jutting jaw, enormous muscular forearms, heavy blue/ivory team shoulder pads, leather straps and matching football equipment; and a clearly much smaller cheerful but determined HALFLING on the right, rounder body, curly hair, rounded ears, oversized bare hairy feet, small blue/ivory padded sports jersey and leather gear. No weapons. Ogre about twice ordinary human height, halfling about half ordinary human height; visibly distinct fantasy athlete silhouettes on a shared baseline. Keep subjects well inside the image, anatomically coherent.
+Exact labels "OGRE" and "HALFLING". Under the main art, show their matching smaller upright sprites each centered over a separate IDENTICALLY SIZED single square grass tile: both occupy one board square despite their different silhouette sizes. Ogre may be taller visually but its footprint is centered on just one tile; halfling should remain markedly small. Lower right restrained uniform swatches matching the approved palette.
+This is preliminary concept art, not a sliceable sprite atlas. Do not redesign or recolor the approved Human kit, do not smooth into painting, do not invent numeric pixel-size labels, branding, stats, other new positions, 3D or isometric ground, logos or watermarks.
+
+## Original reference chain
+
 Generated 2026-09-06 with the built-in image-generation tool. No CLI/API fallback used. Original images retained at the tool's default location; identical copies saved beside this file. Human sheet generated from text; Orc sheet references the generated Human sheet; match screen references both generated sheets. No repository image was used as a generation reference.
 
 ## Humans — humans-concept-v1.png

@@ -2,17 +2,44 @@
 
 Preliminary visual exploration, 2026-09-06. Produced with the built-in image-generation tool for owner review; [exact prompts and reference chain](prompts.md). All three images are 1536 × 1024 PNG concept boards. These are neither executable UI nor production-ready sprite atlases. Existing game assets remain unchanged.
 
+**Update, 2026-09-07:** the owner approves the Human/Orc direction. New matching
+position sheets add Ogre/Halfling and Troll/Goblin below. The
+[revised pitch and UI requirements](pitch-and-ui-requirements-v2.md) supersede the
+original pitch image's grid and panel proportions. Open the
+[interactive layout study](pitch-review-v2.html) to explore equal grid/end-zone
+cells, 4/7/4 wide zones, coordinates, zoom/pan, skill labels and the larger shared
+log/chat panel. This standalone review has no game connection; actual browser
+automated browser visual verification remains outstanding because local-file navigation was blocked.
+
+**Layout accepted, 2026-09-07:** the owner reviewed concept 02 and approved it as
+the foundation for future match-screen work. Build on this layout as engineering
+progresses, preserving its pitch-first proportions, compact bench, expandable
+log/chat, grid geometry and display controls. This accepts the visual direction;
+production integration and viewport/accessibility checks remain future work.
+
 ## Human team
 
 Blue/ivory sample uniform; lineman, blitzer, catcher and thrower silhouettes; a braced/running pose comparison.
 
 ![Human concept sheet](humans-concept-v1.png)
 
+### Added positions: Ogre and Halfling
+
+New companion sheet preserving the approved blue/ivory equipment and pixel treatment.
+
+![Human Ogre and Halfling concept sheet](humans-additions-v1.png)
+
 ## Orc team
 
 Rust/charcoal sample uniform; lineman, blitzer, blocker and thrower silhouettes; heavier proportions distinguish the team from Humans. Roles are sample art archetypes, not a validated or complete BB2025 roster.
 
 ![Orc concept sheet](orcs-concept-v1.png)
+
+### Added positions: Troll and Goblin
+
+New companion sheet preserving the approved rust/charcoal equipment and pixel treatment.
+
+![Orc Troll and Goblin concept sheet](orcs-additions-v1.png)
 
 ## Pitch, dugouts and match controls
 
@@ -30,6 +57,9 @@ The match-screen grid is illustrative: exact 26 × 15 square geometry, line plac
 
 **Next trial:** choose a native sprite cell after placing a few cleaned Human/Orc sprites on the actual board, test small/normal/large silhouettes, then export a short pose set with matching origins and transparent edges. Verify integer zoom, ball/status overlays, home/away differentiation and readable controls. This is a small art-production trial; the approximately 30-team sprite/color-variation sprint remains separate.
 
-**Owner review focus:** preferred amount of pixel detail, Human/Orc silhouettes, pitch texture, dugout placement and overall panel density. The sample colors are provisional. No final team name or branding decision is needed for M0/M1.
+**Owner review focus:** Human/Orc style and colors are accepted as the reference
+for these additions. Review the four new silhouettes and the revised pitch layout;
+the original oversized bench and illustrative grid are superseded by concept 02.
+No final team name or branding decision is needed for M0/M1.
 
 See [implementation kickoff](../overhaul-analysis/09-implementation-kickoff.md) for accepted architecture and engineering slices.

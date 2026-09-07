@@ -1,0 +1,28 @@
+Fixture demo passed gameId=2 before stop/start.
+true
+NAME                       IMAGE                                                                                    COMMAND                  SERVICE    CREATED              STATUS                    PORTS
+ffb-local-m0b-database-1   mariadb:11.8.9@sha256:2439dcd7d14010ecd1ff7a4e1c5abe8e208c34fe35290744deeeaac3569043c3   "docker-entrypoint.s…"   database   13 minutes ago       Up 13 minutes (healthy)   3306/tcp
+ffb-local-m0b-server-1     ffb-server:3.4.0-m0b.1                                                                   "java -Xms128m -Xmx7…"   server     About a minute ago   Up 58 seconds (healthy)   22227/tcp
+ Container ffb-local-m0b-server-1 Stopping 
+ Container ffb-local-m0b-server-1 Stopped 
+ Container ffb-local-m0b-database-1 Stopping 
+ Container ffb-local-m0b-database-1 Stopped 
+server-1  | 	at com.fumbbl.ffb.server.db.DbUpdateFactory.closeDbConnection(DbUpdateFactory.java:79)
+server-1  | 	at com.fumbbl.ffb.server.FantasyFootballServer.lambda$shutdownResources$8(FantasyFootballServer.java:445)
+server-1  | 	at com.fumbbl.ffb.server.FantasyFootballServer.shutdownPhase(FantasyFootballServer.java:455)
+server-1  | 	at com.fumbbl.ffb.server.FantasyFootballServer.shutdownResources(FantasyFootballServer.java:445)
+server-1  | 	at java.lang.Thread.run(Thread.java:750)
+server-1  | Exception in thread "local-server-shutdown" java.lang.IllegalStateException: Server shutdown incomplete; inspect errors above
+server-1  | 	at com.fumbbl.ffb.server.FantasyFootballServer.shutdownResources(FantasyFootballServer.java:448)
+server-1  | 	at java.lang.Thread.run(Thread.java:750)
+ Container ffb-local-m0b-database-1 Starting 
+ Container ffb-local-m0b-database-1 Started 
+ Container ffb-local-m0b-database-1 Waiting 
+ Container ffb-local-m0b-database-1 Healthy 
+ Container ffb-local-m0b-server-1 Starting 
+ Container ffb-local-m0b-server-1 Started 
+ Container ffb-local-m0b-server-1 Waiting 
+ Container ffb-local-m0b-database-1 Waiting 
+ Container ffb-local-m0b-database-1 Healthy 
+ Container ffb-local-m0b-server-1 Healthy 
+PASS gameId=2

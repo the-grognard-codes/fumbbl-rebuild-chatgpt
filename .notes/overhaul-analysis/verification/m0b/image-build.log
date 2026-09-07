@@ -1,0 +1,272 @@
+ Image ffb-server:3.4.0-m0b.1 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 584B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 994B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/eclipse-temurin:8-jdk-jammy@sha256:7cb1137d4a02aeb7ca85faae69c5f0720703936cbfb0b4af21067c73174f9b5e
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-8@sha256:e20e4fc05fb5480c884a1f750c362ed0e91aca15cec5736e12796713710ec9b3
+#4 DONE 0.1s
+
+#5 [internal] load metadata for docker.io/library/eclipse-temurin:8-jre-jammy@sha256:d53aa7811eba390450721b1037978605992f5d9467c4af629384f23a49f78436
+#5 DONE 0.1s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 427B done
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 DONE 0.0s
+
+#8 [maven 1/1] FROM docker.io/library/maven:3.9.9-eclipse-temurin-8@sha256:e20e4fc05fb5480c884a1f750c362ed0e91aca15cec5736e12796713710ec9b3
+#8 resolve docker.io/library/maven:3.9.9-eclipse-temurin-8@sha256:e20e4fc05fb5480c884a1f750c362ed0e91aca15cec5736e12796713710ec9b3 0.1s done
+#8 DONE 0.1s
+
+#9 [stage-2 1/4] FROM docker.io/library/eclipse-temurin:8-jre-jammy@sha256:d53aa7811eba390450721b1037978605992f5d9467c4af629384f23a49f78436
+#9 resolve docker.io/library/eclipse-temurin:8-jre-jammy@sha256:d53aa7811eba390450721b1037978605992f5d9467c4af629384f23a49f78436
+#9 resolve docker.io/library/eclipse-temurin:8-jre-jammy@sha256:d53aa7811eba390450721b1037978605992f5d9467c4af629384f23a49f78436 0.1s done
+#9 DONE 0.1s
+
+#10 [build 1/7] FROM docker.io/library/eclipse-temurin:8-jdk-jammy@sha256:7cb1137d4a02aeb7ca85faae69c5f0720703936cbfb0b4af21067c73174f9b5e
+#10 resolve docker.io/library/eclipse-temurin:8-jdk-jammy@sha256:7cb1137d4a02aeb7ca85faae69c5f0720703936cbfb0b4af21067c73174f9b5e 0.1s done
+#10 DONE 0.1s
+
+#7 [internal] load build context
+#7 transferring context: 485.33kB 0.4s done
+#7 DONE 0.4s
+
+#11 [build 2/7] COPY --from=maven /usr/share/maven /usr/share/maven
+#11 CACHED
+
+#12 [build 3/7] WORKDIR /source
+#12 CACHED
+
+#13 [build 4/7] COPY . .
+#13 DONE 2.4s
+
+#14 [build 5/7] RUN --mount=type=cache,target=/root/.m2 mvn -B -ntp -pl ffb-server -am package
+#14 1.946 [INFO] Scanning for projects...
+#14 2.078 [INFO] ------------------------------------------------------------------------
+#14 2.079 [INFO] Reactor Build Order:
+#14 2.079 [INFO] 
+#14 2.080 [INFO] ffb                                                                [pom]
+#14 2.080 [INFO] ffb-common                                                         [jar]
+#14 2.080 [INFO] ffb-server                                                         [jar]
+#14 2.093 [INFO] 
+#14 2.093 [INFO] -------------------------< com.fumbbl.ffb:ffb >-------------------------
+#14 2.094 [INFO] Building ffb 3.4.0                                                 [1/3]
+#14 2.094 [INFO]   from pom.xml
+#14 2.094 [INFO] --------------------------------[ pom ]---------------------------------
+#14 2.097 [INFO] 
+#14 2.097 [INFO] ---------------------< com.fumbbl.ffb:ffb-common >----------------------
+#14 2.097 [INFO] Building ffb-common 3.4.0                                          [2/3]
+#14 2.097 [INFO]   from ffb-common/pom.xml
+#14 2.097 [INFO] --------------------------------[ jar ]---------------------------------
+#14 2.334 [INFO] 
+#14 2.334 [INFO] --- resources:3.3.1:resources (default-resources) @ ffb-common ---
+#14 2.630 [INFO] Copying 1 resource from src/main/resources to target/classes
+#14 2.648 [INFO] The encoding used to copy filtered properties files have not been set. This means that the same encoding will be used to copy filtered properties files as when copying other filtered resources. This might not be what you want! Run your build with --debug to see which files might be affected. Read more at https://maven.apache.org/plugins/maven-resources-plugin/examples/filtering-properties-files.html
+#14 2.650 [INFO] 
+#14 2.650 [INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-common ---
+#14 2.841 [INFO] Recompiling the module because of changed source code.
+#14 2.853 [INFO] Compiling 1238 source files with javac [debug target 8] to target/classes
+#14 7.724 [INFO] /source/ffb-common/src/main/java/com/fumbbl/ffb/json/JsonAbstractOption.java: Some input files use or override a deprecated API.
+#14 7.724 [INFO] /source/ffb-common/src/main/java/com/fumbbl/ffb/json/JsonAbstractOption.java: Recompile with -Xlint:deprecation for details.
+#14 7.724 [INFO] /source/ffb-common/src/main/java/com/fumbbl/ffb/util/Scanner.java: /source/ffb-common/src/main/java/com/fumbbl/ffb/util/Scanner.java uses unchecked or unsafe operations.
+#14 7.724 [INFO] /source/ffb-common/src/main/java/com/fumbbl/ffb/util/Scanner.java: Recompile with -Xlint:unchecked for details.
+#14 7.724 [INFO] 
+#14 7.724 [INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-common ---
+#14 7.728 [INFO] skip non existing resourceDirectory /source/ffb-common/src/test/resources
+#14 7.728 [INFO] 
+#14 7.728 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-common ---
+#14 7.738 [INFO] Recompiling the module because of changed dependency.
+#14 7.740 [INFO] Compiling 5 source files with javac [debug target 8] to target/test-classes
+#14 7.788 [INFO] 
+#14 7.788 [INFO] --- surefire:3.2.5:test (default-test) @ ffb-common ---
+#14 8.000 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+#14 8.043 [INFO] 
+#14 8.043 [INFO] -------------------------------------------------------
+#14 8.043 [INFO]  T E S T S
+#14 8.043 [INFO] -------------------------------------------------------
+#14 8.514 [INFO] Running com.fumbbl.ffb.IClientPropertyValueTest
+#14 8.683 [INFO] Tests run: 84, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.155 s -- in com.fumbbl.ffb.IClientPropertyValueTest
+#14 8.684 [INFO] Running com.fumbbl.ffb.util.StringToolTest
+#14 8.688 [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.fumbbl.ffb.util.StringToolTest
+#14 8.688 [INFO] Running com.fumbbl.ffb.RulesTest
+#14 8.697 [INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.fumbbl.ffb.RulesTest
+#14 8.697 [INFO] Running com.fumbbl.ffb.CommonPropertyTest
+#14 8.782 [INFO] Tests run: 70, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.084 s -- in com.fumbbl.ffb.CommonPropertyTest
+#14 8.783 [INFO] Running com.fumbbl.ffb.CommonPropertyValueTest
+#14 8.791 [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.fumbbl.ffb.CommonPropertyValueTest
+#14 8.828 [INFO] 
+#14 8.828 [INFO] Results:
+#14 8.828 [INFO] 
+#14 8.828 [INFO] Tests run: 174, Failures: 0, Errors: 0, Skipped: 0
+#14 8.828 [INFO] 
+#14 8.832 [INFO] 
+#14 8.832 [INFO] --- jar:2.4:jar (default-jar) @ ffb-common ---
+#14 9.228 [INFO] Building jar: /source/ffb-common/target/ffb-common-3.4.0.jar
+#14 9.534 [INFO] 
+#14 9.534 [INFO] ---------------------< com.fumbbl.ffb:ffb-server >----------------------
+#14 9.534 [INFO] Building ffb-server 3.4.0                                          [3/3]
+#14 9.534 [INFO]   from ffb-server/pom.xml
+#14 9.535 [INFO] --------------------------------[ jar ]---------------------------------
+#14 9.660 [INFO] 
+#14 9.660 [INFO] --- resources:3.3.1:resources (default-resources) @ ffb-server ---
+#14 9.662 [INFO] skip non existing resourceDirectory /source/ffb-server/src/main/resources
+#14 9.662 [INFO] 
+#14 9.662 [INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-server ---
+#14 9.739 [INFO] Recompiling the module because of changed dependency.
+#14 9.742 [INFO] Compiling 1111 source files with javac [debug target 8] to target/classes
+#14 12.75 [INFO] /source/ffb-server/src/main/java/com/fumbbl/ffb/server/local/LocalAcceptanceDemo.java: Some input files use or override a deprecated API.
+#14 12.75 [INFO] /source/ffb-server/src/main/java/com/fumbbl/ffb/server/local/LocalAcceptanceDemo.java: Recompile with -Xlint:deprecation for details.
+#14 12.75 [INFO] /source/ffb-server/src/main/java/com/fumbbl/ffb/server/handler/AbstractServerCommandHandlerSketch.java: Some input files use unchecked or unsafe operations.
+#14 12.75 [INFO] /source/ffb-server/src/main/java/com/fumbbl/ffb/server/handler/AbstractServerCommandHandlerSketch.java: Recompile with -Xlint:unchecked for details.
+#14 12.75 [INFO] 
+#14 12.75 [INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-server ---
+#14 12.75 [INFO] skip non existing resourceDirectory /source/ffb-server/src/test/resources
+#14 12.75 [INFO] 
+#14 12.75 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-server ---
+#14 12.76 [INFO] Recompiling the module because of changed dependency.
+#14 12.76 [INFO] Compiling 13 source files with javac [debug target 8] to target/test-classes
+#14 12.87 [INFO] /source/ffb-server/src/test/java/com/fumbbl/ffb/server/util/ReRollApiEquivalenceTest.java: /source/ffb-server/src/test/java/com/fumbbl/ffb/server/util/ReRollApiEquivalenceTest.java uses unchecked or unsafe operations.
+#14 12.87 [INFO] /source/ffb-server/src/test/java/com/fumbbl/ffb/server/util/ReRollApiEquivalenceTest.java: Recompile with -Xlint:unchecked for details.
+#14 12.87 [INFO] 
+#14 12.87 [INFO] --- surefire:3.2.5:test (default-test) @ ffb-server ---
+#14 12.87 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+#14 12.88 [INFO] 
+#14 12.88 [INFO] -------------------------------------------------------
+#14 12.88 [INFO]  T E S T S
+#14 12.88 [INFO] -------------------------------------------------------
+#14 13.34 [INFO] Running com.fumbbl.ffb.marking.MarkerGeneratorTest
+#14 14.86 [INFO] Tests run: 47, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.518 s -- in com.fumbbl.ffb.marking.MarkerGeneratorTest
+#14 14.86 [INFO] Running com.fumbbl.ffb.server.util.ReRollApiEquivalenceTest
+#14 15.16 [INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.300 s -- in com.fumbbl.ffb.server.util.ReRollApiEquivalenceTest
+#14 15.16 [INFO] Running com.fumbbl.ffb.server.injury.injuryType.InjuryTypeBlockBB2025Test
+#14 15.17 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.fumbbl.ffb.server.injury.injuryType.InjuryTypeBlockBB2025Test
+#14 15.17 [INFO] Running com.fumbbl.ffb.server.net.SessionTimeoutTaskTest
+#14 15.40 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.222 s -- in com.fumbbl.ffb.server.net.SessionTimeoutTaskTest
+#14 15.40 [INFO] Running com.fumbbl.ffb.server.request.ServerRequestProcessorShutdownTest
+#14 15.63 [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.230 s -- in com.fumbbl.ffb.server.request.ServerRequestProcessorShutdownTest
+#14 15.63 [INFO] Running com.fumbbl.ffb.server.commandline.InifileParamFilterTest
+#14 15.64 [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.fumbbl.ffb.server.commandline.InifileParamFilterTest
+#14 15.64 [INFO] Running com.fumbbl.ffb.server.DbUpdaterShutdownTest
+#14 15.74 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.104 s -- in com.fumbbl.ffb.server.DbUpdaterShutdownTest
+#14 15.74 [INFO] Running com.fumbbl.ffb.server.local.LocalSchemaTest
+#14 15.98 [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.232 s -- in com.fumbbl.ffb.server.local.LocalSchemaTest
+#14 15.98 [INFO] Running com.fumbbl.ffb.server.local.LocalGameLifecycleTest
+#14 15.99 [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.fumbbl.ffb.server.local.LocalGameLifecycleTest
+#14 15.99 [INFO] Running com.fumbbl.ffb.server.local.LocalDatabaseCloseTest
+#14 15.99 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.fumbbl.ffb.server.local.LocalDatabaseCloseTest
+#14 15.99 [INFO] Running com.fumbbl.ffb.server.ServerReplayerShutdownTest
+#14 16.14 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.145 s -- in com.fumbbl.ffb.server.ServerReplayerShutdownTest
+#14 16.14 [INFO] Running com.fumbbl.ffb.server.ServerUrlPropertyTest
+#14 16.23 [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in com.fumbbl.ffb.server.ServerUrlPropertyTest
+#14 16.23 [INFO] Running com.fumbbl.ffb.server.admin.UtilBackupTest
+#14 16.27 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in com.fumbbl.ffb.server.admin.UtilBackupTest
+#14 16.30 [INFO] 
+#14 16.30 [INFO] Results:
+#14 16.30 [INFO] 
+#14 16.30 [INFO] Tests run: 87, Failures: 0, Errors: 0, Skipped: 0
+#14 16.30 [INFO] 
+#14 16.30 [INFO] 
+#14 16.30 [INFO] --- jar:2.4:jar (default-jar) @ ffb-server ---
+#14 16.50 [INFO] Building jar: /source/ffb-server/target/ffb-server-3.4.0.jar
+#14 16.84 [INFO] 
+#14 16.84 [INFO] --- shade:3.5.1:shade (default) @ ffb-server ---
+#14 16.89 [INFO] Including com.fumbbl.ffb:ffb-common:jar:3.4.0 in the shaded jar.
+#14 16.89 [INFO] Excluding io.github.classgraph:classgraph:jar:4.8.98 from the shaded jar.
+#14 16.89 [INFO] Excluding com.eclipsesource.minimal-json:minimal-json:jar:0.9.5 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty.websocket:websocket-server:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty.websocket:websocket-common:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty.websocket:websocket-api:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty.websocket:websocket-servlet:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding javax.servlet:javax.servlet-api:jar:3.1.0 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty:jetty-servlet:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty:jetty-security:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty:jetty-server:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty:jetty-http:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty.websocket:websocket-client:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty:jetty-util:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty:jetty-io:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding org.eclipse.jetty:jetty-client:jar:9.4.0.v20161208 from the shaded jar.
+#14 16.89 [INFO] Excluding com.amazonaws:aws-java-sdk-s3:jar:1.12.272 from the shaded jar.
+#14 16.89 [INFO] Excluding com.amazonaws:aws-java-sdk-kms:jar:1.12.272 from the shaded jar.
+#14 16.89 [INFO] Excluding com.amazonaws:aws-java-sdk-core:jar:1.12.272 from the shaded jar.
+#14 16.89 [INFO] Excluding commons-logging:commons-logging:jar:1.1.3 from the shaded jar.
+#14 16.89 [INFO] Excluding commons-codec:commons-codec:jar:1.15 from the shaded jar.
+#14 16.89 [INFO] Excluding software.amazon.ion:ion-java:jar:1.0.2 from the shaded jar.
+#14 16.89 [INFO] Excluding com.fasterxml.jackson.core:jackson-databind:jar:2.12.6.1 from the shaded jar.
+#14 16.89 [INFO] Excluding com.fasterxml.jackson.core:jackson-annotations:jar:2.12.6 from the shaded jar.
+#14 16.89 [INFO] Excluding com.fasterxml.jackson.core:jackson-core:jar:2.12.6 from the shaded jar.
+#14 16.89 [INFO] Excluding com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:jar:2.12.6 from the shaded jar.
+#14 16.89 [INFO] Excluding joda-time:joda-time:jar:2.8.1 from the shaded jar.
+#14 16.89 [INFO] Excluding com.amazonaws:jmespath-java:jar:1.12.272 from the shaded jar.
+#14 16.89 [INFO] Excluding org.apache.httpcomponents:httpmime:jar:4.5.2 from the shaded jar.
+#14 16.89 [INFO] Excluding org.apache.httpcomponents:httpclient:jar:4.5.2 from the shaded jar.
+#14 16.89 [INFO] Excluding org.apache.httpcomponents:httpcore:jar:4.4.4 from the shaded jar.
+#14 16.89 [INFO] Excluding org.mariadb.jdbc:mariadb-java-client:jar:3.5.8 from the shaded jar.
+#14 16.89 [INFO] Dependency-reduced POM written at: /source/ffb-server/dependency-reduced-pom.xml
+#14 17.39 [WARNING] ffb-common-3.4.0.jar, ffb-server-3.4.0.jar define 1 overlapping resource: 
+#14 17.39 [WARNING]   - META-INF/MANIFEST.MF
+#14 17.39 [WARNING] maven-shade-plugin has detected that some files are
+#14 17.39 [WARNING] present in two or more JARs. When this happens, only one
+#14 17.39 [WARNING] single version of the file is copied to the uber jar.
+#14 17.39 [WARNING] Usually this is not harmful and you can skip these warnings,
+#14 17.39 [WARNING] otherwise try to manually exclude artifacts based on
+#14 17.39 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
+#14 17.40 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+#14 17.40 [INFO] Replacing /source/ffb-server/target/FantasyFootballServer.jar with /source/ffb-server/target/ffb-server-3.4.0-shaded.jar
+#14 17.40 [INFO] 
+#14 17.40 [INFO] --- assembly:3.6.0:single (make-assembly) @ ffb-server ---
+#14 17.58 [INFO] Reading assembly descriptor: src/assembly/assembly.xml
+#14 17.83 [INFO] Building zip: /source/ffb-server/target/ffb-server.zip
+#14 18.00 [INFO] ------------------------------------------------------------------------
+#14 18.00 [INFO] Reactor Summary for ffb 3.4.0:
+#14 18.00 [INFO] 
+#14 18.00 [INFO] ffb ................................................ SUCCESS [  0.003 s]
+#14 18.00 [INFO] ffb-common ......................................... SUCCESS [  7.438 s]
+#14 18.00 [INFO] ffb-server ......................................... SUCCESS [  8.468 s]
+#14 18.00 [INFO] ------------------------------------------------------------------------
+#14 18.00 [INFO] BUILD SUCCESS
+#14 18.00 [INFO] ------------------------------------------------------------------------
+#14 18.01 [INFO] Total time:  16.093 s
+#14 18.01 [INFO] Finished at: 2026-09-07T04:18:49Z
+#14 18.01 [INFO] ------------------------------------------------------------------------
+#14 DONE 18.2s
+
+#15 [build 6/7] WORKDIR /out
+#15 DONE 0.1s
+
+#16 [build 7/7] RUN jar xf /source/ffb-server/target/ffb-server.zip && rm server.ini
+#16 DONE 0.5s
+
+#17 [stage-2 2/4] WORKDIR /app
+#17 CACHED
+
+#18 [stage-2 3/4] COPY --from=build /out/ /app/
+#18 DONE 0.1s
+
+#19 [stage-2 4/4] RUN mkdir -p /data/backup /app/htdocs && chown -R 10001:10001 /data /app
+#19 DONE 0.4s
+
+#20 exporting to image
+#20 exporting layers
+#20 exporting layers 0.7s done
+#20 exporting manifest sha256:fbd8c2b52a297004087975c8fa73885d2dc201ad463587cd94f567594d03a278 0.0s done
+#20 exporting config sha256:3ef30a949cccf07cc8a8ad153f10a32b9b7c8b3e793e497499095ae6a7cc0e6b 0.0s done
+#20 exporting attestation manifest sha256:9d68f6bd6035910b46f7fa834bfed31742ac0875c3065433ff04c190231b5a90 0.0s done
+#20 exporting manifest list sha256:66edaea871f43070fe294e568f3adf6664e8d6e122a57a32da3c84cbbf73ac95 0.0s done
+#20 naming to docker.io/library/ffb-server:3.4.0-m0b.1 done
+#20 unpacking to docker.io/library/ffb-server:3.4.0-m0b.1
+#20 unpacking to docker.io/library/ffb-server:3.4.0-m0b.1 0.6s done
+#20 DONE 1.4s
+
+#21 resolving provenance for metadata file
+#21 DONE 0.0s
+ Image ffb-server:3.4.0-m0b.1 Built 
