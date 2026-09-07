@@ -37,6 +37,9 @@ Prefer crisp 2D player sprites with a restrained pitch and clean DOM/vector cont
 | [06 Roadmap and prototype](06-roadmap-and-prototype.md) | Milestones, effort ranges, rollback, operating gates, first prototype specification |
 | [07 Verification and coverage](07-verification-and-coverage.md) | Environment, exact commands, test counts, failures resolved, runtime gaps |
 | [08 Evidence and coverage index](08-evidence-index.md) | Scope checklist, machine-readable data, source methodology and remaining uncertainty |
+| [09 Implementation kickoff](09-implementation-kickoff.md) | Accepted owner decisions, local setup needs, session-sized slices and first engineering prompt |
+| [10 Local container environment](10-container-environment.md) | Authorized Docker installation, verified MariaDB image and remaining server-container work |
+| [Preliminary art previews](../art-preview/README.md) | Human/Orc concepts and rough pitch, dugout and match UI |
 | [Contact-sheet gallery](assets/README.md) | All 18 image categories with labeled source samples |
 
 ## Validation result
@@ -50,6 +53,8 @@ Prefer crisp 2D player sprites with a restrained pitch and clean DOM/vector cont
 The 348 reported tests are parameter-expanded invocations, not 348 distinct source methods. Two test-named Swing programs are manual UI checks and were not run by Maven. Logs and per-suite XML/CSV are linked from the verification report.
 
 ## Next decision
+
+**Owner update, 2026-09-06:** ADR-001–004 and milestone direction accepted; ADR-005 deferred with GCP likely. Human/Orc and match-screen art exploration is now requested, with full team artwork reserved for a separate sprint. See [implementation kickoff](09-implementation-kickoff.md) and [art previews](../art-preview/README.md). The audit results above remain historical measurements.
 
 The next engineering step is the **local browser proof in M0–M1**, after a separate implementation request. It tests whether two browsers can drive the existing engine, resolve a controlled block and reconnect safely without FUMBBL. It does not need final artwork or a full rules rewrite.
 

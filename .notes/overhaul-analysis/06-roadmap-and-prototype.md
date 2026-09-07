@@ -1,6 +1,6 @@
 # Migration roadmap and first prototype
 
-Status: **proposed implementation sequence**. No prototype or overhaul code was created during this audit. Effort ranges are planning estimates for one experienced developer with AI assistance, including normal implementation and verification; they are not measured productivity or calendar promises. Asset production is estimated separately. See [technology decisions](04-technology-and-decisions.md) and [PRD](05-product-requirements.md).
+Status: **milestone direction accepted by the owner on 2026-09-06**. No prototype or overhaul code was created during this audit. Effort ranges are planning estimates for one experienced developer with AI assistance, including normal implementation and verification; they are not measured productivity, Codex session counts, or calendar promises. Asset production is estimated separately. See [technology decisions](04-technology-and-decisions.md), [PRD](05-product-requirements.md), and [implementation kickoff and session-sized slices](09-implementation-kickoff.md).
 
 ## Milestones, dependency order and acceptance
 
