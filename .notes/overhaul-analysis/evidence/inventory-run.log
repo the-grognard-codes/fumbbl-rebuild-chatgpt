@@ -1,0 +1,108 @@
+{
+  "revision": "882fe8721dcc44b2958346629b41e469edb8d12b",
+  "inventory_rows": 1284,
+  "file_assets": 1260,
+  "archive_members": 24,
+  "bytes_files": 30467349,
+  "bytes_unpacked_members": 8376574,
+  "extensions": {
+    ".png": 1121,
+    ".gif": 84,
+    ".zip": 4,
+    ".ogg": 46,
+    ".wav": 5
+  },
+  "image_categories": {
+    "actions": 37,
+    "animation": 99,
+    "augments": 2,
+    "bloodspots": 28,
+    "pitches-archive": 20,
+    "player-sheets": 396,
+    "portraits": 368,
+    "cached-other": 1,
+    "cursors": 27,
+    "decorations": 26,
+    "emoji": 89,
+    "game": 38,
+    "menu": 3,
+    "overlays": 3,
+    "players": 6,
+    "replay": 28,
+    "scorebar": 17,
+    "sidebar": 37
+  },
+  "duplicate_groups": 87,
+  "duplicate_entries": 99,
+  "animated_images": 0,
+  "image_errors": [],
+  "loading_reference_count": 7079,
+  "remote_reference_count": 2037,
+  "sample_count": 230,
+  "contact_sheets": 18,
+  "modules": [
+    {
+      "module": "ffb-common",
+      "tracked_files": 1247,
+      "production_java": 1238,
+      "test_java": 5,
+      "production_lines": 80714,
+      "awt_swing_files": 0,
+      "test_annotations": 13
+    },
+    {
+      "module": "ffb-tools",
+      "tracked_files": 14,
+      "production_java": 12,
+      "test_java": 0,
+      "production_lines": 704,
+      "awt_swing_files": 0,
+      "test_annotations": 0
+    },
+    {
+      "module": "ffb-server",
+      "tracked_files": 1204,
+      "production_java": 1107,
+      "test_java": 6,
+      "production_lines": 131019,
+      "awt_swing_files": 0,
+      "test_annotations": 77
+    },
+    {
+      "module": "ffb-client-logic",
+      "tracked_files": 697,
+      "production_java": 654,
+      "test_java": 4,
+      "production_lines": 61937,
+      "awt_swing_files": 182,
+      "test_annotations": 23
+    },
+    {
+      "module": "ffb-resources",
+      "tracked_files": 1263,
+      "production_java": 0,
+      "test_java": 0,
+      "production_lines": 0,
+      "awt_swing_files": 0,
+      "test_annotations": 0
+    },
+    {
+      "module": "ffb-client",
+      "tracked_files": 132,
+      "production_java": 84,
+      "test_java": 0,
+      "production_lines": 9707,
+      "awt_swing_files": 6,
+      "test_annotations": 0
+    },
+    {
+      "module": "ffb-statetest",
+      "tracked_files": 18,
+      "production_java": 5,
+      "test_java": 10,
+      "production_lines": 363,
+      "awt_swing_files": 0,
+      "test_annotations": 74
+    }
+  ]
+}

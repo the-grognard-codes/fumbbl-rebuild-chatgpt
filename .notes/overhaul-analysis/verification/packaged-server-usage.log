@@ -1,0 +1,6 @@
+java -jar FantasyFootballServer.jar standalone
+java -jar FantasyFootballServer.jar standalone initDb
+java -jar FantasyFootballServer.jar fumbbl
+java -jar FantasyFootballServer.jar fumbbl initDb
+
+ExitCode=0

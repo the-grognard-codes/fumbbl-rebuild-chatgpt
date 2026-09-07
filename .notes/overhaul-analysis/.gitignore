@@ -1,0 +1,8 @@
+# Portable audit tooling and generated caches; keep logs/reports as evidence.
+verification/apache-maven-*/
+verification/apache-maven-*-bin.zip
+verification/java8/
+verification/java8.zip
+verification/maven-cache/
+verification/server-package/
+__pycache__/

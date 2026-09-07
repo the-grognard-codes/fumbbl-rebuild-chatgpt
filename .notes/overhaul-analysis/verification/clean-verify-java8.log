@@ -1,0 +1,460 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] ffb                                                                [pom]
+[INFO] ffb-common                                                         [jar]
+[INFO] ffb-tools                                                          [jar]
+[INFO] ffb-server                                                         [jar]
+[INFO] ffb-client-logic                                                   [jar]
+[INFO] ffb-resources                                                      [jar]
+[INFO] ffb-client                                                         [jar]
+[INFO] ffb-statetest                                                      [jar]
+[INFO] 
+[INFO] -------------------------< com.fumbbl.ffb:ffb >-------------------------
+[INFO] Building ffb 3.4.0                                                 [1/8]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb ---
+[INFO] 
+[INFO] ---------------------< com.fumbbl.ffb:ffb-common >----------------------
+[INFO] Building ffb-common 3.4.0                                          [2/8]
+[INFO]   from ffb-common\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-common ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-common ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] The encoding used to copy filtered properties files have not been set. This means that the same encoding will be used to copy filtered properties files as when copying other filtered resources. This might not be what you want! Run your build with --debug to see which files might be affected. Read more at https://maven.apache.org/plugins/maven-resources-plugin/examples/filtering-properties-files.html
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-common ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1238 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-common/src/main/java/com/fumbbl/ffb/json/JsonAbstractOption.java: Some input files use or override a deprecated API.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-common/src/main/java/com/fumbbl/ffb/json/JsonAbstractOption.java: Recompile with -Xlint:deprecation for details.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-common/src/main/java/com/fumbbl/ffb/util/Scanner.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\src\main\java\com\fumbbl\ffb\util\Scanner.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-common/src/main/java/com/fumbbl/ffb/util/Scanner.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-common ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-common ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug target 8] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-common ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fumbbl.ffb.CommonPropertyTest
+[INFO] Tests run: 70, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.162 s -- in com.fumbbl.ffb.CommonPropertyTest
+[INFO] Running com.fumbbl.ffb.CommonPropertyValueTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in com.fumbbl.ffb.CommonPropertyValueTest
+[INFO] Running com.fumbbl.ffb.IClientPropertyValueTest
+[INFO] Tests run: 84, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s -- in com.fumbbl.ffb.IClientPropertyValueTest
+[INFO] Running com.fumbbl.ffb.RulesTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in com.fumbbl.ffb.RulesTest
+[INFO] Running com.fumbbl.ffb.util.StringToolTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.fumbbl.ffb.util.StringToolTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 174, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-common ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target\ffb-common-3.4.0.jar
+[INFO] 
+[INFO] ----------------------< com.fumbbl.ffb:ffb-tools >----------------------
+[INFO] Building ffb-tools 3.4.0                                           [3/8]
+[INFO]   from ffb-tools\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-tools ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-tools ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-tools ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 12 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-tools/src/main/java/com/fumbbl/ffb/tools/mock/MockGameRules.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\src\main\java\com\fumbbl\ffb\tools\mock\MockGameRules.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-tools/src/main/java/com/fumbbl/ffb/tools/mock/MockGameRules.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-tools ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-tools ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-tools ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ ffb-tools ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\target\ffb-tools-3.4.0.jar
+[INFO] 
+[INFO] ---------------------< com.fumbbl.ffb:ffb-server >----------------------
+[INFO] Building ffb-server 3.4.0                                          [4/8]
+[INFO]   from ffb-server\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-server ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-server ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-server ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1107 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/main/java/com/fumbbl/ffb/server/net/CommandSocket.java: Some input files use or override a deprecated API.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/main/java/com/fumbbl/ffb/server/net/CommandSocket.java: Recompile with -Xlint:deprecation for details.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/main/java/com/fumbbl/ffb/server/handler/AbstractServerCommandHandlerSketch.java: Some input files use unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/main/java/com/fumbbl/ffb/server/handler/AbstractServerCommandHandlerSketch.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-server ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-server ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 6 source files with javac [debug target 8] to target\test-classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/test/java/com/fumbbl/ffb/server/util/ReRollApiEquivalenceTest.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/test/java/com/fumbbl/ffb/server/util/ReRollApiEquivalenceTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-server ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fumbbl.ffb.marking.MarkerGeneratorTest
+[INFO] Tests run: 47, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.013 s -- in com.fumbbl.ffb.marking.MarkerGeneratorTest
+[INFO] Running com.fumbbl.ffb.server.commandline.InifileParamFilterTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.fumbbl.ffb.server.commandline.InifileParamFilterTest
+[INFO] Running com.fumbbl.ffb.server.injury.injuryType.InjuryTypeBlockBB2025Test
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 s -- in com.fumbbl.ffb.server.injury.injuryType.InjuryTypeBlockBB2025Test
+[INFO] Running com.fumbbl.ffb.server.net.SessionTimeoutTaskTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.300 s -- in com.fumbbl.ffb.server.net.SessionTimeoutTaskTest
+[INFO] Running com.fumbbl.ffb.server.ServerUrlPropertyTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 s -- in com.fumbbl.ffb.server.ServerUrlPropertyTest
+[INFO] Running com.fumbbl.ffb.server.util.ReRollApiEquivalenceTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.418 s -- in com.fumbbl.ffb.server.util.ReRollApiEquivalenceTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 77, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-server ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\ffb-server-3.4.0.jar
+[INFO] 
+[INFO] --- shade:3.5.1:shade (default) @ ffb-server ---
+[INFO] Including com.fumbbl.ffb:ffb-common:jar:3.4.0 in the shaded jar.
+[INFO] Excluding io.github.classgraph:classgraph:jar:4.8.98 from the shaded jar.
+[INFO] Excluding com.eclipsesource.minimal-json:minimal-json:jar:0.9.5 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-server:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-common:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-api:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-servlet:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding javax.servlet:javax.servlet-api:jar:3.1.0 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-servlet:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-security:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-server:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-http:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-client:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-util:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-io:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-client:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding com.amazonaws:aws-java-sdk-s3:jar:1.12.272 from the shaded jar.
+[INFO] Excluding com.amazonaws:aws-java-sdk-kms:jar:1.12.272 from the shaded jar.
+[INFO] Excluding com.amazonaws:aws-java-sdk-core:jar:1.12.272 from the shaded jar.
+[INFO] Excluding commons-logging:commons-logging:jar:1.1.3 from the shaded jar.
+[INFO] Excluding commons-codec:commons-codec:jar:1.15 from the shaded jar.
+[INFO] Excluding software.amazon.ion:ion-java:jar:1.0.2 from the shaded jar.
+[INFO] Excluding com.fasterxml.jackson.core:jackson-databind:jar:2.12.6.1 from the shaded jar.
+[INFO] Excluding com.fasterxml.jackson.core:jackson-annotations:jar:2.12.6 from the shaded jar.
+[INFO] Excluding com.fasterxml.jackson.core:jackson-core:jar:2.12.6 from the shaded jar.
+[INFO] Excluding com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:jar:2.12.6 from the shaded jar.
+[INFO] Excluding joda-time:joda-time:jar:2.8.1 from the shaded jar.
+[INFO] Excluding com.amazonaws:jmespath-java:jar:1.12.272 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents:httpmime:jar:4.5.2 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents:httpclient:jar:4.5.2 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents:httpcore:jar:4.4.4 from the shaded jar.
+[INFO] Excluding org.mariadb.jdbc:mariadb-java-client:jar:3.5.8 from the shaded jar.
+[INFO] Dependency-reduced POM written at: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\dependency-reduced-pom.xml
+[WARNING] ffb-common-3.4.0.jar, ffb-server-3.4.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\FantasyFootballServer.jar with C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\ffb-server-3.4.0-shaded.jar
+[INFO] 
+[INFO] --- assembly:3.6.0:single (make-assembly) @ ffb-server ---
+[INFO] Reading assembly descriptor: src/assembly/assembly.xml
+[INFO] Building zip: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\ffb-server.zip
+[INFO] 
+[INFO] ------------------< com.fumbbl.ffb:ffb-client-logic >-------------------
+[INFO] Building ffb-client-logic 3.4.0                                    [5/8]
+[INFO]   from ffb-client-logic\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-client-logic ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-client-logic ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-client-logic ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 654 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-client-logic/src/main/java/com/fumbbl/ffb/client/ui/swing/JComboBox.java: Some input files use unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-client-logic/src/main/java/com/fumbbl/ffb/client/ui/swing/JComboBox.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-client-logic ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-client-logic ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug target 8] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-client-logic ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fumbbl.ffb.client.dialog.DialogKeyGuardTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.210 s -- in com.fumbbl.ffb.client.dialog.DialogKeyGuardTest
+[INFO] Running com.fumbbl.ffb.client.handler.SubHandlerGameStateMarkingTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.935 s -- in com.fumbbl.ffb.client.handler.SubHandlerGameStateMarkingTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-client-logic ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target\ffb-client-logic-3.4.0.jar
+[INFO] 
+[INFO] --- shade:3.5.1:shade (default) @ ffb-client-logic ---
+[INFO] Including com.fumbbl.ffb:ffb-common:jar:3.4.0 in the shaded jar.
+[INFO] Excluding io.github.classgraph:classgraph:jar:4.8.98 from the shaded jar.
+[INFO] Excluding com.eclipsesource.minimal-json:minimal-json:jar:0.9.5 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-client:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-core:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-spi:jar:1.21 from the shaded jar.
+[INFO] Excluding jakarta.websocket:jakarta.websocket-api:jar:1.1.1 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-container-grizzly-client:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-framework:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-http-server:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-http:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.client5:httpclient5:jar:5.3 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.core5:httpcore5:jar:5.2.4 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.core5:httpcore5-h2:jar:5.2.4 from the shaded jar.
+[INFO] Excluding org.slf4j:slf4j-api:jar:1.7.36 from the shaded jar.
+[INFO] Excluding kuusisto.tinysound:tinysound:jar:1.1.1 from the shaded jar.
+[INFO] Excluding org.osgi:core:jar:4.3.0 from the shaded jar.
+[INFO] Excluding javazoom.vorbisspi:vorbisspi:jar:1.0.3 from the shaded jar.
+[INFO] Excluding com.jcraft:jorbis:jar:0.0.17 from the shaded jar.
+[INFO] Excluding org.tritonus:tritonus_share:jar:0.0.1 from the shaded jar.
+[INFO] Dependency-reduced POM written at: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\dependency-reduced-pom.xml
+[WARNING] ffb-client-logic-3.4.0.jar, ffb-common-3.4.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target\ffb-client-logic-3.4.0.jar with C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target\ffb-client-logic-3.4.0-shaded.jar
+[INFO] 
+[INFO] --------------------< com.fumbbl.ffb:ffb-resources >--------------------
+[INFO] Building ffb-resources 3.4.0                                       [6/8]
+[INFO]   from ffb-resources\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-resources ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-resources\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-resources ---
+[INFO] Copying 1262 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-resources ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-resources ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-resources\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-resources ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-resources ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-resources ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-resources\target\FantasyFootballClientResources.jar
+[INFO] 
+[INFO] ---------------------< com.fumbbl.ffb:ffb-client >----------------------
+[INFO] Building ffb-client 3.4.0                                          [7/8]
+[INFO]   from ffb-client\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-client ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-client ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-client ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 84 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-client/src/main/java/com/fumbbl/ffb/client/state/ClientStateFactoryAwt.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\src\main\java\com\fumbbl\ffb\client\state\ClientStateFactoryAwt.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-client/src/main/java/com/fumbbl/ffb/client/state/ClientStateFactoryAwt.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-client ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-client ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-client ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-client ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\ffb-client-3.4.0.jar
+[INFO] 
+[INFO] --- shade:3.5.1:shade (default) @ ffb-client ---
+[INFO] Including com.fumbbl.ffb:ffb-client-logic:jar:3.4.0 in the shaded jar.
+[INFO] Excluding com.fumbbl.ffb:ffb-common:jar:3.4.0 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-client:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-core:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-spi:jar:1.21 from the shaded jar.
+[INFO] Excluding jakarta.websocket:jakarta.websocket-api:jar:1.1.1 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-container-grizzly-client:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-framework:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-http-server:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-http:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.client5:httpclient5:jar:5.3 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.core5:httpcore5:jar:5.2.4 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.core5:httpcore5-h2:jar:5.2.4 from the shaded jar.
+[INFO] Excluding org.slf4j:slf4j-api:jar:1.7.36 from the shaded jar.
+[INFO] Excluding com.fumbbl.ffb:ffb-resources:jar:3.4.0 from the shaded jar.
+[INFO] Excluding kuusisto.tinysound:tinysound:jar:1.1.1 from the shaded jar.
+[INFO] Excluding org.osgi:core:jar:4.3.0 from the shaded jar.
+[INFO] Excluding javazoom.vorbisspi:vorbisspi:jar:1.0.3 from the shaded jar.
+[INFO] Excluding com.jcraft:jorbis:jar:0.0.17 from the shaded jar.
+[INFO] Excluding org.tritonus:tritonus_share:jar:0.0.1 from the shaded jar.
+[INFO] Excluding io.github.classgraph:classgraph:jar:4.8.98 from the shaded jar.
+[INFO] Excluding com.eclipsesource.minimal-json:minimal-json:jar:0.9.5 from the shaded jar.
+[INFO] Dependency-reduced POM written at: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\dependency-reduced-pom.xml
+[WARNING] ffb-client-3.4.0.jar, ffb-client-logic-3.4.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\FantasyFootballClient.jar with C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\ffb-client-3.4.0-shaded.jar
+[INFO] 
+[INFO] --- assembly:3.6.0:single (make-assembly) @ ffb-client ---
+[INFO] Reading assembly descriptor: src/assembly/assembly.xml
+[INFO] Artifact kuusisto.tinysound:tinysound:pom:1.1.1 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact kuusisto.tinysound:tinysound:pom:1.1.1 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact javazoom.vorbisspi:vorbisspi:pom:1.0.3 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact javazoom.vorbisspi:vorbisspi:pom:1.0.3 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact com.jcraft:jorbis:pom:0.0.17 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact com.jcraft:jorbis:pom:0.0.17 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact org.tritonus:tritonus_share:pom:0.0.1 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact org.tritonus:tritonus_share:pom:0.0.1 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Building zip: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\ffb-client.zip
+[INFO] 
+[INFO] --------------------< com.fumbbl.ffb:ffb-statetest >--------------------
+[INFO] Building ffb-statetest 3.4.0                                       [8/8]
+[INFO]   from ffb-statetest\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-statetest ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-statetest ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-statetest ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug target 8] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-statetest ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-statetest ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 10 source files with javac [debug target 8] to target\test-classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-statetest/src/test/java/com/fumbbl/ffb/test/OnTheBallMechanicTest.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\src\test\java\com\fumbbl\ffb\test\OnTheBallMechanicTest.java uses or overrides a deprecated API.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-statetest/src/test/java/com/fumbbl/ffb/test/OnTheBallMechanicTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-statetest ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fumbbl.ffb.test.BlockTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.695 s -- in com.fumbbl.ffb.test.BlockTest
+[INFO] Running com.fumbbl.ffb.test.CrowdPushTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.515 s -- in com.fumbbl.ffb.test.CrowdPushTest
+[INFO] Running com.fumbbl.ffb.test.GameStateExecuteStepTest
+[INFO] Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.89 s -- in com.fumbbl.ffb.test.GameStateExecuteStepTest
+[INFO] Running com.fumbbl.ffb.test.kickoff.SwarmingEndTurnTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.443 s -- in com.fumbbl.ffb.test.kickoff.SwarmingEndTurnTest
+[INFO] Running com.fumbbl.ffb.test.OnTheBallMechanicTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.848 s -- in com.fumbbl.ffb.test.OnTheBallMechanicTest
+[INFO] Running com.fumbbl.ffb.test.OnTheBallPassBlockIntegrationTest
+[WARNING] Tests run: 4, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 1.895 s -- in com.fumbbl.ffb.test.OnTheBallPassBlockIntegrationTest
+[INFO] Running com.fumbbl.ffb.test.OnTheBallSkillTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.fumbbl.ffb.test.OnTheBallSkillTest
+[INFO] Running com.fumbbl.ffb.test.pass.HandOffTurnoverTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.347 s -- in com.fumbbl.ffb.test.pass.HandOffTurnoverTest
+[INFO] Running com.fumbbl.ffb.test.skill.move.ShadowingTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.171 s -- in com.fumbbl.ffb.test.skill.move.ShadowingTest
+[INFO] Running com.fumbbl.ffb.test.skill.pass.SafePassTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.837 s -- in com.fumbbl.ffb.test.skill.pass.SafePassTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 74, Failures: 0, Errors: 0, Skipped: 1
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ ffb-statetest ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\target\ffb-statetest-3.4.0.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for ffb 3.4.0:
+[INFO] 
+[INFO] ffb ................................................ SUCCESS [  0.266 s]
+[INFO] ffb-common ......................................... SUCCESS [ 24.393 s]
+[INFO] ffb-tools .......................................... SUCCESS [  0.783 s]
+[INFO] ffb-server ......................................... SUCCESS [ 30.744 s]
+[INFO] ffb-client-logic ................................... SUCCESS [ 15.789 s]
+[INFO] ffb-resources ...................................... SUCCESS [  6.081 s]
+[INFO] ffb-client ......................................... SUCCESS [  4.094 s]
+[INFO] ffb-statetest ...................................... SUCCESS [ 34.914 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:57 min
+[INFO] Finished at: 2026-09-06T16:09:25-04:00
+[INFO] ------------------------------------------------------------------------
+ExitCode=0

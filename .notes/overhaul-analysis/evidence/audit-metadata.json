@@ -1,0 +1,16 @@
+{
+  "revision": "882fe8721dcc44b2958346629b41e469edb8d12b",
+  "branch": "main",
+  "captured_utc": "2026-09-06T20:39:42.824057+00:00",
+  "initial_status": "?? .notes/",
+  "final_status": "?? .notes/\n",
+  "tracked_diff": "",
+  "verify_totals": {
+    "tests": 348,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 347
+  },
+  "sources": "Git-tracked source/media at revision; .notes background read separately"
+}

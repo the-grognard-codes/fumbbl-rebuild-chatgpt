@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fumbbl.ffb.RulesTest" time="0.092" tests="9" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target\test-classes;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target\classes;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\io\github\classgraph\classgraph\4.8.98\classgraph-4.8.98.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\eclipsesource\minimal-json\minimal-json\0.9.5\minimal-json-0.9.5.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\junit\jupiter\junit-jupiter-api\5.5.0\junit-jupiter-api-5.5.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\junit\platform\junit-platform-commons\1.5.0\junit-platform-commons-1.5.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\junit\jupiter\junit-jupiter-params\5.5.0\junit-jupiter-params-5.5.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\mockito\mockito-junit-jupiter\4.11.0\mockito-junit-jupiter-4.11.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\mockito\mockito-core\4.11.0\mockito-core-4.11.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\net\bytebuddy\byte-buddy\1.12.19\byte-buddy-1.12.19.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\net\bytebuddy\byte-buddy-agent\1.12.19\byte-buddy-agent-1.12.19.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\mockito\mockito-inline\4.11.0\mockito-inline-4.11.0.jar;"/>
+    <property name="java.vm.vendor" value="Temurin"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="America/New_York"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\jaken\AppData\Local\Temp\surefire249247240994058569\surefirebooter-20260906160335304_3.jar C:\Users\jaken\AppData\Local\Temp\surefire249247240994058569 2026-09-06T16-03-34_843-jvmRun1 surefire-20260906160335304_1tmp surefire_0-20260906160335304_2tmp"/>
+    <property name="test" value="BlockTest,ShadowingTest,HandOffTurnoverTest,SafePassTest,SwarmingEndTurnTest,RulesTest,ReRollApiEquivalenceTest,SessionTimeoutTaskTest"/>
+    <property name="surefire.test.class.path" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target\test-classes;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target\classes;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\io\github\classgraph\classgraph\4.8.98\classgraph-4.8.98.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\eclipsesource\minimal-json\minimal-json\0.9.5\minimal-json-0.9.5.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\junit\jupiter\junit-jupiter-api\5.5.0\junit-jupiter-api-5.5.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\junit\platform\junit-platform-commons\1.5.0\junit-platform-commons-1.5.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\junit\jupiter\junit-jupiter-params\5.5.0\junit-jupiter-params-5.5.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\mockito\mockito-junit-jupiter\4.11.0\mockito-junit-jupiter-4.11.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\mockito\mockito-core\4.11.0\mockito-core-4.11.0.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\net\bytebuddy\byte-buddy\1.12.19\byte-buddy-1.12.19.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\net\bytebuddy\byte-buddy-agent\1.12.19\byte-buddy-agent-1.12.19.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\org\mockito\mockito-inline\4.11.0\mockito-inline-4.11.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\jaken"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.home" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre"/>
+    <property name="basedir" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common"/>
+    <property name="file.separator" value="\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\jaken\AppData\Local\Temp\surefire249247240994058569\surefirebooter-20260906160335304_3.jar"/>
+    <property name="sun.boot.class.path" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\resources.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\rt.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\sunrsasign.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\jsse.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\jce.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\charsets.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\jfr.jar;C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\classes"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="1.8.0_504-b01"/>
+    <property name="user.name" value="jaken"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.endorsed.dirs" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\endorsed"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="surefire.failIfNoSpecifiedTests" value="false"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\jaken\AppData\Local\Temp\"/>
+    <property name="java.version" value="1.8.0_504"/>
+    <property name="user.dir" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell;C:\Users\jaken\.codex\tmp\arg0\codex-arg0YMO2ga;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\libheif\libheif\bin;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\jxrlib\jxrlib\bin;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\poppler\Library\bin;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\override;C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot\bin;C:\Program Files\Python314\Scripts\;C:\Program Files\Python314\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\PuTTY\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Git\cmd;C:\Program Files\GitHub CLI\;C:\Program Files\nodejs\;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell;C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe;C:/Users/jaken/.gemini/antigravity/bin;C:\Users\jaken\AppData\Roaming\Antigravity\bin;C:\Users\jaken\AppData\Local\Microsoft\WindowsApps;C:\Users\jaken\AppData\Local\Microsoft\WinGet\Links;C:\Users\jaken\flutter\flutter\bin;C:\Users\jaken\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\jaken\AppData\Local\PowerToys\DSCModules\;C:\Users\jaken\AppData\Local\Programs\apache-maven-3.9.9\bin;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\fallback;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin;C:\Users\jaken\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd;C:\Users\jaken\AppData\Local\OpenAI\Codex\bin\80b8e5c230e43848;C:\Users\jaken\AppData\Local\OpenAI\Codex\bin\27d6a192e9c98618;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Temurin"/>
+    <property name="java.vm.version" value="25.504-b01"/>
+    <property name="java.specification.maintenance.version" value="6"/>
+    <property name="java.ext.dirs" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\java8\jdk8u504-b01\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="maven.repo.local" value="C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache"/>
+    <property name="java.class.version" value="52.0"/>
+  </properties>
+  <testcase name="_2020IsNotEligibleForCommon" classname="com.fumbbl.ffb.RulesTest" time="0.022"/>
+  <testcase name="commonIsEligibleFor2016" classname="com.fumbbl.ffb.RulesTest" time="0.002"/>
+  <testcase name="commonIsEligibleFor2020" classname="com.fumbbl.ffb.RulesTest" time="0.0"/>
+  <testcase name="commonIsEligibleFor2025" classname="com.fumbbl.ffb.RulesTest" time="0.0"/>
+  <testcase name="_2016IsNotEligibleFor2020" classname="com.fumbbl.ffb.RulesTest" time="0.0"/>
+  <testcase name="identityIsEligible(Rules)[1]" classname="com.fumbbl.ffb.RulesTest" time="0.024"/>
+  <testcase name="identityIsEligible(Rules)[2]" classname="com.fumbbl.ffb.RulesTest" time="0.001"/>
+  <testcase name="identityIsEligible(Rules)[3]" classname="com.fumbbl.ffb.RulesTest" time="0.0"/>
+  <testcase name="identityIsEligible(Rules)[4]" classname="com.fumbbl.ffb.RulesTest" time="0.001"/>
+</testsuite>

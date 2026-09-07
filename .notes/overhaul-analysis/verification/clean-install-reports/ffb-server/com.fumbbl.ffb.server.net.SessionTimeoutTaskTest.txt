@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.fumbbl.ffb.server.net.SessionTimeoutTaskTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.337 s -- in com.fumbbl.ffb.server.net.SessionTimeoutTaskTest

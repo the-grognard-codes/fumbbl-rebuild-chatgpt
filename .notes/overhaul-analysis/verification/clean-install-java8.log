@@ -1,0 +1,829 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] ffb                                                                [pom]
+[INFO] ffb-common                                                         [jar]
+[INFO] ffb-tools                                                          [jar]
+[INFO] ffb-server                                                         [jar]
+[INFO] ffb-client-logic                                                   [jar]
+[INFO] ffb-resources                                                      [jar]
+[INFO] ffb-client                                                         [jar]
+[INFO] ffb-statetest                                                      [jar]
+[INFO] 
+[INFO] -------------------------< com.fumbbl.ffb:ffb >-------------------------
+[INFO] Building ffb 3.4.0                                                 [1/8]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/3.2.0/maven-clean-plugin-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/3.2.0/maven-clean-plugin-3.2.0.pom (5.3 kB at 8.8 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/35/maven-plugins-35.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/35/maven-plugins-35.pom (9.9 kB at 85 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/35/maven-parent-35.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/35/maven-parent-35.pom (45 kB at 298 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/25/apache-25.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/25/apache-25.pom (21 kB at 197 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/3.1.2/maven-install-plugin-3.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/3.1.2/maven-install-plugin-3.1.2.pom (8.5 kB at 73 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/42/maven-plugins-42.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/42/maven-plugins-42.pom (7.7 kB at 77 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/42/maven-parent-42.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/42/maven-parent-42.pom (50 kB at 531 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/32/apache-32.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/32/apache-32.pom (24 kB at 235 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/3.1.2/maven-install-plugin-3.1.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/3.1.2/maven-install-plugin-3.1.2.jar (32 kB at 105 kB/s)
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/3.3.4/maven-shared-utils-3.3.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/3.3.4/maven-shared-utils-3.3.4.pom (5.8 kB at 57 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.pom (14 kB at 123 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/3.3.4/maven-shared-utils-3.3.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/3.3.4/maven-shared-utils-3.3.4.jar (153 kB at 1.1 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.jar (215 kB at 1.3 MB/s)
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ ffb ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.9.18/maven-resolver-util-1.9.18.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.9.18/maven-resolver-util-1.9.18.pom (2.9 kB at 22 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver/1.9.18/maven-resolver-1.9.18.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver/1.9.18/maven-resolver-1.9.18.pom (22 kB at 201 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-api/1.9.18/maven-resolver-api-1.9.18.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-api/1.9.18/maven-resolver-api-1.9.18.pom (2.7 kB at 28 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.0.1/plexus-utils-4.0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.0.1/plexus-utils-4.0.1.pom (7.8 kB at 91 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.9.18/maven-resolver-util-1.9.18.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.9.18/maven-resolver-util-1.9.18.jar (196 kB at 1.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-api/1.9.18/maven-resolver-api-1.9.18.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.0.1/plexus-utils-4.0.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-api/1.9.18/maven-resolver-api-1.9.18.jar (157 kB at 1.4 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.0.1/plexus-utils-4.0.1.jar (193 kB at 671 kB/s)
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\pom.xml to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb\3.4.0\ffb-3.4.0.pom
+[INFO] 
+[INFO] ---------------------< com.fumbbl.ffb:ffb-common >----------------------
+[INFO] Building ffb-common 3.4.0                                          [2/8]
+[INFO]   from ffb-common\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.pom (5.8 kB at 73 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pom (13 kB at 127 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/21/maven-parent-21.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/21/maven-parent-21.pom (26 kB at 256 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/10/apache-10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/10/apache-10.pom (15 kB at 129 kB/s)
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-common ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-common ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] The encoding used to copy filtered properties files have not been set. This means that the same encoding will be used to copy filtered properties files as when copying other filtered resources. This might not be what you want! Run your build with --debug to see which files might be affected. Read more at https://maven.apache.org/plugins/maven-resources-plugin/examples/filtering-properties-files.html
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-common ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1238 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-common/src/main/java/com/fumbbl/ffb/json/JsonAbstractOption.java: Some input files use or override a deprecated API.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-common/src/main/java/com/fumbbl/ffb/json/JsonAbstractOption.java: Recompile with -Xlint:deprecation for details.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-common/src/main/java/com/fumbbl/ffb/util/Scanner.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\src\main\java\com\fumbbl\ffb\util\Scanner.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-common/src/main/java/com/fumbbl/ffb/util/Scanner.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-common ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-common ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug target 8] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-common ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fumbbl.ffb.CommonPropertyTest
+[INFO] Tests run: 70, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.202 s -- in com.fumbbl.ffb.CommonPropertyTest
+[INFO] Running com.fumbbl.ffb.CommonPropertyValueTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in com.fumbbl.ffb.CommonPropertyValueTest
+[INFO] Running com.fumbbl.ffb.IClientPropertyValueTest
+[INFO] Tests run: 84, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 s -- in com.fumbbl.ffb.IClientPropertyValueTest
+[INFO] Running com.fumbbl.ffb.RulesTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.fumbbl.ffb.RulesTest
+[INFO] Running com.fumbbl.ffb.util.StringToolTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.fumbbl.ffb.util.StringToolTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 174, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-common ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.6/maven-plugin-api-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.6/maven-plugin-api-2.0.6.pom (1.5 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven/2.0.6/maven-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven/2.0.6/maven-2.0.6.pom (9.0 kB at 88 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/5/maven-parent-5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/5/maven-parent-5.pom (15 kB at 142 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/3/apache-3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/3/apache-3.pom (3.4 kB at 26 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.6/maven-project-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.6/maven-project-2.0.6.pom (2.6 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.pom (2.0 kB at 16 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.0.6/maven-model-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.0.6/maven-model-2.0.6.pom (3.0 kB at 21 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.4.1/plexus-utils-1.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.4.1/plexus-utils-1.4.1.pom (1.9 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/1.0.11/plexus-1.0.11.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/1.0.11/plexus-1.0.11.pom (9.0 kB at 82 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1.pom (3.9 kB at 30 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-containers/1.0.3/plexus-containers-1.0.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-containers/1.0.3/plexus-containers-1.0.3.pom (492 B at 5.9 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/1.0.4/plexus-1.0.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/1.0.4/plexus-1.0.4.pom (5.7 kB at 63 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/junit/junit/3.8.1/junit-3.8.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit/3.8.1/junit-3.8.1.pom (998 B at 8.0 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.0.4/plexus-utils-1.0.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.0.4/plexus-utils-1.0.4.pom (6.9 kB at 61 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.pom (3.1 kB at 24 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.0.6/maven-profile-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.0.6/maven-profile-2.0.6.pom (2.0 kB at 20 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.0.6/maven-artifact-manager-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.0.6/maven-artifact-manager-2.0.6.pom (2.6 kB at 20 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.0.6/maven-repository-metadata-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.0.6/maven-repository-metadata-2.0.6.pom (1.9 kB at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.0.6/maven-artifact-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.0.6/maven-artifact-2.0.6.pom (1.6 kB at 12 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.0.6/maven-plugin-registry-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.0.6/maven-plugin-registry-2.0.6.pom (1.9 kB at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/2.5/maven-archiver-2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/2.5/maven-archiver-2.5.pom (4.5 kB at 44 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/17/maven-shared-components-17.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/17/maven-shared-components-17.pom (8.7 kB at 88 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.0.6/maven-core-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.0.6/maven-core-2.0.6.pom (6.7 kB at 49 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.0.6/maven-plugin-parameter-documenter-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.0.6/maven-plugin-parameter-documenter-2.0.6.pom (1.9 kB at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.pom (1.8 kB at 12 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting/2.0.6/maven-reporting-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting/2.0.6/maven-reporting-2.0.6.pom (1.4 kB at 10 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.pom (424 B at 4.6 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia/1.0-alpha-7/doxia-1.0-alpha-7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia/1.0-alpha-7/doxia-1.0-alpha-7.pom (3.9 kB at 26 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.0.6/maven-error-diagnostics-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.0.6/maven-error-diagnostics-2.0.6.pom (1.7 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-cli/commons-cli/1.0/commons-cli-1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-cli/commons-cli/1.0/commons-cli-1.0.pom (2.1 kB at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.0.6/maven-plugin-descriptor-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.0.6/maven-plugin-descriptor-2.0.6.pom (2.0 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.pom (7.1 kB at 54 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.0.6/maven-monitor-2.0.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.0.6/maven-monitor-2.0.6.pom (1.3 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1/classworlds-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1/classworlds-1.1.pom (3.3 kB at 27 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/2.1/plexus-archiver-2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/2.1/plexus-archiver-2.1.pom (2.8 kB at 22 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.pom (4.1 kB at 44 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/spice/spice-parent/16/spice-parent-16.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonatype/spice/spice-parent/16/spice-parent-16.pom (8.4 kB at 61 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.0.2/plexus-io-2.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.0.2/plexus-io-2.0.2.pom (1.7 kB at 12 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-components/1.1.19/plexus-components-1.1.19.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-components/1.1.19/plexus-components-1.1.19.pom (2.7 kB at 30 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/3.0.1/plexus-3.0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/3.0.1/plexus-3.0.1.pom (19 kB at 172 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interpolation/1.15/plexus-interpolation-1.15.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interpolation/1.15/plexus-interpolation-1.15.pom (1.0 kB at 12 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.1/commons-lang-2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.1/commons-lang-2.1.pom (9.9 kB at 106 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.6/maven-plugin-api-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.6/maven-plugin-api-2.0.6.jar (13 kB at 43 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.6/maven-project-2.0.6.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.0.6/maven-profile-2.0.6.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.0.6/maven-repository-metadata-2.0.6.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.0.6/maven-artifact-manager-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.6/maven-project-2.0.6.jar (116 kB at 696 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.0.6/maven-plugin-registry-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.0.6/maven-artifact-manager-2.0.6.jar (57 kB at 234 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1.jar (194 kB at 552 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/junit/junit/3.8.1/junit-3.8.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.0.6/maven-repository-metadata-2.0.6.jar (24 kB at 62 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit/3.8.1/junit-3.8.1.jar (121 kB at 274 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.0.6/maven-model-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.0.6/maven-profile-2.0.6.jar (35 kB at 76 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.0.6/maven-artifact-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.0.6/maven-plugin-registry-2.0.6.jar (29 kB at 61 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/2.5/maven-archiver-2.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.0.6/maven-model-2.0.6.jar (86 kB at 163 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.0.6/maven-core-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.0.6/maven-artifact-2.0.6.jar (87 kB at 146 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.0.6/maven-plugin-parameter-documenter-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.0.6/maven-core-2.0.6.jar (152 kB at 241 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.jar (49 kB at 76 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/2.5/maven-archiver-2.5.jar (22 kB at 29 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.0.6/maven-error-diagnostics-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.jar (5.9 kB at 7.8 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-cli/commons-cli/1.0/commons-cli-1.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.0.6/maven-plugin-parameter-documenter-2.0.6.jar (21 kB at 25 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.0.6/maven-plugin-descriptor-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar (38 kB at 45 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-cli/commons-cli/1.0/commons-cli-1.0.jar (30 kB at 35 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.0.6/maven-monitor-2.0.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.jar (9.9 kB at 11 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interpolation/1.15/plexus-interpolation-1.15.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.0.6/maven-error-diagnostics-2.0.6.jar (14 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/2.1/plexus-archiver-2.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interpolation/1.15/plexus-interpolation-1.15.jar (60 kB at 61 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.0.2/plexus-io-2.0.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.0.6/maven-monitor-2.0.6.jar (10 kB at 9.6 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.1/commons-lang-2.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.jar (13 kB at 12 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.0.2/plexus-io-2.0.2.jar (58 kB at 51 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/2.1/plexus-archiver-2.1.jar (184 kB at 163 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.0.6/maven-plugin-descriptor-2.0.6.jar (37 kB at 31 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.jar (226 kB at 184 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.1/commons-lang-2.1.jar (208 kB at 166 kB/s)
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target\ffb-common-3.4.0.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ ffb-common ---
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\pom.xml to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-common\3.4.0\ffb-common-3.4.0.pom
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-common\target\ffb-common-3.4.0.jar to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-common\3.4.0\ffb-common-3.4.0.jar
+[INFO] 
+[INFO] ----------------------< com.fumbbl.ffb:ffb-tools >----------------------
+[INFO] Building ffb-tools 3.4.0                                           [3/8]
+[INFO]   from ffb-tools\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.4.1/maven-jar-plugin-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.4.1/maven-jar-plugin-3.4.1.pom (7.8 kB at 90 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.4.1/maven-jar-plugin-3.4.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.4.1/maven-jar-plugin-3.4.1.jar (34 kB at 106 kB/s)
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-tools ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-tools ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-tools ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 12 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-tools/src/main/java/com/fumbbl/ffb/tools/mock/MockGameRules.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\src\main\java\com\fumbbl\ffb\tools\mock\MockGameRules.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-tools/src/main/java/com/fumbbl/ffb/tools/mock/MockGameRules.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-tools ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-tools ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-tools ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ ffb-tools ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/file-management/3.1.0/file-management-3.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/file-management/3.1.0/file-management-3.1.0.pom (4.5 kB at 55 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/36/maven-shared-components-36.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/36/maven-shared-components-36.pom (4.9 kB at 62 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/36/maven-parent-36.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/36/maven-parent-36.pom (45 kB at 523 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/26/apache-26.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/26/apache-26.pom (21 kB at 223 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.2/maven-archiver-3.6.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.2/maven-archiver-3.6.2.pom (4.4 kB at 52 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/41/maven-shared-components-41.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/41/maven-shared-components-41.pom (3.2 kB at 45 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.9.2/plexus-archiver-4.9.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.9.2/plexus-archiver-4.9.2.pom (6.0 kB at 80 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.2/plexus-io-3.4.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.2/plexus-io-3.4.2.pom (3.9 kB at 51 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.26.1/commons-compress-1.26.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.26.1/commons-compress-1.26.1.pom (22 kB at 196 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/66/commons-parent-66.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/66/commons-parent-66.pom (77 kB at 819 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.16.1/commons-codec-1.16.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.16.1/commons-codec-1.16.1.pom (16 kB at 184 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.pom (31 kB at 343 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/64/commons-parent-64.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/64/commons-parent-64.pom (78 kB at 829 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/30/apache-30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/30/apache-30.pom (23 kB at 261 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/iq80/snappy/snappy/0.4/snappy-0.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/iq80/snappy/snappy/0.4/snappy-0.4.pom (15 kB at 148 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.9/xz-1.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.9/xz-1.9.pom (2.0 kB at 25 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.5-11/zstd-jni-1.5.5-11.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.5-11/zstd-jni-1.5.5-11.pom (2.0 kB at 24 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/file-management/3.1.0/file-management-3.1.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/file-management/3.1.0/file-management-3.1.0.jar (36 kB at 93 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.2/maven-archiver-3.6.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.9.2/plexus-archiver-4.9.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.2/plexus-io-3.4.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.26.1/commons-compress-1.26.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.2/plexus-io-3.4.2.jar (79 kB at 987 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.16.1/commons-codec-1.16.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.16.1/commons-codec-1.16.1.jar (365 kB at 1.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/iq80/snappy/snappy/0.4/snappy-0.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.9.2/plexus-archiver-4.9.2.jar (225 kB at 885 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.9/xz-1.9.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.26.1/commons-compress-1.26.1.jar (1.1 MB at 3.3 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.5-11/zstd-jni-1.5.5-11.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.9/xz-1.9.jar (116 kB at 332 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/iq80/snappy/snappy/0.4/snappy-0.4.jar (58 kB at 165 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.2/maven-archiver-3.6.2.jar (27 kB at 62 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar (658 kB at 1.4 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.5-11/zstd-jni-1.5.5-11.jar (6.8 MB at 6.4 MB/s)
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\target\ffb-tools-3.4.0.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ ffb-tools ---
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\pom.xml to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-tools\3.4.0\ffb-tools-3.4.0.pom
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-tools\target\ffb-tools-3.4.0.jar to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-tools\3.4.0\ffb-tools-3.4.0.jar
+[INFO] 
+[INFO] ---------------------< com.fumbbl.ffb:ffb-server >----------------------
+[INFO] Building ffb-server 3.4.0                                          [4/8]
+[INFO]   from ffb-server\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-shade-plugin/3.5.1/maven-shade-plugin-3.5.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-shade-plugin/3.5.1/maven-shade-plugin-3.5.1.pom (14 kB at 131 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/40/maven-plugins-40.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/40/maven-plugins-40.pom (8.1 kB at 86 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/40/maven-parent-40.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/40/maven-parent-40.pom (49 kB at 576 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-assembly-plugin/3.6.0/maven-assembly-plugin-3.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-assembly-plugin/3.6.0/maven-assembly-plugin-3.6.0.pom (15 kB at 138 kB/s)
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-server ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-server ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-server ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1107 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/main/java/com/fumbbl/ffb/server/net/CommandSocket.java: Some input files use or override a deprecated API.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/main/java/com/fumbbl/ffb/server/net/CommandSocket.java: Recompile with -Xlint:deprecation for details.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/main/java/com/fumbbl/ffb/server/handler/AbstractServerCommandHandlerSketch.java: Some input files use unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/main/java/com/fumbbl/ffb/server/handler/AbstractServerCommandHandlerSketch.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-server ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-server ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 6 source files with javac [debug target 8] to target\test-classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/test/java/com/fumbbl/ffb/server/util/ReRollApiEquivalenceTest.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-server/src/test/java/com/fumbbl/ffb/server/util/ReRollApiEquivalenceTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-server ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fumbbl.ffb.marking.MarkerGeneratorTest
+[INFO] Tests run: 47, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.317 s -- in com.fumbbl.ffb.marking.MarkerGeneratorTest
+[INFO] Running com.fumbbl.ffb.server.commandline.InifileParamFilterTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.fumbbl.ffb.server.commandline.InifileParamFilterTest
+[INFO] Running com.fumbbl.ffb.server.injury.injuryType.InjuryTypeBlockBB2025Test
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s -- in com.fumbbl.ffb.server.injury.injuryType.InjuryTypeBlockBB2025Test
+[INFO] Running com.fumbbl.ffb.server.net.SessionTimeoutTaskTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.337 s -- in com.fumbbl.ffb.server.net.SessionTimeoutTaskTest
+[INFO] Running com.fumbbl.ffb.server.ServerUrlPropertyTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s -- in com.fumbbl.ffb.server.ServerUrlPropertyTest
+[INFO] Running com.fumbbl.ffb.server.util.ReRollApiEquivalenceTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.411 s -- in com.fumbbl.ffb.server.util.ReRollApiEquivalenceTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 77, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-server ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\ffb-server-3.4.0.jar
+[INFO] 
+[INFO] --- shade:3.5.1:shade (default) @ ffb-server ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.pom (3.8 kB at 35 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.32/slf4j-parent-1.7.32.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.32/slf4j-parent-1.7.32.pom (14 kB at 135 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.5/asm-9.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.5/asm-9.5.pom (2.4 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.5/asm-commons-9.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.5/asm-commons-9.5.pom (2.8 kB at 22 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.5/asm-tree-9.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.5/asm-tree-9.5.pom (2.6 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6.1/jdom2-2.0.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6.1/jdom2-2.0.6.1.pom (4.6 kB at 54 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-dependency-tree/3.2.1/maven-dependency-tree-3.2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-dependency-tree/3.2.1/maven-dependency-tree-3.2.1.pom (6.2 kB at 79 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/37/maven-shared-components-37.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/37/maven-shared-components-37.pom (4.9 kB at 61 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/37/maven-parent-37.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/37/maven-parent-37.pom (46 kB at 470 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.13.0/commons-io-2.13.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.13.0/commons-io-2.13.0.pom (20 kB at 214 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/58/commons-parent-58.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/58/commons-parent-58.pom (83 kB at 908 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/vafer/jdependency/2.9.0/jdependency-2.9.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/vafer/jdependency/2.9.0/jdependency-2.9.0.pom (14 kB at 133 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.pom (24 kB at 243 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/48/commons-parent-48.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/48/commons-parent-48.pom (72 kB at 743 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar (42 kB at 69 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.5/asm-9.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.5/asm-commons-9.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6.1/jdom2-2.0.6.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.5/asm-tree-9.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-dependency-tree/3.2.1/maven-dependency-tree-3.2.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.5/asm-9.5.jar (122 kB at 890 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.13.0/commons-io-2.13.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.5/asm-tree-9.5.jar (52 kB at 327 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/vafer/jdependency/2.9.0/jdependency-2.9.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.5/asm-commons-9.5.jar (72 kB at 310 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6.1/jdom2-2.0.6.1.jar (328 kB at 1.3 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/vafer/jdependency/2.9.0/jdependency-2.9.0.jar (404 kB at 1.1 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.13.0/commons-io-2.13.0.jar (484 kB at 1.2 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar (752 kB at 1.3 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-dependency-tree/3.2.1/maven-dependency-tree-3.2.1.jar (43 kB at 65 kB/s)
+[INFO] Including com.fumbbl.ffb:ffb-common:jar:3.4.0 in the shaded jar.
+[INFO] Excluding io.github.classgraph:classgraph:jar:4.8.98 from the shaded jar.
+[INFO] Excluding com.eclipsesource.minimal-json:minimal-json:jar:0.9.5 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-server:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-common:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-api:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-servlet:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding javax.servlet:javax.servlet-api:jar:3.1.0 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-servlet:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-security:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-server:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-http:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty.websocket:websocket-client:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-util:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-io:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding org.eclipse.jetty:jetty-client:jar:9.4.0.v20161208 from the shaded jar.
+[INFO] Excluding com.amazonaws:aws-java-sdk-s3:jar:1.12.272 from the shaded jar.
+[INFO] Excluding com.amazonaws:aws-java-sdk-kms:jar:1.12.272 from the shaded jar.
+[INFO] Excluding com.amazonaws:aws-java-sdk-core:jar:1.12.272 from the shaded jar.
+[INFO] Excluding commons-logging:commons-logging:jar:1.1.3 from the shaded jar.
+[INFO] Excluding commons-codec:commons-codec:jar:1.15 from the shaded jar.
+[INFO] Excluding software.amazon.ion:ion-java:jar:1.0.2 from the shaded jar.
+[INFO] Excluding com.fasterxml.jackson.core:jackson-databind:jar:2.12.6.1 from the shaded jar.
+[INFO] Excluding com.fasterxml.jackson.core:jackson-annotations:jar:2.12.6 from the shaded jar.
+[INFO] Excluding com.fasterxml.jackson.core:jackson-core:jar:2.12.6 from the shaded jar.
+[INFO] Excluding com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:jar:2.12.6 from the shaded jar.
+[INFO] Excluding joda-time:joda-time:jar:2.8.1 from the shaded jar.
+[INFO] Excluding com.amazonaws:jmespath-java:jar:1.12.272 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents:httpmime:jar:4.5.2 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents:httpclient:jar:4.5.2 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents:httpcore:jar:4.4.4 from the shaded jar.
+[INFO] Excluding org.mariadb.jdbc:mariadb-java-client:jar:3.5.8 from the shaded jar.
+[INFO] Dependency-reduced POM written at: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\dependency-reduced-pom.xml
+[WARNING] ffb-common-3.4.0.jar, ffb-server-3.4.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\FantasyFootballServer.jar with C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\ffb-server-3.4.0-shaded.jar
+[INFO] 
+[INFO] --- assembly:3.6.0:single (make-assembly) @ ffb-server ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-common-artifact-filters/3.3.2/maven-common-artifact-filters-3.3.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-common-artifact-filters/3.3.2/maven-common-artifact-filters-3.3.2.pom (5.3 kB at 72 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.1/plexus-io-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.1/plexus-io-3.4.1.pom (6.0 kB at 66 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.7.1/plexus-archiver-4.7.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.7.1/plexus-archiver-4.7.1.pom (6.5 kB at 86 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.23.0/commons-compress-1.23.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.23.0/commons-compress-1.23.0.pom (22 kB at 254 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/56/commons-parent-56.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/56/commons-parent-56.pom (82 kB at 876 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.9.1/junit-bom-5.9.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.9.1/junit-bom-5.9.1.pom (5.6 kB at 63 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.5-2/zstd-jni-1.5.5-2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.5-2/zstd-jni-1.5.5-2.pom (1.9 kB at 23 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.0/maven-archiver-3.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.0/maven-archiver-3.6.0.pom (3.9 kB at 42 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.0/plexus-io-3.4.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.0/plexus-io-3.4.0.pom (6.0 kB at 82 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.4.0/plexus-archiver-4.4.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.4.0/plexus-archiver-4.4.0.pom (6.3 kB at 81 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom (20 kB at 232 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-common-artifact-filters/3.3.2/maven-common-artifact-filters-3.3.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-common-artifact-filters/3.3.2/maven-common-artifact-filters-3.3.2.jar (58 kB at 601 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.1/plexus-io-3.4.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.23.0/commons-compress-1.23.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.0/maven-archiver-3.6.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.5-2/zstd-jni-1.5.5-2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.7.1/plexus-archiver-4.7.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.4.1/plexus-io-3.4.1.jar (79 kB at 496 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.7.1/plexus-archiver-4.7.1.jar (221 kB at 728 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.23.0/commons-compress-1.23.0.jar (1.1 MB at 3.0 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.0/maven-archiver-3.6.0.jar (26 kB at 49 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.5-2/zstd-jni-1.5.5-2.jar (5.9 MB at 5.9 MB/s)
+[INFO] Reading assembly descriptor: src/assembly/assembly.xml
+[INFO] Building zip: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\ffb-server.zip
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ ffb-server ---
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\dependency-reduced-pom.xml to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-server\3.4.0\ffb-server-3.4.0.pom
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\ffb-server-3.4.0.jar to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-server\3.4.0\ffb-server-3.4.0.jar
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-server\target\ffb-server.zip to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-server\3.4.0\ffb-server-3.4.0.zip
+[INFO] 
+[INFO] ------------------< com.fumbbl.ffb:ffb-client-logic >-------------------
+[INFO] Building ffb-client-logic 3.4.0                                    [5/8]
+[INFO]   from ffb-client-logic\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-client-logic ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-client-logic ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-client-logic ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 654 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-client-logic/src/main/java/com/fumbbl/ffb/client/ui/swing/JComboBox.java: Some input files use unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-client-logic/src/main/java/com/fumbbl/ffb/client/ui/swing/JComboBox.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-client-logic ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-client-logic ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug target 8] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-client-logic ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fumbbl.ffb.client.dialog.DialogKeyGuardTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.246 s -- in com.fumbbl.ffb.client.dialog.DialogKeyGuardTest
+[INFO] Running com.fumbbl.ffb.client.handler.SubHandlerGameStateMarkingTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.829 s -- in com.fumbbl.ffb.client.handler.SubHandlerGameStateMarkingTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-client-logic ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target\ffb-client-logic-3.4.0.jar
+[INFO] 
+[INFO] --- shade:3.5.1:shade (default) @ ffb-client-logic ---
+[INFO] Including com.fumbbl.ffb:ffb-common:jar:3.4.0 in the shaded jar.
+[INFO] Excluding io.github.classgraph:classgraph:jar:4.8.98 from the shaded jar.
+[INFO] Excluding com.eclipsesource.minimal-json:minimal-json:jar:0.9.5 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-client:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-core:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-spi:jar:1.21 from the shaded jar.
+[INFO] Excluding jakarta.websocket:jakarta.websocket-api:jar:1.1.1 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-container-grizzly-client:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-framework:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-http-server:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-http:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.client5:httpclient5:jar:5.3 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.core5:httpcore5:jar:5.2.4 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.core5:httpcore5-h2:jar:5.2.4 from the shaded jar.
+[INFO] Excluding org.slf4j:slf4j-api:jar:1.7.36 from the shaded jar.
+[INFO] Excluding kuusisto.tinysound:tinysound:jar:1.1.1 from the shaded jar.
+[INFO] Excluding org.osgi:core:jar:4.3.0 from the shaded jar.
+[INFO] Excluding javazoom.vorbisspi:vorbisspi:jar:1.0.3 from the shaded jar.
+[INFO] Excluding com.jcraft:jorbis:jar:0.0.17 from the shaded jar.
+[INFO] Excluding org.tritonus:tritonus_share:jar:0.0.1 from the shaded jar.
+[INFO] Dependency-reduced POM written at: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\dependency-reduced-pom.xml
+[WARNING] ffb-client-logic-3.4.0.jar, ffb-common-3.4.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target\ffb-client-logic-3.4.0.jar with C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target\ffb-client-logic-3.4.0-shaded.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ ffb-client-logic ---
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\dependency-reduced-pom.xml to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-client-logic\3.4.0\ffb-client-logic-3.4.0.pom
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client-logic\target\ffb-client-logic-3.4.0.jar to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-client-logic\3.4.0\ffb-client-logic-3.4.0.jar
+[INFO] 
+[INFO] --------------------< com.fumbbl.ffb:ffb-resources >--------------------
+[INFO] Building ffb-resources 3.4.0                                       [6/8]
+[INFO]   from ffb-resources\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-resources ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-resources\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-resources ---
+[INFO] Copying 1262 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-resources ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-resources ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-resources\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-resources ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-resources ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-resources ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-resources\target\FantasyFootballClientResources.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ ffb-resources ---
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-resources\pom.xml to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-resources\3.4.0\ffb-resources-3.4.0.pom
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-resources\target\FantasyFootballClientResources.jar to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-resources\3.4.0\ffb-resources-3.4.0.jar
+[INFO] 
+[INFO] ---------------------< com.fumbbl.ffb:ffb-client >----------------------
+[INFO] Building ffb-client 3.4.0                                          [7/8]
+[INFO]   from ffb-client\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-client ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-client ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-client ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 84 source files with javac [debug target 8] to target\classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-client/src/main/java/com/fumbbl/ffb/client/state/ClientStateFactoryAwt.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\src\main\java\com\fumbbl\ffb\client\state\ClientStateFactoryAwt.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-client/src/main/java/com/fumbbl/ffb/client/state/ClientStateFactoryAwt.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-client ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-client ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-client ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:2.4:jar (default-jar) @ ffb-client ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\ffb-client-3.4.0.jar
+[INFO] 
+[INFO] --- shade:3.5.1:shade (default) @ ffb-client ---
+[INFO] Including com.fumbbl.ffb:ffb-client-logic:jar:3.4.0 in the shaded jar.
+[INFO] Excluding com.fumbbl.ffb:ffb-common:jar:3.4.0 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-client:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-core:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-spi:jar:1.21 from the shaded jar.
+[INFO] Excluding jakarta.websocket:jakarta.websocket-api:jar:1.1.1 from the shaded jar.
+[INFO] Excluding org.glassfish.tyrus:tyrus-container-grizzly-client:jar:1.21 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-framework:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-http-server:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.glassfish.grizzly:grizzly-http:jar:2.4.4 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.client5:httpclient5:jar:5.3 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.core5:httpcore5:jar:5.2.4 from the shaded jar.
+[INFO] Excluding org.apache.httpcomponents.core5:httpcore5-h2:jar:5.2.4 from the shaded jar.
+[INFO] Excluding org.slf4j:slf4j-api:jar:1.7.36 from the shaded jar.
+[INFO] Excluding com.fumbbl.ffb:ffb-resources:jar:3.4.0 from the shaded jar.
+[INFO] Excluding kuusisto.tinysound:tinysound:jar:1.1.1 from the shaded jar.
+[INFO] Excluding org.osgi:core:jar:4.3.0 from the shaded jar.
+[INFO] Excluding javazoom.vorbisspi:vorbisspi:jar:1.0.3 from the shaded jar.
+[INFO] Excluding com.jcraft:jorbis:jar:0.0.17 from the shaded jar.
+[INFO] Excluding org.tritonus:tritonus_share:jar:0.0.1 from the shaded jar.
+[INFO] Excluding io.github.classgraph:classgraph:jar:4.8.98 from the shaded jar.
+[INFO] Excluding com.eclipsesource.minimal-json:minimal-json:jar:0.9.5 from the shaded jar.
+[INFO] Dependency-reduced POM written at: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\dependency-reduced-pom.xml
+[WARNING] ffb-client-3.4.0.jar, ffb-client-logic-3.4.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\FantasyFootballClient.jar with C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\ffb-client-3.4.0-shaded.jar
+[INFO] 
+[INFO] --- assembly:3.6.0:single (make-assembly) @ ffb-client ---
+[INFO] Reading assembly descriptor: src/assembly/assembly.xml
+[INFO] Artifact kuusisto.tinysound:tinysound:pom:1.1.1 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact kuusisto.tinysound:tinysound:pom:1.1.1 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/kuusisto/tinysound/tinysound/1.1.1/tinysound-1.1.1.pom
+[INFO] Artifact javazoom.vorbisspi:vorbisspi:pom:1.0.3 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact javazoom.vorbisspi:vorbisspi:pom:1.0.3 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javazoom/vorbisspi/vorbisspi/1.0.3/vorbisspi-1.0.3.pom
+[INFO] Artifact com.jcraft:jorbis:pom:0.0.17 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact com.jcraft:jorbis:pom:0.0.17 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/jcraft/jorbis/0.0.17/jorbis-0.0.17.pom
+[INFO] Artifact org.tritonus:tritonus_share:pom:0.0.1 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Artifact org.tritonus:tritonus_share:pom:0.0.1 is present in the local repository, but cached from a remote repository ID that is unavailable in current build context, verifying that is downloadable from [central (https://repo.maven.apache.org/maven2, default, releases)]
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/tritonus/tritonus_share/0.0.1/tritonus_share-0.0.1.pom
+[INFO] Building zip: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\ffb-client.zip
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ ffb-client ---
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\dependency-reduced-pom.xml to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-client\3.4.0\ffb-client-3.4.0.pom
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\ffb-client-3.4.0.jar to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-client\3.4.0\ffb-client-3.4.0.jar
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-client\target\ffb-client.zip to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-client\3.4.0\ffb-client-3.4.0.zip
+[INFO] 
+[INFO] --------------------< com.fumbbl.ffb:ffb-statetest >--------------------
+[INFO] Building ffb-statetest 3.4.0                                       [8/8]
+[INFO]   from ffb-statetest\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ ffb-statetest ---
+[INFO] Deleting C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ffb-statetest ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ffb-statetest ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug target 8] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ffb-statetest ---
+[INFO] skip non existing resourceDirectory C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ffb-statetest ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 10 source files with javac [debug target 8] to target\test-classes
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-statetest/src/test/java/com/fumbbl/ffb/test/OnTheBallMechanicTest.java: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\src\test\java\com\fumbbl\ffb\test\OnTheBallMechanicTest.java uses or overrides a deprecated API.
+[INFO] /C:/Users/jaken/Git-Hub/fumbbl-rebuild-chatgpt/ffb-statetest/src/test/java/com/fumbbl/ffb/test/OnTheBallMechanicTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ffb-statetest ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fumbbl.ffb.test.BlockTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.673 s -- in com.fumbbl.ffb.test.BlockTest
+[INFO] Running com.fumbbl.ffb.test.CrowdPushTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.554 s -- in com.fumbbl.ffb.test.CrowdPushTest
+[INFO] Running com.fumbbl.ffb.test.GameStateExecuteStepTest
+[INFO] Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.13 s -- in com.fumbbl.ffb.test.GameStateExecuteStepTest
+[INFO] Running com.fumbbl.ffb.test.kickoff.SwarmingEndTurnTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.828 s -- in com.fumbbl.ffb.test.kickoff.SwarmingEndTurnTest
+[INFO] Running com.fumbbl.ffb.test.OnTheBallMechanicTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.573 s -- in com.fumbbl.ffb.test.OnTheBallMechanicTest
+[INFO] Running com.fumbbl.ffb.test.OnTheBallPassBlockIntegrationTest
+[WARNING] Tests run: 4, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 1.369 s -- in com.fumbbl.ffb.test.OnTheBallPassBlockIntegrationTest
+[INFO] Running com.fumbbl.ffb.test.OnTheBallSkillTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.fumbbl.ffb.test.OnTheBallSkillTest
+[INFO] Running com.fumbbl.ffb.test.pass.HandOffTurnoverTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.674 s -- in com.fumbbl.ffb.test.pass.HandOffTurnoverTest
+[INFO] Running com.fumbbl.ffb.test.skill.move.ShadowingTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.861 s -- in com.fumbbl.ffb.test.skill.move.ShadowingTest
+[INFO] Running com.fumbbl.ffb.test.skill.pass.SafePassTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.265 s -- in com.fumbbl.ffb.test.skill.pass.SafePassTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 74, Failures: 0, Errors: 0, Skipped: 1
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ ffb-statetest ---
+[INFO] Building jar: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\target\ffb-statetest-3.4.0.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ ffb-statetest ---
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\pom.xml to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-statetest\3.4.0\ffb-statetest-3.4.0.pom
+[INFO] Installing C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\ffb-statetest\target\ffb-statetest-3.4.0.jar to C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.notes\overhaul-analysis\verification\maven-cache\com\fumbbl\ffb\ffb-statetest\3.4.0\ffb-statetest-3.4.0.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for ffb 3.4.0:
+[INFO] 
+[INFO] ffb ................................................ SUCCESS [  4.316 s]
+[INFO] ffb-common ......................................... SUCCESS [ 30.183 s]
+[INFO] ffb-tools .......................................... SUCCESS [  5.453 s]
+[INFO] ffb-server ......................................... SUCCESS [ 34.806 s]
+[INFO] ffb-client-logic ................................... SUCCESS [ 19.686 s]
+[INFO] ffb-resources ...................................... SUCCESS [  6.666 s]
+[INFO] ffb-client ......................................... SUCCESS [  5.647 s]
+[INFO] ffb-statetest ...................................... SUCCESS [ 31.722 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:18 min
+[INFO] Finished at: 2026-09-06T16:06:56-04:00
+[INFO] ------------------------------------------------------------------------
+ExitCode=0

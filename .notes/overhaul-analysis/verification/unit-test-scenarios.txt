@@ -1,0 +1,117 @@
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:50:	public void setUp() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:75:	public void testManualReplayInitialGameState() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:96:	public void testManualReplayGameStateUpdate() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:118:	public void testManualPlayerInitialGameState() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:139:	public void testManualPlayerGameStateUpdate() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:161:	public void testManualSpectatorGameStateUpdate() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:183:	public void testAutomaticReplayInitialGameState() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:204:	public void testAutomaticPlayerInitialGameState() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:225:	public void testAutomaticPlayerGameStateUpdate() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:247:	public void testAutomaticSpectatorGameStateUpdate() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:269:	public void testAutomaticReplayGameStateUpdate() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:291:	public void testManualPlayerReconnecting() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:313:	public void testManualSpectatorReconnecting() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:335:	public void testAutomaticPlayerReconnecting() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\handler\SubHandlerGameStateMarkingTest.java:357:	public void testAutomaticSpectatorReconnecting() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:23:	void setUp() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:32:	void allowsPairedPressAndReleaseAfterDelay() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:38:	void blocksReleaseWithoutPress() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:43:	void blocksEventsDuringDelay() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:49:	void blocksReleaseOfKeyPressedBeforeDialogWasShown() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:54:	void blocksTypedEventWithoutPress() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:59:	void allowsTypedEventWhileKeyIsPressed() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:65:	void ignoresEventsOfOtherComponents() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:71:	void dispatchKeyEventConsumesBlockedEvents() {
+ffb-client-logic\src\test\java\com\fumbbl\ffb\client\dialog\DialogKeyGuardTest.java:77:	void zeroDelayOnlyPairsPressAndRelease() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\commandline\InifileParamFilterTest.java:20:    void filterForInifileFiltersExistingParam() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\commandline\InifileParamFilterTest.java:30:    void filterForInifileFiltersExistingParams() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\commandline\InifileParamFilterTest.java:40:    void filterForInifileReturnsDefaultForMissingParam() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\commandline\InifileParamFilterTest.java:49:    void filterForInifileReturnsDefaultForMissingValue() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\commandline\InifileParamFilterTest.java:58:    void filterForInifileReturnsDefaultForEmptyArray() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\commandline\InifileParamFilterTest.java:65:    void filterForInifileReturnsDefaultForNullArray() {
+ffb-common\src\test\java\com\fumbbl\ffb\CommonPropertyTest.java:12:	public void assertFieldLength(CommonProperty property) {
+ffb-common\src\test\java\com\fumbbl\ffb\CommonPropertyValueTest.java:16:	public void assertFieldLength(String property) {
+ffb-server\src\test\java\com\fumbbl\ffb\server\net\SessionTimeoutTaskTest.java:43:	void setUp() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\net\SessionTimeoutTaskTest.java:48:	void run() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\injury\injuryType\InjuryTypeBlockBB2025Test.java:10:	void useArmourModifiersOnlyModeShouldExist() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\injury\injuryType\InjuryTypeBlockBB2025Test.java:18:	void canCreateInjuryTypeBlockWithUseArmourModifiersOnlyMode() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\injury\injuryType\InjuryTypeBlockBB2025Test.java:25:	void allModesShouldBePresent() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:85:	public void setUp() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:123:	public void generate() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:132:	public void generateWithoutSorting() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:146:	public void generateForSuperSetsWithoutSorting() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:159:	public void generateWithSeparator() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:171:	public void ignoreUnknownSkills() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:184:	public void ignoreMarkingWithUnknownSkills() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:196:	public void ignoreMarkingWithUnknownInjuries() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:205:	public void generateNoMarking() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:214:	public void generateOnlyForPresentSkills() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:224:	public void generateMarkingsForOverlappingConfigs() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:234:	public void ignoreCombinedConfigsForGainedSkillsWithOnlyPartialMatch() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:244:	public void ignoreSubsets() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:254:	public void ignoreSubsetUnlessApplyToMakesDifference() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:265:	public void ignoreSubsetUnlessGainedOnlyMakesDifference() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:275:	public void generateForAllMatchingConfigs() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:285:	public void generateForAllMatchingConfigsWithOpponent() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:295:	public void generateForAllMatchingConfigsWithMatchingApplyTo() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:305:	public void generateForAllMatchingConfigsWithOpponentAndMatchingApplyTo() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:315:	public void generateForAllMatchingConfigsWithGainedOnly() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:325:	public void generateForAllMatchingConfigsWithOpponentAndGainedOnly() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:335:	public void generateForAllMatchingConfigsWithMatchingGainedAndApplyTo() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:347:	public void generateForAllMatchingConfigsWithOpponentAndMatchingGainedAndApplyTo() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:359:	public void generateForSingleInjuryMarkings() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:369:	public void ignoreGainedOnlyOnInjuryMarkings() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:379:	public void generateForMultiInjuryMarkings() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:389:	public void generateForSingleInjuryMarkingsOnlyForOwnPlayer() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:399:	public void generateForSingleInjuryMarkingsOnlyForOpponent() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:409:	public void generateForCombinedSkillAndInjuryMarkings() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:421:	public void ignoreInjuryOnlyMarkingsIfTheyAreASubset() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:431:	public void ignoreCombinedSkillAndInjuryMarkingsIfGainedOnlyDoesNotMatch() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:441:	public void generateSingleMarkingForMultiStatIncreases() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:456:	public void generateMarkingMatchingForMultiStatIncreases() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:471:	public void ignoreMatchingForMultiStatIncreasesIfOnlyOneIsPresent() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:485:	public void generateOnlyForNetStatIncreases() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:497:	public void generateOnlyForNetInjuries() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:509:	public void generateSingleMarkingForMultiInjuries() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:518:	public void ignoreStatInjuries() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:527:	public void generateNigglingMarker() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:536:	public void generateCombinedInjuryMarkerWhenPlayerWasHurtDuringTheGame() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:551:	public void generateMarkingMatchingForMultiInjuries() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:560:	public void ignoreMatchingForMultiInjuriesIfOnlyOneIsPresent() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:569:	public void sortInjuriesLastAndAlphabeticallyOtherwise() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:581:	public void ignoreIdenticalMarkingWithGainedOnly() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:591:	public void ignoreIdenticalMarkingWithNoRepetition() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:601:	public void generateRepeatedMarking() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:610:	public void generateMultiInjuryMarkingOverRepeated() {
+ffb-server\src\test\java\com\fumbbl\ffb\marking\MarkerGeneratorTest.java:620:	public void generateRepeatedMarkingOnlyOnceIfNotCompletelyApplicable() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:130:	void actingPlayerWithoutModifyingSkill() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:138:	void actingPlayerWithModifyingSkill() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:148:	void actingPlayerWithIgnoredSkills() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:158:	void actingPlayerPassesIgnoredSkillsToLookup() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:171:	void playerWithModificationSkillResolvesReRollSkill() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:181:	void playerWithExplicitReRollSkill() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:191:	void playerWithMenuProperty() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:202:	void playerWithAllParameters() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:214:	void playerWithoutSkills() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:222:	void playerWithMessagesOnly() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:230:	void playerWithFumbleAndMessages() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\util\ReRollApiEquivalenceTest.java:240:	void resolvedReRollSkillIsUsedWhenAvailable() {
+ffb-common\src\test\java\com\fumbbl\ffb\IClientPropertyValueTest.java:16:	public void assertFieldLength(String property) {
+ffb-server\src\test\java\com\fumbbl\ffb\server\ServerUrlPropertyTest.java:24:	void urlReturnsAssembledValue() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\ServerUrlPropertyTest.java:32:	void urlHandlesUndefinedPort() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\ServerUrlPropertyTest.java:41:	void urlHandlesUndefinedPath() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\ServerUrlPropertyTest.java:50:	void urlHandlesSlashAsPathAndPrefix() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\ServerUrlPropertyTest.java:58:	void urlIgnoresDuplicateSlashes() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\ServerUrlPropertyTest.java:65:	void urlIgnoresPortIfPresentInBase() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\ServerUrlPropertyTest.java:74:	void urlIgnoresOtherValuesIfPathIsFullUrl() {
+ffb-server\src\test\java\com\fumbbl\ffb\server\ServerUrlPropertyTest.java:83:	void urlRemovesSlashFromBase() {
+ffb-common\src\test\java\com\fumbbl\ffb\RulesTest.java:16:	public void commonIsEligibleFor2016() {
+ffb-common\src\test\java\com\fumbbl\ffb\RulesTest.java:21:	public void commonIsEligibleFor2020() {
+ffb-common\src\test\java\com\fumbbl\ffb\RulesTest.java:27:	public void identityIsEligible(RulesCollection.Rules rule) {
+ffb-common\src\test\java\com\fumbbl\ffb\RulesTest.java:32:	public void commonIsEligibleFor2025() {
+ffb-common\src\test\java\com\fumbbl\ffb\RulesTest.java:37:	public void _2016IsNotEligibleFor2020() {
+ffb-common\src\test\java\com\fumbbl\ffb\RulesTest.java:42:	public void _2020IsNotEligibleForCommon() {
+ffb-common\src\test\java\com\fumbbl\ffb\util\StringToolTest.java:11:	void capitalizeCapitalizesFirstCharacter() {
+ffb-common\src\test\java\com\fumbbl\ffb\util\StringToolTest.java:16:	void capitalizeCapitalizesRequestedCharacters() {
+ffb-common\src\test\java\com\fumbbl\ffb\util\StringToolTest.java:22:	void capitalizeLeavesInputUnchangedWhenLengthIsNotPositive() {
+ffb-common\src\test\java\com\fumbbl\ffb\util\StringToolTest.java:28:	void capitalizeReturnsNullForNullInput() {

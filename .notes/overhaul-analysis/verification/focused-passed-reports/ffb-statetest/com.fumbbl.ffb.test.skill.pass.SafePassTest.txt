@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.fumbbl.ffb.test.skill.pass.SafePassTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.645 s -- in com.fumbbl.ffb.test.skill.pass.SafePassTest

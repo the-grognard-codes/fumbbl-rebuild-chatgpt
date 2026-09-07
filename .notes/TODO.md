@@ -1,0 +1,1 @@
+A separate app or tool that allows users to build teams for use in exhibition play.  They can create a roster for use in one time league matches or to test specific builds.  This also will act as a scaffold for testing the client / server locally.  

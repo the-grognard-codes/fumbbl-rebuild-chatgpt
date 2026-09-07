@@ -1,0 +1,46 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] ffb                                                                [pom]
+[INFO] ffb-common                                                         [jar]
+[INFO] ffb-tools                                                          [jar]
+[INFO] ffb-server                                                         [jar]
+[INFO] ffb-client-logic                                                   [jar]
+[INFO] ffb-resources                                                      [jar]
+[INFO] ffb-client                                                         [jar]
+[INFO] ffb-statetest                                                      [jar]
+[INFO] 
+[INFO] -------------------------< com.fumbbl.ffb:ffb >-------------------------
+[INFO] Building ffb 3.4.0                                                 [1/8]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[WARNING] The POM for org.apache.maven.plugins:maven-clean-plugin:jar:3.2.0 is missing, no dependency information available
+[WARNING] The POM for org.apache.maven.plugins:maven-install-plugin:jar:3.1.2 is missing, no dependency information available
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for ffb 3.4.0:
+[INFO] 
+[INFO] ffb ................................................ FAILURE [  0.026 s]
+[INFO] ffb-common ......................................... SKIPPED
+[INFO] ffb-tools .......................................... SKIPPED
+[INFO] ffb-server ......................................... SKIPPED
+[INFO] ffb-client-logic ................................... SKIPPED
+[INFO] ffb-resources ...................................... SKIPPED
+[INFO] ffb-client ......................................... SKIPPED
+[INFO] ffb-statetest ...................................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.157 s
+[INFO] Finished at: 2026-09-06T16:04:21-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Plugin org.apache.maven.plugins:maven-install-plugin:3.1.2 or one of its dependencies could not be resolved:
+[ERROR] 	Cannot access central (https://repo.maven.apache.org/maven2) in offline mode and the artifact org.apache.maven.plugins:maven-install-plugin:jar:3.1.2 has not been downloaded from it before.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException
+ExitCode=1

@@ -1,0 +1,8 @@
+module,tracked_files,production_java,test_java,production_lines,awt_swing_files,test_annotations
+ffb-common,1247,1238,5,80714,0,13
+ffb-tools,14,12,0,704,0,0
+ffb-server,1204,1107,6,131019,0,77
+ffb-client-logic,697,654,4,61937,182,23
+ffb-resources,1263,0,0,0,0,0
+ffb-client,132,84,0,9707,6,0
+ffb-statetest,18,5,10,363,0,74
