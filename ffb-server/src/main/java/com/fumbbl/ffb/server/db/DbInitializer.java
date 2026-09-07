@@ -32,6 +32,11 @@ public class DbInitializer {
 	}
 
 	public void initDb() throws SQLException {
+		initDb(true);
+	}
+
+	/** Destructive initialization; callers must ensure the database is disposable. */
+	public void initDb(boolean seedLegacyFixtures) throws SQLException {
 
 		try (Connection connection = fDbConnectionManager.openDbConnection();
 				Statement statement = connection.createStatement();) {
@@ -53,7 +58,7 @@ public class DbInitializer {
 			createTableGamesInfo(statement);
 			createTableGamesSerialized(statement);
 
-			if (fDbConnectionManager.isStandalone()) {
+			if (fDbConnectionManager.isStandalone() && seedLegacyFixtures) {
 				initTableCoaches(statement);
 				initTableTeamSetups(statement);
 			}

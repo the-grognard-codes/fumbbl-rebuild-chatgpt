@@ -62,21 +62,26 @@ import org.eclipse.jetty.websocket.api.WebSocketException;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kalimar
  */
 public class ServerCommunication implements Runnable, IReceivedCommandHandler {
 
-	private boolean fStopped;
+	private volatile boolean fStopped;
 	private final BlockingQueue<ReceivedCommand> fCommandQueue;
+	private final Object enqueueLock = new Object();
+	private final ReceivedCommand shutdownMarker = new ReceivedCommand(null, null);
+	private final CountDownLatch stopped = new CountDownLatch(1);
 	private final FantasyFootballServer fServer;
 	private boolean fCommandCompression;
+	private volatile Thread workerThread;
 
 	public ServerCommunication(FantasyFootballServer pServer) {
 		fServer = pServer;
@@ -89,10 +94,14 @@ public class ServerCommunication implements Runnable, IReceivedCommandHandler {
 	}
 
 	public boolean handleCommand(ReceivedCommand command) {
-		if (fStopped) {
-			return false;
+		synchronized (enqueueLock) {
+			if (fStopped && Thread.currentThread() != workerThread) {
+				getServer().getDebugLog().logWithOutGameId(IServerLogLevel.WARN,
+					"Rejected server command while communication is shutting down.");
+				return false;
+			}
+			return fCommandQueue.offer(command);
 		}
-		return fCommandQueue.offer(command);
 	}
 
 	public boolean handleCommand(InternalServerCommand internalCommand) {
@@ -101,18 +110,29 @@ public class ServerCommunication implements Runnable, IReceivedCommandHandler {
 
 	public void run() {
 		try {
-			while (!fStopped) {
+			workerThread = Thread.currentThread();
+			while (true) {
 				ReceivedCommand command = null;
 				try {
 					command = fCommandQueue.take();
 				} catch (InterruptedException pInterruptedException) {
 					// continue with receivedCommand == null
 				}
-				handleCommandInternal(command);
+				if (command != shutdownMarker) {
+					handleCommandInternal(command);
+				}
+				synchronized (enqueueLock) {
+					if (fStopped && fCommandQueue.isEmpty()) {
+						break;
+					}
+				}
 			}
 		} catch (Exception pException) {
 			getServer().getDebugLog().logWithOutGameId(pException);
+			stopped.countDown();
 			System.exit(99);
+		} finally {
+			stopped.countDown();
 		}
 	}
 
@@ -277,11 +297,25 @@ public class ServerCommunication implements Runnable, IReceivedCommandHandler {
 	}
 
 	public void shutdown() {
-		fStopped = true;
-		List<ReceivedCommand> commands = new ArrayList<>();
-		fCommandQueue.drainTo(commands);
-		for (ReceivedCommand command : commands) {
-			handleCommandInternal(command);
+		synchronized (enqueueLock) {
+			if (!fStopped) {
+				fStopped = true;
+				fCommandQueue.offer(shutdownMarker);
+			}
+		}
+		if (Thread.currentThread() == workerThread) {
+			return;
+		}
+		if (workerThread == null) {
+			return;
+		}
+		try {
+			if (!stopped.await(20, TimeUnit.SECONDS)) {
+				throw new IllegalStateException("Timed out draining server commands");
+			}
+		} catch (InterruptedException interrupted) {
+			Thread.currentThread().interrupt();
+			throw new IllegalStateException("Interrupted draining server commands", interrupted);
 		}
 	}
 

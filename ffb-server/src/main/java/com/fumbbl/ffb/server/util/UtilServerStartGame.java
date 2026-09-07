@@ -13,6 +13,7 @@ import com.fumbbl.ffb.server.db.DbStatementId;
 import com.fumbbl.ffb.server.db.IDbStatementFactory;
 import com.fumbbl.ffb.server.db.query.DbUserSettingsQuery;
 import com.fumbbl.ffb.server.factory.SequenceGeneratorFactory;
+import com.fumbbl.ffb.server.local.LocalGameLifecycle;
 import com.fumbbl.ffb.server.net.SessionManager;
 import com.fumbbl.ffb.server.request.fumbbl.FumbblRequestLoadPlayerMarkings;
 import com.fumbbl.ffb.server.request.fumbbl.FumbblRequestResumeGamestate;
@@ -207,6 +208,11 @@ public class UtilServerStartGame {
 	public static void addDefaultGameOptions(GameState pGameState) {
 		Game game = pGameState.getGame();
 		FantasyFootballServer server = pGameState.getServer();
+		LocalGameLifecycle localGameLifecycle = new LocalGameLifecycle();
+		if (localGameLifecycle.isLocal(server)) {
+			localGameLifecycle.configureOptions(pGameState);
+			return;
+		}
 		if (ServerMode.STANDALONE == server.getMode()) {
 			GameOptionFactory optionFactory = new GameOptionFactory();
 			GameOptionString pitchUrl = (GameOptionString) optionFactory.createGameOption(GameOptionId.PITCH_URL);

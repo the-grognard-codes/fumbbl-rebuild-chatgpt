@@ -1,0 +1,116 @@
+Normal profile: host loopback HTTP 200; fixture gameId=3 passed.
+NAME                       IMAGE                                                                                    COMMAND                  SERVICE    CREATED              STATUS                        PORTS
+ffb-local-m0b-database-1   mariadb:11.8.9@sha256:2439dcd7d14010ecd1ff7a4e1c5abe8e208c34fe35290744deeeaac3569043c3   "docker-entrypoint.s…"   database   17 minutes ago       Up 4 minutes (healthy)        3306/tcp
+ffb-local-m0b-server-1     ffb-server:3.4.0-m0b.1                                                                   "java -Xms128m -Xmx7…"   server     About a minute ago   Up About a minute (healthy)   127.0.0.1:22227->22227/tcp
+ Container ffb-local-m0b-database-1 Running 
+ Container ffb-local-m0b-server-1 Recreate 
+ Container ffb-local-m0b-server-1 Recreated 
+ Container ffb-local-m0b-database-1 Waiting 
+ Container ffb-local-m0b-database-1 Healthy 
+ Container ffb-local-m0b-server-1 Starting 
+ Container ffb-local-m0b-server-1 Started 
+ Container ffb-local-m0b-database-1 Waiting 
+ Container ffb-local-m0b-server-1 Waiting 
+ Container ffb-local-m0b-database-1 Healthy 
+ Container ffb-local-m0b-server-1 Healthy 
+{"ffb-local-m0b_isolated":{"IPAMConfig":null,"Links":null,"Aliases":["ffb-local-m0b-server-1","server"],"DriverOpts":null,"GwPriority":0,"NetworkID":"3a5fd7a46eaab47e4f21cd6aa0c22c0a0909351a9078056b692bf395b6139bd6","EndpointID":"c25e602970ca43a7b862a131b2d7cd59fd50bce2eb4eede347d1d0126765c63d","Gateway":"","IPAddress":"172.18.0.3","MacAddress":"d6:10:52:58:32:1d","IPPrefixLen":16,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"DNSNames":["ffb-local-m0b-server-1","server","8c1bfd01ec3f"]}} {}
+internal=true
+2026-09-07 04:20:06.867:INFO::main: Logging initialized @540ms to org.eclipse.jetty.util.log.StdErrLog
+PASS gameId=4
+ Container ffb-local-m0b-server-1 Stopping 
+ Container ffb-local-m0b-server-1 Stopped 
+ Container ffb-local-m0b-database-1 Stopping 
+ Container ffb-local-m0b-database-1 Stopped 
+server-1  | 2026-09-07 04:20:01.074:INFO:oejs.AbstractConnector:main: Started ServerConnector@4d465b11{HTTP/1.1,[http/1.1]}{0.0.0.0:22227}
+server-1  | 2026-09-07 04:20:01.075:INFO:oejs.Server:main: Started @1001ms
+server-1  | 2026-09-07 04:20:01.078 FantasyFootballServer 3.4.0 running on port 22227
+server-1  | 2026-09-07 04:20:33.789:INFO:oejs.AbstractConnector:local-server-shutdown: Stopped ServerConnector@4d465b11{HTTP/1.1,[http/1.1]}{0.0.0.0:22227}
+server-1  | 2026-09-07 04:20:33.790:INFO:oejsh.ContextHandler:local-server-shutdown: Stopped o.e.j.s.ServletContextHandler@6babf3bf{/,null,UNAVAILABLE}
+server-1  | FantasyFootballServer shut down; database queue drained.
+serverExit=143 OOMKilled=false
+ Container ffb-local-m0b-database-1 Starting 
+ Container ffb-local-m0b-database-1 Started 
+ Container ffb-local-m0b-database-1 Waiting 
+ Container ffb-local-m0b-database-1 Healthy 
+ Container ffb-local-m0b-server-1 Starting 
+ Container ffb-local-m0b-server-1 Started 
+ Container ffb-local-m0b-server-1 Waiting 
+ Container ffb-local-m0b-database-1 Waiting 
+ Container ffb-local-m0b-database-1 Healthy 
+ Container ffb-local-m0b-server-1 Healthy 
+PASS gameId=4
+Before reset: game rows
+4
+ Container ffb-local-m0b-server-1 Stopping 
+ Container ffb-local-m0b-server-1 Stopped 
+ Container ffb-local-m0b-server-1 Removing 
+ Container ffb-local-m0b-server-1 Removed 
+ Container ffb-local-m0b-database-1 Stopping 
+ Container ffb-local-m0b-database-1 Stopped 
+ Container ffb-local-m0b-database-1 Removing 
+ Container ffb-local-m0b-database-1 Removed 
+ Network ffb-local-m0b_isolated Removing 
+ Network ffb-local-m0b_loopback Removing 
+ Volume ffb-local-m0b_database Removing 
+ Volume ffb-local-m0b_backup Removing 
+ Volume ffb-local-m0b_database Removed 
+ Volume ffb-local-m0b_backup Removed 
+ Network ffb-local-m0b_isolated Removed 
+ Network ffb-local-m0b_loopback Removed 
+ Volume ffb-local-m0b_backup Creating 
+ Network ffb-local-m0b_loopback Creating 
+ Network ffb-local-m0b_isolated Creating 
+ Volume ffb-local-m0b_database Creating 
+ Network ffb-local-m0b_isolated Creating 
+ Network ffb-local-m0b_loopback Creating 
+ Volume ffb-local-m0b_backup Creating 
+ Volume ffb-local-m0b_database Creating 
+ Volume ffb-local-m0b_database Created 
+ Volume ffb-local-m0b_database Created 
+ Volume ffb-local-m0b_backup Created 
+ Volume ffb-local-m0b_backup Created 
+ Network ffb-local-m0b_loopback Created 
+ Network ffb-local-m0b_loopback Created 
+ Network ffb-local-m0b_isolated Created 
+ Network ffb-local-m0b_isolated Created 
+ Container ffb-local-m0b-database-1 Creating 
+ Container ffb-local-m0b-database-1 Created 
+ Container ffb-local-m0b-server-1 Creating 
+ Container ffb-local-m0b-server-1 Created 
+ Container ffb-local-m0b-database-1 Starting 
+ Container ffb-local-m0b-database-1 Started 
+ Container ffb-local-m0b-database-1 Waiting 
+ Container ffb-local-m0b-database-1 Healthy 
+ Container ffb-local-m0b-server-1 Starting 
+ Container ffb-local-m0b-server-1 Started 
+ Container ffb-local-m0b-server-1 Waiting 
+ Container ffb-local-m0b-database-1 Waiting 
+ Container ffb-local-m0b-database-1 Healthy 
+ Container ffb-local-m0b-server-1 Healthy 
+After reset: game rows, schema version, coach count
+0
+1
+2
+FAIL: HTTP 404 for /gamestate/get
+Expected nonzero check confirms old game 4 is gone.
+2026-09-07 04:22:54.343:INFO::main: Logging initialized @854ms to org.eclipse.jetty.util.log.StdErrLog
+PASS gameId=1
+openjdk version "1.8.0_502"
+OpenJDK Runtime Environment (Temurin)(build 1.8.0_502-b07)
+OpenJDK 64-Bit Server VM (Temurin)(build 25.502-b07, mixed mode)
+image=sha256:66edaea871f43070fe294e568f3adf6664e8d6e122a57a32da3c84cbbf73ac95 platform=linux/amd64
+NAME                       IMAGE                                                                                    COMMAND                  SERVICE    CREATED              STATUS                        PORTS
+ffb-local-m0b-database-1   mariadb:11.8.9@sha256:2439dcd7d14010ecd1ff7a4e1c5abe8e208c34fe35290744deeeaac3569043c3   "docker-entrypoint.s…"   database   About a minute ago   Up About a minute (healthy)   3306/tcp
+ffb-local-m0b-server-1     ffb-server:3.4.0-m0b.1                                                                   "java -Xms128m -Xmx7…"   server     About a minute ago   Up 50 seconds (healthy)       127.0.0.1:22227->22227/tcp
+ Container ffb-local-m0b-server-1 Stopping 
+ Container ffb-local-m0b-server-1 Stopped 
+ Container ffb-local-m0b-database-1 Stopping 
+ Container ffb-local-m0b-database-1 Stopped 
+server-1  | 2026-09-07 04:22:07.526:INFO:oejs.Server:main: Started @1647ms
+server-1  | 2026-09-07 04:22:07.531 FantasyFootballServer 3.4.0 running on port 22227
+server-1  | 2026-09-07 04:22:56.528:INFO:oejs.AbstractConnector:local-server-shutdown: Stopped ServerConnector@6da21078{HTTP/1.1,[http/1.1]}{0.0.0.0:22227}
+server-1  | 2026-09-07 04:22:56.530:INFO:oejsh.ContextHandler:local-server-shutdown: Stopped o.e.j.s.ServletContextHandler@7a419da4{/,null,UNAVAILABLE}
+server-1  | FantasyFootballServer shut down; database queue drained.
+NAME                       IMAGE                                                                                    COMMAND                  SERVICE    CREATED              STATUS                              PORTS
+ffb-local-m0b-database-1   mariadb:11.8.9@sha256:2439dcd7d14010ecd1ff7a4e1c5abe8e208c34fe35290744deeeaac3569043c3   "docker-entrypoint.s…"   database   About a minute ago   Exited (0) Less than a second ago   
+ffb-local-m0b-server-1     ffb-server:3.4.0-m0b.1                                                                   "java -Xms128m -Xmx7…"   server     About a minute ago   Exited (143) 1 second ago           

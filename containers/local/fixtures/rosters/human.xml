@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roster id="fixture.human">
+  <name>Fixture Human</name><type>Regular</type><reRollCost>50000</reRollCost><maxReRolls>8</maxReRolls>
+  <position id="fixture.lineman">
+    <quantity>16</quantity><name>Fixture Lineman</name><displayName>Fixture Lineman</displayName>
+    <type>Regular</type><cost>50000</cost><movement>6</movement><strength>3</strength>
+    <agility>3</agility><passing>4</passing><armour>9</armour><skillList/>
+    <skillCategoryList><normal>General</normal><double>Agility</double><double>Strength</double></skillCategoryList>
+  </position>
+</roster>

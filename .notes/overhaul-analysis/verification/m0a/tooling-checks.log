@@ -1,0 +1,10 @@
+PASS: Build rejects missing setup
+PASS: Offline bootstrap rejects a missing archive
+PASS: Checksum failure prevents extraction
+PASS: Offline setup accepts the pinned archive and existing JDK in a path with spaces
+PASS: Repeated setup succeeds
+PASS: Build uses configured tools instead of ambient Java and Maven arguments
+PASS: Build restores caller environment and working directory
+PASS: JDK version mismatch is rejected
+PASS: Maven failure reaches the caller as a nonzero exit code
+9 tooling checks passed. Diagnostic files: C:\Users\jaken\Git-Hub\fumbbl-rebuild-chatgpt\.tools\tooling checks\6a0ce631a4184dde944cb2844d4aca48

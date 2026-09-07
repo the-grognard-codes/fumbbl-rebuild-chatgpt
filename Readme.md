@@ -4,6 +4,21 @@ FFB is the Fantasy Football software used by [FUMBBL](https://fumbbl.com)
 
 Client and server are both implemented using Java 8 with Swing/AWT.
 
+## Reproducible build and tests
+
+From the repository root in PowerShell:
+
+```powershell
+./tools/bootstrap.ps1
+./tools/build.ps1 focused
+./tools/build.ps1 install
+./tools/build.ps1 verify
+```
+
+Setup pins Maven 3.9.9 and Temurin JDK 8u504-b01 without a global install.
+See [the build guide](tools/README.md) for prerequisites, checksums, offline setup,
+individual tests, CI commands and the Java 8 characterization limits.
+
 ## Using newer Java versions
 
 In case you want to use newer Java versions, e.g. 21 or higher, you use the `mockito5` profile which ensures tests are 
@@ -65,7 +80,7 @@ The main class is `com.fumbbl.ffb.server.FantasyFootballServer`
 | -inifile [filepath]  | Path to server config file, [server.ini](ffb-server/server.ini) can be used as a template                                                                                     |
 | -override [filepath] | Path to an override file supporting the same syntax and values as `inifile`. This allows to use a base ini file and apply environment specific overrides                      |
 
-The server requires a database (connection data has to be defined in ini files), currently mysql up to 5.6 or mariadb up to 10.4. are supported by the used mysql-connector lib (5.1.27).
+The server requires a database configured through its INI file. The [isolated local container profile](containers/local/README.md) is verified with MariaDB 11.8.9 and MariaDB Connector/J 3.5.8. It includes synthetic BB2025 teams, separate database storage, a fixture-match acceptance command, loopback access and explicit stop/start/reset instructions.
 
 ## Client
 

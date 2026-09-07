@@ -56,4 +56,105 @@ Use the same task for closely related work when convenient. A new task can conti
 - Audit complete; ADR-001–004 and milestone direction accepted.
 - ADR-005 deferred, GCP likely.
 - A0 concept previews generated; see [visual preview package](../art-preview/README.md). Style remains open to owner review. These are not production sprites or a functional UI.
-- M0a/M0b/M1 application implementation not started. Subsequent owner-authorized tooling setup installed Docker Desktop and verified an isolated MariaDB container; see [container environment verification](10-container-environment.md). No game-server image, Compose application stack, schema migration or browser feature has been implemented.
+- **M0a complete for the local Java 8 build/test baseline, 2026-09-06. M0b complete for independent fixture startup, 2026-09-07.** The versioned JVM image, separate MariaDB Compose service, local schema/fixtures and lifecycle adapters passed actual two-coach acceptance, stop/start persistence and disposable reset. See [M0b evidence](verification/m0b/README.md). M1 browser work has not started in this task.
+
+### M0a implementation results — 2026-09-06
+
+Started from `9120e865c` with a clean working tree. Inspected existing tools before
+adding anything: PATH provided Temurin Java 21 and PowerShell; no global Maven
+resolved. The audit's Maven 3.9.9 and Temurin 8u504-b01 archives/installations and
+dependency cache were still present. Reused the two verified archives, extracted
+fresh tools under `.tools/`, and populated a new Maven repository from dependencies
+resolved by the project. The audit cache and historical evidence were preserved.
+No application dependency was added or upgraded.
+
+Changed files: root `pom.xml` pins the six previously implicit lifecycle plugin
+versions; `.gitignore` excludes `.tools/`; `.mvn/settings.xml` isolates Maven
+settings; `tools/build-toolchain.json`, `bootstrap.ps1`, `check-java.ps1`,
+`build.ps1` and `test-tooling.ps1` provide checksum-verified setup, exact JDK
+validation, build/test entry points and tooling integration checks. `Readme.md`
+links the [exact setup and command guide](../../tools/README.md).
+`.github/workflows/maven-verify.yml` selects Ubuntu 24.04 and the exact manifest
+JDK, uses the same setup/verify scripts and caches only the project-local Maven
+repository. Player-facing code and the existing characterization tests were not
+changed; Java source/target 8, Mockito 4.11.0 and the disabled scenario remain.
+
+Commands below run from repository root in PowerShell. Evidence, including the
+failed sandbox attempt, successful console logs and per-suite CSV totals, is in
+[the M0a verification record](verification/m0a/README.md).
+
+| Check | Result |
+|---|---|
+| `./tools/bootstrap.ps1 -Offline` | Passed; reused audit archives, checked Maven SHA512 and JDK SHA256; repeated setup also passed |
+| `./tools/build.ps1 info` | Maven 3.9.9; Temurin JDK `1.8.0_504-b01`; workspace-local tools/repository |
+| `./tools/test-tooling.ps1` | 9 checks passed under PowerShell 7.6.5 and Windows PowerShell 5.1, including checksum rejection, missing setup, path spaces, environment restoration and nonzero failure propagation |
+| `./tools/build.ps1 focused` | 39 passed; zero failures/errors/skips; successful authorized run took 1m10s |
+| `./tools/build.ps1 install` | Required `clean install` passed, all eight reactor projects; 348 reported, 347 passed, one disabled, zero failures/errors; 2m10s |
+| `./tools/build.ps1 verify -Offline` | Required `clean verify` CI lifecycle passed using the populated local cache, all eight reactor projects; same 348/347/1 totals, zero failures/errors; 1m45s |
+| `powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./tools/build.ps1 test -Module ffb-statetest -Test 'BlockTest#bothDownResolvesBothPlayersToProne' -Offline` | One existing scenario passed; verifies the documented method-selector entry point under Windows PowerShell 5.1 |
+| Syntax/configuration and diff checks | PowerShell scripts parsed; POM/settings XML and toolchain JSON parsed; workflow reviewed; `git diff --check` passed |
+
+**Blockers and limits:** no remaining local M0a build/test blocker. The first
+focused attempt was blocked by sandbox socket permissions while fetching a Maven
+plugin; the identical command passed with authorized network/filesystem access.
+Required lifecycles used that same approved execution context. The full offline
+verify demonstrates the local dependency cache is sufficient. Hosted Ubuntu
+Actions execution remains unverified: the CI lifecycle was reproduced on Windows,
+and no push or workflow dispatch was performed. Automatic fresh network download
+of the tool archives was not exercised here because verified copies were reused.
+Java 21 compatibility, service startup, database integration and browser behavior
+remain outside this slice. Legacy artifact timestamps/Built-By metadata mean this
+is a reproducible toolchain/test baseline, not a byte-identical archive guarantee.
+
+**Next M0b action:** start by reading `10-container-environment.md` and tracing
+`ffb-server/server.ini`, `FantasyFootballServer.run()`/`initDb`, and the JDBC/schema
+initialization paths to define the minimum isolated startup configuration and
+fixture data. Then implement the required local lifecycle adapters, versioned
+Linux server image and separate MariaDB Compose service as those startup inputs
+become known. The next acceptance demo is a JVM accepting a fixture match without
+required live FUMBBL calls, followed by documented stop/start and disposable-data
+behavior with loopback-only ports. Do not treat the successful build or the earlier
+MariaDB image smoke test as that demo. No commit, push, deployment, service startup,
+browser feature or production artwork was performed during M0a.
+
+### M0b implementation results — 2026-09-07
+
+Executed the M0b handoff above; preserved M0a and unrelated concurrent working-tree
+changes. [Startup trace](11-independent-startup.md) documents the server INI, JDBC
+schema and local lifecycle decisions. [Container commands](../../containers/local/README.md)
+cover startup, fixture acceptance, normal stop/start and explicit disposable reset.
+
+The Java 8 image `ffb-server:3.4.0-m0b.1` uses digest-pinned Maven/JDK/JRE stages and
+separate MariaDB 11.8.9. Config/secrets/fixtures are mounted outside the image.
+Local schema version 1 initializes only an empty database and refuses unversioned
+or partial data. Local adapters configure BB2025 before fixture roster loading,
+disable S3 fallback and prevent JDBC close from shutting down the separate database.
+Shutdown drains producer workers and database work before connection closure.
+
+**Actual acceptance:** normal loopback profile returned HTTP 200 and accepted match
+3; the same image accepted match 4 with only an internal network/no external route.
+Both fixture coaches received game states over real WebSockets and JDBC readback
+passed. Stop/start retained match 4. Explicit volume reset changed 4 game rows to 0,
+recreated schema version 1/two coaches, and rejected the old match with HTTP 404.
+A fresh two-coach match then passed as ID 1. Both services were left stopped, with
+that fresh data and external secrets retained. MariaDB has no published port;
+normal JVM access binds only `127.0.0.1:22227`. Docker Desktop's internal-only
+port-publishing limitation requires separate normal and offline network profiles.
+
+**Verification:** Linux image build passed common/server tests. Required host Java
+8 clean install and clean verify both passed all eight reactor projects: 358 tests
+reported, 357 passed, one existing disabled test, no failures/errors. Ten focused
+tests protect the new behavior. Initial ClassGraph sandbox access failure was
+resolved by authorized execution outside the sandbox. [Exact logs, test manifest,
+failures and limitations](verification/m0b/README.md).
+
+**Limits:** container Java 8u502-b07 differs from host reference 8u504-b01 because
+the exact host-patch image tags were unavailable. No completed-match/replay cleanup,
+pending-choice recovery, production auth, browser behavior or Java 21 claim. A late
+replay-delete callback during shutdown remains logged/rejected with its DB copy
+retained. No commit, push, deployment, browser feature or production artwork was
+performed in this task.
+
+**Next action:** M1a — start the documented local stack and introduce the narrow
+browser adapter/two-browser movement demo using neutral tokens. Keep authority,
+illegal moves, stale actions and duplicate actions in the acceptance criteria.

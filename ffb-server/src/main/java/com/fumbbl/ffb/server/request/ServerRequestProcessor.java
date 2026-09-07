@@ -4,10 +4,10 @@ import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.IServerLogLevel;
 import com.fumbbl.ffb.util.StringTool;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -15,9 +15,16 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class ServerRequestProcessor extends Thread {
 
-	private boolean fStopped;
+	private volatile boolean fStopped;
 	private final FantasyFootballServer fServer;
 	private final BlockingQueue<ServerRequest> fRequestQueue;
+	private final Object enqueueLock = new Object();
+	private final ServerRequest shutdownMarker = new ServerRequest() {
+		@Override
+		public void process(ServerRequestProcessor processor) {
+		}
+	};
+	private final CountDownLatch stopped = new CountDownLatch(1);
 
 	public ServerRequestProcessor(FantasyFootballServer pServer) {
 		fServer = pServer;
@@ -29,35 +36,62 @@ public class ServerRequestProcessor extends Thread {
 	}
 
 	public boolean add(ServerRequest pServerRequest) {
-		if (fStopped) {
-			return false;
+		synchronized (enqueueLock) {
+			if (fStopped && Thread.currentThread() != this) {
+				return false;
+			}
+			getServer().getDebugLog().logWithOutGameId(IServerLogLevel.DEBUG,
+				"Adding request to request processor queue: " + pServerRequest.getClass().getName());
+			return fRequestQueue.offer(pServerRequest);
 		}
-		getServer().getDebugLog().logWithOutGameId(IServerLogLevel.DEBUG,
-			"Adding request to request processor queue: " + pServerRequest.getClass().getName());
-		return fRequestQueue.offer(pServerRequest);
 	}
 
 	@Override
 	public void run() {
 		getServer().getDebugLog().logWithOutGameId(IServerLogLevel.INFO, "Request Processor Started.");
-		while (!fStopped) {
-			ServerRequest request = null;
-			try {
-				request = fRequestQueue.take();
-			} catch (InterruptedException pInterruptedException) {
-				// continue with serverRequest == null
+		try {
+			while (true) {
+				ServerRequest request = null;
+				try {
+					request = fRequestQueue.take();
+				} catch (InterruptedException pInterruptedException) {
+					// continue with serverRequest == null
+				}
+				if (request != shutdownMarker) {
+					handleRequestInternal(request, true);
+				}
+				synchronized (enqueueLock) {
+					if (fStopped && fRequestQueue.isEmpty()) {
+						break;
+					}
+				}
 			}
-			handleRequestInternal(request, true);
+		} finally {
+			stopped.countDown();
 		}
 		getServer().getDebugLog().logWithOutGameId(IServerLogLevel.INFO, "Request Processor Stopped.");
 	}
 
 	public void shutdown() {
-		fStopped = true;
-		List<ServerRequest> requests = new ArrayList<>();
-		fRequestQueue.drainTo(requests);
-		for (ServerRequest request : requests) {
-			handleRequestInternal(request, false);
+		synchronized (enqueueLock) {
+			if (!fStopped) {
+				fStopped = true;
+				fRequestQueue.offer(shutdownMarker);
+			}
+		}
+		if (Thread.currentThread() == this) {
+			return;
+		}
+		if (getState() == State.NEW) {
+			return;
+		}
+		try {
+			if (!stopped.await(20, TimeUnit.SECONDS)) {
+				throw new IllegalStateException("Timed out draining server requests");
+			}
+		} catch (InterruptedException interrupted) {
+			Thread.currentThread().interrupt();
+			throw new IllegalStateException("Interrupted draining server requests", interrupted);
 		}
 	}
 
@@ -74,13 +108,15 @@ public class ServerRequestProcessor extends Thread {
 			} catch (Exception pAnyException) {
 				getServer().getDebugLog().logWithOutGameId(IServerLogLevel.ERROR, StringTool.print(request.getRequestUrl()));
 				getServer().getDebugLog().logWithOutGameId(pAnyException);
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException pInterruptedException) {
-					// just continue
+				if (!fStopped) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException pInterruptedException) {
+						// just continue
+					}
 				}
 			}
-		} while (!sent);
+		} while (loopOnError && !fStopped && !sent);
 	}
 
 }

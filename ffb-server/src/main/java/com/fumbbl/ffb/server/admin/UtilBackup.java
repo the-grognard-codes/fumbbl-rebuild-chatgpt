@@ -11,6 +11,7 @@ import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.IServerLogLevel;
 import com.fumbbl.ffb.server.IServerProperty;
+import com.fumbbl.ffb.server.local.LocalGameLifecycle;
 import com.fumbbl.ffb.util.ArrayTool;
 
 import java.io.BufferedOutputStream;
@@ -119,7 +120,7 @@ public class UtilBackup {
 				server.getDebugLog().log(IServerLogLevel.WARN, gameId, "Replay loaded from database.");
 			}
 		}
-		if ((gameState == null)) {
+		if (gameState == null && !new LocalGameLifecycle().isLocal(server)) {
 			gameState = loadFromS3(gameId, server);
 			if (gameState != null) {
 				server.getDebugLog().log(IServerLogLevel.WARN, gameId, "Replay loaded from s3 bucket.");

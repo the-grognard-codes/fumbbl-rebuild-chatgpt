@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kalimar
@@ -26,9 +28,11 @@ public class ServerReplayer implements Runnable {
 		add(ModelChangeId.PLAYER_RESULT_SET_SERIOUS_INJURY_DECAY);
 	}};
 
-	private boolean fStopped;
+	private volatile boolean fStopped;
 	private final List<ServerReplay> fReplayQueue;
 	private final FantasyFootballServer fServer;
+	private final CountDownLatch stopped = new CountDownLatch(1);
+	private volatile Thread workerThread;
 
 	public ServerReplayer(FantasyFootballServer pServer) {
 		fServer = pServer;
@@ -37,19 +41,22 @@ public class ServerReplayer implements Runnable {
 
 	public void add(ServerReplay pReplay) {
 		synchronized (fReplayQueue) {
+			if (fStopped && Thread.currentThread() != workerThread) {
+				throw new IllegalStateException("Server replayer is shutting down");
+			}
 			fReplayQueue.add(pReplay);
 			fReplayQueue.notify();
 		}
 	}
 
 	public void run() {
+		workerThread = Thread.currentThread();
+		try {
+			while (true) {
+				ServerReplay serverReplay = null;
 
-		ServerReplay serverReplay = null;
-
-		while (true) {
-
-			FantasyFootballServer server = getServer();
-			try {
+				FantasyFootballServer server = getServer();
+				try {
 
 				synchronized (fReplayQueue) {
 					try {
@@ -59,12 +66,10 @@ public class ServerReplayer implements Runnable {
 					} catch (InterruptedException e) {
 						break;
 					}
-					if (fStopped) {
+					if (fStopped && fReplayQueue.isEmpty()) {
 						break;
 					}
-					if (serverReplay == null) {
-						serverReplay = fReplayQueue.remove(0);
-					}
+					serverReplay = fReplayQueue.remove(0);
 				}
 
 				while (serverReplay != null) {
@@ -119,18 +124,34 @@ public class ServerReplayer implements Runnable {
 
 				}
 
-			} catch (Exception pException) {
-				server.getDebugLog().log(serverReplay != null ? serverReplay.getGameId() : 0, pException);
+				} catch (Exception pException) {
+					server.getDebugLog().log(serverReplay != null ? serverReplay.getGameId() : 0, pException);
+				}
+
 			}
-
+		} finally {
+			stopped.countDown();
 		}
-
 	}
 
 	public void stop() {
-		fStopped = true;
 		synchronized (fReplayQueue) {
+			fStopped = true;
 			fReplayQueue.notifyAll();
+		}
+		if (Thread.currentThread() == workerThread) {
+			return;
+		}
+		if (workerThread == null) {
+			return;
+		}
+		try {
+			if (!stopped.await(20, TimeUnit.SECONDS)) {
+				throw new IllegalStateException("Timed out draining server replays");
+			}
+		} catch (InterruptedException interrupted) {
+			Thread.currentThread().interrupt();
+			throw new IllegalStateException("Interrupted draining server replays", interrupted);
 		}
 	}
 

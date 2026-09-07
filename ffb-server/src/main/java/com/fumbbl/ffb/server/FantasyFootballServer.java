@@ -83,10 +83,15 @@ public class FantasyFootballServer implements IFactorySource {
 	private final FactoryManager factoryManager;
 
 	private final Map<Factory, INamedObjectFactory> factories;
+	private Server httpServer;
+	private boolean resourcesStopped;
 
 	public FantasyFootballServer(ServerMode pMode, Properties pProperties) {
 		fMode = pMode;
 		fProperties = pProperties;
+		if (Boolean.parseBoolean(pProperties.getProperty("server.local")) && pMode != ServerMode.STANDALONE) {
+			throw new IllegalArgumentException("The local profile requires standalone mode");
+		}
 		factoryManager = new FactoryManager();
 
 		factories = factoryManager.getFactoriesForContext(getContext(), this);
@@ -207,6 +212,7 @@ public class FantasyFootballServer implements IFactorySource {
 			String httpDirProperty = getProperty(IServerProperty.SERVER_BASE_DIR);
 			if (StringTool.isProvided(httpPortProperty) && StringTool.isProvided(httpDirProperty)) {
 				Server server = new Server(Integer.parseInt(httpPortProperty));
+				httpServer = server;
 				ServletContextHandler context = new ServletContextHandler();
 				context.setContextPath("/");
 				server.setHandler(context);
@@ -399,45 +405,63 @@ public class FantasyFootballServer implements IFactorySource {
 	}
 
 	public void stop(int pStatus) {
+		int status = pStatus;
+		try {
+			shutdownResources();
+		} catch (RuntimeException failure) {
+			failure.printStackTrace();
+			status = 99;
+		} finally {
+			System.exit(status);
+		}
+	}
+
+	/** Drains persistence before closing JDBC; also usable by the local SIGTERM hook. */
+	public synchronized void shutdownResources() {
+		if (resourcesStopped) {
+			return;
+		}
 		setBlockingNewGames(true);
+		boolean successful = shutdownPhase(() -> { if (httpServer != null) { httpServer.stop(); } });
+		if (fDbKeepAliveTimer != null) { fDbKeepAliveTimer.cancel(); }
+		if (fNetworkEntropyTimer != null) { fNetworkEntropyTimer.cancel(); }
+		if (fServerGameTimeTimer != null) { fServerGameTimeTimer.cancel(); }
+		if (sessionTimeoutTimer != null) { sessionTimeoutTimer.cancel(); }
 		fDbKeepAliveTimer = null;
 		fNetworkEntropyTimer = null;
 		fServerGameTimeTimer = null;
-		if (fReplayer != null) {
-			fReplayer.stop();
+		successful &= shutdownPhase(() -> { if (fCommunication != null) { fCommunication.shutdown(); } });
+		// Live mode closeGame enqueues remote removal requests, so keep its processor open until then.
+		if (getMode() == ServerMode.FUMBBL) {
+			successful &= shutdownPhase(() -> { if (fGameCache != null) { fGameCache.closeAllGames(); } });
 		}
-		if (getGameCache() != null) {
-			getGameCache().closeAllGames();
-			getDebugLog().logWithOutGameId(IServerLogLevel.ERROR, "All games closed.");
+		successful &= shutdownPhase(() -> { if (fServerRequestProcessor != null) { fServerRequestProcessor.shutdown(); } });
+		successful &= shutdownPhase(() -> { if (fReplayer != null) { fReplayer.stop(); } });
+		if (getMode() != ServerMode.FUMBBL) {
+			successful &= shutdownPhase(() -> { if (fGameCache != null) { fGameCache.closeAllGames(); } });
 		}
-		if (getRequestProcessor() != null) {
-			getRequestProcessor().shutdown();
-			getDebugLog().logWithOutGameId(IServerLogLevel.ERROR, "RequestProcessor shut down.");
+		successful &= shutdownPhase(() -> { if (fDbUpdater != null) { fDbUpdater.shutdown(); } });
+		successful &= shutdownPhase(() -> { if (fDbQueryFactory != null) { fDbQueryFactory.closeDbConnection(); } });
+		successful &= shutdownPhase(() -> { if (fDbUpdateFactory != null) { fDbUpdateFactory.closeDbConnection(); } });
+		resourcesStopped = true;
+		if (!successful) {
+			throw new IllegalStateException("Server shutdown incomplete; inspect errors above");
 		}
-		if (getCommunication() != null) {
-			getCommunication().shutdown();
-			getDebugLog().logWithOutGameId(IServerLogLevel.ERROR, "Communication shut down.");
+		System.err.println("FantasyFootballServer shut down; database queue drained.");
+	}
+
+	private boolean shutdownPhase(ShutdownPhase phase) {
+		try {
+			phase.run();
+			return true;
+		} catch (Exception failure) {
+			failure.printStackTrace();
+			return false;
 		}
-		if (getDbUpdater() != null) {
-			getDbUpdater().shutdown();
-			getDebugLog().logWithOutGameId(IServerLogLevel.ERROR, "DbUpdater shut down.");
-		}
-		if (getDbQueryFactory() != null) {
-			try {
-				getDbQueryFactory().closeDbConnection();
-			} catch (SQLException sqlE) {
-				getDebugLog().log(IServerLogLevel.ERROR, sqlE);
-			}
-		}
-		if (getDbUpdateFactory() != null) {
-			try {
-				getDbUpdateFactory().closeDbConnection();
-			} catch (SQLException sqlE) {
-				getDebugLog().log(IServerLogLevel.ERROR, sqlE);
-			}
-		}
-		getDebugLog().logWithOutGameId(IServerLogLevel.ERROR, "FantasyFootballServer shut down.");
-		System.exit(pStatus);
+	}
+
+	private interface ShutdownPhase {
+		void run() throws Exception;
 	}
 
 	@Override
