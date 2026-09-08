@@ -10,6 +10,9 @@ public class ChangeList {
 
 	public ChangeList() {
 		versions.add(new VersionChangeList("3.4.0")
+			.addImprovement("Local browser prototype handles missing assets and renderer failures, and bounds connection traffic with reconnect recovery")
+			.addFeature("Local browser Both Down fixtures with server-owned choices, reconnect recovery and safe choice retries")
+			.addFeature("Local browser movement prototype with synchronized BB2025 fixture views and server-validated requests")
 			.addFeature("Isolated local server profile with BB2025 fixture teams and container startup")
 			.addBugfix("B&C: If stunned by a pitch invasion no injury was applied")
 			.addBugfix("Wizard: Fireball did not affect prone or stunned players, and Fireball/Zap could not target own-team players in the 2025 ruleset")

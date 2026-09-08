@@ -1,0 +1,30 @@
+ M .notes/overhaul-analysis/09-implementation-kickoff.md
+ M Readme.md
+ M containers/local/Dockerfile
+ M containers/local/README.md
+ M containers/local/compose.yaml
+ M containers/local/server.ini
+ M containers/local/setup.ps1
+ M ffb-client-logic/src/main/java/com/fumbbl/ffb/client/model/ChangeList.java
+ M ffb-server/src/main/java/com/fumbbl/ffb/server/FantasyFootballServer.java
+ M ffb-server/src/main/java/com/fumbbl/ffb/server/local/LocalServerMain.java
+ M ffb-server/src/main/java/com/fumbbl/ffb/server/net/ServerCommunication.java
+?? .notes/overhaul-analysis/verification/m1a/
+?? .notes/overhaul-analysis/verification/m1b/
+?? .notes/overhaul-analysis/verification/m1c/
+?? browser-client/
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserChoice.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserFixtureControl.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserLocalProbe.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserMatchAdapter.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserMatchDelivery.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserMatchServlet.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserMatchSocket.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserMatchTransport.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserMatchTransportMetrics.java
+?? ffb-server/src/test/java/com/fumbbl/ffb/server/local/BrowserMatchDeliveryTest.java
+?? ffb-server/src/test/java/com/fumbbl/ffb/server/local/BrowserMatchSocketTest.java
+?? ffb-server/src/test/java/com/fumbbl/ffb/server/local/BrowserMatchTransportTest.java
+?? ffb-statetest/src/test/java/com/fumbbl/ffb/test/BrowserChoiceTest.java
+?? ffb-statetest/src/test/java/com/fumbbl/ffb/test/BrowserMatchAdapterTest.java
+?? ffb-statetest/src/test/java/com/fumbbl/ffb/test/ServerCommunicationWorkTest.java

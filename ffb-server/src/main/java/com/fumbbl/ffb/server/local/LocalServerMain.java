@@ -37,6 +37,8 @@ public class LocalServerMain {
 		if (!coachPassword.matches("[0-9a-f]{32}")) {
 			throw new IllegalArgumentException("Fixture coach secret must be an MD5 hex digest for the legacy local protocol");
 		}
+		properties.setProperty("local.browser.home.token", launcher.readSecret(properties, "local.browser.home.token.file"));
+		properties.setProperty("local.browser.away.token", launcher.readSecret(properties, "local.browser.away.token.file"));
 		FantasyFootballServer server = new FantasyFootballServer(ServerMode.STANDALONE, properties);
 		Class.forName(properties.getProperty("db.driver"));
 		DbConnectionManager manager = new DbConnectionManager(server);

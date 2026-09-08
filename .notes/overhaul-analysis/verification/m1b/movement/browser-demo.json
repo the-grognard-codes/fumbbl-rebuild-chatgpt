@@ -1,0 +1,197 @@
+{
+  "passed": true,
+  "browser": "152.0.7977.77",
+  "node": "v24.19.0",
+  "platform": "win32",
+  "viewport": "1440x1080",
+  "sessions": "Two independent Playwright BrowserContexts with distinct local credentials",
+  "observations": [
+    {
+      "scenario": "wrong-role",
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "a7c99a1b-0c01-4165-82ad-c1a710839958",
+        "status": "rejected",
+        "code": "WRONG_TURN",
+        "revision": 0,
+        "duplicate": false
+      }
+    },
+    {
+      "scenario": "illegal-26-7",
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "0602190f-e42d-4e05-8c2f-e9d80e1304e6",
+        "status": "rejected",
+        "code": "OFF_BOARD",
+        "revision": 0,
+        "duplicate": false
+      }
+    },
+    {
+      "scenario": "illegal-8-7",
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "23b0fdfa-5f35-41a3-bf82-9b952955be38",
+        "status": "rejected",
+        "code": "NOT_ADJACENT",
+        "revision": 0,
+        "duplicate": false
+      }
+    },
+    {
+      "scenario": "illegal-5-7",
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "c785a02e-ff6d-4987-b5f8-c3bbde7061ae",
+        "status": "rejected",
+        "code": "NOT_ADJACENT",
+        "revision": 0,
+        "duplicate": false
+      }
+    },
+    {
+      "scenario": "accepted-move",
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "0bc6fda1-505c-441e-b8d3-c10a8b91c7c8",
+        "status": "accepted",
+        "code": "MOVED",
+        "revision": 1,
+        "duplicate": false
+      },
+      "home": {
+        "version": 1,
+        "type": "snapshot",
+        "revision": 1,
+        "matchId": "8384dc4d-1518-49f4-ae98-da6f8383dfe2",
+        "actor": "home",
+        "players": [
+          {
+            "id": "home-runner",
+            "role": "home",
+            "x": 6,
+            "y": 7,
+            "movementUsed": 1,
+            "movementAllowance": 6,
+            "state": "other"
+          },
+          {
+            "id": "away-runner",
+            "role": "away",
+            "x": 20,
+            "y": 7,
+            "movementUsed": 0,
+            "movementAllowance": 6,
+            "state": "standing"
+          }
+        ],
+        "ball": {
+          "x": 12,
+          "y": 7
+        },
+        "turnOwner": "home",
+        "prompt": null,
+        "resources": {
+          "home": {
+            "rerolls": 3,
+            "rerollUsed": false,
+            "blitzUsed": false,
+            "passUsed": false,
+            "handOverUsed": false,
+            "foulUsed": false
+          },
+          "away": {
+            "rerolls": 3,
+            "rerollUsed": false,
+            "blitzUsed": false,
+            "passUsed": false,
+            "handOverUsed": false,
+            "foulUsed": false
+          }
+        }
+      },
+      "away": {
+        "version": 1,
+        "type": "snapshot",
+        "revision": 1,
+        "matchId": "8384dc4d-1518-49f4-ae98-da6f8383dfe2",
+        "actor": "away",
+        "players": [
+          {
+            "id": "home-runner",
+            "role": "home",
+            "x": 6,
+            "y": 7,
+            "movementUsed": 1,
+            "movementAllowance": 6,
+            "state": "other"
+          },
+          {
+            "id": "away-runner",
+            "role": "away",
+            "x": 20,
+            "y": 7,
+            "movementUsed": 0,
+            "movementAllowance": 6,
+            "state": "standing"
+          }
+        ],
+        "ball": {
+          "x": 12,
+          "y": 7
+        },
+        "turnOwner": "home",
+        "prompt": null,
+        "resources": {
+          "home": {
+            "rerolls": 3,
+            "rerollUsed": false,
+            "blitzUsed": false,
+            "passUsed": false,
+            "handOverUsed": false,
+            "foulUsed": false
+          },
+          "away": {
+            "rerolls": 3,
+            "rerollUsed": false,
+            "blitzUsed": false,
+            "passUsed": false,
+            "handOverUsed": false,
+            "foulUsed": false
+          }
+        }
+      }
+    },
+    {
+      "scenario": "duplicate",
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "0bc6fda1-505c-441e-b8d3-c10a8b91c7c8",
+        "status": "accepted",
+        "code": "MOVED",
+        "revision": 1,
+        "duplicate": true
+      }
+    },
+    {
+      "scenario": "stale",
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "demo-stale-1",
+        "status": "rejected",
+        "code": "STALE_REVISION",
+        "revision": 1,
+        "duplicate": false
+      }
+    }
+  ],
+  "errors": []
+}

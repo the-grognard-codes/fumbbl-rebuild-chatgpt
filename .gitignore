@@ -1,18 +1,44 @@
-.metadata/
-/.tools/
+# Build output and local tooling
+.tools/
+**/target/
+**/dependency-reduced-pom.xml
+**/pom.xml.versionsBackup
+
+# Browser-client build output
+browser-client/node_modules/
+browser-client/dist/
+browser-client/coverage/
+
+# IDE and editor files
 .idea/
-**/*.iml
-/ffb-tools/target/
-/ffb-server/dependency-reduced-pom.xml
-/ffb-client/dependency-reduced-pom.xml
-/ffb-resources/target/
-/ffb-client-logic/target/
-/ffb-client-logic/dependency-reduced-pom.xml
-/ffb-client/pom.xml.versionsBackup
-/ffb-client-logic/pom.xml.versionsBackup
-/ffb-common/pom.xml.versionsBackup
-/ffb-resources/pom.xml.versionsBackup
-/ffb-server/pom.xml.versionsBackup
-/ffb-tools/pom.xml.versionsBackup
-/pom.xml.versionsBackup
-/ffb-statetest/pom.xml.versionsBackup
+.vscode/
+.metadata/
+*.iml
+*.ipr
+*.iws
+*.swp
+*.swo
+*~
+
+# Java and JVM crash diagnostics
+*.class
+*.log
+hs_err_pid*
+replay_pid*
+
+# Test and coverage output
+coverage/
+*.lcov
+*.exec
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+*.local.properties
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini

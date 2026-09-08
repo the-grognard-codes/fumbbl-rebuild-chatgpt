@@ -1,0 +1,468 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "changed-body",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "55bae339-1b5d-4069-9c73-4fc6d96c9b69",
+        "expectedRevision": 0,
+        "playerId": "home-runner",
+        "to": {
+          "x": 8,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "55bae339-1b5d-4069-9c73-4fc6d96c9b69",
+        "status": "rejected",
+        "code": "REQUEST_ID_REUSED",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "stale",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "stale",
+        "expectedRevision": 0,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "stale",
+        "status": "rejected",
+        "code": "STALE_REVISION",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "dice-field",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "dice",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        },
+        "dice": [
+          6
+        ]
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "dice",
+        "status": "rejected",
+        "code": "MALFORMED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "scenario-field",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "scenario",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        },
+        "scenario": "MOVEMENT"
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "scenario",
+        "status": "rejected",
+        "code": "MALFORMED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "actor-field",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "actor",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        },
+        "actor": "away"
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "actor",
+        "status": "rejected",
+        "code": "MALFORMED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "unsupported",
+      "request": {
+        "version": 1,
+        "type": "reset",
+        "requestId": "reset"
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "reset",
+        "status": "rejected",
+        "code": "UNSUPPORTED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "version",
+      "request": {
+        "version": 2,
+        "type": "move",
+        "requestId": "version",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "version",
+        "status": "rejected",
+        "code": "UNSUPPORTED_VERSION",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "malformed",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "malformed",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": []
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "malformed",
+        "status": "rejected",
+        "code": "MALFORMED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "wrong-actor",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "wrong",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "wrong",
+        "status": "rejected",
+        "code": "WRONG_TURN",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "capacity-new-id",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "over-cap",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 8,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "over-cap",
+        "status": "rejected",
+        "code": "REQUEST_HISTORY_LIMIT",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "retained-after-rejoin",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "55bae339-1b5d-4069-9c73-4fc6d96c9b69",
+        "expectedRevision": 0,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "55bae339-1b5d-4069-9c73-4fc6d96c9b69",
+        "status": "accepted",
+        "code": "MOVED",
+        "revision": 1,
+        "duplicate": true
+      }
+    },
+    {
+      "name": "stale-socket-callback",
+      "passed": true
+    },
+    {
+      "name": "cross-actor-and-fixture-cache-disabled",
+      "passed": true
+    },
+    {
+      "name": "live-ingress-burst-healthy-peer-and-resync",
+      "passed": true,
+      "layer": "Fixed one-second operator hold of communication worker, then 3000 x approximately 7KB requests over real WebSocket; not TCP backpressure"
+    },
+    {
+      "name": "invalid-choice-option",
+      "request": {
+        "version": 1,
+        "type": "choice",
+        "requestId": "invalid-option",
+        "expectedRevision": 0,
+        "choiceId": "332884a5-bd98-416d-ba16-06c03ebf74ce-choice-0",
+        "optionId": "not-an-option"
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "invalid-option",
+        "status": "rejected",
+        "code": "INVALID_OPTION",
+        "revision": 0,
+        "duplicate": false
+      },
+      "unchangedSnapshot": {
+        "version": 1,
+        "type": "snapshot",
+        "revision": 0,
+        "matchId": "332884a5-bd98-416d-ba16-06c03ebf74ce",
+        "actor": "away",
+        "players": [
+          {
+            "id": "home-runner",
+            "role": "home",
+            "x": 7,
+            "y": 7,
+            "movementUsed": 0,
+            "movementAllowance": 6,
+            "state": "other"
+          },
+          {
+            "id": "away-runner",
+            "role": "away",
+            "x": 8,
+            "y": 7,
+            "movementUsed": 0,
+            "movementAllowance": 6,
+            "state": "other"
+          }
+        ],
+        "ball": {
+          "x": 12,
+          "y": 7
+        },
+        "turnOwner": "home",
+        "prompt": {
+          "id": "332884a5-bd98-416d-ba16-06c03ebf74ce-choice-0",
+          "type": "block",
+          "actor": "away",
+          "revision": 0,
+          "options": [
+            {
+              "id": "die-0",
+              "label": "Both Down"
+            },
+            {
+              "id": "die-1",
+              "label": "Both Down"
+            }
+          ]
+        },
+        "resources": {
+          "home": {
+            "rerolls": 0,
+            "rerollUsed": false,
+            "blitzUsed": false,
+            "passUsed": false,
+            "handOverUsed": false,
+            "foulUsed": false
+          },
+          "away": {
+            "rerolls": 0,
+            "rerollUsed": false,
+            "blitzUsed": false,
+            "passUsed": false,
+            "handOverUsed": false,
+            "foulUsed": false
+          }
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "historyMetrics": {
+    "id": "403dd858-29dd-4a2f-86e1-6a07bbd6fe99",
+    "ok": true,
+    "fixtureLifetimes": 11,
+    "adapter": {
+      "matchId": "28f09d22-7f0b-4468-9f49-e678204dcf8d",
+      "revision": 2,
+      "historyEntries": 256,
+      "authorizedConnections": 2,
+      "fixture": "MOVEMENT",
+      "failed": false
+    },
+    "transport": {
+      "activeConnections": 2,
+      "activeConnectionsHighWater": 2,
+      "admissionRejected": 0,
+      "ingressQueueDepth": 0,
+      "ingressQueueHighWater": 1,
+      "ingressDelayMillis": 40,
+      "ingressOverload": 0,
+      "deliveryQueueDepth": 0,
+      "deliveryQueueHighWater": 1,
+      "deliveryQueueBytes": 0,
+      "deliveryQueueBytesHighWater": 794,
+      "deliveryQueueDelayMillis": 0,
+      "deliveryQueueDelayHighWaterMillis": 0,
+      "outboundOverload": 0,
+      "slowDisconnects": 0
+    },
+    "jvmHeapUsedBytes": 114835024,
+    "jvmHeapCommittedBytes": 231211008,
+    "jvmNonHeapUsedBytes": 48315128,
+    "jvmThreads": 26,
+    "jvmUptimeMs": 89466
+  },
+  "beforeFlood": {
+    "id": "99ef5eab-653f-41eb-959d-6dd8841d1d2d",
+    "ok": true,
+    "fixtureLifetimes": 12,
+    "adapter": {
+      "matchId": "f9b77e13-dbd5-4829-bafd-62fd26e43560",
+      "revision": 0,
+      "historyEntries": 0,
+      "authorizedConnections": 2,
+      "fixture": "MOVEMENT",
+      "failed": false
+    },
+    "transport": {
+      "activeConnections": 2,
+      "activeConnectionsHighWater": 2,
+      "admissionRejected": 0,
+      "ingressQueueDepth": 0,
+      "ingressQueueHighWater": 1,
+      "ingressDelayMillis": 43,
+      "ingressOverload": 0,
+      "deliveryQueueDepth": 0,
+      "deliveryQueueHighWater": 1,
+      "deliveryQueueBytes": 0,
+      "deliveryQueueBytesHighWater": 794,
+      "deliveryQueueDelayMillis": 0,
+      "deliveryQueueDelayHighWaterMillis": 0,
+      "outboundOverload": 0,
+      "slowDisconnects": 0
+    },
+    "jvmHeapUsedBytes": 117070096,
+    "jvmHeapCommittedBytes": 231211008,
+    "jvmNonHeapUsedBytes": 48347496,
+    "jvmThreads": 26,
+    "jvmUptimeMs": 91936
+  },
+  "hold": {
+    "id": "08136c66-ea36-4bc3-b379-613056a0b760",
+    "ok": true,
+    "phase": "holding"
+  },
+  "afterFlood": {
+    "id": "2f726ee9-eb22-4d8a-bfbd-50a9e95a8ad8",
+    "ok": true,
+    "fixtureLifetimes": 12,
+    "adapter": {
+      "matchId": "f9b77e13-dbd5-4829-bafd-62fd26e43560",
+      "revision": 1,
+      "historyEntries": 1,
+      "authorizedConnections": 2,
+      "fixture": "MOVEMENT",
+      "failed": false
+    },
+    "transport": {
+      "activeConnections": 2,
+      "activeConnectionsHighWater": 2,
+      "admissionRejected": 0,
+      "ingressQueueDepth": 0,
+      "ingressQueueHighWater": 128,
+      "ingressDelayMillis": 15477,
+      "ingressOverload": 1,
+      "deliveryQueueDepth": 0,
+      "deliveryQueueHighWater": 1,
+      "deliveryQueueBytes": 0,
+      "deliveryQueueBytesHighWater": 794,
+      "deliveryQueueDelayMillis": 0,
+      "deliveryQueueDelayHighWaterMillis": 0,
+      "outboundOverload": 0,
+      "slowDisconnects": 0
+    },
+    "jvmHeapUsedBytes": 142684992,
+    "jvmHeapCommittedBytes": 231211008,
+    "jvmNonHeapUsedBytes": 48943960,
+    "jvmThreads": 26,
+    "jvmUptimeMs": 94816
+  },
+  "floodClose": {
+    "code": 1006,
+    "reason": ""
+  }
+}

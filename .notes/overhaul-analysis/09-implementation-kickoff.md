@@ -56,7 +56,7 @@ Use the same task for closely related work when convenient. A new task can conti
 - Audit complete; ADR-001–004 and milestone direction accepted.
 - ADR-005 deferred, GCP likely.
 - A0 concept previews generated; see [visual preview package](../art-preview/README.md). Style remains open to owner review. These are not production sprites or a functional UI.
-- **M0a complete for the local Java 8 build/test baseline, 2026-09-06. M0b complete for independent fixture startup, 2026-09-07.** The versioned JVM image, separate MariaDB Compose service, local schema/fixtures and lifecycle adapters passed actual two-coach acceptance, stop/start persistence and disposable reset. See [M0b evidence](verification/m0b/README.md). M1 browser work has not started in this task.
+- **M0a complete for the local Java 8 build/test baseline, 2026-09-06. M0b complete for independent fixture startup, 2026-09-07. M1a complete for browser movement, 2026-09-07. M1b complete for controlled decisions/reconnect, 2026-09-07.** See [M0b evidence](verification/m0b/README.md), [M1a evidence](verification/m1a/README.md), and separate [M1b evidence](verification/m1b/README.md). M1b passed four engine-parity and two-browser choice/reconnect variants. **M1c robustness/closeout and overall M1 complete, 2026-09-07**, following independent approval of the [M1c report](verification/m1c/README.md) and all nine acceptance rows.
 
 ### M0a implementation results — 2026-09-06
 
@@ -158,3 +158,142 @@ performed in this task.
 **Next action:** M1a — start the documented local stack and introduce the narrow
 browser adapter/two-browser movement demo using neutral tokens. Keep authority,
 illegal moves, stale actions and duplicate actions in the acceptance criteria.
+
+### M1a implementation results — 2026-09-07
+
+**Complete for the browser movement slice.** Started at `4fd75d0d0` with a clean
+working tree. Implemented TypeScript/React/PixiJS with neutral home/away tokens,
+server-derived state/resource panels, coordinate controls and correlated result
+log. Added the local `/browser/v1` adapter with distinct generated home/away bearer
+credentials, canonical 26×15 coordinates, strict version/field validation,
+monotonic revision, semantic request dedupe and fail-closed history capacity.
+The existing communication queue serializes browser requests. The BB2025 Select/
+Move sequence and `GameState.handleCommand` execute the move; rules were not ported
+or changed. Fixture setup runs locally, not through the browser schema.
+
+**Acceptance evidence:** two independent Chrome 152 browser contexts joined as
+home/away and synchronized revision 0. Home moved (5,7) → (6,7); both observed
+revision 1, movement used 1/6 and unchanged team resources. Wrong-role, illegal
+and stale requests were rejected; accepted retry returned `duplicate:true` with
+no second movement or broadcast. Engine tests compare the entire serialized
+GameState around rejection/retry. [Screenshots, sanitized requests/responses,
+exact image identity, commands, failures and limits](verification/m1a/README.md).
+
+**Exact successful checks:** root PowerShell commands were
+`./containers/local/setup.ps1`,
+`docker compose -f containers/local/compose.yaml build server`,
+`docker compose -f containers/local/compose.yaml up -d --wait`,
+`./tools/build.ps1 test -Module ffb-statetest -Test 'BrowserMatchAdapterTest,ServerCommunicationWorkTest,ShadowingTest' -Offline`,
+`./tools/build.ps1 install -Offline`, `./tools/build.ps1 verify -Offline`,
+`./tools/test-tooling.ps1`, and `git diff --check`. In `browser-client`,
+`npm install --no-audit --no-fund`,
+`npm install --save-dev --save-exact playwright@1.62.1 --no-audit --no-fund`,
+`npm test`, `npm run build`, `npm run dev`, and a second terminal's `npm run demo`
+completed the frontend/demo checks. Docker PATH and rerun instructions are in the
+[client guide](../../browser-client/README.md). The final demo was repeated after
+refreshing the image from final source; it passed.
+
+| Check | Result |
+|---|---|
+| Focused BB2025/adapter/queue selector | 11 passed, no failures/errors |
+| Required Java 8 clean install | All 8 reactor projects; 367 reported, 366 passed, 1 existing disabled; 2m37s |
+| Required Java 8 clean verify | Same 367/366/1, no failures/errors; 2m25s |
+| Tooling checks | 9 passed |
+| Browser runtime schema/revision tests | 4 passed |
+| TypeScript/Vite build | Passed |
+| Actual two-browser demo | Passed: exactly one accepted engine move/broadcast, both revision 1 |
+
+Changed areas: new `browser-client/`; local browser adapter/socket/servlet and
+startup registration; existing queue work seam; two focused test classes;
+container image `3.4.0-m1a.1` plus mounted home/away secrets; change-list feature
+entry; README/protocol/evidence/status documents. No unrelated changes were present
+at entry, and existing database/backup volumes and credentials were preserved.
+
+**Resolved issues:** sandbox Docker/npm/ClassGraph access required authorized host
+execution; no global tool install. Strict-parser tests found a malformed-version
+exception, then passed after moving parsing before mutation. The first browser
+build needed Vite CSS types. Review found missing resource DTO validation; it was
+added and tested. These failures/corrections are recorded in the evidence report.
+
+**Limits:** in-memory synthetic fixture only; no persisted browser match, public
+identity provider or durable dedupe. Browser fixture game ID -1 remains outside
+legacy cache/JDBC. It resets only with local server restart. History caps at 256
+IDs without evicting accepted requests; new IDs fail closed. Unexpected engine
+failure quarantines the fixture and closes the socket; recovery is not claimed.
+Block/decision/reconnect are M1b. Renderer/asset fault injection, 1,000-action
+metrics, slow-client robustness and protocol closeout are M1c. Java 21/public
+Jetty/TLS/cloud/hosted-CI execution remain unverified. The healthy stack and Vite
+loopback server were left running at browser revision 1; demo browser contexts
+closed after evidence capture. No commit, push or deployment.
+
+**Next M1b action:** read `browser-client/protocol.md`, this M1a evidence, and
+`ffb-statetest/.../BlockTest.java`. Add controlled local Both Down fixtures and
+server-owned choice DTOs, then demonstrate engine parity and full pending-choice
+resync after disconnect with correct actor/revision and idempotent choice retries.
+Keep dice and scenario-loading controls outside the browser protocol. Do not
+claim M1 complete until M1b and M1c acceptance are separately evidenced.
+
+### M1b implementation results — 2026-09-07
+
+Controlled local startup fixtures now pause the BB2025 engine at Both Down,
+with/without attacker Block and with home/away choice ownership. Server-owned
+DTOs project prompt ID, owner, revision and all options. Both browsers receive
+the full current state after rejoin; actor-scoped exact choice retries return
+the retained accepted result without rerunning the engine or broadcasting again.
+Dice/scenario loading remain local JVM configuration and test setup only.
+
+All four variants passed independent `BlockTest`-style engine oracle checks and
+live two-browser acceptance on `ffb-server:3.4.0-m1b.1`. The live runs withheld
+the chooser's result and resolved snapshot, rejoined it, and explicitly retried
+the original request. Both views agreed at revision 1; the observer received
+exactly one resolved snapshot. The existing movement browser demo also passed.
+
+Validation: 17 focused Java tests; 5 browser decoder tests; TypeScript/Vite build;
+Java 8 clean install and clean verify, each with 370 passed / 1 existing disabled /
+zero failures/errors across eight reactor projects. Independent ownership/retry
+review found no actionable issues. See the [separate M1b acceptance table, wire
+traces, screenshots, commands and limitations](verification/m1b/README.md).
+
+The existing uncommitted M1a work was preserved. No commit, push, deployment or
+database reset. The local JVM/database are healthy with a fresh default
+`BOTH_DOWN` pending at revision 0; the loopback browser development server remains
+available. Request history remains bounded and in memory; JVM restart creates a
+new match lifetime. These fixtures do not constitute a general playable match.
+
+**Next action at M1b closeout (historical): M1c** — separately evidence renderer/asset failure paths, bounded
+repeat-action metrics, queue/history/slow-client behavior and protocol closeout.
+Do not mark overall M1 complete until that acceptance and report are reviewed.
+
+## M1c robustness and overall M1 closeout — 2026-09-07
+
+**M1c and overall M1 are complete. Next milestone: M2.** The independent
+review approved concurrency, ownership, ordered delivery, cleanup, idempotency,
+measurement methodology and the final evidence-to-conclusion mapping. All nine
+original M1 acceptance rows are accounted for in the separate
+[M1c report](verification/m1c/README.md); historical M1a/M1b records are preserved.
+
+M1c adds bounded browser admission and ordered asynchronous delivery with
+failure/overflow disconnect and resync, actual diagnostic asset loading and
+labeled fallbacks, actionable WebGL initialization failure with tested reload
+recovery, executable wire fixtures, and operator-only fixture lifecycle controls.
+The Java 8 BB2025 engine remains authoritative. Movement, all four controlled
+choice/reconnect variants, failure demonstrations, history capacity and healthy
+peer isolation passed against the final local image `ffb-server:3.4.0-m1c.1`
+(identity recorded in the report), including fresh isolated-network verification.
+
+The measured run kept the JVM and browser processes running across 100 fixture
+lifetimes: 1,000 submissions comprised 600 mutations, 200 rejections and 200 exact
+retries, with 100 reconnects. Accepted action-to-render submission p95 was
+23.40 ms; reconnect p95 was 50.20 ms, with zero failures/timeouts. Browser memory
+fell after cleanup; JVM RSS showed a late plateau but did not return to baseline.
+These are observed finite-run results with enforced resource bounds, not proof
+of absence of every leak or GPU presentation timing.
+
+Final Java verify reported 386 tests: 385 passed and one existing disabled;
+focused regressions, browser tests/build and required install also passed.
+No commit, push, deployment, credential replacement or volume deletion occurred.
+The final local stack is healthy, Vite remains on loopback port 5173, the server
+on loopback port 22227, and the fresh default BOTH_DOWN fixture has revision zero,
+zero history and zero active browser connections. The filesystem-only operator
+mailbox remains explicitly enabled. M2 work has not started; follow the roadmap's
+catalog/team validation, frozen roster data, saved teams and match ownership scope.

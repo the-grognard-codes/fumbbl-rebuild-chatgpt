@@ -17,6 +17,8 @@ import com.fumbbl.ffb.server.db.DbInitializer;
 import com.fumbbl.ffb.server.db.DbQueryFactory;
 import com.fumbbl.ffb.server.db.DbUpdateFactory;
 import com.fumbbl.ffb.server.handler.ServerCommandHandlerFactory;
+import com.fumbbl.ffb.server.local.BrowserMatchAdapter;
+import com.fumbbl.ffb.server.local.BrowserMatchServlet;
 import com.fumbbl.ffb.server.net.CommandServlet;
 import com.fumbbl.ffb.server.net.FileServlet;
 import com.fumbbl.ffb.server.net.ReplaySessionManager;
@@ -221,6 +223,13 @@ public class FantasyFootballServer implements IFactorySource {
 				context.addServlet(new ServletHolder(new GameStateServlet(this)), "/gamestate/*");
 				context.addServlet(new ServletHolder(new BackupServlet(this)), "/backup/*");
 				context.addServlet(new ServletHolder(new CommandServlet(this)), "/command/*");
+				if (Boolean.parseBoolean(getProperty("server.local"))) {
+					BrowserMatchAdapter browserMatch = new BrowserMatchAdapter(this,
+						getProperty("local.browser.home.token"), getProperty("local.browser.away.token"),
+						getProperty("local.browser.fixture") == null ? BrowserMatchAdapter.Fixture.MOVEMENT
+							: BrowserMatchAdapter.Fixture.valueOf(getProperty("local.browser.fixture")));
+					context.addServlet(new ServletHolder(new BrowserMatchServlet(this, browserMatch)), "/browser/v1/*");
+				}
 				ServletHolder fileServletHolder = new ServletHolder(new FileServlet(this));
 				fileServletHolder.setInitParameter("resourceBase", httpDir.getAbsolutePath());
 				fileServletHolder.setInitParameter("pathInfoOnly", "true");

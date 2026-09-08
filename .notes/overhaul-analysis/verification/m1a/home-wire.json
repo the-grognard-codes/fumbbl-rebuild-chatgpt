@@ -1,0 +1,236 @@
+{
+  "incoming": [
+    {
+      "type": "connected"
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "8e19acc1-ab1f-4fae-821e-62a131d254e6",
+      "status": "accepted",
+      "code": "JOINED",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "snapshot",
+      "revision": 0,
+      "matchId": "m1a",
+      "actor": "home",
+      "players": [
+        {
+          "id": "home-runner",
+          "role": "home",
+          "x": 5,
+          "y": 7,
+          "movementUsed": 0,
+          "movementAllowance": 6
+        },
+        {
+          "id": "away-runner",
+          "role": "away",
+          "x": 20,
+          "y": 7,
+          "movementUsed": 0,
+          "movementAllowance": 6
+        }
+      ],
+      "ball": {
+        "x": 12,
+        "y": 7
+      },
+      "turnOwner": "home",
+      "prompt": null,
+      "resources": {
+        "home": {
+          "rerolls": 3,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        },
+        "away": {
+          "rerolls": 3,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "6314446c-fca2-4c7a-8910-d9b6f789047b",
+      "status": "rejected",
+      "code": "OFF_BOARD",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "745c8ed6-95e4-4bed-8f3f-b74671221a2f",
+      "status": "rejected",
+      "code": "NOT_ADJACENT",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "2099c7bb-3142-462b-bbab-b610930235a0",
+      "status": "rejected",
+      "code": "NOT_ADJACENT",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "dad72390-69ca-4c64-9dd9-be1c4dc2b25e",
+      "status": "accepted",
+      "code": "MOVED",
+      "revision": 1,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "snapshot",
+      "revision": 1,
+      "matchId": "m1a",
+      "actor": "home",
+      "players": [
+        {
+          "id": "home-runner",
+          "role": "home",
+          "x": 6,
+          "y": 7,
+          "movementUsed": 1,
+          "movementAllowance": 6
+        },
+        {
+          "id": "away-runner",
+          "role": "away",
+          "x": 20,
+          "y": 7,
+          "movementUsed": 0,
+          "movementAllowance": 6
+        }
+      ],
+      "ball": {
+        "x": 12,
+        "y": 7
+      },
+      "turnOwner": "home",
+      "prompt": null,
+      "resources": {
+        "home": {
+          "rerolls": 3,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        },
+        "away": {
+          "rerolls": 3,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "dad72390-69ca-4c64-9dd9-be1c4dc2b25e",
+      "status": "accepted",
+      "code": "MOVED",
+      "revision": 1,
+      "duplicate": true
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "demo-stale-1",
+      "status": "rejected",
+      "code": "STALE_REVISION",
+      "revision": 1,
+      "duplicate": false
+    }
+  ],
+  "outgoing": [
+    {
+      "version": 1,
+      "type": "move",
+      "requestId": "6314446c-fca2-4c7a-8910-d9b6f789047b",
+      "expectedRevision": 0,
+      "playerId": "home-runner",
+      "to": {
+        "x": 26,
+        "y": 7
+      }
+    },
+    {
+      "version": 1,
+      "type": "move",
+      "requestId": "745c8ed6-95e4-4bed-8f3f-b74671221a2f",
+      "expectedRevision": 0,
+      "playerId": "home-runner",
+      "to": {
+        "x": 8,
+        "y": 7
+      }
+    },
+    {
+      "version": 1,
+      "type": "move",
+      "requestId": "2099c7bb-3142-462b-bbab-b610930235a0",
+      "expectedRevision": 0,
+      "playerId": "home-runner",
+      "to": {
+        "x": 5,
+        "y": 7
+      }
+    },
+    {
+      "version": 1,
+      "type": "move",
+      "requestId": "dad72390-69ca-4c64-9dd9-be1c4dc2b25e",
+      "expectedRevision": 0,
+      "playerId": "home-runner",
+      "to": {
+        "x": 6,
+        "y": 7
+      }
+    },
+    {
+      "version": 1,
+      "type": "move",
+      "requestId": "dad72390-69ca-4c64-9dd9-be1c4dc2b25e",
+      "expectedRevision": 0,
+      "playerId": "home-runner",
+      "to": {
+        "x": 6,
+        "y": 7
+      }
+    },
+    {
+      "version": 1,
+      "type": "move",
+      "requestId": "demo-stale-1",
+      "expectedRevision": 0,
+      "playerId": "home-runner",
+      "to": {
+        "x": 7,
+        "y": 7
+      }
+    }
+  ]
+}
