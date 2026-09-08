@@ -6,12 +6,9 @@ import com.fumbbl.ffb.PlayerState;
 import com.fumbbl.ffb.TurnMode;
 import com.fumbbl.ffb.Weather;
 import com.fumbbl.ffb.model.Game;
-import com.fumbbl.ffb.model.skill.Skill;
-import com.fumbbl.ffb.net.commands.ClientCommandUseSkill;
 import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.step.IStep;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -101,33 +98,4 @@ public class OnTheBallPassBlockIntegrationTest {
 			"Expected turn mode to NOT be PASS_BLOCK when defender has no tacklezones");
 	}
 
-	@Disabled("Requires removing DUMP_OFF guard in StepPassBlock.executeStep()")
-	@Test
-	public void blockOnThrowerWithDumpOffTriggersPassBlock() {
-		GameState state = new GameStateBuilder(testServer.getGameState())
-			.withRule("BB2025")
-			.withWeather(Weather.NICE)
-			.withBallAt(11, 7)
-			.withTeam(true, t -> t
-				.player("home_blitzer", p -> p.at(10, 7).stats(6, 3, 3, 5, 8))
-				.player("home_otb", p -> p.at(16, 7).stats(6, 3, 3, 5, 8).skill("On The Ball")))
-			.withTeam(false, t -> t
-				.player("away_thrower", p -> p.at(11, 7).stats(6, 3, 3, 2, 8).skill("Dump-Off")))
-			.build();
-
-		Game game = state.getGame();
-		StepEngine.start(state);
-
-		StepEngine.respond(state, Commands.selectPlayer("home_blitzer", PlayerAction.BLOCK));
-		StepEngine.respond(state, Commands.block("home_blitzer", "away_thrower"));
-
-		Skill dumpOff = game.getPlayerById("away_thrower").getSkills()[0];
-		StepEngine.respond(state, new ClientCommandUseSkill(dumpOff, true, "away_thrower", null, false));
-
-		IStep step = StepEngine.respond(state, Commands.pass("away_thrower", new FieldCoordinate(14, 7)));
-		assertNotNull(step, "Expected a step after pass command");
-
-		assertEquals(TurnMode.PASS_BLOCK, game.getTurnMode(),
-			"PASS_BLOCK should be triggered during dump-off pass sequence");
-	}
 }

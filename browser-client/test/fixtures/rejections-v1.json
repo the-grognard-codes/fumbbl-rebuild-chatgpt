@@ -1,0 +1,9 @@
+[
+  {"request":{"version":1,"type":"move","requestId":"stale","expectedRevision":9,"playerId":"home-runner","to":{"x":6,"y":7}},"code":"STALE_REVISION"},
+  {"request":{"version":1,"type":"move","requestId":"dice","expectedRevision":0,"playerId":"home-runner","to":{"x":6,"y":7},"dice":[6]},"code":"MALFORMED_MESSAGE"},
+  {"request":{"version":1,"type":"move","requestId":"scenario","expectedRevision":0,"playerId":"home-runner","to":{"x":6,"y":7},"scenario":"MOVEMENT"},"code":"MALFORMED_MESSAGE"},
+  {"request":{"version":1,"type":"move","requestId":"actor","expectedRevision":0,"playerId":"home-runner","to":{"x":6,"y":7},"actor":"away"},"code":"MALFORMED_MESSAGE"},
+  {"request":{"version":1,"type":"reset","requestId":"unsupported"},"code":"UNSUPPORTED_MESSAGE"},
+  {"request":{"version":2,"type":"move","requestId":"version","expectedRevision":0,"playerId":"home-runner","to":{"x":6,"y":7}},"code":"UNSUPPORTED_VERSION"},
+  {"request":{"version":1,"type":"move","requestId":"malformed","expectedRevision":0,"playerId":"home-runner","to":[]},"code":"MALFORMED_MESSAGE"}
+]

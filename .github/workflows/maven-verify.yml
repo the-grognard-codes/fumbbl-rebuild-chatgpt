@@ -1,13 +1,26 @@
 name: Maven Verify
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
-      - "**"
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: maven-verify-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   verify:
+    name: Validate
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
 
     steps:
       - name: Check out repository
@@ -39,6 +52,16 @@ jobs:
       - name: Check build tooling
         shell: pwsh
         run: ./tools/test-tooling.ps1
+
+      - name: Reject disabled tests
+        shell: pwsh
+        run: |
+          $disabledTests = Get-ChildItem -Path . -Recurse -File -Filter '*.java' |
+            Select-String -Pattern '@Disabled\b|@Ignore\b'
+          if ($disabledTests) {
+            Write-Error "Disabled tests are not allowed in the validation suite:`n$disabledTests"
+            exit 1
+          }
 
       - name: Run Maven verify
         shell: pwsh

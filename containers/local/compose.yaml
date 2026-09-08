@@ -17,7 +17,7 @@ services:
       retries: 40
     networks: [isolated]
   server:
-    image: ffb-server:3.4.0-m0b.1
+    image: ffb-server:3.4.0-m1c.1
     build:
       context: ../..
       dockerfile: containers/local/Dockerfile
@@ -26,7 +26,7 @@ services:
         condition: service_healthy
     ports:
       - "127.0.0.1:22227:22227"
-    secrets: [db_password, admin_password, coach_password]
+    secrets: [db_password, admin_password, coach_password, browser_home_token, browser_away_token]
     volumes:
       - ./server.ini:/config/server.ini:ro
       - ./fixtures/teams:/app/teams:ro
@@ -59,3 +59,7 @@ secrets:
     file: ./.secrets/admin_password
   coach_password:
     file: ./.secrets/coach_password
+  browser_home_token:
+    file: ./.secrets/browser_home_token
+  browser_away_token:
+    file: ./.secrets/browser_away_token

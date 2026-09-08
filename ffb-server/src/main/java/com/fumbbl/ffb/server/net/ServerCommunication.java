@@ -108,6 +108,14 @@ public class ServerCommunication implements Runnable, IReceivedCommandHandler {
 		return handleCommand(new ReceivedCommand(internalCommand, null));
 	}
 
+	/** Queues adapter work on the same single worker that owns legacy game mutation. */
+	public boolean execute(Runnable work) {
+		if (work == null) {
+			return false;
+		}
+		return handleCommand(new RunnableWork(work));
+	}
+
 	public void run() {
 		try {
 			workerThread = Thread.currentThread();
@@ -141,6 +149,14 @@ public class ServerCommunication implements Runnable, IReceivedCommandHandler {
 		if (command == null) {
 			return;
 		}
+		if (command instanceof RunnableWork) {
+			try {
+				((RunnableWork) command).run();
+			} catch (RuntimeException exception) {
+				getServer().getDebugLog().logWithOutGameId(exception);
+			}
+			return;
+		}
 
 		if (getServer().getReplaySessionManager().has(command.getSession())) {
 			getServer().getDebugLog().logReplayCommand(IServerLogLevel.DEBUG, command);
@@ -164,6 +180,19 @@ public class ServerCommunication implements Runnable, IReceivedCommandHandler {
 
 		handleByState(command);
 
+	}
+
+	private static class RunnableWork extends ReceivedCommand {
+		private final Runnable work;
+
+		private RunnableWork(Runnable work) {
+			super(null, null);
+			this.work = work;
+		}
+
+		private void run() {
+			work.run();
+		}
 	}
 
 	private void handleByState(ReceivedCommand command) {

@@ -1,0 +1,305 @@
+{
+  "machine": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "AMD Ryzen 7 260 w/ Radeon 780M Graphics",
+    "logicalCpus": 16,
+    "ramBytes": 16438054912,
+    "node": "v24.19.0",
+    "browser": "152.0.7977.77"
+  },
+  "image": "sha256:b036eed3eef1215369f423218ff527d461f3fe49e28279511d8431b2d9b93deb",
+  "submissions": 1000,
+  "mutations": 600,
+  "rejects": 200,
+  "duplicates": 200,
+  "measuredLifetimes": 100,
+  "warmupLifetimes": 2,
+  "reconnects": 100,
+  "acceptedRenderMs": {
+    "count": 600,
+    "p50": 18.30000001192093,
+    "p95": 23.400000005960464,
+    "max": 38.099999994039536
+  },
+  "acceptedResultMs": {
+    "count": 600,
+    "p50": 5.200000017881393,
+    "p95": 6.600000023841858,
+    "max": 22.099999994039536
+  },
+  "reconnectRenderMs": {
+    "count": 100,
+    "p50": 39.80000001192093,
+    "p95": 50.20000001788139,
+    "max": 72.5
+  },
+  "snapshotBytes": {
+    "count": 600,
+    "p50": 623,
+    "p95": 623,
+    "max": 623
+  },
+  "resultBytes": {
+    "count": 1000,
+    "p50": 146,
+    "p95": 146,
+    "max": 146
+  },
+  "failures": 0,
+  "timeouts": 0,
+  "memory": [
+    {
+      "phase": "baseline-after-warmup",
+      "jvmHeapMiB": 80.86,
+      "jvmCommittedMiB": 220.5,
+      "jvmRssMiB": 230.01,
+      "containerMemory": "217.2MiB / 7.412GiB",
+      "browserWorkingSetSumMiB": 1339.51,
+      "browserPrivateBytesSumMiB": 999.73,
+      "homeJsHeapMiB": 20.69,
+      "awayJsHeapMiB": 18.12,
+      "homeDom": {
+        "documents": 2,
+        "nodes": 1397,
+        "jsEventListeners": 382
+      },
+      "awayDom": {
+        "documents": 2,
+        "nodes": 322,
+        "jsEventListeners": 215
+      },
+      "jvmThreads": 26,
+      "transport": {
+        "activeConnections": 2,
+        "activeConnectionsHighWater": 2,
+        "admissionRejected": 0,
+        "ingressQueueDepth": 0,
+        "ingressQueueHighWater": 1,
+        "ingressDelayMillis": 5,
+        "ingressOverload": 0,
+        "deliveryQueueDepth": 0,
+        "deliveryQueueHighWater": 1,
+        "deliveryQueueBytes": 0,
+        "deliveryQueueBytesHighWater": 623,
+        "deliveryQueueDelayMillis": 0,
+        "deliveryQueueDelayHighWaterMillis": 0,
+        "outboundOverload": 0,
+        "slowDisconnects": 0
+      },
+      "historyEntries": 0,
+      "authorizedConnections": 2,
+      "jvmUptimeMs": 79572
+    },
+    {
+      "phase": "lifetime-25",
+      "jvmHeapMiB": 80.29,
+      "jvmCommittedMiB": 325,
+      "jvmRssMiB": 320.68,
+      "containerMemory": "308.7MiB / 7.412GiB",
+      "browserWorkingSetSumMiB": 1435.92,
+      "browserPrivateBytesSumMiB": 1077.95,
+      "homeJsHeapMiB": 37.69,
+      "awayJsHeapMiB": 29.84,
+      "homeDom": {
+        "documents": 2,
+        "nodes": 3603,
+        "jsEventListeners": 837
+      },
+      "awayDom": {
+        "documents": 2,
+        "nodes": 727,
+        "jsEventListeners": 380
+      },
+      "jvmThreads": 25,
+      "transport": {
+        "activeConnections": 2,
+        "activeConnectionsHighWater": 2,
+        "admissionRejected": 0,
+        "ingressQueueDepth": 0,
+        "ingressQueueHighWater": 1,
+        "ingressDelayMillis": 55,
+        "ingressOverload": 0,
+        "deliveryQueueDepth": 0,
+        "deliveryQueueHighWater": 1,
+        "deliveryQueueBytes": 0,
+        "deliveryQueueBytesHighWater": 623,
+        "deliveryQueueDelayMillis": 0,
+        "deliveryQueueDelayHighWaterMillis": 0,
+        "outboundOverload": 0,
+        "slowDisconnects": 0
+      },
+      "historyEntries": 8,
+      "authorizedConnections": 2,
+      "jvmUptimeMs": 122648
+    },
+    {
+      "phase": "lifetime-50",
+      "jvmHeapMiB": 182.38,
+      "jvmCommittedMiB": 325,
+      "jvmRssMiB": 352.12,
+      "containerMemory": "340MiB / 7.412GiB",
+      "browserWorkingSetSumMiB": 1411.54,
+      "browserPrivateBytesSumMiB": 1047.38,
+      "homeJsHeapMiB": 36,
+      "awayJsHeapMiB": 18.26,
+      "homeDom": {
+        "documents": 2,
+        "nodes": 4276,
+        "jsEventListeners": 966
+      },
+      "awayDom": {
+        "documents": 2,
+        "nodes": 990,
+        "jsEventListeners": 483
+      },
+      "jvmThreads": 25,
+      "transport": {
+        "activeConnections": 2,
+        "activeConnectionsHighWater": 2,
+        "admissionRejected": 0,
+        "ingressQueueDepth": 0,
+        "ingressQueueHighWater": 1,
+        "ingressDelayMillis": 79,
+        "ingressOverload": 0,
+        "deliveryQueueDepth": 0,
+        "deliveryQueueHighWater": 1,
+        "deliveryQueueBytes": 0,
+        "deliveryQueueBytesHighWater": 623,
+        "deliveryQueueDelayMillis": 0,
+        "deliveryQueueDelayHighWaterMillis": 0,
+        "outboundOverload": 0,
+        "slowDisconnects": 0
+      },
+      "historyEntries": 8,
+      "authorizedConnections": 2,
+      "jvmUptimeMs": 164668
+    },
+    {
+      "phase": "lifetime-75",
+      "jvmHeapMiB": 73.48,
+      "jvmCommittedMiB": 310.5,
+      "jvmRssMiB": 422.65,
+      "containerMemory": "410.3MiB / 7.412GiB",
+      "browserWorkingSetSumMiB": 1383.78,
+      "browserPrivateBytesSumMiB": 1017.26,
+      "homeJsHeapMiB": 37.65,
+      "awayJsHeapMiB": 33.27,
+      "homeDom": {
+        "documents": 2,
+        "nodes": 2257,
+        "jsEventListeners": 573
+      },
+      "awayDom": {
+        "documents": 2,
+        "nodes": 352,
+        "jsEventListeners": 242
+      },
+      "jvmThreads": 25,
+      "transport": {
+        "activeConnections": 2,
+        "activeConnectionsHighWater": 2,
+        "admissionRejected": 0,
+        "ingressQueueDepth": 0,
+        "ingressQueueHighWater": 1,
+        "ingressDelayMillis": 108,
+        "ingressOverload": 0,
+        "deliveryQueueDepth": 0,
+        "deliveryQueueHighWater": 1,
+        "deliveryQueueBytes": 0,
+        "deliveryQueueBytesHighWater": 623,
+        "deliveryQueueDelayMillis": 0,
+        "deliveryQueueDelayHighWaterMillis": 0,
+        "outboundOverload": 0,
+        "slowDisconnects": 0
+      },
+      "historyEntries": 8,
+      "authorizedConnections": 2,
+      "jvmUptimeMs": 206935
+    },
+    {
+      "phase": "lifetime-100",
+      "jvmHeapMiB": 173.94,
+      "jvmCommittedMiB": 310.5,
+      "jvmRssMiB": 425.7,
+      "containerMemory": "413.5MiB / 7.412GiB",
+      "browserWorkingSetSumMiB": 1439.71,
+      "browserPrivateBytesSumMiB": 1123.9,
+      "homeJsHeapMiB": 40.07,
+      "awayJsHeapMiB": 26.32,
+      "homeDom": {
+        "documents": 2,
+        "nodes": 1571,
+        "jsEventListeners": 449
+      },
+      "awayDom": {
+        "documents": 2,
+        "nodes": 490,
+        "jsEventListeners": 294
+      },
+      "jvmThreads": 25,
+      "transport": {
+        "activeConnections": 2,
+        "activeConnectionsHighWater": 2,
+        "admissionRejected": 0,
+        "ingressQueueDepth": 0,
+        "ingressQueueHighWater": 1,
+        "ingressDelayMillis": 140,
+        "ingressOverload": 0,
+        "deliveryQueueDepth": 0,
+        "deliveryQueueHighWater": 1,
+        "deliveryQueueBytes": 0,
+        "deliveryQueueBytesHighWater": 623,
+        "deliveryQueueDelayMillis": 0,
+        "deliveryQueueDelayHighWaterMillis": 0,
+        "outboundOverload": 0,
+        "slowDisconnects": 0
+      },
+      "historyEntries": 8,
+      "authorizedConnections": 2,
+      "jvmUptimeMs": 248848
+    },
+    {
+      "phase": "idle-15s-retired",
+      "jvmHeapMiB": 176.76,
+      "jvmCommittedMiB": 310.5,
+      "jvmRssMiB": 425.71,
+      "containerMemory": "413.8MiB / 7.412GiB",
+      "browserWorkingSetSumMiB": 1170.59,
+      "browserPrivateBytesSumMiB": 807.52,
+      "homeJsHeapMiB": 17.77,
+      "awayJsHeapMiB": 17.47,
+      "homeDom": {
+        "documents": 2,
+        "nodes": 220,
+        "jsEventListeners": 194
+      },
+      "awayDom": {
+        "documents": 2,
+        "nodes": 213,
+        "jsEventListeners": 194
+      },
+      "jvmThreads": 25,
+      "transport": {
+        "activeConnections": 0,
+        "activeConnectionsHighWater": 2,
+        "admissionRejected": 0,
+        "ingressQueueDepth": 0,
+        "ingressQueueHighWater": 1,
+        "ingressDelayMillis": 140,
+        "ingressOverload": 0,
+        "deliveryQueueDepth": 0,
+        "deliveryQueueHighWater": 1,
+        "deliveryQueueBytes": 0,
+        "deliveryQueueBytesHighWater": 623,
+        "deliveryQueueDelayMillis": 0,
+        "deliveryQueueDelayHighWaterMillis": 0,
+        "outboundOverload": 0,
+        "slowDisconnects": 0
+      },
+      "historyEntries": 0,
+      "authorizedConnections": 0,
+      "jvmUptimeMs": 268283
+    }
+  ]
+}

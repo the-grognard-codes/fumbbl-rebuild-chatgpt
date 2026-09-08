@@ -1,0 +1,35 @@
+{
+  "id": "456f97d1-cc59-4f45-90ce-2832cfed15ae",
+  "ok": true,
+  "fixtureLifetimes": 104,
+  "adapter": {
+    "matchId": "7563b8d7-4552-4808-9c49-b7bb538f1e01",
+    "revision": 0,
+    "historyEntries": 0,
+    "authorizedConnections": 0,
+    "fixture": "BOTH_DOWN",
+    "failed": false
+  },
+  "transport": {
+    "activeConnections": 0,
+    "activeConnectionsHighWater": 2,
+    "admissionRejected": 0,
+    "ingressQueueDepth": 0,
+    "ingressQueueHighWater": 1,
+    "ingressDelayMillis": 140,
+    "ingressOverload": 0,
+    "deliveryQueueDepth": 0,
+    "deliveryQueueHighWater": 1,
+    "deliveryQueueBytes": 0,
+    "deliveryQueueBytesHighWater": 623,
+    "deliveryQueueDelayMillis": 0,
+    "deliveryQueueDelayHighWaterMillis": 0,
+    "outboundOverload": 0,
+    "slowDisconnects": 0
+  },
+  "jvmHeapUsedBytes": 190581984,
+  "jvmHeapCommittedBytes": 325582848,
+  "jvmNonHeapUsedBytes": 59963688,
+  "jvmThreads": 24,
+  "jvmUptimeMs": 420302
+}

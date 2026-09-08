@@ -1,7 +1,8 @@
-# Isolated local server — M0b
+# Isolated local server — M0b / M1a / M1b
 
 This is the Java 8 development profile, using the existing JVM, JDBC and legacy
-HTTP/WebSocket commands. It has no browser client. The two synthetic Human teams
+HTTP/WebSocket commands. M1a/M1b add a [local browser movement and choice client](../../browser-client/README.md)
+and a separate in-memory two-token fixture. The two synthetic Human teams
 are startup fixtures: eleven identical linemen each, not a validated roster-builder
 catalog or production artwork. BB2025 is selected explicitly.
 
@@ -24,7 +25,7 @@ back through the authenticated game-state endpoint. Save `N` for restart checks.
 A healthy database, healthy listener or successful image build alone is not this
 demo. This does not demonstrate a completed match or browser movement.
 
-The versioned image is `ffb-server:3.4.0-m0b.1`. Its Maven 3.9.9 build stage runs
+The versioned image is `ffb-server:3.4.0-m1b.1` (M0b/M1a evidence retains its earlier image IDs). Its Maven 3.9.9 build stage runs
 common/server tests and packages the existing server distribution; the runtime
 stage contains its JAR and dependency libraries. All three base images and MariaDB
 are pinned by digest. The resolved Java runtime is Temurin `1.8.0_502-b07`; the host
@@ -92,9 +93,15 @@ changing secret files alone does not update existing database accounts.
 - `server.ini` is a read-only mount. `LocalServerMain` permits only the dedicated
   `jdbc:mariadb://database:3306/ffb_local` URL, standalone mode and `server.local=true`.
   It rejects FUMBBL and S3 configuration. There are no live FUMBBL credentials.
-- `setup.ps1` generates four secrets once under ignored `.secrets/`. They are mounted
+- `setup.ps1` generates six secrets once under ignored `.secrets/`, including distinct
+  browser home/away bearer tokens. They are mounted
   as files, excluded from the image context, and never printed. Coach/admin digests
   follow the existing development protocol and are password-equivalent secrets.
+- `/browser/v1` is an additional local-only text WebSocket route. It binds roles
+  from the distinct browser tokens, projects the two-token fixture, and validates
+  correlated/versioned movement requests. Fixture setup is JVM-local; there is no
+  browser reset/scenario-loading command. The fixture/revision/history reset on
+  server restart; existing JDBC matches and volumes remain separate.
 - `LocalSchema` initializes only a database with **no tables**. It reuses the Java
   DDL without legacy coaches/setups, widens compressed snapshots to `LONGBLOB`, seeds
   `FixtureHome`/`FixtureAway`, then records version 1. Existing unversioned, partial

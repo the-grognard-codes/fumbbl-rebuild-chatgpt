@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "browser": "152.0.7977.77",
+  "results": [
+    {
+      "scenario": "valid-asset",
+      "fallback": null,
+      "revision": 1,
+      "markerRequests": 1,
+      "markerResponses": [
+        {
+          "status": 200,
+          "contentType": "image/svg+xml"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "scenario": "missing-mapping",
+      "fallback": "Token marker asset mapping is unavailable; using vector fallback.",
+      "revision": 1,
+      "markerRequests": 0,
+      "markerResponses": [],
+      "pageErrors": []
+    },
+    {
+      "scenario": "failed-load",
+      "fallback": "Token marker asset could not load; using vector fallback.",
+      "revision": 1,
+      "markerRequests": 1,
+      "markerResponses": [
+        {
+          "status": 200,
+          "contentType": "text/html"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "scenario": "webgl-init-failure-and-recovery",
+      "fallback": "WebGL error caught; DOM move accepted; reload restored rendered revision 1.",
+      "pageErrors": []
+    }
+  ]
+}

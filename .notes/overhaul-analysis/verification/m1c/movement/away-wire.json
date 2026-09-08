@@ -1,0 +1,140 @@
+{
+  "incoming": [
+    {
+      "type": "connected"
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "44a6fbf2-2888-4b11-b6a7-566250b63d37",
+      "status": "accepted",
+      "code": "JOINED",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "snapshot",
+      "revision": 0,
+      "matchId": "53513d1b-1f29-4789-934a-d5435cad6a2d",
+      "actor": "away",
+      "players": [
+        {
+          "id": "home-runner",
+          "role": "home",
+          "x": 5,
+          "y": 7,
+          "movementUsed": 0,
+          "movementAllowance": 6,
+          "state": "other"
+        },
+        {
+          "id": "away-runner",
+          "role": "away",
+          "x": 20,
+          "y": 7,
+          "movementUsed": 0,
+          "movementAllowance": 6,
+          "state": "standing"
+        }
+      ],
+      "ball": {
+        "x": 12,
+        "y": 7
+      },
+      "turnOwner": "home",
+      "prompt": null,
+      "resources": {
+        "home": {
+          "rerolls": 3,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        },
+        "away": {
+          "rerolls": 3,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "8ba02169-201a-4b80-bc1c-4b12f951ce7b",
+      "status": "rejected",
+      "code": "WRONG_TURN",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "snapshot",
+      "revision": 1,
+      "matchId": "53513d1b-1f29-4789-934a-d5435cad6a2d",
+      "actor": "away",
+      "players": [
+        {
+          "id": "home-runner",
+          "role": "home",
+          "x": 6,
+          "y": 7,
+          "movementUsed": 1,
+          "movementAllowance": 6,
+          "state": "other"
+        },
+        {
+          "id": "away-runner",
+          "role": "away",
+          "x": 20,
+          "y": 7,
+          "movementUsed": 0,
+          "movementAllowance": 6,
+          "state": "standing"
+        }
+      ],
+      "ball": {
+        "x": 12,
+        "y": 7
+      },
+      "turnOwner": "home",
+      "prompt": null,
+      "resources": {
+        "home": {
+          "rerolls": 3,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        },
+        "away": {
+          "rerolls": 3,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        }
+      }
+    }
+  ],
+  "outgoing": [
+    {
+      "version": 1,
+      "type": "move",
+      "requestId": "8ba02169-201a-4b80-bc1c-4b12f951ce7b",
+      "expectedRevision": 0,
+      "playerId": "away-runner",
+      "to": {
+        "x": 6,
+        "y": 7
+      }
+    }
+  ]
+}

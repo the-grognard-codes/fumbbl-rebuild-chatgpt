@@ -1,0 +1,334 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "name": "changed-body",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "5ea7e397-4078-43ae-bbdc-5d5b8bf16ddb",
+        "expectedRevision": 0,
+        "playerId": "home-runner",
+        "to": {
+          "x": 8,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "5ea7e397-4078-43ae-bbdc-5d5b8bf16ddb",
+        "status": "rejected",
+        "code": "REQUEST_ID_REUSED",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "stale",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "stale",
+        "expectedRevision": 0,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "stale",
+        "status": "rejected",
+        "code": "STALE_REVISION",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "dice-field",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "dice",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        },
+        "dice": [
+          6
+        ]
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "dice",
+        "status": "rejected",
+        "code": "MALFORMED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "scenario-field",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "scenario",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        },
+        "scenario": "MOVEMENT"
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "scenario",
+        "status": "rejected",
+        "code": "MALFORMED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "actor-field",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "actor",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        },
+        "actor": "away"
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "actor",
+        "status": "rejected",
+        "code": "MALFORMED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "unsupported",
+      "request": {
+        "version": 1,
+        "type": "reset",
+        "requestId": "reset"
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "reset",
+        "status": "rejected",
+        "code": "UNSUPPORTED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "version",
+      "request": {
+        "version": 2,
+        "type": "move",
+        "requestId": "version",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "version",
+        "status": "rejected",
+        "code": "UNSUPPORTED_VERSION",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "malformed",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "malformed",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": []
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "malformed",
+        "status": "rejected",
+        "code": "MALFORMED_MESSAGE",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "wrong-actor",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "wrong",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "wrong",
+        "status": "rejected",
+        "code": "WRONG_TURN",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "capacity-new-id",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "over-cap",
+        "expectedRevision": 2,
+        "playerId": "home-runner",
+        "to": {
+          "x": 8,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "over-cap",
+        "status": "rejected",
+        "code": "REQUEST_HISTORY_LIMIT",
+        "revision": 2,
+        "duplicate": false
+      }
+    },
+    {
+      "name": "retained-after-rejoin",
+      "request": {
+        "version": 1,
+        "type": "move",
+        "requestId": "5ea7e397-4078-43ae-bbdc-5d5b8bf16ddb",
+        "expectedRevision": 0,
+        "playerId": "home-runner",
+        "to": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "result": {
+        "version": 1,
+        "type": "result",
+        "requestId": "5ea7e397-4078-43ae-bbdc-5d5b8bf16ddb",
+        "status": "accepted",
+        "code": "MOVED",
+        "revision": 1,
+        "duplicate": true
+      }
+    },
+    {
+      "name": "stale-socket-callback",
+      "passed": true
+    },
+    {
+      "name": "cross-actor-and-fixture-cache-disabled",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "historyMetrics": {
+    "id": "49788fd5-68f3-4368-929f-905319b5a708",
+    "ok": true,
+    "fixtureLifetimes": 11,
+    "adapter": {
+      "matchId": "cd0a0eb2-a42d-429e-9071-f72ded8517e6",
+      "revision": 2,
+      "historyEntries": 256,
+      "authorizedConnections": 2,
+      "fixture": "MOVEMENT",
+      "failed": false
+    },
+    "transport": {
+      "activeConnections": 2,
+      "activeConnectionsHighWater": 2,
+      "admissionRejected": 0,
+      "ingressQueueDepth": 0,
+      "ingressQueueHighWater": 1,
+      "ingressDelayMillis": 38,
+      "ingressOverload": 0,
+      "deliveryQueueDepth": 0,
+      "deliveryQueueHighWater": 1,
+      "deliveryQueueBytes": 0,
+      "deliveryQueueBytesHighWater": 794,
+      "deliveryQueueDelayMillis": 0,
+      "deliveryQueueDelayHighWaterMillis": 0,
+      "outboundOverload": 0,
+      "slowDisconnects": 0
+    },
+    "jvmHeapUsedBytes": 114571760,
+    "jvmHeapCommittedBytes": 231211008,
+    "jvmNonHeapUsedBytes": 48283624,
+    "jvmThreads": 26,
+    "jvmUptimeMs": 90081
+  },
+  "beforeFlood": {
+    "id": "cd85b557-d240-40f3-8c61-0b2b61be3ca3",
+    "ok": true,
+    "fixtureLifetimes": 12,
+    "adapter": {
+      "matchId": "0c57fbcf-fd1b-457c-989f-b6a718321991",
+      "revision": 0,
+      "historyEntries": 0,
+      "authorizedConnections": 2,
+      "fixture": "MOVEMENT",
+      "failed": false
+    },
+    "transport": {
+      "activeConnections": 2,
+      "activeConnectionsHighWater": 2,
+      "admissionRejected": 0,
+      "ingressQueueDepth": 0,
+      "ingressQueueHighWater": 1,
+      "ingressDelayMillis": 40,
+      "ingressOverload": 0,
+      "deliveryQueueDepth": 0,
+      "deliveryQueueHighWater": 1,
+      "deliveryQueueBytes": 0,
+      "deliveryQueueBytesHighWater": 794,
+      "deliveryQueueDelayMillis": 0,
+      "deliveryQueueDelayHighWaterMillis": 0,
+      "outboundOverload": 0,
+      "slowDisconnects": 0
+    },
+    "jvmHeapUsedBytes": 117053296,
+    "jvmHeapCommittedBytes": 231211008,
+    "jvmNonHeapUsedBytes": 48319232,
+    "jvmThreads": 26,
+    "jvmUptimeMs": 92702
+  },
+  "failure": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Local session credential') to be visible\u001b[22m\n\n    at C:\\Users\\jaken\\Git-Hub\\fumbbl-rebuild-chatgpt\\browser-client\\test\\robustness-demo.mjs:81:53"
+}

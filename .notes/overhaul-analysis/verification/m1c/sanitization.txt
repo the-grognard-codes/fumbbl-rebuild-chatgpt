@@ -1,0 +1,1 @@
+Credential scan completed successfully (including empty logs); files requiring redaction: 0

@@ -1,0 +1,30 @@
+{
+  "name": "ffb-browser-m1a",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "demo": "node test/browser-demo.mjs",
+    "demo:choice": "node test/choice-demo.mjs",
+    "demo:renderer-failures": "node test/renderer-failure-demo.mjs",
+    "demo:renderer-lifecycle": "node test/renderer-lifecycle-demo.mjs"
+  },
+  "dependencies": {
+    "pixi.js": "8.20.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "playwright": "1.62.1",
+    "typescript": "7.0.2",
+    "vite": "8.2.2"
+  }
+}

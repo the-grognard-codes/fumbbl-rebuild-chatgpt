@@ -4,6 +4,11 @@ FFB is the Fantasy Football software used by [FUMBBL](https://fumbbl.com)
 
 Client and server are both implemented using Java 8 with Swing/AWT.
 
+The separate [local browser movement prototype](browser-client/README.md) uses
+TypeScript, React and PixiJS over the retained BB2025 server engine. It demonstrates
+two-session movement and request validation; the Java desktop client remains the
+full-match reference.
+
 ## Reproducible build and tests
 
 From the repository root in PowerShell:
