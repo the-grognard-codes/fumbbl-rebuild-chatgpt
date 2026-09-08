@@ -56,13 +56,11 @@ jobs:
       - name: Reject disabled tests
         shell: pwsh
         run: |
-          $disabledTests = rg --glob '*.java' '@Disabled|@Ignore' .
-          if ($LASTEXITCODE -eq 0) {
+          $disabledTests = Get-ChildItem -Path . -Recurse -File -Filter '*.java' |
+            Select-String -Pattern '@Disabled\b|@Ignore\b'
+          if ($disabledTests) {
             Write-Error "Disabled tests are not allowed in the validation suite:`n$disabledTests"
             exit 1
-          }
-          if ($LASTEXITCODE -ne 1) {
-            exit $LASTEXITCODE
           }
 
       - name: Run Maven verify

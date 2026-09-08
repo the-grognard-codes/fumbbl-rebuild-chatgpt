@@ -7,7 +7,9 @@ work.
 ## GitHub branch rule
 
 - Require a pull request before merging; do **not** require approvals.
-- Require the `Validate` status check from the `Maven Verify` workflow.
+- Require the `Validate` status check from the `Maven Verify` workflow. In
+  GitHub's checks list this is normally displayed as `Maven Verify / Validate`;
+  select the `Validate` check, not the workflow heading alone.
 - Do not require a branch to be up to date before merging.
 - Require conversation resolution when a review conversation exists.
 - Block force pushes and branch deletion.
