@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ffb:browser:team:v1",
+  "title": "BB2025 M2a team requests",
+  "description": "Structural/reference version contract. The server additionally checks catalog references, unique player IDs/slots, eligibility, position limits, points and recomputes costs. A draft with structural errors can produce MALFORMED_TEAM_REQUEST; legality errors produce teamValidation.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "type",
+        "requestId"
+      ],
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "type": {
+          "const": "catalog"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,100}$"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "type",
+        "requestId",
+        "draft"
+      ],
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "type": {
+          "const": "validateTeam"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,100}$"
+        },
+        "draft": {
+          "$ref": "#/$defs/draft"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "draft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalogVersion",
+        "ruleset",
+        "rosterId",
+        "presetId",
+        "captainId",
+        "players",
+        "resources"
+      ],
+      "properties": {
+        "catalogVersion": {
+          "const": "bb2025-human-2026-09-08.1"
+        },
+        "ruleset": {
+          "const": "BB2025"
+        },
+        "rosterId": {
+          "const": "human"
+        },
+        "presetId": {
+          "const": "human-exhibition-1150"
+        },
+        "captainId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "^[A-Za-z0-9_.-]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "players": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "slot",
+              "positionId",
+              "skillIds"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "pattern": "^[A-Za-z0-9_.-]+$"
+              },
+              "slot": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 16
+              },
+              "positionId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "pattern": "^[A-Za-z0-9_.-]+$"
+              },
+              "skillIds": {
+                "type": "array",
+                "maxItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80,
+                  "pattern": "^[A-Za-z0-9_.-]+$"
+                }
+              }
+            }
+          }
+        },
+        "resources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "rerolls",
+            "assistantCoaches",
+            "cheerleaders",
+            "apothecary",
+            "dedicatedFans"
+          ],
+          "properties": {
+            "rerolls": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "assistantCoaches": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 6
+            },
+            "cheerleaders": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 6
+            },
+            "apothecary": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "dedicatedFans": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}

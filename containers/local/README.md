@@ -25,7 +25,7 @@ back through the authenticated game-state endpoint. Save `N` for restart checks.
 A healthy database, healthy listener or successful image build alone is not this
 demo. This does not demonstrate a completed match or browser movement.
 
-The versioned image is `ffb-server:3.4.0-m1b.1` (M0b/M1a evidence retains its earlier image IDs). Its Maven 3.9.9 build stage runs
+The current versioned image is `ffb-server:3.4.0-m2b.1` (earlier evidence retains its historical image IDs). Its Maven 3.9.9 build stage runs
 common/server tests and packages the existing server distribution; the runtime
 stage contains its JAR and dependency libraries. All three base images and MariaDB
 are pinned by digest. The resolved Java runtime is Temurin `1.8.0_502-b07`; the host
@@ -82,7 +82,7 @@ docker compose -f containers/local/compose.yaml down --volumes
 docker compose -f containers/local/compose.yaml up -d --wait
 ```
 
-The new database starts empty except schema version 1 and two fixture identities.
+The new database starts with schema version 2, an empty saved-team table and two fixture identities.
 An old game ID will no longer load until a new game reuses that numeric ID. The
 `create` command can then demonstrate a fresh match. Reset preserves external
 secrets. To rotate coach/database credentials, reset the disposable volumes as well;
@@ -133,3 +133,24 @@ Run application verification with `./tools/build.ps1 install` and
 `LocalGameLifecycleTest`, `UtilBackupTest` and `DbUpdaterShutdownTest`; lifecycle
 worker tests accompany the shutdown implementation. The actual M0b run record is
 in [the verification report](../../.notes/overhaul-analysis/verification/m0b/README.md).
+
+## M2b saved-team persistence
+
+Schema 2 adds durable validated saved teams without changing existing match data.
+See [migration, rollback/reset boundaries and save-load-restart commands](saved-team-migration.md).
+The older schema-1 description above describes the initial M0b seed step; current
+startup then applies migration 002 and validates the complete saved-team table.
+
+## M2c durable match preparation
+
+Current image `ffb-server:3.4.0-m2c.1` applies schema migration 003 after the saved-team
+migration. `/matches` creates and joins intended-opponent matches with frozen owned
+teams and persisted roles. Authentication labels are local identity subjects;
+match roles come from membership, so either identity can be the creator/home side.
+Both participants finish in `AWAITING_SETUP`. No product engine session or regular
+play is initialized. The separate diagnostic board remains a synthetic fixture.
+
+See [match migration, retry recovery and routine restart demonstration](prepared-match-migration.md)
+and [M2c actual verification](../../.notes/overhaul-analysis/verification/m2c/README.md).
+Current fresh startup reaches schema 3. Routine upgrades preserve saved teams,
+legacy games, backup/database volumes and existing credentials.
