@@ -38,7 +38,9 @@ test('DOM renders server cost, rejection messages and unavailable totals accessi
   assert.match(renderToStaticMarkup(createElement(TeamValidationView, { result: null })), /Draft has not been validated/);
   let html = renderToStaticMarkup(createElement(TeamValidationView, { result }));
   assert.match(html, /Valid draft/); assert.match(html, /700,000 gold/); assert.match(html, /aria-live="polite"/);
-  html = renderToStaticMarkup(createElement(TeamValidationView, { result: { ...result, valid: false, total: null, messages: [{ code: 'QUANTITY', path: 'resources.rerolls', text: '<script>bad</script>' }] } }));
-  assert.match(html, /Draft needs changes/); assert.match(html, /Total unavailable/); assert.match(html, /resources.rerolls/);
-  assert.match(html, /&lt;script&gt;/); assert.doesNotMatch(html, /<script>/);
+  for (const text of ['<script>bad</script>', '<SCRIPT>bad</SCRIPT>', '<ScRiPt>bad</ScRiPt>']) {
+    html = renderToStaticMarkup(createElement(TeamValidationView, { result: { ...result, valid: false, total: null, messages: [{ code: 'QUANTITY', path: 'resources.rerolls', text }] } }));
+    assert.match(html, /Draft needs changes/); assert.match(html, /Total unavailable/); assert.match(html, /resources.rerolls/);
+    assert.match(html, /&lt;script&gt;/i); assert.doesNotMatch(html, /<script>/i);
+  }
 });
