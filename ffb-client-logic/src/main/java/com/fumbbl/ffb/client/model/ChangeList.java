@@ -10,6 +10,9 @@ public class ChangeList {
 
 	public ChangeList() {
 		versions.add(new VersionChangeList("3.4.0")
+			.addFeature("Create and join local invited matches with owned saved teams, frozen rosters and durable participant roles")
+			.addFeature("Local BB2025 Human starter team builder with a versioned catalog and server-computed costs and validation")
+			.addFeature("Save, load, edit and import/export validated local teams with catalog status and conflicting-save protection")
 			.addImprovement("Local browser prototype handles missing assets and renderer failures, and bounds connection traffic with reconnect recovery")
 			.addFeature("Local browser Both Down fixtures with server-owned choices, reconnect recovery and safe choice retries")
 			.addFeature("Local browser movement prototype with synchronized BB2025 fixture views and server-validated requests")

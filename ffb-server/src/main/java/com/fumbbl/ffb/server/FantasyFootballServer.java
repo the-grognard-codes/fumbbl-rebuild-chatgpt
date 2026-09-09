@@ -18,6 +18,12 @@ import com.fumbbl.ffb.server.db.DbQueryFactory;
 import com.fumbbl.ffb.server.db.DbUpdateFactory;
 import com.fumbbl.ffb.server.handler.ServerCommandHandlerFactory;
 import com.fumbbl.ffb.server.local.BrowserMatchAdapter;
+import com.fumbbl.ffb.server.local.BrowserSavedTeamJson;
+import com.fumbbl.ffb.server.team.JdbcSavedTeamRepository;
+import com.fumbbl.ffb.server.team.SavedTeamService;
+import com.fumbbl.ffb.server.team.bb2025.RosterCatalog;
+import com.fumbbl.ffb.server.match.JdbcMatchRepository;
+import com.fumbbl.ffb.server.match.MatchService;
 import com.fumbbl.ffb.server.local.BrowserMatchServlet;
 import com.fumbbl.ffb.server.net.CommandServlet;
 import com.fumbbl.ffb.server.net.FileServlet;
@@ -228,6 +234,14 @@ public class FantasyFootballServer implements IFactorySource {
 						getProperty("local.browser.home.token"), getProperty("local.browser.away.token"),
 						getProperty("local.browser.fixture") == null ? BrowserMatchAdapter.Fixture.MOVEMENT
 							: BrowserMatchAdapter.Fixture.valueOf(getProperty("local.browser.fixture")));
+					RosterCatalog catalog = new RosterCatalog();
+					SavedTeamService savedTeamService = new SavedTeamService(new JdbcSavedTeamRepository(
+						() -> java.sql.DriverManager.getConnection(dbConnectionManager.getDbUrl(), dbConnectionManager.getDbUser(), dbConnectionManager.getDbPassword())),
+						catalog);
+					browserMatch.setSavedTeams(new BrowserSavedTeamJson(savedTeamService));
+					browserMatch.setPreparedMatches(new MatchService(new JdbcMatchRepository(
+						() -> java.sql.DriverManager.getConnection(dbConnectionManager.getDbUrl(), dbConnectionManager.getDbUser(), dbConnectionManager.getDbPassword())),
+						savedTeamService, catalog));
 					context.addServlet(new ServletHolder(new BrowserMatchServlet(this, browserMatch)), "/browser/v1/*");
 				}
 				ServletHolder fileServletHolder = new ServletHolder(new FileServlet(this));

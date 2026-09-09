@@ -13,7 +13,8 @@
     "demo": "node test/browser-demo.mjs",
     "demo:choice": "node test/choice-demo.mjs",
     "demo:renderer-failures": "node test/renderer-failure-demo.mjs",
-    "demo:renderer-lifecycle": "node test/renderer-lifecycle-demo.mjs"
+    "demo:renderer-lifecycle": "node test/renderer-lifecycle-demo.mjs",
+    "demo:prepared-match": "node test/prepared-match-demo.mjs prepare"
   },
   "dependencies": {
     "pixi.js": "8.20.1",

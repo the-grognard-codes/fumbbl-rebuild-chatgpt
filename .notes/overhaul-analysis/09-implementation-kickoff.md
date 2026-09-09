@@ -53,6 +53,14 @@ Use the same task for closely related work when convenient. A new task can conti
 
 ## Current status
 
+- **M2a implemented and validated, 2026-09-07 local / 2026-09-08 UTC.** The owner
+  approved Blood Bowl Base BB2025 as source of truth and selected a 1,150,000-gold
+  preset. A versioned Human catalog, immutable draft/validation seams and React
+  DOM builder now pass focused and full Java/browser checks and a local live demo.
+  See [M2a closeout](verification/m2a/closeout.md) and the preserved
+  [original provenance gate](verification/m2a/README.md). M2 is not complete.
+  Next slice: **M2b — saved-team round trip**.
+
 - Audit complete; ADR-001–004 and milestone direction accepted.
 - ADR-005 deferred, GCP likely.
 - A0 concept previews generated; see [visual preview package](../art-preview/README.md). Style remains open to owner review. These are not production sprites or a functional UI.
@@ -297,3 +305,37 @@ on loopback port 22227, and the fresh default BOTH_DOWN fixture has revision zer
 zero history and zero active browser connections. The filesystem-only operator
 mailbox remains explicitly enabled. M2 work has not started; follow the roadmap's
 catalog/team validation, frozen roster data, saved teams and match ownership scope.
+
+### M2b saved-team round trip — 2026-09-08
+
+**M2b implemented and validated. M2 remains incomplete.** The browser team route
+now creates, lists, loads, edits, saves and imports/exports immutable validated
+documents through a saved-team service/repository and MariaDB schema migration 002.
+Server validation recomputes every save/import and load; optimistic document
+versions prevent stale replacement. Historical catalogs remain visible and locked,
+with explicit migration-required or unavailable status and no automatic migration.
+
+Final evidence: 53 focused Java regressions; 9 tooling checks; Java 8 offline
+install and verify across all eight projects (409 tests, zero failures/errors/skips);
+17 browser tests, schema checks and production build; actual MariaDB rollback/CAS/
+lost-acknowledgement reconciliation; live browser save-load-export-import and
+complete-document equality after JVM stop/start. Independent final review approved.
+See [changed files, exact commands, failures, screenshots and limits](verification/m2b/README.md).
+
+Existing M2a working-tree changes, credentials and database/backup volumes were
+preserved. No commit, push, deployment, reset or disabled tests. The final local
+M2b server and database are healthy. Saved teams are not match-ready; public
+accounts and match ownership remain out of scope. Schema rollback/reset boundaries
+are documented in [the migration guide](../../containers/local/saved-team-migration.md).
+
+**Next slice: M2c — match creation, frozen roster data and role ownership.**
+
+### M2c durable match preparation — 2026-09-08
+
+**M2c implemented and validated. Overall M2 is not declared complete solely by this slice.** Either local identity can create an explicitly invited match using an owned saved-team revision. Persisted roles, revalidated immutable rosters, atomic optimistic writes and durable retries survive JVM restart. The final state is AWAITING_SETUP; no setup/gameplay is initialized.
+
+Final evidence: 77 focused Java tests, 9 tooling checks, clean Java 8 offline install/verify across eight projects (433 tests, zero failures/errors/skips), 20 browser tests and production build, mounted error/reconnect checks, actual MariaDB concurrency/rollback/lost-acknowledgement tests, and two-browser reversed-role/source-edit/import/restart demonstration. Independent final review approved. Initial failures and corrections are recorded honestly.
+
+See [M2c changed files, exact commands, evidence and M2 assessment](verification/m2c/README.md), [contract](../../browser-client/prepared-match.md), and [migration/rollback boundaries](../../containers/local/prepared-match-migration.md). Existing M2a/M2b work, credentials and volumes were preserved. No commit, push or deployment occurred.
+
+Combined evidence supports bounded local M2 acceptance. Public accounts, credential lifecycle and production TLS remain outside this slice. M3 must enforce persisted membership on every setup/gameplay action and keep fixture credential labels outside product authorization. Full setup/kickoff/gameplay and in-progress recovery remain undelivered.

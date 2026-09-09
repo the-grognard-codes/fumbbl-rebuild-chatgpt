@@ -1,0 +1,45 @@
+ M .dockerignore
+ M .notes/overhaul-analysis/09-implementation-kickoff.md
+ M browser-client/README.md
+ M browser-client/protocol.md
+ M browser-client/src/main.tsx
+ M browser-client/src/style.css
+ M containers/local/Dockerfile
+ M containers/local/README.md
+ M containers/local/compose.yaml
+ M ffb-client-logic/src/main/java/com/fumbbl/ffb/client/model/ChangeList.java
+ M ffb-server/src/main/java/com/fumbbl/ffb/server/FantasyFootballServer.java
+ M ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserMatchAdapter.java
+ M ffb-server/src/main/java/com/fumbbl/ffb/server/local/LocalSchema.java
+ M ffb-server/src/test/java/com/fumbbl/ffb/server/local/LocalSchemaTest.java
+?? .notes/overhaul-analysis/12-m2a-catalog-validation-prompt.md
+?? .notes/overhaul-analysis/13-m2b-saved-team-round-trip-prompt.md
+?? .notes/overhaul-analysis/verification/m2a/
+?? .notes/overhaul-analysis/verification/m2b/
+?? browser-client/catalog.md
+?? browser-client/saved-team.schema.json
+?? browser-client/src/TeamPanel.tsx
+?? browser-client/src/saved-team-protocol.ts
+?? browser-client/src/saved-team-ui-state.ts
+?? browser-client/src/team-protocol.ts
+?? browser-client/src/team-validation-view.ts
+?? browser-client/team-request.schema.json
+?? browser-client/test/fixtures/catalog-v1.json
+?? browser-client/test/saved-team-demo.mjs
+?? browser-client/test/saved-team-mock-form.mjs
+?? browser-client/test/saved-team-protocol.test.ts
+?? browser-client/test/saved-team-ui-state.test.ts
+?? browser-client/test/team-demo.mjs
+?? browser-client/test/team-protocol.test.ts
+?? browser-client/test/test-saved-team-schema.ps1
+?? browser-client/test/test-team-schema.ps1
+?? containers/local/saved-team-migration.md
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserSavedTeamJson.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/local/BrowserTeamJson.java
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/match/
+?? ffb-server/src/main/java/com/fumbbl/ffb/server/team/
+?? ffb-server/src/main/resources/
+?? ffb-server/src/test/java/com/fumbbl/ffb/server/local/BrowserSavedTeamJsonTest.java
+?? ffb-server/src/test/java/com/fumbbl/ffb/server/local/BrowserTeamJsonTest.java
+?? ffb-server/src/test/java/com/fumbbl/ffb/server/team/
+?? ffb-statetest/src/test/java/com/fumbbl/ffb/test/BrowserTeamAdapterTest.java

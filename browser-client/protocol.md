@@ -1,5 +1,138 @@
 # Browser protocol v1 — movement, choices and M1c transport bounds
 
+## M2a catalog and draft evaluation
+
+The same authenticated local WebSocket now accepts two read-only operations:
+
+```json
+{"version":1,"type":"catalog","requestId":"catalog-1"}
+{"version":1,"type":"validateTeam","requestId":"validate-1","draft":{"catalogVersion":"bb2025-human-2026-09-08.1","ruleset":"BB2025","rosterId":"human","presetId":"human-exhibition-1150","captainId":null,"players":[],"resources":{"rerolls":0,"assistantCoaches":0,"cheerleaders":0,"apothecary":0,"dedicatedFans":0}}}
+```
+
+The empty draft above returns `PLAYER_COUNT`. Each player is exactly
+`{"id":"p1","slot":1,"positionId":"lineman","skillIds":[]}`. Supply 11–16
+players with unique IDs and integer slots 1–16 for a legal draft. `skillIds`
+contains only purchased skills. The server owns base skills, stats, costs,
+position limits and resource prices. Captain ID is null or a draft player ID.
+No supplied total is accepted, even if numerically correct.
+
+Successful catalog lookup returns `type:"catalog"`; the complete executable
+projection is `test/fixtures/catalog-v1.json`. Every response includes version,
+request ID, catalog version and ruleset. See [content and source mapping](catalog.md).
+
+```json
+{"version":1,"type":"teamValidation","requestId":"validate-1","catalogVersion":"bb2025-human-2026-09-08.1","ruleset":"BB2025","valid":false,"budget":1150000,"skillPoints":0,"messages":[{"code":"PLAYER_COUNT","path":"players","text":"A draft must contain 11 to 16 players."}],"total":0}
+```
+
+`total` is the server-computed gold cost, or null if references/quantities cannot
+be priced. A total on an invalid draft is diagnostic, never acceptance.
+`skillPoints` is computed independently of gold. `valid` is true only with no
+messages. Unknown version/ruleset/roster/preset produces `CATALOG_VERSION`,
+`RULESET`, `ROSTER`, or `PRESET` and no total. Legality messages include
+`POSITION`, `POSITION_LIMIT`, `PLAYER_COUNT`, `PLAYER_ID`, `DUPLICATE_PLAYER`,
+`DUPLICATE_SLOT`, `SLOT`, `CAPTAIN`, `CAPTAIN_INELIGIBLE`, `SKILL`,
+`SKILL_INELIGIBLE`, `DUPLICATE_SKILL`, `SKILL_LIMIT`, `SKILL_POINTS`,
+`SECONDARY_LIMIT`, `ELITE_LIMIT`, `QUANTITY` and `OVER_BUDGET`.
+
+[Request schema](team-request.schema.json) defines legal draft structure.
+The decoder also accepts some bounded illegal drafts to explain legality errors;
+it does not silently coerce numbers, strings, missing or duplicate object fields.
+Unexpected fields, wrong types, missing fields, more than 16 player entries or
+more than two skill entries per player fail as `MALFORMED_TEAM_REQUEST` using
+the existing rejected-result envelope. Two skills decode only to explain the
+one-purchase limit; three or more fail at the decoder. More than 16 KiB UTF-8
+or nesting deeper than eight is rejected before recursive parsing as
+`MALFORMED_MESSAGE` (the existing socket byte limit can close oversized frames
+before adapter execution). The nesting guard also protects existing message types;
+their valid shapes and transport/queue semantics are unchanged.
+
+These operations require the existing join but do not modify a team or match,
+increment match revision, occupy action history, or broadcast. Repeating an
+evaluation recomputes it; there is no persistence or exactly-once mutation to
+claim. Request IDs correlate responses only. The browser locks its draft while
+evaluation is pending and clears results on edits/disconnect, rejecting responses
+from retired sockets. Join snapshots remain fixture snapshots, never a team
+catalog. Raw XML, legacy model JSON, class names, artwork URLs, dice and fixture
+controls are absent. Import/export files remain out of scope; incoming draft
+JSON is nevertheless treated as untrusted input.
+
+## M2b saved-team documents
+
+After the existing authenticated `join`, saved-team traffic uses the same WebSocket
+and a single strict envelope. `list` has only the four header/operation fields;
+`load` adds `teamId`; `create` adds `draft`; `update` adds `teamId`,
+`expectedDocumentVersion`, and `draft`; `import` adds a JSON `document`.
+
+```json
+{"version":1,"type":"savedTeam","requestId":"save-1","operation":"update","teamId":"12345678-1234-1234-1234-123456789abc","expectedDocumentVersion":3,"draft":{"catalogVersion":"bb2025-human-2026-09-08.1","ruleset":"BB2025","rosterId":"human","presetId":"human-exhibition-1150","captainId":null,"players":[],"resources":{"rerolls":0,"assistantCoaches":0,"cheerleaders":0,"apothecary":0,"dedicatedFans":0}}}
+```
+
+Every response is `{version,type:"savedTeam",requestId,code,document,
+versionStatus,validation,teams}`. `teams` is at most 50 metadata records on a
+list response and is empty for all other operations. Codes are `OK`,
+`MALFORMED_TEAM_REQUEST`, `INVALID_DOCUMENT_VERSION`, `CONFLICT`, `NOT_FOUND`,
+`VALIDATION_FAILED`, `MIGRATION_REQUIRED`, `VERSION_UNAVAILABLE`,
+`PERSISTENCE_FAILED`, `SAVE_OUTCOME_UNKNOWN`, and `LIMIT_REACHED`.
+
+An authoritative document has format version 1, a canonical lower-case UUID,
+positive document version, `BB2025`, catalog version, local `home` or `away`
+owner, the strict M2a draft, and server-computed validation. Imports never trust
+claimed validation. An existing ID imports only for the same owner and matching
+document version; an unknown ID may create only at version 1 and receives a new
+server UUID. The server never migrates a catalog automatically. A load preserves
+its original document and draft, while `versionStatus` reports `CURRENT`,
+`MIGRATION_REQUIRED`, or `VERSION_UNAVAILABLE` and validation is evaluated again.
+Clients keep unavailable documents visible and editing locked, including across a
+reconnect; they can still export them. See [saved-team schema](saved-team.schema.json).
+
+Catalog policy is **current-catalog-only writes**. The only available catalog is
+`bb2025-human-2026-09-08.1`. If it remains available but a different catalog becomes
+selectable, its documents return `MIGRATION_REQUIRED`. Any other catalog version
+returns `VERSION_UNAVAILABLE`. Load always evaluates through `TeamValidation`,
+but unavailable content returns an unpriced diagnostic evaluation; the saved
+draft, prices and stored validation are not rewritten. Create, update and import
+reject both statuses. Updating the catalogVersion field is not a migration and
+cannot bypass the old document's version check. There is no automatic migration.
+
+`formatVersion:1` describes the file contract; `documentVersion` is the separate
+optimistic revision, from 1 through 2,147,483,646. Creates generate a server UUID
+and revision 1. Each replacement increments its revision exactly once with an
+atomic JDBC compare-and-swap. Stale updates and stale imports return `CONFLICT`.
+Importing an existing owned ID replaces it; importing an unknown revision-1 ID
+creates a new server ID and binds the current local owner. Unknown IDs at later
+revisions fail with `CONFLICT` rather than pretending they are fresh documents.
+File owner metadata cannot change an existing document's owner. Local subjects
+are provisional credential-derived namespaces, not public accounts or match roles.
+
+Only canonical identifier/choice data plus newly computed accepted validation is
+stored. The supplied validation object's known numeric/boolean fields are
+structurally checked and discarded; totals, budgets, skill points and acceptance
+are recomputed. Unknown and duplicate fields are rejected at every object level.
+The whole request is limited to 16 KiB UTF-8 and eight levels of nesting, including
+the import envelope. Quantities must be JSON integers, never strings or fractions.
+No names, artwork URLs, legacy model/XML objects, tokens, dice or fixture data
+belong to this schema. The owner-scoped list and create capacity are both 50;
+`LIMIT_REACHED` leaves the existing rows untouched. This slice has no delete API.
+
+Validation, parse, version, capacity and pre-commit SQL failures leave stored
+bytes unchanged. `PERSISTENCE_FAILED` is a known pre-commit failure. Once COMMIT
+is attempted, a database/connection failure may mean its acknowledgement was
+lost: `SAVE_OUTCOME_UNKNOWN` returns the **attempted**, unconfirmed document and
+its recovery ID. Never display that as a completed save or automatically retry
+create. Refresh/list and load that ID to reconcile; the browser preserves edits
+and blocks further saves/imports meanwhile. A disconnected socket likewise does
+not prove rejection. Requests correlate responses but are not durable create
+idempotency keys; an uncertain create must be reconciled before another create.
+No server log prints request bodies, documents, imported content or credentials.
+
+The saved-team repository uses dedicated short JDBC transactions on the existing
+communication worker; it does not alter fixture/game state or gameplay history.
+Migration and stop/start boundaries are in the [container guide](../containers/local/README.md).
+Saved teams are not match-ready. M2c owns match creation, frozen roster data and
+role ownership; M2 remains incomplete.
+
+## Existing match contract
+
 Transport: uncompressed text JSON over `ws://127.0.0.1:22227/browser/v1`.
 This route exists only in the explicit local server profile. Allowed browser origins
 are exactly `http://127.0.0.1:5173` and `http://localhost:5173`. TLS/public identities,
@@ -178,3 +311,15 @@ decode captured M1b movement/choice/rejoin/retry messages. M1a's older snapshot
 capture predates the required `state` projection added in M1b; M1b-compatible
 client/server artifacts must be paired. M1c does not introduce another wire
 schema change. See the separate M1c report for final acceptance status.
+# M2c prepared-match contract
+
+`preparedMatch` is a version-1 authenticated local-browser message. It is separate from the synthetic fixture and never initializes regular play. The server resolves ownership, catalog content, validation and match roles; the browser sends only saved-team identifiers and optimistic revisions.
+
+Create: `{version:1,type:"preparedMatch",operation:"create",requestId,teamId,expectedDocumentVersion,intendedOpponent:"home"|"away"}`. Join: `{version:1,type:"preparedMatch",operation:"join",requestId,matchId,expectedRevision,teamId,expectedDocumentVersion}`. Load: `{version:1,type:"preparedMatch",operation:"load",requestId,matchId}`.
+
+Every response has `{version:1,type:"preparedMatch",requestId,code,duplicate,callerRole,recoveryMatchId,document}`. `recoveryMatchId` is null except for `MATCH_OUTCOME_UNKNOWN`; it is the only match detail returned for an unknown commit outcome. The document includes its identifier/revision, `WAITING_FOR_OPPONENT` or `AWAITING_SETUP`, invitation policy, and frozen home/away rosters. Each member records source team/revision, ruleset/catalog, `rosterId`, `presetId`, `presetVersion`, resolved positions and integer skill parameters (including explicit zero values). Clients fail closed on unknown fields and never reconstruct a frozen roster from mutable saved-team records or a newer catalog. `callerRole` is persisted match membership, not a credential label. A match ID does not authorize a vacant seat: the server checks invitation and ownership. `ACCEPTED` is a successful mutation or load; an exact idempotent retry returns `ACCEPTED` with `duplicate:true`. On `MATCH_OUTCOME_UNKNOWN`, retain the exact request; load the recovery identifier and/or retry that exact request to reconcile.
+
+The complete [M2c field, invitation, frozen-document and durable retry policy](prepared-match.md)
+is the normative supplement for this message family. Exact retries reconcile
+unknown outcomes; the browser locks new mutations and reloads authoritative data
+after same-identity reconnect. M1 fixture messages/history remain separate.

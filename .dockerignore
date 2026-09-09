@@ -15,6 +15,10 @@
 !ffb-resources/pom.xml
 !ffb-statetest/
 !ffb-statetest/pom.xml
+!browser-client/
+!browser-client/test/
+!browser-client/test/fixtures/
+!browser-client/test/fixtures/catalog-v1.json
 **/target
 **/dependency-reduced-pom.xml
 **/*.iml

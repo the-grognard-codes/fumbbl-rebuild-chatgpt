@@ -33,6 +33,9 @@ import com.fumbbl.ffb.server.factory.SequenceGeneratorFactory;
 import com.fumbbl.ffb.server.step.generator.Select;
 import com.fumbbl.ffb.server.step.generator.SequenceGenerator;
 import com.fumbbl.ffb.server.util.UtilSkillBehaviours;
+import com.fumbbl.ffb.server.team.bb2025.RosterCatalog;
+import com.fumbbl.ffb.server.match.MatchJson;
+import com.fumbbl.ffb.server.match.MatchService;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -63,6 +66,13 @@ public class BrowserMatchAdapter {
 	private final Map<String, RequestRecord> requests = new LinkedHashMap<>();
 	private long revision;
 	private boolean failed;
+	private final BrowserTeamJson teamJson = new BrowserTeamJson(new RosterCatalog());
+	private BrowserSavedTeamJson savedTeams;
+	private MatchService preparedMatches;
+	private final MatchJson preparedMatchJson = new MatchJson();
+
+	public synchronized void setSavedTeams(BrowserSavedTeamJson savedTeams) { this.savedTeams = savedTeams; }
+	public synchronized void setPreparedMatches(MatchService preparedMatches) { this.preparedMatches = preparedMatches; }
 
 	public BrowserMatchAdapter(FantasyFootballServer server, String homeToken, String awayToken) {
 		this(server, homeToken, awayToken, Fixture.MOVEMENT);
@@ -85,6 +95,7 @@ public class BrowserMatchAdapter {
 		String requestId = null;
 		String type;
 		try {
+			teamJson.checkEnvelope(text);
 			message = JsonObject.readFrom(text);
 			JsonValue id = message.get("requestId");
 			if (id != null && id.isString()) requestId = id.asString();
@@ -116,6 +127,41 @@ public class BrowserMatchAdapter {
 			}
 		} catch (RuntimeException exception) {
 			connection.send(result(requestId, "rejected", "MALFORMED_MESSAGE", revision, false).toString());
+			return;
+		}
+		if ("preparedMatch".equals(type)) {
+			// The authenticated subject identifies a person; MatchService derives roles from persisted membership.
+			if (!actors.containsKey(connection)) {
+				connection.send(result(requestId, "rejected", "AUTHENTICATION_REQUIRED", revision, false).toString());
+			} else if (preparedMatches == null) {
+				connection.send(result(requestId, "rejected", "PERSISTENCE_UNAVAILABLE", revision, false).toString());
+			} else connection.send(preparedMatchJson.handle(preparedMatches, actors.get(connection), text).toString());
+			return;
+		}
+		if ("savedTeam".equals(type)) {
+			if (!actors.containsKey(connection)) {
+				connection.send(result(requestId, "rejected", "AUTHENTICATION_REQUIRED", revision, false).toString());
+			} else if (savedTeams == null) {
+				connection.send(result(requestId, "rejected", "PERSISTENCE_UNAVAILABLE", revision, false).toString());
+			} else connection.send(savedTeams.handle(actors.get(connection), text).toString());
+			return;
+		}
+		if ("catalog".equals(type) || "validateTeam".equals(type)) {
+			if (!actors.containsKey(connection)) {
+				connection.send(result(requestId, "rejected", "AUTHENTICATION_REQUIRED", revision, false).toString());
+				return;
+			}
+			try {
+				if ("catalog".equals(type)) {
+					teamJson.fields(message, "version", "type", "requestId");
+					connection.send(teamJson.catalog(requestId).toString());
+				} else {
+					teamJson.fields(message, "version", "type", "requestId", "draft");
+					connection.send(teamJson.evaluate(requestId, message.get("draft").asObject()).toString());
+				}
+			} catch (RuntimeException exception) {
+				connection.send(result(requestId, "rejected", "MALFORMED_TEAM_REQUEST", revision, false).toString());
+			}
 			return;
 		}
 		if (failed) {

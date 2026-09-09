@@ -169,3 +169,72 @@ lifetime. The 1,000 submissions therefore include 600 mutations, not 1,000.
 The final retirement restores a fresh `BOTH_DOWN` fixture. See
 [M1c evidence](../.notes/overhaul-analysis/verification/m1c/README.md) for results,
 limitations, source/image identity and full reproduction commands.
+# M2c match preparation
+
+Open `/matches`, connect with a local credential, select one owned saved team and create a match. The creator chooses an intended local opponent; that does not choose the creator's match role. The intended participant reloads the shared match ID and joins with an owned compatible team. The server returns persisted roles and frozen roster versions. `AWAITING_SETUP` means both snapshots are frozen; setup and gameplay are outside this route.
+
+The form preserves selected input after authorization, stale-version, conflict or unknown-outcome errors. On a lost acknowledgement, reload the authoritative match before retrying. Source-team edits never change the displayed frozen snapshot.
+
+With a running M2c server and Vite, run `node test/prepared-match-demo.mjs prepare`, restart only the server while retaining MariaDB volumes, then run `node test/prepared-match-demo.mjs check`.
+
+# M2a local team builder
+
+Open `http://127.0.0.1:5173/teams` (or use **Team builder** from the board).
+Connect with an existing local browser credential. The route uses React DOM;
+it does not mount Pixi or consume fixture controls. Add Human players, optionally
+select a captain and supported purchased skills, set resources, then choose
+**Validate draft on server**. Both legal totals and rejection messages come from
+Java. Editing invalidates the displayed evaluation. No draft is saved or entered
+into the running fixture. Reconnecting in the same page retains choices but
+requires revalidation; reloading loses the unsaved draft.
+
+Build/start the current local image with the existing Compose instructions,
+then run `npm run dev` if Vite is not already listening on loopback port 5173.
+M2a uses image `ffb-server:3.4.0-m2a.1`. Do not use the old M1 image with the new
+route. Existing tokens, database and backup volumes are preserved.
+
+Content, source comparison and unsupported options: [catalog.md](catalog.md).
+Wire contract: [protocol.md](protocol.md). Reproduce the focused browser checks
+with `node --experimental-strip-types --test test/team-protocol.test.ts` and
+the local real-browser acceptance with `node test/team-demo.mjs`. The demo reads
+the existing credential file and excludes joins from saved wire evidence.
+
+## M2b saved teams
+
+The Team builder also lists, loads, creates, updates, imports and downloads local
+saved-team documents. Saving always uses the server's current document version;
+when another editor has changed a loaded document, a `CONFLICT` leaves this page's
+edits intact for review and a later save. Export always downloads the last saved
+server document; unsaved edits are explicitly excluded. Import accepts unique-key JSON that fits the
+16 KiB WebSocket request bound. Downloads contain the authoritative server document, including its
+owner and recomputed validation.
+
+Catalog versions are never silently rewritten. A loaded document marked
+`MIGRATION_REQUIRED` or `VERSION_UNAVAILABLE` remains visible and downloadable,
+but its editor is locked. Reconnects retain this state rather than replacing it
+with a new empty draft. Saved teams cannot enter a match in this slice.
+
+Run the focused structural checks with:
+
+```powershell
+node --experimental-strip-types --test test/saved-team-protocol.test.ts
+```
+
+Use the paired M2b image and a running Vite server to execute the durable browser
+acceptance in two phases:
+
+```powershell
+node test/saved-team-demo.mjs prepare
+# stop and start the local server without clearing MariaDB
+node test/saved-team-demo.mjs check
+# Mounted fake-WebSocket regression for catalog-mismatch reconnect locking:
+node test/saved-team-mock-form.mjs
+```
+
+`prepare` creates one synthetic 11-Lineman, 700,000-gold team through the DOM;
+exercises list/new/load, a 750,000-gold update, download, recomputed import,
+stale-import conflict and invalid-save protection; then records only that team's
+ID and authoritative document. `check` loads that same document after restart
+and compares the complete document. Screenshots and the single restart artifact
+are under `.notes/overhaul-analysis/verification/m2b/`; no credentials or other
+list records are written.

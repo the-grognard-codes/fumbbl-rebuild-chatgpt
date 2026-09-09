@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "type": "catalog",
+  "requestId": "catalog-fixture",
+  "catalogVersion": "bb2025-human-2026-09-08.1",
+  "ruleset": "BB2025",
+  "rosterId": "human",
+  "name": "Human",
+  "presetId": "human-exhibition-1150",
+  "budget": 1150000,
+  "minPlayers": 11,
+  "maxPlayers": 16,
+  "skillPoints": 8,
+  "maxSecondary": 2,
+  "maxElite": 4,
+  "league": "Old World Classic",
+  "specialRule": "Team Captain",
+  "positions": [
+    {
+      "id": "lineman",
+      "name": "Human Lineman",
+      "maximum": 16,
+      "cost": 50000,
+      "ma": 6,
+      "st": 3,
+      "ag": 3,
+      "pa": 4,
+      "av": 9,
+      "role": "Lineman",
+      "race": "Human",
+      "primary": "G",
+      "secondary": "ADS",
+      "baseSkills": [],
+      "canCaptain": true
+    },
+    {
+      "id": "halfling",
+      "name": "Halfling Hopeful",
+      "maximum": 3,
+      "cost": 30000,
+      "ma": 5,
+      "st": 2,
+      "ag": 3,
+      "pa": 4,
+      "av": 7,
+      "role": "Lineman",
+      "race": "Halfling",
+      "primary": "A",
+      "secondary": "DGS",
+      "baseSkills": [
+        {
+          "id": "dodge",
+          "value": 0
+        },
+        {
+          "id": "right-stuff",
+          "value": 0
+        },
+        {
+          "id": "stunty",
+          "value": 0
+        }
+      ],
+      "canCaptain": true
+    },
+    {
+      "id": "catcher",
+      "name": "Human Catcher",
+      "maximum": 2,
+      "cost": 75000,
+      "ma": 8,
+      "st": 3,
+      "ag": 3,
+      "pa": 4,
+      "av": 8,
+      "role": "Catcher",
+      "race": "Human",
+      "primary": "AG",
+      "secondary": "DPS",
+      "baseSkills": [
+        {
+          "id": "catch",
+          "value": 0
+        },
+        {
+          "id": "dodge",
+          "value": 0
+        }
+      ],
+      "canCaptain": true
+    },
+    {
+      "id": "thrower",
+      "name": "Human Thrower",
+      "maximum": 2,
+      "cost": 75000,
+      "ma": 6,
+      "st": 3,
+      "ag": 3,
+      "pa": 3,
+      "av": 9,
+      "role": "Thrower",
+      "race": "Human",
+      "primary": "GP",
+      "secondary": "ADS",
+      "baseSkills": [
+        {
+          "id": "pass",
+          "value": 0
+        },
+        {
+          "id": "sure-hands",
+          "value": 0
+        }
+      ],
+      "canCaptain": true
+    },
+    {
+      "id": "blitzer",
+      "name": "Human Blitzer",
+      "maximum": 2,
+      "cost": 85000,
+      "ma": 7,
+      "st": 3,
+      "ag": 3,
+      "pa": 4,
+      "av": 9,
+      "role": "Blitzer",
+      "race": "Human",
+      "primary": "GS",
+      "secondary": "AD",
+      "baseSkills": [
+        {
+          "id": "block",
+          "value": 0
+        },
+        {
+          "id": "tackle",
+          "value": 0
+        }
+      ],
+      "canCaptain": true
+    },
+    {
+      "id": "ogre",
+      "name": "Ogre",
+      "maximum": 1,
+      "cost": 140000,
+      "ma": 5,
+      "st": 5,
+      "ag": 4,
+      "pa": 5,
+      "av": 10,
+      "role": "Big Guy",
+      "race": "Ogre",
+      "primary": "S",
+      "secondary": "AG",
+      "baseSkills": [
+        {
+          "id": "bone-head",
+          "value": 0
+        },
+        {
+          "id": "loner",
+          "value": 3
+        },
+        {
+          "id": "mighty-blow",
+          "value": 1
+        },
+        {
+          "id": "thick-skull",
+          "value": 0
+        },
+        {
+          "id": "throw-team-mate",
+          "value": 0
+        }
+      ],
+      "canCaptain": false
+    }
+  ],
+  "skills": [
+    {
+      "id": "block",
+      "name": "Block",
+      "category": "G",
+      "selectable": true,
+      "elite": true
+    },
+    {
+      "id": "dodge",
+      "name": "Dodge",
+      "category": "A",
+      "selectable": true,
+      "elite": true
+    },
+    {
+      "id": "catch",
+      "name": "Catch",
+      "category": "A",
+      "selectable": true,
+      "elite": false
+    },
+    {
+      "id": "pass",
+      "name": "Pass",
+      "category": "P",
+      "selectable": true,
+      "elite": false
+    },
+    {
+      "id": "sure-hands",
+      "name": "Sure Hands",
+      "category": "G",
+      "selectable": true,
+      "elite": false
+    },
+    {
+      "id": "tackle",
+      "name": "Tackle",
+      "category": "G",
+      "selectable": true,
+      "elite": false
+    },
+    {
+      "id": "pro",
+      "name": "Pro",
+      "category": "G",
+      "selectable": true,
+      "elite": false
+    },
+    {
+      "id": "right-stuff",
+      "name": "Right Stuff",
+      "category": "T",
+      "selectable": false,
+      "elite": false
+    },
+    {
+      "id": "stunty",
+      "name": "Stunty",
+      "category": "T",
+      "selectable": false,
+      "elite": false
+    },
+    {
+      "id": "bone-head",
+      "name": "Bone Head",
+      "category": "T",
+      "selectable": false,
+      "elite": false
+    },
+    {
+      "id": "loner",
+      "name": "Loner",
+      "category": "T",
+      "selectable": false,
+      "elite": false
+    },
+    {
+      "id": "mighty-blow",
+      "name": "Mighty Blow",
+      "category": "S",
+      "selectable": false,
+      "elite": true
+    },
+    {
+      "id": "thick-skull",
+      "name": "Thick Skull",
+      "category": "S",
+      "selectable": false,
+      "elite": false
+    },
+    {
+      "id": "throw-team-mate",
+      "name": "Throw Team-Mate",
+      "category": "T",
+      "selectable": false,
+      "elite": false
+    }
+  ],
+  "resources": [
+    {
+      "id": "rerolls",
+      "name": "Team re-rolls",
+      "cost": 50000,
+      "maximum": 8
+    },
+    {
+      "id": "assistantCoaches",
+      "name": "Assistant coaches",
+      "cost": 10000,
+      "maximum": 6
+    },
+    {
+      "id": "cheerleaders",
+      "name": "Cheerleaders",
+      "cost": 10000,
+      "maximum": 6
+    },
+    {
+      "id": "apothecary",
+      "name": "Apothecary",
+      "cost": 50000,
+      "maximum": 1
+    },
+    {
+      "id": "dedicatedFans",
+      "name": "Dedicated fans",
+      "cost": 5000,
+      "maximum": 3
+    }
+  ],
+  "unsupported": "All other rosters, skills for purchase, star players, inducements, progression and match creation are unsupported. Unspent budget is lost."
+}

@@ -1,0 +1,1 @@
+Final git diff --check passed (line-ending advisories only). Evidence text scan found zero matches to existing local secret values.

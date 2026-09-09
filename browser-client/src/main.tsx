@@ -5,6 +5,8 @@ import type { RendererTestFault } from './board';
 import { decode, newerSnapshot } from './protocol';
 import type { Choice, Move, Point, Snapshot, Result } from './protocol';
 import './style.css';
+import { TeamPanel } from './TeamPanel';
+import { MatchPanel } from './MatchPanel';
 
 function App() {
   const [token, setToken] = useState('');
@@ -136,4 +138,4 @@ function App() {
     <h2>Request results</h2><div role="log" className="results">{log.map((entry, index) => <article key={`${entry.requestId}-${index}`} className={entry.status}><strong>{entry.status} · {entry.code}</strong><div>Revision {entry.revision}{entry.duplicate ? ' · duplicate' : ''}</div><small>{entry.requestId ?? 'uncorrelated'}</small></article>)}</div></aside></div>
   </main>;
 }
-createRoot(document.getElementById('root')!).render(<App/>);
+createRoot(document.getElementById('root')!).render(window.location.pathname === '/teams' ? <TeamPanel/> : window.location.pathname === '/matches' ? <MatchPanel/> : <><nav><a href="/teams">Team builder</a> · <a href="/matches">Match preparation</a></nav><App/></>);

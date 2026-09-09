@@ -1,0 +1,579 @@
+{
+  "matchId": "a84a1ef2-e30a-3ffd-9180-b65f884c2653",
+  "document": {
+    "formatVersion": 1,
+    "matchId": "a84a1ef2-e30a-3ffd-9180-b65f884c2653",
+    "documentVersion": 2,
+    "lifecycle": "AWAITING_SETUP",
+    "invitation": {
+      "intendedOpponent": "home"
+    },
+    "home": {
+      "role": "home",
+      "sourceTeamId": "e2e09f92-301d-44d0-8810-32da858948da",
+      "sourceDocumentVersion": 1,
+      "ruleset": "BB2025",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "rosterId": "human",
+      "presetId": "human-exhibition-1150",
+      "presetVersion": "bb2025-human-2026-09-08.1",
+      "validation": {
+        "valid": true,
+        "total": 550000,
+        "budget": 1150000,
+        "skillPoints": 0,
+        "messages": []
+      },
+      "roster": {
+        "captainId": null,
+        "resources": {
+          "rerolls": 0,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 0,
+          "dedicatedFans": 0
+        },
+        "players": [
+          {
+            "id": "2902a166-7dc1-4e95-81ec-34106e314bf3",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "2250358c-08f7-48ef-ab15-712614516560",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "e42cf263-0176-41a7-8377-12751c2e0822",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "e6c8cbfb-c46f-4c89-98c4-2adf98b39ea9",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "06ecff6b-aef0-4478-bc84-3a93029f45f4",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "b8bf6575-b916-4f29-8468-1ae61ab3f527",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "03b8c510-de7f-4432-87b4-4ed8b781f898",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "5714d7d2-d2c1-4b66-bede-72eb61dcfe44",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "ffd76316-a2d7-441d-bc39-1d9cb97b3612",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "b40c544b-da14-4c18-b5d3-ee1caf430b3d",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "be203793-4a9f-4ba5-8b58-8c749fcc6c7e",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          }
+        ]
+      }
+    },
+    "away": {
+      "role": "away",
+      "sourceTeamId": "38ee0d41-ff8e-47ce-acc6-d087d1e736fd",
+      "sourceDocumentVersion": 1,
+      "ruleset": "BB2025",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "rosterId": "human",
+      "presetId": "human-exhibition-1150",
+      "presetVersion": "bb2025-human-2026-09-08.1",
+      "validation": {
+        "valid": true,
+        "total": 550000,
+        "budget": 1150000,
+        "skillPoints": 0,
+        "messages": []
+      },
+      "roster": {
+        "captainId": null,
+        "resources": {
+          "rerolls": 0,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 0,
+          "dedicatedFans": 0
+        },
+        "players": [
+          {
+            "id": "43e0562b-625c-49a1-8ecb-d97baef4d4aa",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "0d47b6cf-0378-473d-a23e-6a7f1e734bef",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "e3904bb7-3067-4f36-aa99-6c37642c22a3",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "e40228e8-a211-4622-9273-77c977c685d2",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "470d7440-3a1a-46ba-955b-d6742d9ccefa",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "8d12117a-5303-4875-a4ce-c828713c851f",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "e330a2c1-7420-4c4b-ad92-2eb4d0eb1736",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "c3a97c89-1791-4ba9-99ed-e076bc43b29a",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "8284280a-3c22-4f80-846a-0e95c891ea24",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "e279b2dd-7e24-4a94-8505-6dd67b37caf4",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          },
+          {
+            "id": "73d810c4-d288-4189-b87a-c42fda9f2e24",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": [],
+            "position": {
+              "name": "Human Lineman",
+              "role": "Lineman",
+              "race": "Human",
+              "maximum": 16,
+              "cost": 50000,
+              "ma": 6,
+              "st": 3,
+              "ag": 3,
+              "pa": 4,
+              "av": 9,
+              "primary": "G",
+              "secondary": "ADS",
+              "baseSkillIds": [],
+              "parameters": {}
+            }
+          }
+        ]
+      }
+    }
+  },
+  "syntheticTeams": [
+    "e2e09f92-301d-44d0-8810-32da858948da",
+    "38ee0d41-ff8e-47ce-acc6-d087d1e736fd"
+  ],
+  "preparedRequests": [
+    {
+      "version": 1,
+      "type": "preparedMatch",
+      "requestId": "86a0dbf3-a892-4d24-afb9-5ab8145899a3",
+      "operation": "create",
+      "teamId": "e2e09f92-301d-44d0-8810-32da858948da",
+      "expectedDocumentVersion": 1,
+      "intendedOpponent": "home"
+    },
+    {
+      "version": 1,
+      "type": "preparedMatch",
+      "requestId": "71ba2a1b-52f3-466e-8dab-72cdda640f25",
+      "operation": "join",
+      "matchId": "a84a1ef2-e30a-3ffd-9180-b65f884c2653",
+      "expectedRevision": 1,
+      "teamId": "38ee0d41-ff8e-47ce-acc6-d087d1e736fd",
+      "expectedDocumentVersion": 1
+    }
+  ]
+}
