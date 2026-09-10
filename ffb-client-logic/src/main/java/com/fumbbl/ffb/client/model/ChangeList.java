@@ -10,6 +10,7 @@ public class ChangeList {
 
 	public ChangeList() {
 		versions.add(new VersionChangeList("3.4.0")
+			.addFeature("Local browser matches support passing, interceptions, hand-offs, fouls, throw team-mate, jumps and skill or injury choices, with searchable actions and reconnect recovery")
 			.addFeature("Play local browser kickoff and core turns with server-issued movement, block, reroll and follow-up decisions")
 			.addFeature("Activate prepared local matches with frozen teams, browser pre-match choices and legal setup through to kickoff readiness")
 			.addFeature("Create and join local invited matches with owned saved teams, frozen rosters and durable participant roles")

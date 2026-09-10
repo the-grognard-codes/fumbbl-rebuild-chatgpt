@@ -30,7 +30,7 @@ per resident match, without eviction. The existing 32-session limit, ingress and
 outbound bounds still apply. All history and engine decisions remain in memory.
 Restart retires activated sessions; durable prepared documents and frozen teams
 are unchanged. No schema or credential migration is required. The paired local
-image is `ffb-server:3.4.0-m3b.1`; update server and browser together because the
+image is `ffb-server:3.4.0-m3c.1`; update server and browser together because the
 strict snapshot shape has expanded.
 
 ## Implemented controls
@@ -62,11 +62,15 @@ current step to distinguish it from a live pending decision.
 All requested core action families are exposed for the bounded catalog. On the
 Ball, Kick and other skills outside the frozen catalog are not recruited or added.
 This does not certify every possible skill interaction or a complete match.
-Unknown decisions expose no guessed actions; the engine remains resident for
-inspection. Passing, hand-off, fouling, scoring/drive/half/completion UX, results,
-replay, session cleanup and durable in-progress restart recovery remain later M3
-work. There is no catalog, rules or infrastructure upgrade.
+M3c completes passing/catching, hand-off, fouling/argue, interception, throw
+team-mate, jump, secure ball, forgo and catalog skill/injury choices. The
+[coverage matrix](action-coverage.md) links every supported family and all 14
+skills/traits to native characterizations, adapters and browser evidence.
+Scoring/drive/half/completion UX, results, replay, session cleanup and durable
+in-progress restart recovery remain later M3 work. There is no catalog, rules or
+infrastructure upgrade.
 
 See [M3b evidence](../.notes/overhaul-analysis/verification/m3b/README.md) for actual
 checks, failures and live demonstration status. Do not infer acceptance merely
-from the availability of a control.
+from the availability of a control. [M3c evidence](../.notes/overhaul-analysis/verification/m3c/README.md)
+records the subsequent action coverage and its live versus mounted test boundaries.

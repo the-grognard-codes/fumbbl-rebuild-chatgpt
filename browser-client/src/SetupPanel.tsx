@@ -27,6 +27,7 @@ export function SetupPanel() {
   const [subject, setSubject] = useState('');
   const [playerId, setPlayerId] = useState('');
   const [actionId, setActionId] = useState('');
+  const [actionFilter, setActionFilter] = useState('');
   const [x, setX] = useState(0); const [y, setY] = useState(0);
   const socket = useRef<WebSocket | null>(null);
   const currentView = useRef<SetupState | null>(null);
@@ -38,7 +39,8 @@ export function SetupPanel() {
   const maySetup = connected && !pending && view?.phase === 'SETUP' && view.actor === view.callerRole;
   const availableActions = view?.actions.filter(action => action.actor === view.callerRole) ?? [];
   const mayAct = connected && !pending && availableActions.some(action => action.id === actionId);
-  const actionsByKind = availableActions.reduce<Record<string, typeof availableActions>>((groups, action) => {
+  const matchingActions = availableActions.filter(action => `${action.label} ${action.kind}`.toLowerCase().includes(actionFilter.trim().toLowerCase()));
+  const actionsByKind = matchingActions.reduce<Record<string, typeof availableActions>>((groups, action) => {
     (groups[action.kind] ??= []).push(action);
     return groups;
   }, {});
@@ -70,6 +72,7 @@ export function SetupPanel() {
         if (message.requestId !== null && !isLoad && !isAction) return;
         if (message.state && message.state.matchId === selectedMatch.current) {
           if (!currentView.current || message.state.revision >= currentView.current.revision) {
+            if (currentView.current?.revision !== message.state.revision) { setActionId(''); setActionFilter(''); }
             currentView.current = message.state; setView(message.state);
           }
         }
@@ -120,6 +123,8 @@ export function SetupPanel() {
       {view.actions.length > 0 && <section aria-label="Server actions" className="server-actions">
         <h3>Server actions</h3>
         <p>{availableActions.length ? 'Choose an action issued for your team. Its actor and kind are shown in the list.' : 'The server has not issued an action for your team.'}</p>
+        {availableActions.length > 12 && <label>Find an action or target <input aria-label="Find an action or target" value={actionFilter} onChange={event => { setActionFilter(event.target.value); setActionId(''); }} placeholder="Player name, pass, or 8, 7" disabled={!connected || !!pending} /></label>}
+        {actionFilter && <p>{matchingActions.length} matching actions</p>}
         <label>Action <select aria-label="Server action" value={actionId} onChange={event => setActionId(event.target.value)} disabled={!connected || !!pending || availableActions.length === 0}>
           <option value="">Select</option>{Object.entries(actionsByKind).map(([kind, actions]) => <optgroup key={kind} label={kind}>{actions.map(action => <option key={action.id} value={action.id}>{action.label} · {action.actor} · {action.kind}</option>)}</optgroup>)}
         </select></label>
@@ -132,7 +137,7 @@ export function SetupPanel() {
           const legal = !!playerId && canPlaceReserve(view, playerId, column, row);
           return <button key={`${column},${row}`} type="button" className={`${player?.role ?? ''} ${column === 12 || column === 13 ? 'los' : ''} ${row < 4 || row > 10 ? 'wide' : ''} ${legal && maySetup ? 'legal' : ''}`}
             aria-label={`Square ${column}, ${row}${player ? ` ${player.role} ${player.name}` : ''}`} onClick={() => { setX(column); setY(row); if (player?.role === view.callerRole) setPlayerId(player.id); }} disabled={!connected}>
-            {player ? `${player.role === 'home' ? 'H' : 'A'}${player.slot}` : '·'}
+            {player ? `${player.role === 'home' ? 'H' : 'A'}${player.slot}` : '·'}{view.ball?.x === column && view.ball.y === row ? ' ●' : ''}
           </button>;
         }))}
       </div>

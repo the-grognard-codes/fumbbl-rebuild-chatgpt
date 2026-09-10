@@ -353,3 +353,23 @@ Combined M2 evidence now includes genuine frozen-team engine integration and per
 M3b implemented and validated for the frozen catalog. Server-issued typed actions drive native kickoff, movement/standing, dodge/rush decisions, blocks/pushes/follow-up, blitz, rerolls, turnovers and end turn. Persisted roles and revision/request identity checks precede engine execution. Same-JVM reconnect restores pending decisions.
 
 Evidence: 98 focused Java tests, 9 tooling checks, offline clean install/verify across eight projects (454 tests, zero failures/errors/skips), 29 browser tests/build, and final-image two-browser kickoff/block-decision reconnect/retry with four actual moves over four completed turns. Independent core review approved. See [exact evidence and failures](verification/m3b/README.md) and [supported/remaining controls](../../browser-client/core-turns.md). Complete-match UX and durable in-progress restart recovery remain later M3 work. No commit, push, deployment, volume reset or credential change occurred.
+
+### M3c supported actions and skills - 2026-09-10
+
+M3c implemented and validated for the unchanged frozen Human catalog/preset.
+Passing/catching, hand-off, fouling/argue, interception, throw team-mate, jump,
+secure ball, forgo and all 14 catalog skills/traits have native engine, adapter
+and browser evidence in the [coverage matrix](../../browser-client/action-coverage.md).
+Persisted membership and frozen rosters remain authoritative. Review found no
+remaining concrete uncovered reachable action/prompt family in this scope.
+
+Evidence: 117 focused Java tests, 9 tooling checks, clean offline install/verify
+across eight projects (473 tests, zero failures/errors/skips), 30 browser tests
+and production build, 88 mounted native-wire traces in two isolated browsers,
+and final-image two-browser native play including hand-off, pass and throw
+team-mate submissions plus block prompt reconnect/retry. Independent review
+approved after correcting opponent hand-off eligibility. See [exact evidence,
+initial failures and boundaries](verification/m3c/README.md). M3d full-match
+completion/results/replay and durable in-progress restart recovery remain
+undelivered. No commit, push, public deployment, volume reset or credential
+change occurred.

@@ -8,6 +8,8 @@ import com.fumbbl.ffb.PlayerState;
 import com.fumbbl.ffb.TurnMode;
 import com.fumbbl.ffb.dialog.DialogPlayerChoiceParameter;
 import com.fumbbl.ffb.PlayerChoiceMode;
+import com.fumbbl.ffb.mechanics.JumpMechanic;
+import com.fumbbl.ffb.mechanics.Mechanic;
 import com.fumbbl.ffb.model.ActingPlayer;
 import com.fumbbl.ffb.model.Game;
 import com.fumbbl.ffb.model.Player;
@@ -19,6 +21,8 @@ import com.fumbbl.ffb.net.commands.ClientCommandBlock;
 import com.fumbbl.ffb.net.commands.ClientCommandEndTurn;
 import com.fumbbl.ffb.net.commands.ClientCommandMove;
 import com.fumbbl.ffb.net.commands.ClientCommandTargetSelected;
+import com.fumbbl.ffb.option.GameOptionId;
+import com.fumbbl.ffb.option.UtilGameOption;
 import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.step.StepId;
 import com.fumbbl.ffb.util.UtilPlayer;
@@ -50,7 +54,9 @@ public final class CoreTurnActions {
         boolean consumedKickoffChoice = game.getDialogParameter() instanceof DialogPlayerChoiceParameter
             && (((DialogPlayerChoiceParameter) game.getDialogParameter()).getPlayerChoiceMode() == PlayerChoiceMode.CHARGE
                 || ((DialogPlayerChoiceParameter) game.getDialogParameter()).getPlayerChoiceMode() == PlayerChoiceMode.SOLID_DEFENCE);
-        if ((state.getCurrentStep().getId() != StepId.INIT_SELECTING && state.getCurrentStep().getId() != StepId.INIT_MOVING && state.getCurrentStep().getId() != StepId.INIT_BLOCKING) || (game.getDialogParameter() != null && !consumedKickoffChoice)
+        if ((state.getCurrentStep().getId() != StepId.INIT_SELECTING && state.getCurrentStep().getId() != StepId.INIT_MOVING && state.getCurrentStep().getId() != StepId.INIT_BLOCKING
+            && state.getCurrentStep().getId() != StepId.INIT_PASSING && state.getCurrentStep().getId() != StepId.INIT_THROW_TEAM_MATE
+            && state.getCurrentStep().getId() != StepId.INIT_FOULING) || (game.getDialogParameter() != null && !consumedKickoffChoice)
             || (game.getTurnMode() != TurnMode.REGULAR && game.getTurnMode() != TurnMode.BLITZ)) return result;
         result.add(new Action("end-turn", "endTurn", "End turn", role, new ClientCommandEndTurn(game.getTurnMode(), null)));
         if (acting.getPlayer() == null) {
@@ -59,6 +65,10 @@ public final class CoreTurnActions {
                 FieldCoordinate at = game.getFieldModel().getPlayerCoordinate(player);
                 if (!FieldCoordinateBounds.FIELD.isInBounds(at) || !status.isActive() || !status.isAbleToMove()) continue;
                 boolean prone = status.getBase() == PlayerState.PRONE;
+                if (!prone && UtilGameOption.isOptionEnabled(game, GameOptionId.ENABLE_STALLING_CHECK))
+                    result.add(new Action("forgo-" + player.getId(), "forgo", "Forgo activation of " + player.getName(), role,
+                        new ClientCommandActingPlayer(player.getId(), PlayerAction.FORGO, false)));
+                new BallAndFoulActions().declarations(game, player, role, result);
                 result.add(new Action("select-" + player.getId(), prone ? "stand" : "select", (prone ? "Stand up " : "Move ") + player.getName(), role,
                     new ClientCommandActingPlayer(player.getId(), prone ? PlayerAction.STAND_UP : PlayerAction.MOVE, false)));
                 if (!game.getTurnData().isBlitzUsed())
@@ -76,17 +86,23 @@ public final class CoreTurnActions {
         result.add(new Action("end-action", "endAction", "End player action", role, new ClientCommandActingPlayer(null, null, false)));
         PlayerAction action = acting.getPlayerAction();
         if (action != null && (action.isMoving() || action.isStandingUp())) {
+            JumpMechanic jump = game.getMechanic(Mechanic.Type.JUMP);
+            if (acting.isJumping() || jump.isAvailableAsNextMove(game, acting, false))
+                result.add(new Action("toggle-jump", "jumpMode", acting.isJumping() ? "Walk normally" : "Jump over a prone or stunned player", role,
+                    new ClientCommandActingPlayer(id, action, !acting.isJumping())));
             for (MoveSquare square : game.getFieldModel().getMoveSquares()) {
                 FieldCoordinate to = square.getCoordinate();
-                if (!FieldCoordinateBounds.FIELD.isInBounds(to) || !to.isAdjacent(from) || game.getFieldModel().getPlayer(to) != null) continue;
-                String label = "Move to " + to.getX() + ", " + to.getY();
+                if (!FieldCoordinateBounds.FIELD.isInBounds(to) || game.getFieldModel().getPlayer(to) != null
+                    || (acting.isJumping() ? !jump.isValidJump(game, acting.getPlayer(), from, to) : !to.isAdjacent(from))) continue;
+                String label = (acting.isJumping() ? "Jump to " : "Move to ") + to.getX() + ", " + to.getY();
                 if (square.getMinimumRollDodge() > 0) label += " (dodge " + square.getMinimumRollDodge() + "+)";
                 if (square.getMinimumRollGoForIt() > 0) label += " (rush " + square.getMinimumRollGoForIt() + "+)";
                 ClientCommand command = action.isBlitzing() ? new ClientCommandBlitzMove(id, oriented(from, role), new FieldCoordinate[] { oriented(to, role) })
                     : new ClientCommandMove(id, oriented(from, role), new FieldCoordinate[] { oriented(to, role) }, null);
-                result.add(new Action("move-" + to.getX() + "-" + to.getY(), "move", label, role, command));
+                result.add(new Action("move-" + to.getX() + "-" + to.getY(), acting.isJumping() ? "jump" : "move", label, role, command));
             }
         }
+        new BallAndFoulActions().targets(game, role, result);
         if (action != null && (action == PlayerAction.BLOCK || action.isBlitzing()) && !acting.hasBlocked()) {
             TargetSelectionState selected = game.getFieldModel().getTargetSelectionState();
             for (Player<?> target : UtilPlayer.findAdjacentBlockablePlayers(game, game.getOtherTeam(game.getActingTeam()), from)) {

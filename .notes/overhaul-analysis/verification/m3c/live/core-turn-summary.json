@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "browser": "152.0.7977.83",
+  "matchId": "7970e94e-238f-372f-8645-2d7e967927f7",
+  "kickoffAction": "kickoff",
+  "pendingPrompt": "blockDie",
+  "completedTurns": 4,
+  "moves": 4,
+  "submittedFamilies": [
+    "handOff",
+    "pass",
+    "throwTeamMate"
+  ],
+  "pendingReconnect": true,
+  "exactRetry": true,
+  "wrongRoleRejected": true,
+  "staleRejected": true,
+  "finalRevision": 73,
+  "errors": []
+}

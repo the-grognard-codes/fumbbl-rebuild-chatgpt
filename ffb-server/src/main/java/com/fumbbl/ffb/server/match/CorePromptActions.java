@@ -12,9 +12,11 @@ import com.fumbbl.ffb.ReRollSources;
 import com.fumbbl.ffb.ReRolledAction;
 import com.fumbbl.ffb.ReRolledActions;
 import com.fumbbl.ffb.dialog.DialogApothecaryChoiceParameter;
+import com.fumbbl.ffb.dialog.DialogArgueTheCallParameter;
 import com.fumbbl.ffb.dialog.DialogBlockRollPropertiesParameter;
 import com.fumbbl.ffb.dialog.DialogConfirmEndActionParameter;
 import com.fumbbl.ffb.dialog.DialogFollowupChoiceParameter;
+import com.fumbbl.ffb.dialog.DialogInterceptionParameter;
 import com.fumbbl.ffb.dialog.DialogReRollPropertiesParameter;
 import com.fumbbl.ffb.dialog.DialogSkillUseParameter;
 import com.fumbbl.ffb.dialog.DialogUseApothecaryParameter;
@@ -26,13 +28,16 @@ import com.fumbbl.ffb.net.commands.ClientCommand;
 import com.fumbbl.ffb.net.commands.ClientCommandApothecaryChoice;
 import com.fumbbl.ffb.net.commands.ClientCommandBlockChoice;
 import com.fumbbl.ffb.net.commands.ClientCommandConfirm;
+import com.fumbbl.ffb.net.commands.ClientCommandArgueTheCall;
 import com.fumbbl.ffb.net.commands.ClientCommandFollowupChoice;
+import com.fumbbl.ffb.net.commands.ClientCommandInterceptorChoice;
 import com.fumbbl.ffb.net.commands.ClientCommandPushback;
 import com.fumbbl.ffb.net.commands.ClientCommandUseApothecary;
 import com.fumbbl.ffb.net.commands.ClientCommandUseProReRollForBlock;
 import com.fumbbl.ffb.net.commands.ClientCommandUseReRoll;
 import com.fumbbl.ffb.net.commands.ClientCommandUseSkill;
 import com.fumbbl.ffb.server.GameState;
+import com.fumbbl.ffb.util.UtilPassing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,9 +91,27 @@ public final class CorePromptActions {
                 add(result, "injury:new", "apothecary", "Choose " + choice.getPlayerStateNew().getDescription() + " " + choice.getSeriousInjuryNew(), role,
                     new ClientCommandApothecaryChoice(choice.getPlayerId(), choice.getPlayerStateNew(), choice.getSeriousInjuryNew(), choice.getPlayerStateOld()));
             }
-        } else if (dialog instanceof DialogConfirmEndActionParameter) {
+		} else if (dialog instanceof DialogConfirmEndActionParameter) {
             String role = roleForTeam(game, ((DialogConfirmEndActionParameter) dialog).getTeamId());
-            if (role != null) add(result, "confirm-end", "endAction", "Confirm ending action", role, new ClientCommandConfirm());
+			if (role != null) add(result, "confirm-end", "endAction", "Confirm ending action", role, new ClientCommandConfirm());
+		} else if (dialog instanceof DialogArgueTheCallParameter) {
+			DialogArgueTheCallParameter choice = (DialogArgueTheCallParameter) dialog;
+			String role = roleForTeam(game, choice.getTeamId());
+			if (role != null) {
+				add(result, "argue:no", "argueTheCall", "Do not argue the call", role, new ClientCommandArgueTheCall(new String[0]));
+				for (String playerId : choice.getPlayerIds()) add(result, "argue:" + playerId, "argueTheCall", "Argue the call for " + game.getPlayerById(playerId).getName(), role,
+					new ClientCommandArgueTheCall(playerId));
+			}
+		} else if (dialog instanceof DialogInterceptionParameter) {
+			DialogInterceptionParameter choice = (DialogInterceptionParameter) dialog;
+			Player<?> thrower = game.getPlayerById(choice.getThrowerId());
+			if (thrower != null) add(result, "intercept:none", "interception", "Do not intercept", roleForTeam(game, game.getOtherTeam(thrower.getTeam()).getId()),
+				new ClientCommandInterceptorChoice(null, null));
+			if (thrower != null) for (Player<?> interceptor : UtilPassing.findInterceptors(game, thrower, game.getPassCoordinate())) {
+				String role = roleForPlayer(game, interceptor);
+				if (role != null) add(result, "intercept:" + interceptor.getId(), "interception", "Intercept with " + interceptor.getName(), role,
+					new ClientCommandInterceptorChoice(interceptor.getId(), choice.getInterceptionSkill()));
+			}
         } else if (dialog == null && game.getFieldModel().getPushbackSquares().length > 0) {
 			pushback(result, game);
 		}
@@ -106,7 +129,8 @@ public final class CorePromptActions {
 			add(result, "block-reroll:team", "reroll", "Use team re-roll", role,
 				new ClientCommandUseReRoll(ReRolledActions.BLOCK, ReRollSources.TEAM_RE_ROLL));
 		}
-		if (dialog.hasProperty(ReRollProperty.PRO)) {
+		if (dialog.hasProperty(ReRollProperty.PRO) || ReRollSources.PRO.getName(game).equals(
+            dialog.getRrActionToSource().get(ReRolledActions.SINGLE_DIE_PER_ACTIVATION.getName(game.getRules().getSkillFactory())))) {
 			for (int index = 0; index < dialog.getBlockRoll().length; index++) add(result, "block-reroll:pro:" + index, "reroll", "Use Pro on die " + (index + 1), role,
 				new ClientCommandUseProReRollForBlock(index));
 		}

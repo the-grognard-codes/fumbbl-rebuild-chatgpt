@@ -59,3 +59,16 @@ per subject; evidence fixtures are retained rather than removing prior records.
 ## M3b extension
 
 M3b uses the same schema-3 ACTIVATED documents and frozen inputs. The paired image is ffb-server:3.4.0-m3b.1. No DDL or credential change is needed. Gameplay remains resident in the JVM; a restart retires it just like M3a setup. Pair the browser snapshot decoder with the server version. See ../../browser-client/core-turns.md.
+
+## M3c extension
+
+Pair `ffb-server:3.4.0-m3c.1` with the M3c browser. Schema 3, JDBC/MariaDB,
+Java 8/Maven, credentials and frozen catalog/preset are unchanged. No DDL,
+volume reset or credential migration is needed. Replacing the JVM still retires
+resident activated sessions; prepare a fresh match for the demonstration.
+From `browser-client`, run `node test/supported-play-demo.mjs` against the
+existing local stack and Vite. It retains created team/match records. The
+separate `node test/supported-actions-demo.mjs` uses mounted test-only wire
+fixtures and does not mutate MariaDB. See the
+[coverage matrix](../../browser-client/action-coverage.md) and
+[M3c evidence](../../.notes/overhaul-analysis/verification/m3c/README.md).

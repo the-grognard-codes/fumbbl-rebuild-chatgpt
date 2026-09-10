@@ -336,3 +336,20 @@ activation record and frozen teams persist. M1 fixture wire behavior is unchange
 ## M3b core turns
 
 See [core-turn actions and decisions](core-turns.md) for the extended setup snapshot, server-issued action IDs, same-JVM recovery and explicit remaining controls.
+
+## M3c supported actions
+
+The same version-1 `setup/action` request and strict `setupState` shape carry the
+[complete frozen-catalog action inventory](action-coverage.md). New action kinds
+include declarePass/pass, declareHandOff/handOff, declareFoul/foul, interception,
+argueTheCall, declareThrowTeamMate/liftTeamMate/throwTeamMate, jumpMode/jump,
+secureBall and forgo. IDs remain opaque, revision-bound server-issued values.
+Optional skills, rerolls and apothecary/injury decisions retain their existing
+typed action families. Coordinates remain canonical home orientation; native
+away commands are transformed only at the server adapter boundary.
+
+Every action uses persisted membership and the immutable activated roster.
+Load/reconnect restores current pending options in the same JVM; retries retain
+their exact request identity. No new message exposes fixture states or dice.
+The browser searches labels/kinds locally and clears selection/search on a new
+revision. Pair this browser with `ffb-server:3.4.0-m3c.1`; no schema change is required.
