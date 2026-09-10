@@ -71,6 +71,27 @@ public final class MatchService {
 		} catch (MatchRepository.OutcomeUnknown failure) { throw new OutcomeUnknown(matchId); }
 	}
 
+	/** Records the one durable transition that permits an external setup initializer to run. */
+	public Result activate(String owner, String requestId, String matchId, int expectedMatchVersion) throws SQLException {
+		identity(owner); selection(matchId, expectedMatchVersion); requestId(requestId);
+		MatchDocument document = required(owner, matchId);
+		String fingerprint = "activate|" + matchId + "|" + expectedMatchVersion;
+		if (document.request(owner, requestId) != null) return repeated(document, owner, requestId, fingerprint);
+		if (document.lifecycle == MatchDocument.Lifecycle.ACTIVATED) throw new Failure("ALREADY_ACTIVATED");
+		if (document.documentVersion != expectedMatchVersion) throw new Failure("STALE_REVISION");
+		if (document.lifecycle != MatchDocument.Lifecycle.AWAITING_SETUP) throw new Failure("MATCH_NOT_READY");
+		MatchDocument activated = document.activated(owner + "\n" + requestId, fingerprint);
+		try {
+			if (!matches.replace(record(activated), document.documentVersion)) {
+				MatchDocument after = required(owner, matchId);
+				if (after.request(owner, requestId) != null) return repeated(after, owner, requestId, fingerprint);
+				if (after.lifecycle == MatchDocument.Lifecycle.ACTIVATED) throw new Failure("ALREADY_ACTIVATED");
+				throw new Failure("CONFLICT");
+			}
+			return new Result(activated, false);
+		} catch (MatchRepository.OutcomeUnknown failure) { throw new OutcomeUnknown(matchId); }
+	}
+
 	public Result load(String owner, String matchId) throws SQLException {
 		identity(owner); selection(matchId, 1);
 		return new Result(required(owner, matchId), false);

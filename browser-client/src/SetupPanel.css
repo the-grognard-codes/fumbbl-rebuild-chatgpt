@@ -1,0 +1,11 @@
+﻿.setup-panel { max-width: 1100px; }
+.setup-grid { display: grid; grid-template-columns: repeat(26, minmax(1.6rem, 1fr)); gap: 1px; width: 100%; overflow-x: auto; background: #315b39; padding: 3px; margin: 1rem 0; }
+.setup-grid button { min-width: 0; height: 1.8rem; padding: 0; border: 0; background: #e0ead7; color: #243322; font-size: .65rem; }
+.setup-grid button.wide { background: #c9d7be; }
+.setup-grid button.los { border-left: 2px solid #806936; }
+.setup-grid button.legal { box-shadow: inset 0 0 0 1px #48834c; }
+.setup-grid button.home { background: #275e84; color: white; border-radius: 50%; }
+.setup-grid button.away { background: #913f28; color: white; }
+.setup-grid button:focus-visible { outline: 3px solid #e8af18; outline-offset: -3px; }
+.server-actions { margin: 1rem 0; padding: .75rem; border: 1px solid #806936; background: #182b25; color: #e0ead7; }
+.server-actions select { min-width: min(100%, 32rem); }

@@ -1,0 +1,1 @@
+Tracked git diff --check passed. Changed/new source and documentation trailing whitespace scan: 0 findings.

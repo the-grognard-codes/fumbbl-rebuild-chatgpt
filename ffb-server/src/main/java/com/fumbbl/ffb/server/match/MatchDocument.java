@@ -2,7 +2,7 @@ package com.fumbbl.ffb.server.match;
 
 /** Versioned durable preparation document. Membership, rather than a credential label, assigns roles. */
 public final class MatchDocument {
-	public enum Lifecycle { WAITING_FOR_OPPONENT, AWAITING_SETUP }
+	public enum Lifecycle { WAITING_FOR_OPPONENT, AWAITING_SETUP, ACTIVATED }
 	public final String matchId, intendedOpponent;
 	public final int documentVersion;
 	public final Lifecycle lifecycle;
@@ -17,6 +17,11 @@ public final class MatchDocument {
 		if (away != null) throw new IllegalStateException("Seat occupied");
 		java.util.Map<String,Request> next=new java.util.LinkedHashMap<String,Request>(requests); next.put(requestKey,new Request(fingerprint));
 		return new MatchDocument(matchId, documentVersion + 1, intendedOpponent, Lifecycle.AWAITING_SETUP, home, opponent,next);
+	}
+	public MatchDocument activated(String requestKey, String fingerprint) {
+		if (away == null || lifecycle != Lifecycle.AWAITING_SETUP) throw new IllegalStateException("Match is not ready");
+		java.util.Map<String,Request> next=new java.util.LinkedHashMap<String,Request>(requests); next.put(requestKey,new Request(fingerprint));
+		return new MatchDocument(matchId, documentVersion + 1, intendedOpponent, Lifecycle.ACTIVATED, home, away,next);
 	}
 	public Request request(String owner,String requestId) { return requests.get(owner + "\n" + requestId); }
 	public static final class Request { public final String fingerprint; public Request(String fingerprint){this.fingerprint=fingerprint;} }

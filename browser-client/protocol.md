@@ -323,3 +323,16 @@ The complete [M2c field, invitation, frozen-document and durable retry policy](p
 is the normative supplement for this message family. Exact retries reconcile
 unknown outcomes; the browser locks new mutations and reloads authoritative data
 after same-identity reconnect. M1 fixture messages/history remain separate.
+
+## M3a prepared-match activation and setup
+
+The separate [setup protocol](setup.md) extends the persisted prepared-match flow
+with `preparedMatch/activate` and the `setup`/`setupState` message family. It covers
+genuine pre-match choices, legal placement and both setup confirmations. Product
+roles are persisted membership; the diagnostic credential label never selects a
+match role. Activated sessions are unavailable after JVM restart, even though the
+activation record and frozen teams persist. M1 fixture wire behavior is unchanged.
+
+## M3b core turns
+
+See [core-turn actions and decisions](core-turns.md) for the extended setup snapshot, server-issued action IDs, same-JVM recovery and explicit remaining controls.

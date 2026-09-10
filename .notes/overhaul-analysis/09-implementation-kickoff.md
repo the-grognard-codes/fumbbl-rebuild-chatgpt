@@ -339,3 +339,17 @@ Final evidence: 77 focused Java tests, 9 tooling checks, clean Java 8 offline in
 See [M2c changed files, exact commands, evidence and M2 assessment](verification/m2c/README.md), [contract](../../browser-client/prepared-match.md), and [migration/rollback boundaries](../../containers/local/prepared-match-migration.md). Existing M2a/M2b work, credentials and volumes were preserved. No commit, push or deployment occurred.
 
 Combined evidence supports bounded local M2 acceptance. Public accounts, credential lifecycle and production TLS remain outside this slice. M3 must enforce persisted membership on every setup/gameplay action and keep fixture credential labels outside product authorization. Full setup/kickoff/gameplay and in-progress recovery remain undelivered.
+
+### M3a activation and legal setup ? 2026-09-09
+
+**M3a implemented and validated.** Revision-3 activation initializes the existing engine once from frozen teams; every introduced operation uses persisted membership. Browser pre-match choices, placement/reserves and native legal setup confirmation reach READY_FOR_KICKOFF for both teams. Reversed creator identity, source-edit isolation, exact retry and reconnect were demonstrated in two browser contexts. A real JVM restart returns SESSION_UNAVAILABLE without reinitializing an activated match. No in-progress recovery is claimed.
+
+Final evidence: 85 focused Java tests, 9 tooling checks, offline clean install/verify across eight projects with 441 tests and no failures/errors/skips, 27 browser tests, production build, actual MariaDB activation fault/race checks, two-browser setup and final-image restart checks. Independent review approved. See [M3a evidence, exact commands, failures, final live match and limits](verification/m3a/README.md), [setup protocol](../../browser-client/setup.md), and [migration guide](../../containers/local/setup-activation-migration.md).
+
+Combined M2 evidence now includes genuine frozen-team engine integration and persisted-role setup authorization. Public accounts/credential lifecycle/TLS remain outside bounded local acceptance. Next: kickoff execution and subsequent M3 gameplay/completion work. No commit, push, deployment, volume reset or credential change occurred.
+
+### M3b kickoff and core turn actions - 2026-09-09
+
+M3b implemented and validated for the frozen catalog. Server-issued typed actions drive native kickoff, movement/standing, dodge/rush decisions, blocks/pushes/follow-up, blitz, rerolls, turnovers and end turn. Persisted roles and revision/request identity checks precede engine execution. Same-JVM reconnect restores pending decisions.
+
+Evidence: 98 focused Java tests, 9 tooling checks, offline clean install/verify across eight projects (454 tests, zero failures/errors/skips), 29 browser tests/build, and final-image two-browser kickoff/block-decision reconnect/retry with four actual moves over four completed turns. Independent core review approved. See [exact evidence and failures](verification/m3b/README.md) and [supported/remaining controls](../../browser-client/core-turns.md). Complete-match UX and durable in-progress restart recovery remain later M3 work. No commit, push, deployment, volume reset or credential change occurred.

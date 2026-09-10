@@ -54,6 +54,9 @@ import java.util.stream.Collectors;
  */
 public class GameState implements IModelChangeObserver, IJsonSerializable {
 
+	/** Application-owned sessions provide their own durability boundary. */
+	public boolean usesLegacyPersistence() { return true; }
+
 	private Game fGame;
 	private final GameLog fGameLog;
 	private GameStatus fStatus;

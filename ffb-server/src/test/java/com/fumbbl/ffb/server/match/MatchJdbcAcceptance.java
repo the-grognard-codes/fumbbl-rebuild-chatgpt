@@ -123,7 +123,28 @@ public final class MatchJdbcAcceptance {
 			check(a.getBoolean("duplicate", false) != b.getBoolean("duplicate", false), "concurrent create needs one original acceptance");
 			check(count() == beforeCreates + 1, "concurrent create duplicated row");
 		} finally { creators.shutdownNow(); }
-		System.out.println("M2c MariaDB acceptance passed: reversed ownership, frozen source, rollback invariance, concurrent joins, durable create/join retry and lost acknowledgements.");
+		JsonObject activation = header("activate").add("matchId", recoveredId).add("expectedRevision", 2);
+		String unactivated = repository.find(recoveredId).json;
+		check("PERSISTENCE_FAILED".equals(json.handle(service(faultConnections(false)), "away", activation.toString()).getString("code", null)), "activation rollback misclassified");
+		check(unactivated.equals(repository.find(recoveredId).json), "activation rollback changed durable state");
+		check("MATCH_OUTCOME_UNKNOWN".equals(json.handle(service(faultConnections(true)), "away", activation.toString()).getString("code", null)), "activation lost acknowledgement misclassified");
+		check(accepted(service(connections), "away", activation).getBoolean("duplicate", false), "activation retry not duplicate");
+		check(repository.find(recoveredId).documentVersion == 3, "activation retry advanced revision");
+		ExecutorService activators = Executors.newFixedThreadPool(2);
+		CountDownLatch activationReady = new CountDownLatch(2), activationStart = new CountDownLatch(1);
+		try {
+			java.util.concurrent.Callable<JsonObject> attempt = () -> {
+				activationReady.countDown(); activationStart.await();
+				return json.handle(service(connections), "away", header("activate").add("matchId", id).add("expectedRevision", 2).toString());
+			};
+			Future<JsonObject> first = activators.submit(attempt), second = activators.submit(attempt);
+			check(activationReady.await(10, TimeUnit.SECONDS), "activation workers not ready"); activationStart.countDown();
+			boolean a = "ACCEPTED".equals(first.get(20, TimeUnit.SECONDS).getString("code", null));
+			boolean b = "ACCEPTED".equals(second.get(20, TimeUnit.SECONDS).getString("code", null));
+			check(a != b, "activation needs one winner");
+			check(repository.find(id).documentVersion == 3, "concurrent activation advanced twice");
+		} finally { activators.shutdownNow(); }
+		System.out.println("M3a MariaDB acceptance passed: M2 preparation regressions plus activation rollback, concurrent activation, durable activation retry and lost acknowledgement.");
 	}
 
 	private MatchService service(JdbcMatchRepository.Connections source) { return new MatchService(new JdbcMatchRepository(source), teams, catalog); }

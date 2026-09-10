@@ -5,6 +5,7 @@ import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.local.BrowserMatchAdapter;
 import com.fumbbl.ffb.server.match.MatchRepository;
 import com.fumbbl.ffb.server.match.MatchService;
+import com.fumbbl.ffb.server.match.SetupApplication;
 import com.fumbbl.ffb.server.team.SavedTeamRepository;
 import com.fumbbl.ffb.server.team.SavedTeamService;
 import com.fumbbl.ffb.server.team.bb2025.RosterCatalog;
@@ -23,6 +24,86 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BrowserPreparedMatchAdapterTest {
+	@Test
+	void activationUsesPersistedReversedRolesAndNeverReinitializesAfterRetryOrRestart() throws Exception {
+		RosterCatalog catalog = new RosterCatalog();
+		SavedTeamService teams = new SavedTeamService(new Teams(), catalog);
+		Matches repository = new Matches();
+		MatchService matches = new MatchService(repository, teams, catalog);
+		String home = teams.create("away", draft(catalog)).document.teamId;
+		String away = teams.create("home", draft(catalog)).document.teamId;
+		String id = matches.create("away", "create", home, 1, "home").document.matchId;
+		matches.join("home", "join", id, 1, away, 1);
+		SetupApplication app = new SetupApplication(new TestServer().getServer(), matches);
+		JsonObject activation = new JsonObject().add("version", 1).add("type", "preparedMatch").add("operation", "activate")
+			.add("requestId", "activate").add("matchId", id).add("expectedRevision", 2);
+		assertEquals("ACCEPTED", app.activate("away", activation.toString()).getString("code", null));
+		JsonObject load = new JsonObject().add("version", 1).add("type", "setup").add("operation", "load")
+			.add("requestId", "load").add("matchId", id);
+		JsonObject view = app.handle("home", load).get("state").asObject();
+		assertEquals("away", view.getString("callerRole", null));
+		assertEquals("home", app.handle("away", load).get("state").asObject().getString("callerRole", null));
+		String before = view.toString();
+		assertTrue(app.activate("away", activation.toString()).getBoolean("duplicate", false));
+		assertEquals(before, app.handle("home", load).get("state").toString());
+		JsonObject choice = new JsonObject().add("version", 1).add("type", "setup").add("operation", "choice")
+			.add("requestId", "choose").add("matchId", id).add("expectedRevision", 0)
+			.add("promptId", view.get("prompt").asObject().get("id")).add("optionId", "heads");
+		assertEquals("WRONG_ACTOR", app.handle("away", choice).getString("code", null));
+		assertEquals("ACCEPTED", app.handle("home", choice).getString("code", null));
+		String after = app.handle("home", load).get("state").toString();
+		assertTrue(app.handle("home", choice).getBoolean("duplicate", false));
+		assertEquals(after, app.handle("home", load).get("state").toString());
+		choice.set("optionId", "tails");
+		assertEquals("REQUEST_ID_REUSED", app.handle("home", choice).getString("code", null));
+		load.add("role", "away");
+		assertEquals("INVALID_REQUEST", app.handle("home", load).getString("code", null));
+		load.remove("role");
+		SetupApplication restarted = new SetupApplication(new TestServer().getServer(), matches);
+		assertTrue(restarted.activate("away", activation.toString()).getBoolean("duplicate", false));
+		assertEquals("SESSION_UNAVAILABLE", restarted.handle("away", load).getString("code", null));
+		// Every read/action checks persisted membership, even while the engine remains resident.
+		repository.rows.remove(id);
+		assertEquals("NOT_FOUND", app.handle("home", load).getString("code", null));
+		assertEquals("NOT_FOUND", app.handle("home", choice).getString("code", null));
+	}
+	@Test
+	void lostActivationCommitAcknowledgementInitializesOnceOnlyOnExactInProcessReconciliation() throws Exception {
+		RosterCatalog catalog = new RosterCatalog();
+		SavedTeamService teams = new SavedTeamService(new Teams(), catalog);
+		Matches repository = new Matches();
+		MatchRepository ambiguous = new MatchRepository() {
+			public Record find(String id) { return repository.find(id); }
+			public void insert(Record record) { repository.insert(record); }
+			public boolean replace(Record record, int expected) throws java.sql.SQLException {
+				repository.replace(record, expected);
+				if (record.documentVersion == 3) throw new MatchRepository.OutcomeUnknown(record, new java.sql.SQLException("lost acknowledgement"));
+				return true;
+			}
+		};
+		MatchService service = new MatchService(ambiguous, teams, catalog);
+		String h = teams.create("home", draft(catalog)).document.teamId, a = teams.create("away", draft(catalog)).document.teamId;
+		String id = service.create("home", "create", h, 1, "away").document.matchId;
+		service.join("away", "join", id, 1, a, 1);
+		SetupApplication app = new SetupApplication(new TestServer().getServer(), service);
+		JsonObject activate = new JsonObject().add("version", 1).add("type", "preparedMatch").add("operation", "activate")
+			.add("requestId", "activate").add("matchId", id).add("expectedRevision", 2);
+		assertEquals("MATCH_OUTCOME_UNKNOWN", app.activate("home", activate.toString()).getString("code", null));
+		JsonObject malformedRetry = JsonObject.readFrom(activate.toString()).set("version", 2);
+		assertEquals("UNSUPPORTED_VERSION", app.activate("home", malformedRetry.toString()).getString("code", null));
+		malformedRetry.set("version", 1).set("type", "setup");
+		assertEquals("UNSUPPORTED_VERSION", app.activate("home", malformedRetry.toString()).getString("code", null));
+		malformedRetry.set("type", "preparedMatch").set("operation", "load");
+		assertEquals("INVALID_REQUEST", app.activate("home", malformedRetry.toString()).getString("code", null));
+		assertTrue(app.activate("home", activate.toString()).getBoolean("duplicate", false));
+		JsonObject load = new JsonObject().add("version", 1).add("type", "setup").add("operation", "load")
+			.add("requestId", "load").add("matchId", id);
+		assertEquals("ACCEPTED", app.handle("home", load).getString("code", null));
+		String before = app.handle("home", load).toString();
+		assertTrue(app.activate("home", activate.toString()).getBoolean("duplicate", false));
+		assertEquals(before, app.handle("home", load).toString());
+		assertEquals("SESSION_UNAVAILABLE", new SetupApplication(new TestServer().getServer(), service).handle("home", load).getString("code", null));
+	}
 	@Test
 	void authenticatedSubjectCreatesItsOwnMatchRoleWithoutChangingFixtureOrHistory() throws Exception {
 		RosterCatalog catalog = new RosterCatalog();

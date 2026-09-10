@@ -1,0 +1,1 @@
+Evidence text scanned against 6 local secret values; zero matches. Screenshots show empty credential inputs; wire capture excludes credential frames.

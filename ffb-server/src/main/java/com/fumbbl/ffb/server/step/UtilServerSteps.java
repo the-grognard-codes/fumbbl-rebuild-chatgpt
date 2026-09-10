@@ -56,11 +56,15 @@ public class UtilServerSteps {
 	}
 
 	public static boolean checkCommandIsFromHomePlayer(GameState gameState, ReceivedCommand pReceivedCommand) {
+		if (!gameState.usesLegacyPersistence() && pReceivedCommand.getApplicationHome() != null)
+			return pReceivedCommand.getApplicationHome();
 		return (gameState.getServer().getSessionManager().getSessionOfHomeCoach(gameState.getId()) == pReceivedCommand
 			.getSession());
 	}
 
 	public static boolean checkCommandIsFromAwayPlayer(GameState gameState, ReceivedCommand pReceivedCommand) {
+		if (!gameState.usesLegacyPersistence() && pReceivedCommand.getApplicationHome() != null)
+			return !pReceivedCommand.getApplicationHome();
 		return (gameState.getServer().getSessionManager().getSessionOfAwayCoach(gameState.getId()) == pReceivedCommand
 			.getSession());
 	}

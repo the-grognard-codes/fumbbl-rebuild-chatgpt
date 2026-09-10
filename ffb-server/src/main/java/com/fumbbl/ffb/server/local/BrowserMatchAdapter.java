@@ -36,6 +36,7 @@ import com.fumbbl.ffb.server.util.UtilSkillBehaviours;
 import com.fumbbl.ffb.server.team.bb2025.RosterCatalog;
 import com.fumbbl.ffb.server.match.MatchJson;
 import com.fumbbl.ffb.server.match.MatchService;
+import com.fumbbl.ffb.server.match.SetupApplication;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -70,9 +71,14 @@ public class BrowserMatchAdapter {
 	private BrowserSavedTeamJson savedTeams;
 	private MatchService preparedMatches;
 	private final MatchJson preparedMatchJson = new MatchJson();
+	private SetupApplication setup;
+	private final Map<Connection, String> setupSubscriptions = new LinkedHashMap<>();
 
 	public synchronized void setSavedTeams(BrowserSavedTeamJson savedTeams) { this.savedTeams = savedTeams; }
-	public synchronized void setPreparedMatches(MatchService preparedMatches) { this.preparedMatches = preparedMatches; }
+	public synchronized void setPreparedMatches(MatchService preparedMatches) {
+		this.preparedMatches = preparedMatches;
+		this.setup = new SetupApplication(server, preparedMatches);
+	}
 
 	public BrowserMatchAdapter(FantasyFootballServer server, String homeToken, String awayToken) {
 		this(server, homeToken, awayToken, Fixture.MOVEMENT);
@@ -129,13 +135,39 @@ public class BrowserMatchAdapter {
 			connection.send(result(requestId, "rejected", "MALFORMED_MESSAGE", revision, false).toString());
 			return;
 		}
+		if ("setup".equals(type)) {
+			if (!actors.containsKey(connection) || setup == null) {
+				connection.send(result(requestId, "rejected", "AUTHENTICATION_REQUIRED", revision, false).toString());
+				return;
+			}
+			JsonObject response = setup.handle(actors.get(connection), message);
+			connection.send(response.toString());
+			if ("ACCEPTED".equals(response.getString("code", null))) {
+				String id = message.getString("matchId", null);
+				setupSubscriptions.put(connection, id);
+				if (!"load".equals(message.getString("operation", null)) && !response.getBoolean("duplicate", false)) {
+					for (Map.Entry<Connection, String> entry : setupSubscriptions.entrySet()) {
+						if (id.equals(entry.getValue()) && entry.getKey() != connection && actors.containsKey(entry.getKey())) {
+							JsonObject load = new JsonObject().add("version", 1).add("type", "setup").add("operation", "load")
+								.add("requestId", "broadcast").add("matchId", id);
+							JsonObject view = setup.handle(actors.get(entry.getKey()), load);
+							view.set("requestId", JsonValue.NULL);
+							entry.getKey().send(view.toString());
+						}
+					}
+				}
+			}
+			return;
+		}
 		if ("preparedMatch".equals(type)) {
 			// The authenticated subject identifies a person; MatchService derives roles from persisted membership.
 			if (!actors.containsKey(connection)) {
 				connection.send(result(requestId, "rejected", "AUTHENTICATION_REQUIRED", revision, false).toString());
 			} else if (preparedMatches == null) {
 				connection.send(result(requestId, "rejected", "PERSISTENCE_UNAVAILABLE", revision, false).toString());
-			} else connection.send(preparedMatchJson.handle(preparedMatches, actors.get(connection), text).toString());
+			} else connection.send((JsonValue.valueOf("activate").equals(message.get("operation"))
+				? setup.activate(actors.get(connection), text)
+				: preparedMatchJson.handle(preparedMatches, actors.get(connection), text)).toString());
 			return;
 		}
 		if ("savedTeam".equals(type)) {
@@ -181,11 +213,13 @@ public class BrowserMatchAdapter {
 
 	public synchronized void disconnect(Connection connection) {
 		actors.remove(connection);
+		setupSubscriptions.remove(connection);
 	}
 
 	/** Operator/test lifecycle only; caller serializes this on the communication worker. */
 	public synchronized void resetFixture(Fixture next) {
 		actors.clear();
+		setupSubscriptions.clear();
 		requests.clear();
 		pendingChoice = null;
 		gameState = null;

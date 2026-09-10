@@ -152,6 +152,35 @@ class MatchServiceTest {
 	}
 
 	@Test
+	void eitherPersistedMemberCanActivateOnceWithDurableRetriesAndStaleProtection() {
+		String id = matchId(accepted("away", create(awayTeam, "home")));
+		accepted("home", join(id, homeTeam));
+		JsonObject activate = activate(id);
+		JsonObject activated = accepted("home", activate);
+		assertEquals("ACTIVATED", activated.get("document").asObject().getString("lifecycle", null));
+		assertEquals(3, matches.rows.get(id).documentVersion);
+		assertTrue(accepted("home", activate).getBoolean("duplicate", false));
+		assertEquals("REQUEST_ID_REUSED", invoke("home", activate.set("expectedRevision", 3)).getString("code", null));
+		assertEquals("ALREADY_ACTIVATED", invoke("away", activate(id)).getString("code", null));
+
+		String staleId = matchId(accepted("home", create(homeTeam, "away")));
+		accepted("away", join(staleId, awayTeam));
+		assertEquals("STALE_REVISION", invoke("home", activate(staleId).set("expectedRevision", 1)).getString("code", null));
+	}
+
+	@Test
+	void unknownActivationCommitReconcilesAsDuplicateWithoutASecondTransition() {
+		String id = matchId(accepted("home", create(homeTeam, "away")));
+		accepted("away", join(id, awayTeam));
+		JsonObject activate = activate(id); matches.unknown = true;
+		assertEquals("MATCH_OUTCOME_UNKNOWN", invoke("away", activate).getString("code", null));
+		matches.unknown = false;
+		JsonObject retry = accepted("away", activate);
+		assertTrue(retry.getBoolean("duplicate", false));
+		assertEquals(3, matches.rows.get(id).documentVersion);
+	}
+
+	@Test
 	void unsupportedPersistedFactsRemainUnchangedAndPrivateClaimsNeverProject() {
 		String id = matchId(accepted("home", create(homeTeam, "away")));
 		JsonObject publicRecord = accepted("home", load(id)).get("document").asObject();
@@ -222,6 +251,7 @@ class MatchServiceTest {
 	private String matchId(JsonObject response) { return response.get("document").asObject().getString("matchId", null); }
 	private JsonObject create(String team, String invited) { return header("create").add("teamId", team).add("expectedDocumentVersion", 1).add("intendedOpponent", invited); }
 	private JsonObject join(String id, String team) { return header("join").add("matchId", id).add("expectedRevision", 1).add("teamId", team).add("expectedDocumentVersion", 1); }
+	private JsonObject activate(String id) { return header("activate").add("matchId", id).add("expectedRevision", 2); }
 	private JsonObject load(String id) { return header("load").add("matchId", id); }
 	private JsonObject header(String operation) { return new JsonObject().add("version", 1).add("type", "preparedMatch").add("requestId", UUID.randomUUID().toString()).add("operation", operation); }
 	private TeamDraft draft(int rerolls) {

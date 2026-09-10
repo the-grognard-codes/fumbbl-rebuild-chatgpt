@@ -308,7 +308,7 @@ public class GameCache {
 	}
 
 	public void queueDbUpdate(GameState pGameState, boolean pWithSerialization) {
-		if (pGameState == null) {
+		if (pGameState == null || !pGameState.usesLegacyPersistence()) {
 			return;
 		}
 		DbTransaction transaction = new DbTransaction();
