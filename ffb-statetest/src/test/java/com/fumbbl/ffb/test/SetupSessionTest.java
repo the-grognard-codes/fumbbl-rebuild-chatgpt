@@ -281,7 +281,7 @@ class SetupSessionTest {
 			.add("requestId", UUID.randomUUID().toString()).add("matchId", view.get("matchId"))
 			.add("expectedRevision", view.get("revision"));
 	}
-	private SetupSession session(int count) throws Exception {
+	SetupSession session(int count) throws Exception {
 		RosterCatalog catalog = new RosterCatalog(); List<TeamDraft.Player> players = new ArrayList<>();
 		for (int i = 1; i <= count; i++) players.add(new TeamDraft.Player("p" + i, i, "lineman", Collections.emptyList()));
 		Map<String, Integer> resources = new LinkedHashMap<>();

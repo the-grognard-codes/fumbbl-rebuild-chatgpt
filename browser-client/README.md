@@ -261,3 +261,11 @@ This supports setup for the existing Human preset, not a full playable match.
 Public authentication and in-progress restart recovery remain later work.
 
 M3b extends /setup with [core turn controls](core-turns.md). Run `node test/core-turn-demo.mjs` after starting the paired local server and Vite.
+
+M3c completes [supported action and skill coverage](action-coverage.md). Large
+action lists can be searched by player, action or target coordinate. With the
+paired local M3c server and Vite running, `node test/supported-play-demo.mjs`
+demonstrates native play in two browsers. `node test/supported-actions-demo.mjs`
+separately exercises 88 mounted native-wire traces, including prompt ownership,
+search and reconnect/retry. These fixtures are test-only. Full-match completion
+and durable in-progress restart recovery remain later work.
