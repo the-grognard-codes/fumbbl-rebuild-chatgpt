@@ -8,6 +8,7 @@ import './style.css';
 import { TeamPanel } from './TeamPanel';
 import { MatchPanel } from './MatchPanel';
 import { SetupPanel } from './SetupPanel';
+import { ResultPanel } from './ResultPanel';
 
 function App() {
   const [token, setToken] = useState('');
@@ -139,4 +140,4 @@ function App() {
     <h2>Request results</h2><div role="log" className="results">{log.map((entry, index) => <article key={`${entry.requestId}-${index}`} className={entry.status}><strong>{entry.status} · {entry.code}</strong><div>Revision {entry.revision}{entry.duplicate ? ' · duplicate' : ''}</div><small>{entry.requestId ?? 'uncorrelated'}</small></article>)}</div></aside></div>
   </main>;
 }
-createRoot(document.getElementById('root')!).render(window.location.pathname === '/setup' ? <SetupPanel/> : window.location.pathname === '/teams' ? <TeamPanel/> : window.location.pathname === '/matches' ? <MatchPanel/> : <><nav><a href="/teams">Team builder</a> · <a href="/matches">Match preparation</a></nav><App/></>);
+createRoot(document.getElementById('root')!).render(window.location.pathname === '/setup' ? <SetupPanel/> : window.location.pathname === '/results' ? <ResultPanel/> : window.location.pathname === '/teams' ? <TeamPanel/> : window.location.pathname === '/matches' ? <MatchPanel/> : <><nav><a href="/teams">Team builder</a> · <a href="/matches">Match preparation</a></nav><App/></>);

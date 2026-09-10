@@ -97,6 +97,34 @@ public final class MatchService {
 		return new Result(required(owner, matchId), false);
 	}
 
+	/** Atomically persists the terminal replay artifact after the one activation transition. */
+	public void complete(String owner, String matchId, CompletedMatch completed) throws SQLException {
+		identity(owner); selection(matchId, 1);
+		if (completed == null) throw new Failure("INVALID_REQUEST");
+		MatchDocument document = required(owner, matchId);
+		if (document.lifecycle == MatchDocument.Lifecycle.COMPLETED) {
+			if (completed.equals(document.completion)) return;
+			throw new Failure("COMPLETION_CONFLICT");
+		}
+		if (document.lifecycle != MatchDocument.Lifecycle.ACTIVATED || document.documentVersion != 3) throw new Failure("MATCH_NOT_ACTIVE");
+		json.validateCompletion(completed, document);
+		MatchDocument terminal = document.completed(completed);
+		try {
+			if (!matches.replace(record(terminal), 3)) {
+				MatchDocument after = required(owner, matchId);
+				if (after.lifecycle == MatchDocument.Lifecycle.COMPLETED && completed.equals(after.completion)) return;
+				throw new Failure("COMPLETION_CONFLICT");
+			}
+		} catch (MatchRepository.OutcomeUnknown failure) { throw new OutcomeUnknown(matchId); }
+	}
+
+	public CompletedMatch result(String owner, String matchId) throws SQLException {
+		identity(owner); selection(matchId, 1);
+		MatchDocument document = required(owner, matchId);
+		if (document.lifecycle != MatchDocument.Lifecycle.COMPLETED || document.completion == null) throw new Failure("NOT_COMPLETED");
+		return document.completion;
+	}
+
 	private Result repeated(MatchDocument document, String owner, String requestId, String fingerprint) {
 		MatchDocument.Request prior = document.request(owner, requestId);
 		if (prior == null || !prior.fingerprint.equals(fingerprint)) throw new Failure("REQUEST_ID_REUSED");

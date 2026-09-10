@@ -8,6 +8,11 @@ type Request = Record<string, unknown>;
 type Retained = { request: Request; subject: string; matchId: string };
 const endpoint = 'ws://127.0.0.1:22227/browser/v1';
 const explanation = (code: SetupCode) => ({
+  PERSISTENCE_FAILED: 'Storage is unavailable. The engine may already have resolved the turn. Reload or retry the exact retained request to reconcile.',
+  MATCH_OUTCOME_UNKNOWN: 'The final save may have committed. Reload or retry the exact retained request; do not create a new action.',
+  REPLAY_UNSUPPORTED: 'This saved result uses an unsupported replay version. Its stored data has not been changed.',
+  REPLAY_LIMIT: 'This match has reached its recorded-history budget. No further action was executed.',
+  MATCH_COMPLETED: 'This match has already finished. Reload the final state or open its result.',
   ILLEGAL_SETUP: 'Field 11 available players, at least three on the line of scrimmage, at most two in each wide zone, and your selected captain if any.',
   ILLEGAL_PLACEMENT: 'Select an empty square in your half.',
   WRONG_ACTOR: 'The other participant owns this decision.',
@@ -100,7 +105,7 @@ export function SetupPanel() {
     socket.current?.send(JSON.stringify(last.request));
   }
   return <main className="team-builder setup-panel">
-    <nav><a href="/matches">Match preparation</a> · <a href="/teams">Team builder</a> · <a href="/">Board scenarios</a></nav>
+    <nav><a href="/matches">Match preparation</a> · <a href="/results?matchId=${encodeURIComponent(matchId)}">Match results</a> · <a href="/teams">Team builder</a> · <a href="/">Board scenarios</a></nav>
     <h1>Match setup</h1>
     <p>Play with the frozen teams. Server restart ends this setup session; in-progress recovery is not available.</p>
     <form onSubmit={event => { event.preventDefault(); connect(); }}>
@@ -113,7 +118,7 @@ export function SetupPanel() {
     <button type="button" className="secondary" onClick={() => load()} disabled={!connected}>Reload setup snapshot</button>
     {view && <section aria-label="Authoritative setup">
       <h2>{view.phase.replaceAll('_', ' ').toLowerCase()}</h2>
-      <p data-testid="setup-status">Revision {view.revision} · you are {view.callerRole} · decision owner {view.actor} · turn {view.turn} ({view.turnMode}) · weather {view.weather} · rerolls home {view.homeRerolls}, away {view.awayRerolls}</p>
+      <p data-testid="setup-status">Revision {view.revision} · you are {view.callerRole} · decision owner {view.actor} · half {view.half}, drive {view.drive} · turns home {view.homeTurn}, away {view.awayTurn} · score home {view.homeScore}, away {view.awayScore} · turn {view.turn} ({view.turnMode}) · weather {view.weather} · rerolls home {view.homeRerolls}, away {view.awayRerolls}</p>
       <p>Ball {view.ball ? `${view.ball.x}, ${view.ball.y}` : 'off pitch'} · active player {view.activePlayerId ?? 'none'}</p>
       {view.prompt && <section aria-label="Pre-match choice"><h3>{view.prompt.kind === 'coin' ? 'Call the coin toss' : 'Choose to receive or kick'}</h3>
         {view.prompt.options.map(option => <button key={option} type="button" onClick={() => mutate('choice', { promptId: view.prompt!.id, optionId: option })} disabled={!connected || !!pending || view.prompt!.actor !== view.callerRole}>{option}</button>)}

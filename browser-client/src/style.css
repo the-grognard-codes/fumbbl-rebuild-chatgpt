@@ -9,3 +9,4 @@
 .team-builder .team-resource { display: inline-block; width: 45%; margin-right: 4%; }
 .team-builder nav a, nav a { color: #d8c79e; }
 @media(max-width:700px) { .team-builder fieldset > ol > li { display: block; } .team-builder .team-resource { width: 100%; } }
+.result-panel { max-width: 1100px; }.result-score { display:flex; align-items:center; gap:1rem; font-size:1.5rem; }.replay-controls { display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0; }.replay-controls button { width:auto; margin:0; }.result-grid { display:grid; grid-template-columns:repeat(26,minmax(1.5rem,1fr)); gap:1px; overflow-x:auto; background:#315b39; padding:3px; }.result-grid span { min-width:0; height:1.7rem; padding:.3rem 0; background:#e0ead7; color:#243322; text-align:center; font-size:.65rem; }.result-grid span.home { background:#275e84; color:white; border-radius:50%; }.result-grid span.away { background:#913f28; color:white; }

@@ -373,3 +373,29 @@ initial failures and boundaries](verification/m3c/README.md). M3d full-match
 completion/results/replay and durable in-progress restart recovery remain
 undelivered. No commit, push, public deployment, volume reset or credential
 change occurred.
+
+### M3d completion, results and replay ? 2026-09-10
+
+M3d is implemented and validated for the unchanged frozen Human preset. Native
+touchdowns, drive setup/kickoff, halftime and full time now lead to an atomic
+revision-4 completed document containing the authoritative result and bounded
+private replay. Schema 4 preserves existing rows and upgrades their storage bound.
+Replay uses server-recorded state events and explicit engine/catalog/preset versions;
+no historical import or rules re-execution is exposed.
+
+The final two-browser match finished home 1?0 away at revision 149 (150 events).
+Both participants retrieved the same result and replay; after JVM restart all
+150 server states equaled live evidence. Completion rollback, CAS races, lost
+acknowledgements and peer notification on the first successful retry passed.
+
+Evidence: 127 focused Java tests, 9 tooling checks, clean offline install/verify
+with 483 passing tests, 34 browser tests/build, actual MariaDB fault checks,
+mounted result UI and final-image two-browser completion/restart. See
+[exact checks, failures, review corrections and limits](verification/m3d/README.md),
+[protocol](../../browser-client/results-replay.md) and
+[migration](../../containers/local/completed-match-migration.md).
+
+In-progress engine recovery, resident-session cleanup and remaining general M3
+reliability work are not declared complete. Completed results survive restart;
+an uncommitted terminal engine cannot recover after JVM loss. No commit, push,
+public deployment, volume reset or credential change occurred.

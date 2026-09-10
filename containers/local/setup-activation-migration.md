@@ -72,3 +72,9 @@ separate `node test/supported-actions-demo.mjs` uses mounted test-only wire
 fixtures and does not mutate MariaDB. See the
 [coverage matrix](../../browser-client/action-coverage.md) and
 [M3c evidence](../../.notes/overhaul-analysis/verification/m3c/README.md).
+
+## M3d successor
+
+M3d requires [schema 4](completed-match-migration.md). It preserves activated
+in-progress restart-unavailable behavior while storing completed result/replay
+artifacts atomically. Earlier schema-3 instructions above are historical.

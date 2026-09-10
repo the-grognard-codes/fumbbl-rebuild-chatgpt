@@ -56,7 +56,7 @@ public final class StepEndGame extends AbstractStep {
 			UtilServerDialog.showDialog(getGameState(), gameStatistics, false);
 		}
 		FantasyFootballServer server = getGameState().getServer();
-		if (!game.isTesting()) {
+		if (!game.isTesting() && getGameState().usesLegacyPersistence()) {
 			if (server.getMode() == ServerMode.FUMBBL) {
 				server.getRequestProcessor().add(new FumbblRequestUploadResults(getGameState()));
 			} else {

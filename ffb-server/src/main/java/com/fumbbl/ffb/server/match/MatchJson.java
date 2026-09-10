@@ -68,13 +68,15 @@ public final class MatchJson {
 		JsonArray requests = new JsonArray();
 		for (Map.Entry<String, MatchDocument.Request> entry : document.requests.entrySet())
 			requests.add(new JsonObject().add("key", entry.getKey()).add("fingerprint", entry.getValue().fingerprint));
-		return out.add("requests", requests);
+		out.add("requests", requests);
+		if (document.completion != null) return out.set("formatVersion", 2).add("completion", JsonObject.readFrom(document.completion.json()));
+		return out;
 	}
 
 	/** Inspect minimal persisted membership before reporting a format incompatibility to a caller. */
 	void authorizePersisted(String owner, String text) {
 		try {
-			JsonObject object = parse(text, 65536, 12);
+			JsonObject object = parse(text, 16 * 1024 * 1024 + 65536, 16);
 			String creator = object.get("homeOwner").asString();
 			String invited = object.get("invitation").asObject().get("intendedOpponent").asString();
 			if (!owner.equals(creator) && !owner.equals(invited)) throw new IllegalArgumentException();
@@ -83,7 +85,8 @@ public final class MatchJson {
 
 	public MatchDocument decode(String text, int persistedVersion) {
 		try {
-			JsonObject object = parse(text, 65536, 12);
+			JsonObject object = parse(text, 16 * 1024 * 1024 + 65536, 16);
+			if (object.getInt("formatVersion", -1) == 2) return decodeCompleted(object, persistedVersion);
 			exact(object, "formatVersion", "matchId", "documentVersion", "lifecycle", "invitation", "home", "away", "homeOwner", "requests");
 			if (object.get("formatVersion").asInt() != 1 || positive(object.get("documentVersion")) != persistedVersion) throw new IllegalArgumentException();
 			String id = uuid(object.get("matchId")), creator = subject(object.get("homeOwner"));
@@ -117,8 +120,76 @@ public final class MatchJson {
 				requests.put(key, new MatchDocument.Request(fingerprint));
 			}
 			return new MatchDocument(id, persistedVersion, invited, lifecycle, home, away, requests);
+		} catch (MatchService.Failure failure) { throw failure;
 		} catch (RuntimeException failure) { throw new MatchService.Failure("SNAPSHOT_UNSUPPORTED"); }
 	}
+
+	private MatchDocument decodeCompleted(JsonObject object, int persistedVersion) {
+		if (persistedVersion != 4) throw new IllegalArgumentException();
+		exact(object, "formatVersion", "matchId", "documentVersion", "lifecycle", "invitation", "home", "away", "homeOwner", "requests", "completion");
+		if (object.getInt("documentVersion", -1) != 4 || !"COMPLETED".equals(object.getString("lifecycle", null))) throw new IllegalArgumentException();
+		CompletedMatch completed = new CompletedMatch(object.get("completion").toString());
+		JsonObject prior = JsonObject.readFrom(object.toString()); prior.remove("completion"); prior.set("formatVersion", 1); prior.set("documentVersion", 3); prior.set("lifecycle", "ACTIVATED");
+		MatchDocument activated = decode(prior.toString(), 3);
+		validateCompletion(completed, activated);
+		return activated.completed(completed);
+	}
+
+	/** Verifies the small, stable terminal envelope without interpreting game state. */
+	void validateCompletion(CompletedMatch completed, MatchDocument document) {
+		try {
+			JsonObject artifact = JsonObject.readFrom(completed.json());
+			exact(artifact, "formatVersion", "engineVersion", "ruleset", "catalogVersion", "presetId", "presetVersion", "matchId", "homeScore", "awayScore", "finalRevision", "events");
+			if (artifact.getInt("formatVersion", -1) != 1 || !CompletedMatch.ENGINE_VERSION.equals(artifact.getString("engineVersion", null))
+				|| !"BB2025".equals(artifact.getString("ruleset", null)) || !document.matchId.equals(artifact.getString("matchId", null))
+				|| !document.home.team.catalogVersion.equals(artifact.getString("catalogVersion", null)) || !document.home.team.presetId.equals(artifact.getString("presetId", null))
+				|| !document.home.team.presetVersion.equals(artifact.getString("presetVersion", null))) throw new IllegalArgumentException();
+			int home = artifact.getInt("homeScore", -1), away = artifact.getInt("awayScore", -1), finalRevision = artifact.getInt("finalRevision", -1);
+			if (home < 0 || away < 0 || home > 100 || away > 100 || finalRevision < 0) throw new IllegalArgumentException();
+			JsonArray events = artifact.get("events").asArray(); if (events.size() == 0 || events.size() > 8193) throw new IllegalArgumentException();
+			int prior = -1;
+			for (JsonValue value : events) {
+				JsonObject event = value.asObject(); exact(event, "revision", "kind", "state"); int revision = event.getInt("revision", -1);
+				if (revision != prior + 1 || revision > finalRevision || !("START".equals(event.getString("kind", null)) || "ACTION".equals(event.getString("kind", null)) || "SELECTION".equals(event.getString("kind", null)) || "TOUCHDOWN".equals(event.getString("kind", null)) || "HALFTIME".equals(event.getString("kind", null)) || "FULL_TIME".equals(event.getString("kind", null)))) throw new IllegalArgumentException(); prior = revision;
+				JsonObject state = event.get("state").asObject();
+				exact(state, "half", "drive", "homeScore", "awayScore", "homeTurn", "awayTurn", "actions", "turn", "turnMode", "activePlayerId", "ball", "matchId", "revision", "callerRole", "phase", "actor", "prompt", "players", "weather", "homeRerolls", "awayRerolls");
+				if (state.get("actions").asArray().size() != 0 || !state.get("prompt").isNull() || !"home".equals(state.getString("callerRole", null)) || !document.matchId.equals(state.getString("matchId", null)) || state.getInt("revision", -1) != revision) throw new IllegalArgumentException();
+                validateReplayState(state);
+                if (event.toString().getBytes(StandardCharsets.UTF_8).length > 65536) throw new IllegalArgumentException();
+			}
+			JsonObject terminal = events.get(events.size() - 1).asObject().get("state").asObject();
+			if (prior != finalRevision || !"FULL_TIME".equals(events.get(events.size() - 1).asObject().getString("kind", null)) || !"FULL_TIME".equals(terminal.getString("phase", null)) || terminal.getInt("homeScore", -1) != home || terminal.getInt("awayScore", -1) != away) throw new IllegalArgumentException();
+		} catch (RuntimeException failure) { throw new MatchService.Failure("REPLAY_UNSUPPORTED"); }
+	}
+
+    private void validateReplayState(JsonObject state) {
+        for (String field : Arrays.asList("homeScore", "awayScore", "homeRerolls", "awayRerolls")) bounded(state.get(field), 0, 100);
+        bounded(state.get("half"), 1, 2); bounded(state.get("drive"), 1, 100);
+        bounded(state.get("homeTurn"), 0, 8); bounded(state.get("awayTurn"), 0, 8); bounded(state.get("turn"), 0, 8);
+        if (!Arrays.asList("PRE_MATCH", "SETUP", "READY_FOR_KICKOFF", "PLAY", "FULL_TIME").contains(state.getString("phase", null))) throw new IllegalArgumentException();
+        subject(state.get("actor")); shortText(state.get("turnMode")); shortText(state.get("weather"));
+        if (!state.get("activePlayerId").isNull()) shortText(state.get("activePlayerId"));
+        if (!state.get("ball").isNull()) {
+            JsonObject ball = state.get("ball").asObject(); exact(ball, "x", "y");
+            bounded(ball.get("x"), 0, 25); bounded(ball.get("y"), 0, 14);
+        }
+        JsonArray players = state.get("players").asArray(); if (players.size() > 32) throw new IllegalArgumentException();
+        Set<String> ids = new HashSet<>();
+        for (JsonValue value : players) {
+            JsonObject player = value.asObject(); exact(player, "id", "name", "slot", "role", "state", "x", "y");
+            shortText(player.get("id")); shortText(player.get("name")); shortText(player.get("state"));
+            if (!ids.add(player.get("id").asString())) throw new IllegalArgumentException();
+            bounded(player.get("slot"), 1, 16); subject(player.get("role"));
+            if (player.get("x").isNull() != player.get("y").isNull()) throw new IllegalArgumentException();
+            if (!player.get("x").isNull()) { bounded(player.get("x"), 0, 25); bounded(player.get("y"), 0, 14); }
+        }
+    }
+    private void shortText(JsonValue value) {
+        String text = value.asString(); if (text.isEmpty() || text.length() > 100) throw new IllegalArgumentException();
+    }
+    private void bounded(JsonValue value, int min, int max) {
+        int number = value.asInt(); if (number < min || number > max) throw new IllegalArgumentException();
+    }
 
 	private MatchDocument.Member readMember(JsonObject object, String owner, boolean away) {
 		if (away) {
@@ -254,7 +325,7 @@ public final class MatchJson {
 	}
 
 	public JsonObject publicDocument(MatchDocument document) {
-		return new JsonObject().add("formatVersion", 1).add("matchId", document.matchId).add("documentVersion", document.documentVersion)
+		return new JsonObject().add("formatVersion", document.lifecycle == MatchDocument.Lifecycle.COMPLETED ? 2 : 1).add("matchId", document.matchId).add("documentVersion", document.documentVersion)
 			.add("lifecycle", document.lifecycle.name()).add("invitation", new JsonObject().add("intendedOpponent", document.intendedOpponent))
 			.add("home", member(document.home)).add("away", document.away == null ? JsonValue.NULL : member(document.away));
 	}

@@ -82,7 +82,7 @@ this preset. No purchasable catalog item depends on their prompts. Automatic
 catch, trait, armor and injury processing is not presented as a new user choice.
 
 The inventory and review found no uncovered action or prompt family in this
-declared scope. Full match completion UX (drives/halves/results/replay), cleanup
-and durable in-progress JVM restart recovery remain M3d work; this document does
-not claim completion acceptance. Same-JVM reconnect is supported. Synthetic
+declared scope. M3d adds [drives, halves, results and replay](results-replay.md). Cleanup
+and durable in-progress JVM restart recovery remain later M3 work; completion
+acceptance is recorded in the linked M3d evidence. Same-JVM reconnect is supported. Synthetic
 states and deterministic dice exist only in tests, never the product contract.

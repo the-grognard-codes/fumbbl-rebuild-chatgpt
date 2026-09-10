@@ -135,3 +135,10 @@ See [migration boundary](../containers/local/setup-activation-migration.md) and
 ## M3b extension
 
 [Core-turn protocol](core-turns.md) extends this historical M3a boundary beyond kickoff readiness. Its snapshot fields and history limit supersede the corresponding M3a definitions.
+
+## M3d successor
+
+[Completion and replay](results-replay.md) extend these historical M3a/M3b
+boundaries. Subsequent drive/halftime setup uses the same controls; completed
+matches have durable results and a read-only final setup state after restart.
+Capacity release and durable in-progress recovery remain future work.

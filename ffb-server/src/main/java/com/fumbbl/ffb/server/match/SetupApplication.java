@@ -17,6 +17,9 @@ public final class SetupApplication {
 	private final Map<String, SetupSession> sessions = new LinkedHashMap<>();
 	private final Map<String, String> pendingActivations = new LinkedHashMap<>();
 	private long engineId = -2;
+	private final java.util.Set<String> completionAcknowledged = new HashSet<>();
+	private final java.util.Set<String> completionBroadcasts = new HashSet<>();
+	public boolean takeCompletionBroadcast(String matchId) { return completionBroadcasts.remove(matchId); }
 
 	public SetupApplication(FantasyFootballServer server, MatchService matches) {
 		this.server = server; this.matches = matches;
@@ -82,12 +85,27 @@ public final class SetupApplication {
 			String role = owner.equals(document.home.owner) ? "home"
 				: document.away != null && owner.equals(document.away.owner) ? "away" : null;
 			if (role == null) throw new MatchService.Failure("NOT_FOUND");
-			if (document.lifecycle != MatchDocument.Lifecycle.ACTIVATED) throw new MatchService.Failure("NOT_ACTIVATED");
+			if (document.lifecycle == MatchDocument.Lifecycle.COMPLETED && !sessions.containsKey(id)) {
+                if (!"load".equals(request.getString("operation", null))) throw new MatchService.Failure("MATCH_COMPLETED");
+                JsonObject artifact = JsonObject.readFrom(matches.result(owner, id).json());
+                com.eclipsesource.json.JsonArray events = artifact.get("events").asArray();
+                JsonObject terminal = events.get(events.size() - 1).asObject().get("state").asObject().set("callerRole", role);
+                return new JsonObject().add("version", 1).add("type", "setupState").add("requestId", requestId)
+                    .add("code", "ACCEPTED").add("duplicate", false).add("state", terminal);
+            }
+            if (document.lifecycle != MatchDocument.Lifecycle.COMPLETED && document.lifecycle != MatchDocument.Lifecycle.ACTIVATED) throw new MatchService.Failure("NOT_ACTIVATED");
 			SetupSession session = sessions.get(id);
 			if (session == null) throw new MatchService.Failure("SESSION_UNAVAILABLE");
-			return "load".equals(request.getString("operation", null))
-				? session.reply(requestId, "ACCEPTED", false, role) : session.apply(role, request);
-		} catch (MatchService.Failure failure) { return failure(requestId, failure.code); }
+			JsonObject response = "load".equals(request.getString("operation", null))
+                ? session.reply(requestId, "ACCEPTED", false, role) : session.apply(role, request);
+            // Persist before acknowledging terminal success. A retry/load reconciles without executing the engine again.
+            if (session.isComplete()) {
+                matches.complete(owner, id, session.completedMatch());
+                if (completionAcknowledged.add(id)) completionBroadcasts.add(id);
+            }
+            return response;
+		} catch (MatchService.OutcomeUnknown failure) { return failure(requestId, "MATCH_OUTCOME_UNKNOWN"); }
+        catch (MatchService.Failure failure) { return failure(requestId, failure.code); }
 		catch (SQLException failure) { return failure(requestId, "PERSISTENCE_FAILED"); }
 		catch (RuntimeException failure) { return failure(requestId, "INVALID_REQUEST"); }
 	}

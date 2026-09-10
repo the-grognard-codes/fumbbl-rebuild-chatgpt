@@ -353,3 +353,10 @@ Load/reconnect restores current pending options in the same JVM; retries retain
 their exact request identity. No new message exposes fixture states or dice.
 The browser searches labels/kinds locally and clears selection/search on a new
 revision. Pair this browser with `ffb-server:3.4.0-m3c.1`; no schema change is required.
+
+## M3d full time, results and replay
+
+See [the M3d contract](results-replay.md) for score/half/drive projection, atomic
+completion and retry semantics, private result/indexed-event reads, resource
+bounds, replay versioning and explicit compatibility behavior. Pair the M3d
+browser with `ffb-server:3.4.0-m3d.1` and schema 4.

@@ -181,6 +181,55 @@ class MatchServiceTest {
 	}
 
 	@Test
+	void completionPersistsAtomicallyAndExactRetryIsIdempotent() throws Exception {
+		String id = matchId(accepted("home", create(homeTeam, "away")));
+		accepted("away", join(id, awayTeam)); accepted("home", activate(id));
+		CompletedMatch completed = completed(id, 2, 1);
+		service.complete("home", id, completed);
+		assertEquals(4, matches.rows.get(id).documentVersion);
+		assertEquals(completed, service.result("away", id));
+		service.complete("away", id, new CompletedMatch(completed.json()));
+		assertEquals("COMPLETION_CONFLICT", assertThrows(MatchService.Failure.class, () -> service.complete("home", id, completed(id, 3, 1))).code);
+		assertEquals(null, json.publicDocument(service.load("home", id).document).get("completion"));
+	}
+
+	@Test
+	void completionRequiresAValidTerminalReplay() throws Exception {
+		String id = matchId(accepted("home", create(homeTeam, "away")));
+		assertEquals("MATCH_NOT_ACTIVE", assertThrows(MatchService.Failure.class, () -> service.complete("home", id, completed(id, 0, 0))).code);
+		accepted("away", join(id, awayTeam)); accepted("home", activate(id));
+		JsonObject invalid = JsonObject.readFrom(completed(id, 0, 0).json()); invalid.get("events").asArray().get(0).asObject().set("kind", "TURN");
+		assertEquals("REPLAY_UNSUPPORTED", assertThrows(MatchService.Failure.class, () -> service.complete("home", id, new CompletedMatch(invalid.toString()))).code);
+	}
+
+	@Test
+	void resultEndpointLimitsReadsToMembersAndReturnsOnlyRequestedReplayEvent() throws Exception {
+		String id = matchId(accepted("home", create(homeTeam, "away")));
+		MatchResultJson endpoint = new MatchResultJson();
+		JsonObject load = new JsonObject().add("version", 1).add("type", "matchResult").add("requestId", "result").add("operation", "load").add("matchId", id);
+		assertEquals("NOT_COMPLETED", endpoint.handle(service, "home", load).getString("code", null));
+		accepted("away", join(id, awayTeam)); accepted("home", activate(id)); service.complete("home", id, completed(id, 1, 0));
+		JsonObject result = endpoint.handle(service, "away", load);
+		assertEquals("ACCEPTED", result.getString("code", null)); assertEquals(1, result.get("result").asObject().getInt("eventCount", -1)); assertTrue(result.get("event").isNull());
+		JsonObject replay = JsonObject.readFrom(load.toString()).set("operation", "replay").add("index", 0);
+		assertEquals("FULL_TIME", endpoint.handle(service, "home", replay).get("event").asObject().getString("kind", null));
+		assertEquals("INVALID_REQUEST", endpoint.handle(service, "home", JsonObject.readFrom(replay.toString()).add("extra", true)).getString("code", null));
+		assertEquals("INVALID_REQUEST", endpoint.handle(service, "home", replay.set("index", 1)).getString("code", null));
+		assertEquals("AUTHENTICATION_REQUIRED", endpoint.handle(service, null, load).getString("code", null));
+		assertEquals("AUTHENTICATION_REQUIRED", endpoint.handle(service, "intruder", load).getString("code", null));
+	}
+
+	@Test
+	void unknownCompletionCommitReconcilesWithoutASecondTransition() throws Exception {
+		String id = matchId(accepted("home", create(homeTeam, "away")));
+		accepted("away", join(id, awayTeam)); accepted("home", activate(id));
+		CompletedMatch completed = completed(id, 0, 0); matches.unknown = true;
+		assertThrows(MatchService.OutcomeUnknown.class, () -> service.complete("home", id, completed));
+		matches.unknown = false; service.complete("away", id, completed);
+		assertEquals(4, matches.rows.get(id).documentVersion); assertEquals(completed, service.result("home", id));
+	}
+
+	@Test
 	void unsupportedPersistedFactsRemainUnchangedAndPrivateClaimsNeverProject() {
 		String id = matchId(accepted("home", create(homeTeam, "away")));
 		JsonObject publicRecord = accepted("home", load(id)).get("document").asObject();
@@ -254,6 +303,14 @@ class MatchServiceTest {
 	private JsonObject activate(String id) { return header("activate").add("matchId", id).add("expectedRevision", 2); }
 	private JsonObject load(String id) { return header("load").add("matchId", id); }
 	private JsonObject header(String operation) { return new JsonObject().add("version", 1).add("type", "preparedMatch").add("requestId", UUID.randomUUID().toString()).add("operation", operation); }
+	private CompletedMatch completed(String id, int home, int away) {
+		JsonObject state = state(id, 0, home, away);
+		JsonObject event = new JsonObject().add("revision", 0).add("kind", "FULL_TIME").add("state", state);
+		return new CompletedMatch(new JsonObject().add("formatVersion", 1).add("engineVersion", CompletedMatch.ENGINE_VERSION).add("ruleset", "BB2025")
+			.add("catalogVersion", RosterCatalog.VERSION).add("presetId", RosterCatalog.PRESET).add("presetVersion", RosterCatalog.VERSION)
+			.add("matchId", id).add("homeScore", home).add("awayScore", away).add("finalRevision", 0).add("events", new com.eclipsesource.json.JsonArray().add(event)).toString());
+	}
+	private JsonObject state(String id, int revision, int home, int away) { return new JsonObject().add("half", 2).add("drive", 1).add("homeScore", home).add("awayScore", away).add("homeTurn", 0).add("awayTurn", 0).add("actions", new com.eclipsesource.json.JsonArray()).add("turn", 0).add("turnMode", "END_GAME").add("activePlayerId", com.eclipsesource.json.JsonValue.NULL).add("ball", com.eclipsesource.json.JsonValue.NULL).add("matchId", id).add("revision", revision).add("callerRole", "home").add("phase", "FULL_TIME").add("actor", "home").add("prompt", com.eclipsesource.json.JsonValue.NULL).add("players", new com.eclipsesource.json.JsonArray()).add("weather", "NICE").add("homeRerolls", 0).add("awayRerolls", 0); }
 	private TeamDraft draft(int rerolls) {
 		List<TeamDraft.Player> players = new ArrayList<>();
 		for (int slot = 1; slot <= 11; slot++) players.add(new TeamDraft.Player("p" + slot, slot, "lineman", Collections.emptyList()));

@@ -36,7 +36,7 @@ class LocalSchemaTest {
 	}
 
 	@Test
-	void restartWithVersionThreeDoesNotSeedOrResetData() throws Exception {
+	void restartWithVersionFourDoesNotSeedOrResetData() throws Exception {
 		DbConnectionManager manager = mock(DbConnectionManager.class);
 		Connection connection = mock(Connection.class);
 		Statement statement = mock(Statement.class);
@@ -48,13 +48,46 @@ class LocalSchemaTest {
 		when(tables.next()).thenReturn(true);
 		when(statement.executeQuery("SELECT version FROM ffb_local_schema")).thenReturn(version);
 		when(version.next()).thenReturn(true, false);
-		when(version.getInt(1)).thenReturn(3);
+		when(version.getInt(1)).thenReturn(4);
 		LocalSchema schema = spy(new LocalSchema());
-		doNothing().when(schema).verifySavedTeams(connection); doNothing().when(schema).verifyPreparedMatches(connection);
+		doNothing().when(schema).verifySavedTeams(connection); doNothing().when(schema).verifyPreparedMatches(connection); doNothing().when(schema).verifyCompletedMatches(connection);
+        when(statement.executeUpdate("UPDATE ffb_local_schema SET version=4 WHERE version=3")).thenReturn(1);
 		schema.initialize(manager, "unused");
 		verify(schema).verifySavedTeams(connection);
 		verify(statement, never()).executeUpdate(anyString());
 	}
+
+    @Test void completedMigrationResumesAfterAlterWithoutRepeatingDdl() throws Exception {
+        DbConnectionManager manager = mock(DbConnectionManager.class);
+        Connection connection = mock(Connection.class); Statement statement = mock(Statement.class);
+        ResultSet tables = mock(ResultSet.class), version = mock(ResultSet.class);
+        when(manager.openDbConnection()).thenReturn(connection); when(connection.createStatement()).thenReturn(statement);
+        when(statement.executeQuery("SHOW TABLES")).thenReturn(tables); when(tables.next()).thenReturn(true);
+        when(statement.executeQuery("SELECT version FROM ffb_local_schema")).thenReturn(version);
+        when(version.next()).thenReturn(true, false); when(version.getInt(1)).thenReturn(3);
+        when(statement.executeUpdate("UPDATE ffb_local_schema SET version=4 WHERE version=3")).thenReturn(1);
+        LocalSchema schema = spy(new LocalSchema());
+        doNothing().when(schema).verifySavedTeams(connection); doNothing().when(schema).verifyCompletedMatches(connection);
+        schema.initialize(manager, "unused");
+        verify(statement, never()).executeUpdate(startsWith("ALTER"));
+        verify(schema, never()).verifyPreparedMatches(connection);
+        verify(statement).executeUpdate("UPDATE ffb_local_schema SET version=4 WHERE version=3");
+    }
+
+    @Test void incompatibleCompletionTableCannotAdvanceSchemaThree() throws Exception {
+        DbConnectionManager manager = mock(DbConnectionManager.class);
+        Connection connection = mock(Connection.class); Statement statement = mock(Statement.class);
+        ResultSet tables = mock(ResultSet.class), version = mock(ResultSet.class);
+        when(manager.openDbConnection()).thenReturn(connection); when(connection.createStatement()).thenReturn(statement);
+        when(statement.executeQuery("SHOW TABLES")).thenReturn(tables); when(tables.next()).thenReturn(true);
+        when(statement.executeQuery("SELECT version FROM ffb_local_schema")).thenReturn(version);
+        when(version.next()).thenReturn(true, false); when(version.getInt(1)).thenReturn(3);
+        LocalSchema schema = spy(new LocalSchema()); doNothing().when(schema).verifySavedTeams(connection);
+        doThrow(new SQLException("not v4")).when(schema).verifyCompletedMatches(connection);
+        doThrow(new SQLException("not v3")).when(schema).verifyPreparedMatches(connection);
+        assertThrows(SQLException.class, () -> schema.initialize(manager, "unused"));
+        verify(statement, never()).executeUpdate(anyString());
+    }
 
 	@Test
 	void migrationResumesOnlyAfterVerifyingExistingTableAndNeverDropsData() throws Exception {
@@ -67,7 +100,8 @@ class LocalSchemaTest {
 		when(version.next()).thenReturn(true, false); when(version.getInt(1)).thenReturn(1);
 		when(statement.executeUpdate("UPDATE ffb_local_schema SET version=2 WHERE version=1")).thenReturn(1);
         when(statement.executeUpdate("UPDATE ffb_local_schema SET version=3 WHERE version=2")).thenReturn(1);
-		LocalSchema schema = spy(new LocalSchema()); doNothing().when(schema).verifySavedTeams(connection); doNothing().when(schema).verifyPreparedMatches(connection);
+		LocalSchema schema = spy(new LocalSchema()); doNothing().when(schema).verifySavedTeams(connection); doNothing().when(schema).verifyPreparedMatches(connection); doNothing().when(schema).verifyCompletedMatches(connection);
+        when(statement.executeUpdate("UPDATE ffb_local_schema SET version=4 WHERE version=3")).thenReturn(1);
 		schema.initialize(manager, "unused");
 		org.mockito.InOrder order = org.mockito.Mockito.inOrder(statement, schema, connection);
 		order.verify(statement).executeUpdate(startsWith("CREATE TABLE IF NOT EXISTS ffb_saved_teams"));
@@ -87,7 +121,8 @@ class LocalSchemaTest {
 		when(version.next()).thenReturn(true, false); when(version.getInt(1)).thenReturn(2);
 		when(statement.executeUpdate("UPDATE ffb_local_schema SET version=3 WHERE version=2")).thenReturn(1);
 		LocalSchema schema = spy(new LocalSchema());
-		doNothing().when(schema).verifySavedTeams(connection); doNothing().when(schema).verifyPreparedMatches(connection);
+		doNothing().when(schema).verifySavedTeams(connection); doNothing().when(schema).verifyPreparedMatches(connection); doNothing().when(schema).verifyCompletedMatches(connection);
+        when(statement.executeUpdate("UPDATE ffb_local_schema SET version=4 WHERE version=3")).thenReturn(1);
 		schema.initialize(manager, "unused");
 		org.mockito.InOrder order = org.mockito.Mockito.inOrder(statement, schema, connection);
 		order.verify(schema).verifySavedTeams(connection);
