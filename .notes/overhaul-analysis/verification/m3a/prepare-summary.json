@@ -1,0 +1,202 @@
+{
+  "passed": true,
+  "browser": "152.0.7977.77",
+  "matchId": "6813f78a-6396-39e9-9e2c-b903da5e2f3d",
+  "reversedCreator": true,
+  "sourceEditsIsolated": true,
+  "activatedRerollsUnchanged": true,
+  "exactRetry": true,
+  "pendingReconnect": true,
+  "wrongRoleRejected": true,
+  "staleRejected": true,
+  "final": {
+    "matchId": "6813f78a-6396-39e9-9e2c-b903da5e2f3d",
+    "revision": 26,
+    "callerRole": "home",
+    "phase": "READY_FOR_KICKOFF",
+    "actor": "home",
+    "prompt": null,
+    "players": [
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p1",
+        "name": "p1",
+        "slot": 1,
+        "role": "home",
+        "x": 12,
+        "y": 6
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p2",
+        "name": "p2",
+        "slot": 2,
+        "role": "home",
+        "x": 12,
+        "y": 7
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p3",
+        "name": "p3",
+        "slot": 3,
+        "role": "home",
+        "x": 12,
+        "y": 8
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p4",
+        "name": "p4",
+        "slot": 4,
+        "role": "home",
+        "x": 10,
+        "y": 4
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p5",
+        "name": "p5",
+        "slot": 5,
+        "role": "home",
+        "x": 10,
+        "y": 5
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p6",
+        "name": "p6",
+        "slot": 6,
+        "role": "home",
+        "x": 10,
+        "y": 6
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p7",
+        "name": "p7",
+        "slot": 7,
+        "role": "home",
+        "x": 10,
+        "y": 7
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p8",
+        "name": "p8",
+        "slot": 8,
+        "role": "home",
+        "x": 10,
+        "y": 8
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p9",
+        "name": "p9",
+        "slot": 9,
+        "role": "home",
+        "x": 10,
+        "y": 9
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p10",
+        "name": "p10",
+        "slot": 10,
+        "role": "home",
+        "x": 10,
+        "y": 10
+      },
+      {
+        "id": "9cdaaa9b-70f2-4c78-9641-666d9595dda8:p11",
+        "name": "p11",
+        "slot": 11,
+        "role": "home",
+        "x": 10,
+        "y": 11
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p1",
+        "name": "p1",
+        "slot": 1,
+        "role": "away",
+        "x": 13,
+        "y": 6
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p2",
+        "name": "p2",
+        "slot": 2,
+        "role": "away",
+        "x": 13,
+        "y": 7
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p3",
+        "name": "p3",
+        "slot": 3,
+        "role": "away",
+        "x": 13,
+        "y": 8
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p4",
+        "name": "p4",
+        "slot": 4,
+        "role": "away",
+        "x": 15,
+        "y": 4
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p5",
+        "name": "p5",
+        "slot": 5,
+        "role": "away",
+        "x": 15,
+        "y": 5
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p6",
+        "name": "p6",
+        "slot": 6,
+        "role": "away",
+        "x": 15,
+        "y": 6
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p7",
+        "name": "p7",
+        "slot": 7,
+        "role": "away",
+        "x": 15,
+        "y": 7
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p8",
+        "name": "p8",
+        "slot": 8,
+        "role": "away",
+        "x": 15,
+        "y": 8
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p9",
+        "name": "p9",
+        "slot": 9,
+        "role": "away",
+        "x": 15,
+        "y": 9
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p10",
+        "name": "p10",
+        "slot": 10,
+        "role": "away",
+        "x": 15,
+        "y": 10
+      },
+      {
+        "id": "51a69cea-a064-4f3e-8be0-f2dba9b08942:p11",
+        "name": "p11",
+        "slot": 11,
+        "role": "away",
+        "x": 15,
+        "y": 11
+      }
+    ],
+    "weather": "NICE",
+    "homeRerolls": 2,
+    "awayRerolls": 2
+  },
+  "errors": []
+}

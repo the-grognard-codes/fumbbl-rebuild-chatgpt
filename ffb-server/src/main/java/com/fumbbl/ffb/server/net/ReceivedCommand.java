@@ -14,6 +14,15 @@ public class ReceivedCommand {
 
 	private NetCommand fCommand;
 	private Session fSession;
+	private Boolean applicationHome;
+
+	/** Trusted application routing, populated only after persisted membership authorization. */
+	public ReceivedCommand(ClientCommand command, boolean home) {
+		this(command, null);
+		applicationHome = home;
+	}
+
+	public Boolean getApplicationHome() { return applicationHome; }
 
 	public ReceivedCommand(NetCommand pCommand, Session pSession) {
 		fCommand = pCommand;

@@ -36,6 +36,10 @@ public final class MatchJson {
 					exact(request, "version", "type", "operation", "requestId", "matchId", "expectedRevision", "teamId", "expectedDocumentVersion");
 					result = service.join(owner, requestId, uuid(request.get("matchId")), positive(request.get("expectedRevision")), uuid(request.get("teamId")), positive(request.get("expectedDocumentVersion")));
 					break;
+				case "activate":
+					exact(request, "version", "type", "operation", "requestId", "matchId", "expectedRevision");
+					result = service.activate(owner, requestId, uuid(request.get("matchId")), positive(request.get("expectedRevision")));
+					break;
 				case "load":
 					exact(request, "version", "type", "operation", "requestId", "matchId");
 					result = service.load(owner, uuid(request.get("matchId")));
@@ -90,8 +94,8 @@ public final class MatchJson {
 			MatchDocument.Member away = object.get("away").isNull() ? null : readMember(object.get("away").asObject(), invited, true);
 			MatchDocument.Lifecycle lifecycle = MatchDocument.Lifecycle.valueOf(object.get("lifecycle").asString());
 			if (!"home".equals(home.role) || (away != null && !"away".equals(away.role))
-				|| persistedVersion != (away == null ? 1 : 2)
-				|| lifecycle != (away == null ? MatchDocument.Lifecycle.WAITING_FOR_OPPONENT : MatchDocument.Lifecycle.AWAITING_SETUP)) throw new IllegalArgumentException();
+				|| persistedVersion != (away == null ? 1 : lifecycle == MatchDocument.Lifecycle.AWAITING_SETUP ? 2 : lifecycle == MatchDocument.Lifecycle.ACTIVATED ? 3 : -1)
+				|| lifecycle != (away == null ? MatchDocument.Lifecycle.WAITING_FOR_OPPONENT : persistedVersion == 2 ? MatchDocument.Lifecycle.AWAITING_SETUP : MatchDocument.Lifecycle.ACTIVATED)) throw new IllegalArgumentException();
 			if (away != null && (!home.team.catalogVersion.equals(away.team.catalogVersion) || !home.team.presetId.equals(away.team.presetId)
 				|| !home.team.presetVersion.equals(away.team.presetVersion) || !home.team.ruleset.equals(away.team.ruleset))) throw new IllegalArgumentException();
 			JsonArray history = object.get("requests").asArray();
@@ -100,9 +104,16 @@ public final class MatchJson {
 			for (JsonValue value : history) {
 				JsonObject request = value.asObject(); exact(request, "key", "fingerprint");
 				String key = request.get("key").asString(), fingerprint = request.get("fingerprint").asString();
-				String expectedOwner = requests.isEmpty() ? creator : invited;
-				if (!key.matches(expectedOwner + "\n[A-Za-z0-9_-]{1,100}") || fingerprint.length() > 300
-					|| !fingerprint.startsWith(requests.isEmpty() ? "create|" : "join|") || requests.containsKey(key)) throw new IllegalArgumentException();
+				int index = requests.size();
+				String expectedOwner = index == 0 ? creator : index == 1 ? invited : null;
+				String uuid = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
+				boolean valid = index == 0 && key.matches(expectedOwner + "\n[A-Za-z0-9_-]{1,100}")
+					&& fingerprint.matches("create\\|" + uuid + "\\|[1-9][0-9]*\\|" + invited)
+					|| index == 1 && key.matches(expectedOwner + "\n[A-Za-z0-9_-]{1,100}")
+					&& fingerprint.matches("join\\|" + id + "\\|1\\|" + uuid + "\\|[1-9][0-9]*")
+					|| index == 2 && key.matches("(" + creator + "|" + invited + ")\n[A-Za-z0-9_-]{1,100}")
+					&& fingerprint.equals("activate|" + id + "|2");
+				if (!valid || requests.containsKey(key)) throw new IllegalArgumentException();
 				requests.put(key, new MatchDocument.Request(fingerprint));
 			}
 			return new MatchDocument(id, persistedVersion, invited, lifecycle, home, away, requests);

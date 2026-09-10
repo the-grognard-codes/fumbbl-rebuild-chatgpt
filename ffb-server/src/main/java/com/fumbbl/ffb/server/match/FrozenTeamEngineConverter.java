@@ -45,7 +45,10 @@ public final class FrozenTeamEngineConverter {
 			player.setPassing(source.pa); player.setArmour(source.av);
 			for (String id : source.baseSkillIds) player.addSkill(skill(skills, id));
 			for (String id : source.skillIds) player.addSkill(skill(skills, id));
-			if (source.id.equals(frozen.captainId)) player.addSkill(skill(skills, "pro"));
+			if (source.id.equals(frozen.captainId)) {
+				player.addSkill(skill(skills, "pro"));
+				player.addSkill(skills.forName("Team Captain"));
+			}
 			team.addPlayer(player);
 		}
 		team.updateRoster(roster(frozen, factories, skills), false, factories);

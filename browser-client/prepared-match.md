@@ -30,8 +30,9 @@ ID confers no permission beyond that persisted invitation/membership policy.
 
 Revision 1 has `WAITING_FOR_OPPONENT`, one frozen home member and `away:null`.
 A successful join atomically creates revision 2 with `AWAITING_SETUP` and both
-members. New join requests against that occupied seat fail. No request in this
-contract can enter setup, kickoff or gameplay, or initialize an engine session.
+members. New join requests against that occupied seat fail. The M3a `activate` extension moves revision 2 to revision 3 `ACTIVATED` and starts
+the engine pre-match/setup flow. See [setup protocol](setup.md) for activation,
+retry, role enforcement and explicit restart-unavailable behavior.
 
 ## Responses and frozen data
 
@@ -98,8 +99,8 @@ match/subject/request ID. Its canonical fingerprint includes expected match and
 team revisions. Reuse with different data returns `REQUEST_ID_REUSED`.
 
 Accepted create/join metadata is persisted atomically with membership and frozen
-rosters in a single InnoDB document row. There are exactly one or two retained
-accepted requests per preparation record; they are never evicted. Concurrent
+rosters in a single InnoDB document row. There are one or two retained accepted preparation requests, and one additional
+activation request once activated; they are never evicted. Concurrent
 creates with one key resolve to one row. Concurrent distinct joins have exactly
 one accepted winner. An exact concurrent retry may report duplicate acceptance,
 but a distinct losing request cannot claim the winner's membership.
@@ -143,3 +144,5 @@ revision; reload the match after a conflict.
 
 See [migration and rollback boundaries](../containers/local/prepared-match-migration.md)
 and [actual M2c acceptance evidence](../.notes/overhaul-analysis/verification/m2c/README.md).
+
+M3a adds activation and setup through kickoff readiness; see [setup protocol](setup.md) and [activation durability](../containers/local/setup-activation-migration.md). Older preparation-only statements above describe M2c.

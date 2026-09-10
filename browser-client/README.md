@@ -238,3 +238,26 @@ ID and authoritative document. `check` loads that same document after restart
 and compares the complete document. Screenshots and the single restart artifact
 are under `.notes/overhaul-analysis/verification/m2b/`; no credentials or other
 list records are written.
+
+## M3a: activate and set up frozen teams
+
+At `/matches`, create/join with saved teams, reload the joined record, and select
+**Activate setup**. Follow **Open match setup**, authenticate, make the server's
+coin and receive choices, place the acting team's players, and confirm its legal
+formation. Repeat for the receiving team. The browser stops at **ready for kickoff**.
+Both source-team edits and imported replacements remain separate from frozen teams.
+
+The [setup contract](setup.md) explains retries, membership, capacity, and explicit
+restart-unavailable behavior. The [migration boundary](../containers/local/setup-activation-migration.md)
+has commands for the two-browser demo and JVM restart check. From this directory:
+
+```powershell
+node test/setup-demo.mjs prepare
+# After stopping/starting only the local JVM:
+node test/setup-demo.mjs check
+```
+
+This supports setup for the existing Human preset, not a full playable match.
+Public authentication and in-progress restart recovery remain later work.
+
+M3b extends /setup with [core turn controls](core-turns.md). Run `node test/core-turn-demo.mjs` after starting the paired local server and Vite.

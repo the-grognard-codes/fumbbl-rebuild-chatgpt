@@ -154,3 +154,7 @@ See [match migration, retry recovery and routine restart demonstration](prepared
 and [M2c actual verification](../../.notes/overhaul-analysis/verification/m2c/README.md).
 Current fresh startup reaches schema 3. Routine upgrades preserve saved teams,
 legacy games, backup/database volumes and existing credentials.
+
+## M3a activation and setup
+
+The current local image is `ffb-server:3.4.0-m3a.1`. Schema remains 3. See [activation durability and restart behavior](setup-activation-migration.md): prepared teams can complete genuine engine setup, but activated in-memory sessions cannot recover after JVM restart. No volume reset or credential change is needed.

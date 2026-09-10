@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "browser": "152.0.7977.83",
+  "matchId": "80778c6f-66c9-3cb5-a310-4a06e915be1b",
+  "kickoffAction": "kickoff",
+  "completedTurns": 4,
+  "pendingReconnect": true,
+  "exactRetry": true,
+  "wrongRoleRejected": true,
+  "staleRejected": true,
+  "finalRevision": 36,
+  "errors": []
+}

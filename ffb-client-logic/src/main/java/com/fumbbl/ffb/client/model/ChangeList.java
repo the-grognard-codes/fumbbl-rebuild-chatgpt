@@ -10,6 +10,8 @@ public class ChangeList {
 
 	public ChangeList() {
 		versions.add(new VersionChangeList("3.4.0")
+			.addFeature("Play local browser kickoff and core turns with server-issued movement, block, reroll and follow-up decisions")
+			.addFeature("Activate prepared local matches with frozen teams, browser pre-match choices and legal setup through to kickoff readiness")
 			.addFeature("Create and join local invited matches with owned saved teams, frozen rosters and durable participant roles")
 			.addFeature("Local BB2025 Human starter team builder with a versioned catalog and server-computed costs and validation")
 			.addFeature("Save, load, edit and import/export validated local teams with catalog status and conflicting-save protection")
