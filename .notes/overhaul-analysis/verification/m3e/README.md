@@ -1,5 +1,9 @@
 # M3e integrated acceptance and disconnect experience
 
+Subsequent hosted validation exposed an unseeded Secure the Ball test: see the
+[CI failure follow-up](secure-ball-fix/README.md). The historical successful runs
+below remain evidence of those runs, not proof that the old test was deterministic.
+
 Implemented and verified 2026-09-10 local / 2026-09-11 UTC, starting at
 `e0fbdae73c01a3d0164ceccd7209d506f0fd0f46` with a clean working tree.
 Accepted ADRs, product requirements, roadmap/kickoff, M2a–M2c closeouts, M3a–M3d
