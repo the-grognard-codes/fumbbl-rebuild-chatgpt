@@ -135,6 +135,10 @@ public class BrowserMatchAdapter {
 			connection.send(result(requestId, "rejected", "MALFORMED_MESSAGE", revision, false).toString());
 			return;
 		}
+        if ("matchResult".equals(type)) {
+            connection.send(new com.fumbbl.ffb.server.match.MatchResultJson().handle(preparedMatches, actors.get(connection), message).toString());
+            return;
+        }
 		if ("setup".equals(type)) {
 			if (!actors.containsKey(connection) || setup == null) {
 				connection.send(result(requestId, "rejected", "AUTHENTICATION_REQUIRED", revision, false).toString());
@@ -145,7 +149,8 @@ public class BrowserMatchAdapter {
 			if ("ACCEPTED".equals(response.getString("code", null))) {
 				String id = message.getString("matchId", null);
 				setupSubscriptions.put(connection, id);
-				if (!"load".equals(message.getString("operation", null)) && !response.getBoolean("duplicate", false)) {
+				boolean completedNow = setup.takeCompletionBroadcast(id);
+				if (completedNow || !"load".equals(message.getString("operation", null)) && !response.getBoolean("duplicate", false)) {
 					for (Map.Entry<Connection, String> entry : setupSubscriptions.entrySet()) {
 						if (id.equals(entry.getValue()) && entry.getKey() != connection && actors.containsKey(entry.getKey())) {
 							JsonObject load = new JsonObject().add("version", 1).add("type", "setup").add("operation", "load")

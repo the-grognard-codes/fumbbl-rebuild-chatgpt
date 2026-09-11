@@ -231,6 +231,112 @@ class SetupSessionTest {
         assertEquals(queued, engine(session).getDiceRoller().getTestRolls().values().stream().mapToInt(java.util.List::size).sum());
     }
 
+    @Test void replayBudgetRejectsBeforeAnyEngineMutation() throws Exception {
+        SetupSession session = session(11);
+        java.lang.reflect.Field bytes = SetupSession.class.getDeclaredField("replayBytes");
+        bytes.setAccessible(true); bytes.setInt(session, 16 * 1024 * 1024 - 128 * 1024 + 1);
+        JsonObject snapshot = view(session), prompt = snapshot.get("prompt").asObject();
+        String before = serialized(session);
+        JsonObject command = request(snapshot, "choice").add("promptId", prompt.get("id")).add("optionId", "heads");
+        assertEquals("REPLAY_LIMIT", assertThrows(MatchService.Failure.class,
+            () -> session.apply(prompt.getString("actor", null), command)).code);
+        assertEquals(before, serialized(session));
+    }
+
+    @Test void fullMatchUsesNativeHalftimeAndCompletesExactlyOnce() throws Exception {
+        SetupSession session = readySession();
+        int halves = 0;
+        JsonObject lastRequest = null; String lastRole = null;
+        for (int action = 0; action < 150 && !session.isComplete(); action++) {
+            JsonObject snapshot = view(session);
+            if ("SETUP".equals(snapshot.getString("phase", null))) {
+                assertEquals(2, snapshot.getInt("half", 0));
+                halves++;
+                arrangeSetup(session);
+                continue;
+            }
+            JsonObject selected;
+            if ("READY_FOR_KICKOFF".equals(snapshot.getString("phase", null))) {
+                engine(session).getDiceRoller().clearTestRolls();
+                TestRolls.on(engine(session)).general(1, 1, 3, 3, 3, 3, 3, 3);
+                selected = snapshot.get("actions").asArray().get(82).asObject();
+            } else if (hasAction(session, "endTurn")) selected = findAction(session, "endTurn");
+            else {
+                assertTrue(snapshot.get("actions").asArray().size() > 0, "Unsupported: " + serialized(session));
+                selected = snapshot.get("actions").asArray().get(0).asObject();
+            }
+            lastRequest = request(snapshot, "action").add("actionId", selected.get("id"));
+            lastRole = selected.getString("actor", null);
+            assertEquals("ACCEPTED", session.apply(lastRole, lastRequest).getString("code", null));
+            String after = serialized(session);
+            assertTrue(session.apply(lastRole, lastRequest).getBoolean("duplicate", false));
+            assertEquals(after, serialized(session), "Every transition retry leaves native state unchanged");
+        }
+        assertTrue(session.isComplete());
+        assertEquals(2, halves, "Both teams set up again at halftime");
+        assertEquals("FULL_TIME", view(session).getString("phase", null));
+        assertEquals(0, view(session).get("actions").asArray().size());
+        String artifact = session.completedMatch().json();
+        assertTrue(session.apply(lastRole, lastRequest).getBoolean("duplicate", false));
+        assertEquals(artifact, session.completedMatch().json(), "Completion retry records no second event");
+        JsonObject replay = JsonObject.readFrom(artifact);
+        assertEquals(view(session).getInt("revision", -1) + 1, replay.get("events").asArray().size());
+        assertEquals(0, replay.getInt("homeScore", -1));
+        assertEquals(0, replay.getInt("awayScore", -1));
+        assertEquals("MATCH_COMPLETED", assertThrows(MatchService.Failure.class,
+            () -> session.apply("home", request(view(session), "confirm"))).code);
+    }
+
+    @Test void nativeTouchdownStartsAnotherDriveAndRetryDoesNotScoreAgain() throws Exception {
+        SetupSession session = readySession();
+        TestRolls.on(engine(session)).general(1, 1, 3, 3, 3, 3, 3, 3);
+        submit(session, view(session).get("actions").asArray().get(82).asObject());
+        com.fumbbl.ffb.model.Game game = engine(session).getGame();
+        com.fumbbl.ffb.model.Player<?> scorer = game.getActingTeam().getPlayers()[0];
+        boolean home = game.isHomePlaying();
+        com.fumbbl.ffb.FieldCoordinate at = new com.fumbbl.ffb.FieldCoordinate(home ? 24 : 1, 7);
+        game.getFieldModel().setPlayerCoordinate(scorer, at);
+        game.getFieldModel().setBallCoordinate(at);
+        game.getFieldModel().setBallInPlay(true);
+        game.getFieldModel().setBallMoving(false);
+        JsonObject select = null;
+        for (JsonValue value : view(session).get("actions").asArray()) {
+            JsonObject option = value.asObject();
+            if ("select".equals(option.getString("kind", null)) && option.getString("id", "").endsWith(scorer.getId())) select = option;
+        }
+        assertTrue(select != null); submit(session, select);
+        JsonObject score = actionEnding(session, ":move-" + (home ? 25 : 0) + "-7");
+        JsonObject command = request(view(session), "action").add("actionId", score.get("id"));
+        String role = score.getString("actor", null);
+        assertEquals("ACCEPTED", session.apply(role, command).getString("code", null));
+        assertEquals(1, view(session).getInt(home ? "homeScore" : "awayScore", 0));
+        assertEquals("SETUP", view(session).getString("phase", null));
+        assertEquals(2, view(session).getInt("drive", 0));
+        String after = serialized(session);
+        assertTrue(session.apply(role, command).getBoolean("duplicate", false));
+        assertEquals(after, serialized(session));
+        arrangeSetup(session); arrangeSetup(session);
+        assertEquals("READY_FOR_KICKOFF", view(session).getString("phase", null));
+    }
+
+    private void arrangeSetup(SetupSession session) {
+        JsonObject snapshot = view(session); String role = snapshot.getString("actor", null);
+        for (JsonValue value : snapshot.get("players").asArray()) {
+            JsonObject player = value.asObject();
+            if (role.equals(player.getString("role", null)) && !player.get("x").isNull())
+                session.apply(role, request(view(session), "place").add("playerId", player.get("id")).add("to", JsonValue.NULL));
+        }
+        int index = 0;
+        for (JsonValue value : view(session).get("players").asArray()) {
+            JsonObject player = value.asObject(); if (!role.equals(player.getString("role", null))) continue;
+            int x = index < 3 ? 12 : 10; if ("away".equals(role)) x = 25 - x;
+            int y = index < 3 ? 6 + index : index + 1;
+            session.apply(role, request(view(session), "place").add("playerId", player.get("id"))
+                .add("to", new JsonObject().add("x", x).add("y", y))); index++;
+        }
+        assertEquals("ACCEPTED", session.apply(role, request(view(session), "confirm")).getString("code", null));
+    }
+
     private JsonObject actionEnding(SetupSession session, String ending) {
         for (JsonValue value : view(session).get("actions").asArray()) if (value.asObject().getString("id", "").endsWith(ending)) return value.asObject();
         throw new AssertionError("Missing action ending " + ending + " at " + view(session));

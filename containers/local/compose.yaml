@@ -17,7 +17,7 @@ services:
       retries: 40
     networks: [isolated]
   server:
-    image: ffb-server:3.4.0-m3c.1
+    image: ffb-server:3.4.0-m3d.1
     build:
       context: ../..
       dockerfile: containers/local/Dockerfile

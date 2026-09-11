@@ -1,0 +1,42 @@
+{
+  "matchId": "11075be4-67c8-3c67-8195-6e4459b63058",
+  "result": {
+    "awayScore": 0,
+    "catalogVersion": "bb2025-human-2026-09-08.1",
+    "engineVersion": "ffb-3.4.0-bb2025-m3d.1",
+    "finalRevision": 149,
+    "formatVersion": 1,
+    "homeScore": 1,
+    "matchId": "11075be4-67c8-3c67-8195-6e4459b63058",
+    "presetId": "human-exhibition-1150",
+    "presetVersion": "bb2025-human-2026-09-08.1",
+    "ruleset": "BB2025",
+    "eventCount": 150
+  },
+  "checkpoints": [
+    {
+      "revision": 74,
+      "half": 1,
+      "drive": 2,
+      "phase": "SETUP",
+      "homeScore": 1,
+      "awayScore": 0
+    },
+    {
+      "revision": 107,
+      "half": 2,
+      "drive": 3,
+      "phase": "SETUP",
+      "homeScore": 1,
+      "awayScore": 0
+    },
+    {
+      "revision": 149,
+      "half": 2,
+      "drive": 3,
+      "phase": "FULL_TIME",
+      "homeScore": 1,
+      "awayScore": 0
+    }
+  ]
+}

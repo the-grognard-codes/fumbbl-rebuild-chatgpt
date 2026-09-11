@@ -269,3 +269,13 @@ demonstrates native play in two browsers. `node test/supported-actions-demo.mjs`
 separately exercises 88 mounted native-wire traces, including prompt ownership,
 search and reconnect/retry. These fixtures are test-only. Full-match completion
 and durable in-progress restart recovery remain later work.
+
+## M3d complete match and private replay
+
+The saved-team flow now continues through touchdowns, later drives, halftime and
+full time. Open the completed match result to inspect its score and recorded
+state events. Results survive server restart; in-progress recovery remains
+unavailable. See [the result/replay contract](results-replay.md) and
+[schema-4 migration](../containers/local/completed-match-migration.md).
+Run `node test/full-match-demo.mjs` against the paired local image and Vite;
+`node test/results-mock.mjs` covers delayed replies and reconnect in the viewer.

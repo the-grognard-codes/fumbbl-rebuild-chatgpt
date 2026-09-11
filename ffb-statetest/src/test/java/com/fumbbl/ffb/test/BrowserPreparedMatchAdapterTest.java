@@ -131,6 +131,72 @@ class BrowserPreparedMatchAdapterTest {
 		assertTrue(!"ACCEPTED".equals(JsonObject.readFrom(output.get(output.size() - 1)).getString("code", null)));
 		assertEquals(before, state.getGame().toJsonValue().toString()); assertEquals(metrics, adapter.measurements().toString());
 	}
+    @Test void terminalPersistenceRetryBroadcastsOnceAndSurvivesApplicationRestart() throws Exception {
+        for (boolean unknown : new boolean[] { false, true }) {
+            RosterCatalog catalog = new RosterCatalog(); SavedTeamService teams = new SavedTeamService(new Teams(), catalog);
+            Matches repository = new Matches(); boolean[] fail = {true}; int[] writes = {0};
+            MatchRepository faulty = new MatchRepository() {
+                public Record find(String id) { return repository.find(id); }
+                public void insert(Record record) { repository.insert(record); }
+                public boolean replace(Record record, int expected) throws java.sql.SQLException {
+                    if (record.documentVersion == 4 && fail[0]) {
+                        fail[0] = false;
+                        if (unknown) { repository.replace(record, expected); writes[0]++; throw new OutcomeUnknown(record, new java.sql.SQLException("lost ack")); }
+                        throw new java.sql.SQLException("before commit");
+                    }
+                    if (record.documentVersion == 4) writes[0]++;
+                    return repository.replace(record, expected);
+                }
+            };
+            MatchService service = new MatchService(faulty, teams, catalog);
+            String h = teams.create("away", draft(catalog)).document.teamId, a = teams.create("home", draft(catalog)).document.teamId;
+            String id = service.create("away", "create", h, 1, "home").document.matchId;
+            service.join("home", "join", id, 1, a, 1);
+            BrowserMatchAdapter adapter = new BrowserMatchAdapter(new TestServer().getServer(), "home-token", "away-token");
+            adapter.setPreparedMatches(service);
+            List<String> home = new ArrayList<>(), away = new ArrayList<>();
+            BrowserMatchAdapter.Connection hc = home::add, ac = away::add;
+            adapter.receive(hc, "{\"version\":1,\"type\":\"join\",\"requestId\":\"auth\",\"token\":\"away-token\"}");
+            adapter.receive(ac, "{\"version\":1,\"type\":\"join\",\"requestId\":\"auth\",\"token\":\"home-token\"}");
+            adapter.receive(hc, new JsonObject().add("version", 1).add("type", "preparedMatch").add("operation", "activate")
+                .add("requestId", "activate").add("matchId", id).add("expectedRevision", 2).toString());
+            JsonObject load = new JsonObject().add("version", 1).add("type", "setup").add("operation", "load").add("requestId", "load").add("matchId", id);
+            adapter.receive(hc, load.toString()); adapter.receive(ac, load.toString());
+            JsonObject view = JsonObject.readFrom(away.get(away.size() - 1)).get("state").asObject();
+            JsonObject choice = new JsonObject().add("version", 1).add("type", "setup").add("operation", "choice")
+                .add("requestId", "choose").add("matchId", id).add("expectedRevision", 0)
+                .add("promptId", view.get("prompt").asObject().get("id")).add("optionId", "heads");
+            adapter.receive(ac, choice.toString());
+            SetupApplication app = (SetupApplication) field(adapter, "setup");
+            com.fumbbl.ffb.server.match.SetupSession session = (com.fumbbl.ffb.server.match.SetupSession) ((Map<?, ?>) field(app, "sessions")).get(id);
+            GameState engine = (GameState) field(session, "state");
+            // A test-only terminal fixture isolates persistence and delivery from the separate native full-match characterization.
+            engine.getGame().setFinished(new java.util.Date()); engine.getGame().setTurnMode(com.fumbbl.ffb.TurnMode.END_GAME);
+            com.eclipsesource.json.JsonArray events = (com.eclipsesource.json.JsonArray) field(session, "events");
+            JsonObject last = events.get(events.size() - 1).asObject();
+            last.set("kind", "FULL_TIME").set("state", session.reply("test", "ACCEPTED", false, "home").get("state").asObject().set("prompt", com.eclipsesource.json.JsonValue.NULL));
+            home.clear(); away.clear();
+            adapter.receive(ac, choice.toString());
+            assertEquals(unknown ? "MATCH_OUTCOME_UNKNOWN" : "PERSISTENCE_FAILED", JsonObject.readFrom(away.get(0)).getString("code", null));
+            assertTrue(home.isEmpty());
+            String before = engine.toJsonValue().toString();
+            adapter.receive(ac, choice.toString());
+            assertTrue(JsonObject.readFrom(away.get(1)).getBoolean("duplicate", false));
+            assertEquals(1, home.size());
+            assertEquals("FULL_TIME", JsonObject.readFrom(home.get(0)).get("state").asObject().getString("phase", null));
+            adapter.receive(ac, choice.toString());
+            assertEquals(1, home.size()); assertEquals(1, writes[0]);
+            assertEquals(before, engine.toJsonValue().toString());
+            SetupApplication restarted = new SetupApplication(new TestServer().getServer(), service);
+            assertEquals("FULL_TIME", restarted.handle("home", load).get("state").asObject().getString("phase", null));
+            assertEquals("MATCH_COMPLETED", restarted.handle("home", choice).getString("code", null));
+            assertEquals(4, service.load("away", id).document.documentVersion);
+        }
+    }
+    private Object field(Object target, String name) throws Exception {
+        Field field = target.getClass().getDeclaredField(name); field.setAccessible(true); return field.get(target);
+    }
+
 	private TeamDraft draft(RosterCatalog catalog) {
 		List<TeamDraft.Player> players = new ArrayList<>();
 		for (int slot = 1; slot <= 11; slot++) players.add(new TeamDraft.Player("p" + slot, slot, "lineman", Collections.emptyList()));

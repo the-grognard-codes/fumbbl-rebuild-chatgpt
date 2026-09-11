@@ -49,9 +49,14 @@ public final class SetupSession {
 	private final Map<String, Record> history = new LinkedHashMap<>();
 	private final Set<String> kickoffSelection = new LinkedHashSet<>();
 	private int revision;
+	private int drive = 1;
+	private int replayBytes;
+	private final JsonArray events = new JsonArray();
+	private final MatchDocument document;
 	private boolean failed;
 
 	public SetupSession(FantasyFootballServer server, MatchDocument document, long engineId) {
+		this.document = document;
 		matchId = document.matchId;
 		state = new GameState(server) {
 			@Override public boolean usesLegacyPersistence() { return false; }
@@ -62,6 +67,7 @@ public final class SetupSession {
 		// The frozen exhibition preset excludes all inducement/prayer purchases.
 		game.getOptions().addOption(new GameOptionBoolean(GameOptionId.USE_PREDEFINED_INDUCEMENTS).setValue(true));
 		game.getOptions().addOption(new GameOptionBoolean(GameOptionId.INDUCEMENT_PRAYERS_AVAILABLE_FOR_UNDERDOG).setValue(false));
+		game.getOptions().addOption(new GameOptionBoolean(GameOptionId.OVERTIME).setValue(false));
 		game.initializeRules();
 		state.initRulesDependentMembers();
 		UtilSkillBehaviours.registerBehaviours(game, server.getDebugLog());
@@ -80,6 +86,7 @@ public final class SetupSession {
 			.pushSequence(new SequenceGenerator.SequenceParams(state));
 		state.startNextStep();
 		assertSupported();
+		recordEvent("START");
 	}
 
 	private void initializeTeam(Team team, String owner, String name) {
@@ -100,6 +107,9 @@ public final class SetupSession {
 			return reply(id, prior.code, true, role);
 		}
 		if (failed) throw new MatchService.Failure("SESSION_UNAVAILABLE");
+		if (isComplete()) throw new MatchService.Failure("MATCH_COMPLETED");
+		// Reserve 128 KiB: one bounded 64 KiB projection plus the envelope and up to 8,193 array separators.
+		if (replayBytes > 16 * 1024 * 1024 - 128 * 1024) throw new MatchService.Failure("REPLAY_LIMIT");
 		if (history.size() >= 8192) throw new MatchService.Failure("REQUEST_HISTORY_LIMIT");
 		if (request.get("expectedRevision").asInt() != revision) throw new MatchService.Failure("STALE_REVISION");
 		if (!"action".equals(request.getString("operation", null)) && !role.equals(actor())) throw new MatchService.Failure("WRONG_ACTOR");
@@ -118,6 +128,7 @@ public final class SetupSession {
                 if (!kickoffSelection.remove(player)) kickoffSelection.add(player);
                 revision++;
                 history.put(key, new Record(fingerprint, "ACCEPTED"));
+                recordEvent("SELECTION");
                 return reply(id, "ACCEPTED", false, role);
             }
             if ("confirm-solid-defence".equals(selected.id)) {
@@ -166,6 +177,8 @@ public final class SetupSession {
 			}
 			command = new ClientCommandEndTurn(TurnMode.SETUP, null);
 		} else throw new MatchService.Failure("INVALID_REQUEST");
+		int oldHalf = game.getHalf();
+		int oldScore = homeScore() + awayScore();
 		try {
 			// No legacy socket is registered for these private engine IDs. Authorization above is persisted-role based.
 			state.handleCommand(new ReceivedCommand(command, "home".equals(role)));
@@ -173,6 +186,10 @@ public final class SetupSession {
 			assertSupported();
 			revision++;
 			history.put(key, new Record(fingerprint, "ACCEPTED"));
+			boolean newHalf = oldHalf > 0 && game.getHalf() != oldHalf;
+			boolean touchdown = homeScore() + awayScore() != oldScore;
+			if (!isComplete() && (newHalf || touchdown)) drive++;
+			recordEvent(isComplete() ? "FULL_TIME" : newHalf ? "HALFTIME" : touchdown ? "TOUCHDOWN" : "ACTION");
 			return reply(id, "ACCEPTED", false, role);
 		} catch (RuntimeException failure) {
 			failed = true;
@@ -212,11 +229,14 @@ public final class SetupSession {
         for (Action action : actions()) legal.add(new JsonObject().add("id", actionId(action)).add("kind", action.kind)
             .add("label", action.label).add("actor", action.role));
         FieldCoordinate ball = game.getFieldModel().getBallCoordinate();
-        return new JsonObject().add("actions", legal).add("turn", game.getTurnData().getTurnNr()).add("turnMode", game.getTurnMode().name())
+        return new JsonObject().add("half", Math.max(1, Math.min(2, game.getHalf()))).add("drive", drive)
+            .add("homeScore", homeScore()).add("awayScore", awayScore())
+            .add("homeTurn", game.getTurnDataHome().getTurnNr()).add("awayTurn", game.getTurnDataAway().getTurnNr())
+            .add("actions", legal).add("turn", game.getTurnData().getTurnNr()).add("turnMode", game.getTurnMode().name())
             .add("activePlayerId", game.getActingPlayer().getPlayerId())
             .add("ball", FieldCoordinateBounds.FIELD.isInBounds(ball) ? new JsonObject().add("x", ball.getX()).add("y", ball.getY()) : JsonValue.NULL)
             .add("matchId", matchId).add("revision", revision).add("callerRole", role)
-			.add("phase", step() == StepId.KICKOFF ? "READY_FOR_KICKOFF" : step() == StepId.SETUP ? "SETUP" : step() == StepId.COIN_CHOICE || step() == StepId.RECEIVE_CHOICE ? "PRE_MATCH" : "PLAY")
+			.add("phase", isComplete() ? "FULL_TIME" : step() == StepId.KICKOFF ? "READY_FOR_KICKOFF" : step() == StepId.SETUP ? "SETUP" : step() == StepId.COIN_CHOICE || step() == StepId.RECEIVE_CHOICE ? "PRE_MATCH" : "PLAY")
 			.add("actor", actor()).add("prompt", prompt).add("players", players)
 			.add("weather", game.getFieldModel().getWeather().name())
 			.add("homeRerolls", game.getTurnDataHome().getReRolls()).add("awayRerolls", game.getTurnDataAway().getReRolls());
@@ -232,16 +252,36 @@ public final class SetupSession {
 		return state.getGame().isHomePlaying() ? "home" : "away";
 	}
 	private String promptId() { return matchId + "-" + revision; }
-	private StepId step() { return state.getCurrentStep().getId(); }
+	private StepId step() { return state.getCurrentStep() == null ? StepId.END_GAME : state.getCurrentStep().getId(); }
     private void assertSupported() {
-        if (state.getCurrentStep() == null) throw new IllegalStateException("No resident engine step");
+        if (!isComplete() && state.getCurrentStep() == null) throw new IllegalStateException("No resident engine step");
     }
     private String actionId(Action action) { return revision + ":" + action.id; }
     private List<Action> actions() {
+        if (isComplete()) return java.util.Collections.emptyList();
         List<Action> result = new KickoffActions(state, kickoffSelection).actions();
         if (result.isEmpty()) result = new CorePromptActions(state).actions();
         if (result.isEmpty()) result = new CoreTurnActions(state).actions();
         return result;
+    }
+
+    public boolean isComplete() { return state.getGame().getFinished() != null; }
+    private int homeScore() { return state.getGame().getGameResult().getTeamResultHome().getScore(); }
+    private int awayScore() { return state.getGame().getGameResult().getTeamResultAway().getScore(); }
+    private void recordEvent(String kind) {
+        JsonObject snapshot = view("home").set("actions", new JsonArray()).set("prompt", JsonValue.NULL);
+        JsonObject event = new JsonObject().add("revision", revision).add("kind", kind).add("state", snapshot);
+        replayBytes += event.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8).length;
+        events.add(event);
+    }
+    public CompletedMatch completedMatch() {
+        if (!isComplete() || failed) throw new MatchService.Failure("NOT_COMPLETED");
+        return new CompletedMatch(new JsonObject().add("formatVersion", 1)
+            .add("engineVersion", "ffb-3.4.0-bb2025-m3d.1").add("ruleset", document.home.team.ruleset)
+            .add("catalogVersion", document.home.team.catalogVersion).add("presetId", document.home.team.presetId)
+            .add("presetVersion", document.home.team.presetVersion).add("matchId", matchId)
+            .add("homeScore", homeScore()).add("awayScore", awayScore()).add("finalRevision", revision)
+            .add("events", events).toString());
     }
 	private SetupMechanic mechanic() {
 		MechanicsFactory factory = state.getGame().getFactory(FactoryType.Factory.MECHANIC);

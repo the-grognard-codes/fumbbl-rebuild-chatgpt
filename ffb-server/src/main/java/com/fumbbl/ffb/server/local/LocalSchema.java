@@ -29,14 +29,15 @@ public class LocalSchema {
 				try (ResultSet version = statement.executeQuery("SELECT version FROM ffb_local_schema")) {
 					if (!version.next()) throw new SQLException("Missing local schema version");
 					current = version.getInt(1);
-					if ((current < 1 || current > 3) || version.next()) {
+					if ((current < 1 || current > 4) || version.next()) {
 						throw new SQLException("Unsupported local schema; use the documented explicit disposable reset");
 					}
 				}
 				if (current == 1) migrateSavedTeams(connection);
 				else verifySavedTeams(connection);
 				if (current < 3) migratePreparedMatches(connection);
-				else verifyPreparedMatches(connection);
+				if (current < 4) migrateCompletedMatches(connection);
+				else verifyCompletedMatches(connection);
 				return;
 			}
 			new DbInitializer(manager).initDb(false);
@@ -54,6 +55,7 @@ public class LocalSchema {
 			connection.commit();
 			migrateSavedTeams(connection);
 			migratePreparedMatches(connection);
+			migrateCompletedMatches(connection);
 		}
 	}
 
@@ -87,13 +89,44 @@ public class LocalSchema {
 		} catch (IOException exception) { throw new SQLException("Unable to read local schema migration 003", exception); }
 	}
 
-	void verifyPreparedMatches(Connection connection) throws SQLException {
+	void verifyPreparedMatches(Connection connection) throws SQLException { verifyMatchTable(connection, false); }
+    void verifyCompletedMatches(Connection connection) throws SQLException { verifyMatchTable(connection, true); }
+
+    private void migrateCompletedMatches(Connection connection) throws SQLException {
+        // One atomic MariaDB ALTER preserves the old or new complete shape across interruption.
+        boolean migrated = false;
+        try { verifyCompletedMatches(connection); migrated = true; }
+        catch (SQLException notMigrated) { verifyPreparedMatches(connection); }
+        try (Statement statement = connection.createStatement()) {
+            if (!migrated) {
+                String constraint = null;
+                try (ResultSet rows = statement.executeQuery("SELECT CONSTRAINT_NAME,CHECK_CLAUSE FROM information_schema.CHECK_CONSTRAINTS WHERE CONSTRAINT_SCHEMA=DATABASE() AND TABLE_NAME='ffb_prepared_matches'")) {
+                    while (rows.next()) {
+                        String clause = rows.getString(2).toLowerCase(java.util.Locale.ROOT).replaceAll("[\\s`()]+", "");
+                        if ("octet_lengthdocument_json<=65536".equals(clause)) constraint = rows.getString(1);
+                    }
+                }
+                if (constraint == null || !constraint.matches("[A-Za-z0-9_]+")) throw new SQLException("Missing original match size constraint");
+                try (InputStream source = LocalSchema.class.getResourceAsStream("/local-schema/004-completed-matches.sql")) {
+                    if (source == null) throw new SQLException("Missing migration 004");
+                    try (Scanner scanner = new Scanner(source, "UTF-8").useDelimiter("\\A")) {
+                        statement.executeUpdate(scanner.next().replace("${sizeConstraint}", constraint));
+                    }
+                } catch (IOException failure) { throw new SQLException("Unable to read migration 004", failure); }
+            }
+            verifyCompletedMatches(connection);
+            if (statement.executeUpdate("UPDATE ffb_local_schema SET version=4 WHERE version=3") != 1) throw new SQLException("Schema migration conflict");
+            connection.commit();
+        }
+    }
+
+    private void verifyMatchTable(Connection connection, boolean completed) throws SQLException {
 		try (Statement statement = connection.createStatement()) {
 			try (ResultSet table = statement.executeQuery("SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='ffb_prepared_matches'")) {
 				if (!table.next() || !"InnoDB".equalsIgnoreCase(table.getString(1)) || table.next()) throw new SQLException("Prepared-match table engine mismatch");
 			}
 			String[] expected = {"match_id|char(36)|NO|ascii|ascii_bin", "document_version|int|NO|null|null",
-				"document_json|mediumtext|NO|utf8mb4|utf8mb4_bin"};
+				(completed ? "document_json|longtext|NO|utf8mb4|utf8mb4_bin" : "document_json|mediumtext|NO|utf8mb4|utf8mb4_bin")};
 			try (ResultSet columns = statement.executeQuery("SELECT COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE,CHARACTER_SET_NAME,COLLATION_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='ffb_prepared_matches' ORDER BY ORDINAL_POSITION")) {
 				for (String column : expected) {
 					if (!columns.next()) throw new SQLException("Prepared-match columns missing");
@@ -111,7 +144,7 @@ public class LocalSchema {
 			try (ResultSet rows = statement.executeQuery("SELECT CHECK_CLAUSE FROM information_schema.CHECK_CONSTRAINTS WHERE CONSTRAINT_SCHEMA=DATABASE() AND TABLE_NAME='ffb_prepared_matches'")) {
 				while (rows.next()) checks.add(rows.getString(1).toLowerCase(java.util.Locale.ROOT).replaceAll("[\\s`()]+", ""));
 			}
-			if (!checks.equals(new HashSet<>(Arrays.asList("document_versionbetween1and2147483646", "octet_lengthdocument_json<=65536")))) throw new SQLException("Prepared-match constraint mismatch");
+			if (!checks.equals(new HashSet<>(Arrays.asList("document_versionbetween1and2147483646", (completed ? "octet_lengthdocument_json<=16842752" : "octet_lengthdocument_json<=65536"))))) throw new SQLException("Prepared-match constraint mismatch");
 			try (ResultSet rows = statement.executeQuery("SELECT COUNT(*) FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA=DATABASE() AND EVENT_OBJECT_TABLE='ffb_prepared_matches'")) {
 				if (!rows.next() || rows.getInt(1) != 0) throw new SQLException("Unexpected prepared-match trigger");
 			}

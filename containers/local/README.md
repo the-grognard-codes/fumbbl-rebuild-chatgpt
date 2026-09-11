@@ -158,3 +158,11 @@ legacy games, backup/database volumes and existing credentials.
 ## M3a activation and setup
 
 The current local image is `ffb-server:3.4.0-m3a.1`. Schema remains 3. See [activation durability and restart behavior](setup-activation-migration.md): prepared teams can complete genuine engine setup, but activated in-memory sessions cannot recover after JVM restart. No volume reset or credential change is needed.
+
+## M3d completion and replay
+
+Current image `ffb-server:3.4.0-m3d.1` upgrades to schema 4 without resetting data.
+[Migration and rollback boundaries](completed-match-migration.md) describe the
+expanded match document bound and atomic terminal artifact. Completed results
+and bounded private replay remain readable after JVM restart; activated
+in-progress engines still do not recover.

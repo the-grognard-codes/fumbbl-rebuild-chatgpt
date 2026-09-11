@@ -66,8 +66,9 @@ M3c completes passing/catching, hand-off, fouling/argue, interception, throw
 team-mate, jump, secure ball, forgo and catalog skill/injury choices. The
 [coverage matrix](action-coverage.md) links every supported family and all 14
 skills/traits to native characterizations, adapters and browser evidence.
-Scoring/drive/half/completion UX, results, replay, session cleanup and durable
-in-progress restart recovery remain later M3 work. There is no catalog, rules or
+[M3d](results-replay.md) adds scoring/drive/half/completion UX, durable results
+and bounded replay. Session cleanup and durable in-progress restart recovery
+remain later M3 work. There is no catalog, rules or
 infrastructure upgrade.
 
 See [M3b evidence](../.notes/overhaul-analysis/verification/m3b/README.md) for actual

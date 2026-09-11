@@ -130,6 +130,15 @@ public final class MatchJdbcAcceptance {
 		check("MATCH_OUTCOME_UNKNOWN".equals(json.handle(service(faultConnections(true)), "away", activation.toString()).getString("code", null)), "activation lost acknowledgement misclassified");
 		check(accepted(service(connections), "away", activation).getBoolean("duplicate", false), "activation retry not duplicate");
 		check(repository.find(recoveredId).documentVersion == 3, "activation retry advanced revision");
+		CompletedMatch recoveredCompletion = completed(recoveredId);
+		String active = repository.find(recoveredId).json;
+		try { service(faultConnections(false)).complete("home", recoveredId, recoveredCompletion); throw new AssertionError("completion rollback accepted"); }
+		catch (SQLException expected) { }
+		check(active.equals(repository.find(recoveredId).json), "completion rollback changed durable state");
+		try { service(faultConnections(true)).complete("home", recoveredId, recoveredCompletion); throw new AssertionError("completion acknowledgement loss accepted"); }
+		catch (MatchService.OutcomeUnknown expected) { }
+		service(connections).complete("away", recoveredId, recoveredCompletion);
+		check(repository.find(recoveredId).documentVersion == 4, "completion retry advanced revision");
 		ExecutorService activators = Executors.newFixedThreadPool(2);
 		CountDownLatch activationReady = new CountDownLatch(2), activationStart = new CountDownLatch(1);
 		try {
@@ -144,7 +153,17 @@ public final class MatchJdbcAcceptance {
 			check(a != b, "activation needs one winner");
 			check(repository.find(id).documentVersion == 3, "concurrent activation advanced twice");
 		} finally { activators.shutdownNow(); }
-		System.out.println("M3a MariaDB acceptance passed: M2 preparation regressions plus activation rollback, concurrent activation, durable activation retry and lost acknowledgement.");
+		CompletedMatch concurrentCompletion = completed(id);
+		ExecutorService completers = Executors.newFixedThreadPool(2);
+		CountDownLatch completionReady = new CountDownLatch(2), completionStart = new CountDownLatch(1);
+		try {
+			java.util.concurrent.Callable<Void> attempt = () -> { completionReady.countDown(); completionStart.await(); service(connections).complete("home", id, concurrentCompletion); return null; };
+			Future<Void> first = completers.submit(attempt), second = completers.submit(attempt);
+			check(completionReady.await(10, TimeUnit.SECONDS), "completion workers not ready"); completionStart.countDown();
+			first.get(20, TimeUnit.SECONDS); second.get(20, TimeUnit.SECONDS);
+			check(repository.find(id).documentVersion == 4, "concurrent completion advanced twice");
+		} finally { completers.shutdownNow(); }
+		System.out.println("M3d MariaDB acceptance passed: completion rollback, CAS, durable retry and lost acknowledgement.");
 	}
 
 	private MatchService service(JdbcMatchRepository.Connections source) { return new MatchService(new JdbcMatchRepository(source), teams, catalog); }
@@ -156,6 +175,12 @@ public final class MatchJdbcAcceptance {
 	private JsonObject create(String teamId, String opponent) { return header("create").add("teamId", teamId).add("expectedDocumentVersion", 1).add("intendedOpponent", opponent); }
 	private JsonObject join(String matchId, String teamId) { return header("join").add("matchId", matchId).add("expectedRevision", 1).add("teamId", teamId).add("expectedDocumentVersion", 1); }
 	private JsonObject header(String operation) { return new JsonObject().add("version", 1).add("type", "preparedMatch").add("requestId", UUID.randomUUID().toString()).add("operation", operation); }
+	private CompletedMatch completed(String id) {
+		JsonObject state = new JsonObject().add("half", 2).add("drive", 1).add("homeScore", 0).add("awayScore", 0).add("homeTurn", 0).add("awayTurn", 0).add("actions", new com.eclipsesource.json.JsonArray()).add("turn", 0).add("turnMode", "END_GAME").add("activePlayerId", com.eclipsesource.json.JsonValue.NULL).add("ball", com.eclipsesource.json.JsonValue.NULL).add("matchId", id).add("revision", 0).add("callerRole", "home").add("phase", "FULL_TIME").add("actor", "home").add("prompt", com.eclipsesource.json.JsonValue.NULL).add("players", new com.eclipsesource.json.JsonArray()).add("weather", "NICE").add("homeRerolls", 0).add("awayRerolls", 0);
+		return new CompletedMatch(new JsonObject().add("formatVersion", 1).add("engineVersion", CompletedMatch.ENGINE_VERSION).add("ruleset", "BB2025")
+			.add("catalogVersion", RosterCatalog.VERSION).add("presetId", RosterCatalog.PRESET).add("presetVersion", RosterCatalog.VERSION).add("matchId", id)
+			.add("homeScore", 0).add("awayScore", 0).add("finalRevision", 0).add("events", new com.eclipsesource.json.JsonArray().add(new JsonObject().add("revision", 0).add("kind", "FULL_TIME").add("state", state))).toString());
+	}
 	private TeamDraft draft(int rerolls) {
 		List<TeamDraft.Player> players = new ArrayList<>();
 		for (int slot = 1; slot <= 11; slot++) players.add(new TeamDraft.Player("jdbc" + slot, slot, "lineman", Collections.emptyList()));
