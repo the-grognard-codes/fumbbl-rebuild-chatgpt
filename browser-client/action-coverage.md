@@ -86,3 +86,13 @@ declared scope. M3d adds [drives, halves, results and replay](results-replay.md)
 and durable in-progress JVM restart recovery remain later M3 work; completion
 acceptance is recorded in the linked M3d evidence. Same-JVM reconnect is supported. Synthetic
 states and deterministic dice exist only in tests, never the product contract.
+
+
+## M3e integrated acceptance
+
+The unchanged matrix was rerun: 128 focused Java tests and all 88 mounted native
+traces passed. Live six-position actions and complete matches in both creator
+directions passed, including lost acknowledgements, prompts, setup/drive/half/
+completion reconnect and exact retry. See [M3e assessment](../.notes/overhaul-analysis/verification/m3e/README.md).
+In-progress JVM recovery and completed-session capacity release are M4 handoff
+items; same-JVM browser reconnect and committed result durability are supported.

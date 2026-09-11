@@ -14,10 +14,23 @@ try {
   const connect = async item => { await item.goto(`http://127.0.0.1:5173/results?matchId=${matchId}`); await item.getByLabel('Local credential', { exact: true }).fill('credential'); await item.getByRole('button', { name: 'Load completed match', exact: true }).click(); await item.getByRole('status').filter({ hasText: 'Connected' }).waitFor(); };
   const requestAt = (item, offset = -1) => item.evaluate(offset => window.resultSocket.outgoing.at(offset), offset);
   const emit = (item, value) => item.evaluate(value => window.resultSocket.onmessage({ data: JSON.stringify(value) }), value);
-  await connect(page); await connect(observer); const loadA = await requestAt(page); const loadB = await requestAt(observer); await emit(page, reply(loadA.requestId)); await emit(observer, reply(loadB.requestId)); await page.getByText('Final score').waitFor();
+  await connect(page); await connect(observer); const loadA = await requestAt(page); const loadB = await requestAt(observer); await emit(page, reply(loadA.requestId)); await emit(observer, reply(loadB.requestId)); await page.getByRole('heading', { name: 'Final score', exact: true }).waitFor();
   await page.getByRole('button', { name: 'First', exact: true }).click(); const first = await requestAt(page); assert.equal(await page.getByRole('button', { name: 'First', exact: true }).isDisabled(), true, 'pending replay disables navigation'); await emit(page, reply(first.requestId, { revision: 0, kind: 'START', state: state(0) })); await page.getByText('Event 1 of 2: START').waitFor();
   await page.getByRole('button', { name: 'Next', exact: true }).click(); const next = await requestAt(page); await emit(page, reply('stale-request', { revision: 0, kind: 'START', state: state(0) })); assert.equal(await page.getByText(/Event 1 of 2/).count(), 1, 'uncorrelated delayed reply cannot relabel the displayed event'); await emit(page, reply(next.requestId, { revision: 1, kind: 'FULL_TIME', state: state(1, 'FULL_TIME') })); await page.getByText('Event 2 of 2: FULL_TIME').waitFor();
   await page.getByRole('button', { name: 'Reload result', exact: true }).click(); const reload = await requestAt(page); await emit(page, reply(reload.requestId, null, 'REPLAY_UNSUPPORTED')); await page.getByRole('alert').filter({ hasText: 'REPLAY_UNSUPPORTED' }).waitFor(); assert.equal(await page.getByText(/Event 2 of 2/).count(), 1, 'unsupported result preserves the confirmed event');
-  await page.evaluate(() => { sessionStorage.setItem('subject', 'away'); window.retiredResultSocket=window.resultSocket; window.resultSocket.close(); }); await page.getByLabel('Local credential',{exact:true}).fill('second-credential'); await page.getByRole('button', { name: 'Load completed match', exact: true }).click(); await page.getByRole('status').filter({ hasText: 'Connected' }).waitFor(); assert.equal(await page.getByText('Final score').count(), 0, 'reconnect identity clears an earlier result before its new load');
+  await page.evaluate(() => { sessionStorage.setItem('subject', 'away'); window.retiredResultSocket=window.resultSocket; window.resultSocket.close(); }); await page.getByLabel('Local credential',{exact:true}).fill('second-credential'); await page.getByRole('button', { name: 'Load completed match', exact: true }).click(); await page.getByRole('status').filter({ hasText: 'Connected' }).waitFor(); assert.equal(await page.getByRole('heading', { name: 'Final score', exact: true }).count(), 0, 'reconnect identity clears an earlier result before its new load');
+  const foreignId = '87654321-4321-4321-4321-cba987654321';
+  const pendingLoad = await requestAt(page);
+  await emit(page, { ...reply(pendingLoad.requestId), result: { ...metadata, matchId: foreignId } });
+  await page.getByRole('alert').filter({ hasText: 'Invalid server response' }).waitFor();
+  assert.equal(await page.getByRole('button', { name: 'Reload result', exact: true }).isDisabled(), true);
+  await page.getByLabel('Local credential', { exact: true }).fill('credential');
+  await page.getByRole('button', { name: 'Load completed match', exact: true }).click();
+  const correctLoad = await requestAt(page); await emit(page, reply(correctLoad.requestId));
+  await page.getByRole('button', { name: 'First', exact: true }).click();
+  const pendingReplay = await requestAt(page);
+  await emit(page, { ...reply(pendingReplay.requestId, { revision: 0, kind: 'START', state: { ...state(0), matchId: foreignId } }), result: { ...metadata, matchId: foreignId } });
+  await page.getByRole('alert').filter({ hasText: 'Invalid server response' }).waitFor();
+  assert.equal(await page.getByRole('button', { name: 'First', exact: true }).isDisabled(), true);
   console.log('Mounted M3d results correlation, pending navigation, unsupported reply, and identity reconnect regression passed.');
 } finally { await contextA.close(); await contextB.close(); await browser.close(); }

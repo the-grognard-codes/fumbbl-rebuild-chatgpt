@@ -4,12 +4,14 @@ import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
 
-const out = resolve('../.notes/overhaul-analysis/verification/m3d/live');
+const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3d/live');
+const integrated = process.env.M3_INTEGRATED === '1';
+const recoveryChecks = [];
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 'chrome', headless: true });
 const contexts = await Promise.all([browser.newContext({ viewport: { width: 1440, height: 1080 } }), browser.newContext({ viewport: { width: 1440, height: 1080 } })]);
 const pages = await Promise.all(contexts.map(context => context.newPage()));
-const subjects = ['away', 'home']; // The match creator is persisted as home despite using the away credential.
+const subjects = process.env.M3_CREATOR === 'home' ? ['home', 'away'] : ['away', 'home'];
 const tokens = await Promise.all(subjects.map(subject => readFile(resolve(`../containers/local/.secrets/browser_${subject}_token`), 'utf8').then(value => value.trim())));
 const errors = [];
 
@@ -21,6 +23,7 @@ for (const page of pages) {
     window.WebSocket = class extends Native {
       constructor(...args) { super(...args); window.__m3b.socket = this; this.addEventListener('message', event => {
         const value = JSON.parse(event.data); if (['preparedMatch', 'setupState', 'matchResult'].includes(value.type)) window.__m3b.incoming.push(value);
+        if (window.__m3b.dropSetup && value.type === 'setupState') event.stopImmediatePropagation();
       }); }
       send(raw) { const value = JSON.parse(raw); if (['preparedMatch', 'setup', 'matchResult'].includes(value.type)) window.__m3b.outgoing.push(value); super.send(raw); }
     };
@@ -53,12 +56,44 @@ async function waitRevision(expected) {
   await Promise.all(pages.map(page => page.getByTestId('setup-status').filter({ hasText: `Revision ${expected} ` }).waitFor()));
   const [home, away] = await Promise.all(pages.map(state));
   assert.equal(home.revision, away.revision, 'both browser views must share the authoritative revision');
+  assert.deepEqual({ ...home, callerRole: 'home' }, { ...away, callerRole: 'home' }, 'full projected states agree except persisted caller role');
   return home;
 }
-async function choose(page, action, expected) {
-  await page.getByLabel('Server action', { exact: true }).selectOption(action.id);
-  await page.getByRole('button', { name: 'Execute action', exact: true }).click();
+async function reconnect(page) {
+  const index = pages.indexOf(page);
+  await page.getByRole('button', { name: 'Disconnect', exact: true }).press('Enter');
+  await page.getByRole('status').filter({ hasText: /^Disconnected$/ }).waitFor();
+  await page.evaluate(() => { window.__m3b.dropSetup = false; });
+  await page.getByLabel('Local credential', { exact: true }).fill(tokens[index]);
+  await page.getByRole('button', { name: 'Join setup', exact: true }).press('Enter');
+  await page.getByTestId('setup-status').waitFor();
+}
+async function submit(page, button, expected, fault = integrated) {
+  if (fault) await page.evaluate(() => { window.__m3b.dropSetup = true; });
+  await button.press('Enter');
+  if (fault) {
+    await page.waitForFunction(expected => window.__m3b.incoming.some(value => value.state?.revision === expected), expected);
+    const request = await page.evaluate(() => window.__m3b.outgoing.filter(value => value.type === 'setup' && value.operation !== 'load').at(-1));
+    const observer = pages[1 - pages.indexOf(page)];
+    await observer.getByTestId('setup-status').filter({ hasText: `Revision ${expected} ` }).waitFor();
+    const broadcasts = await observer.evaluate(expected => window.__m3b.incoming.filter(value => value.requestId === null && value.state?.revision === expected).length, expected);
+    await reconnect(page);
+    await page.getByRole('button', { name: 'Repeat last setup request', exact: true }).press('Enter');
+    await page.waitForFunction(id => window.__m3b.incoming.some(value => value.requestId === id && value.duplicate), request.requestId);
+    assert.equal(await observer.evaluate(expected => window.__m3b.incoming.filter(value => value.requestId === null && value.state?.revision === expected).length, expected), broadcasts, 'retry cannot broadcast a second mutation');
+    const stale = await raw(page, { ...request, requestId: randomUUID() });
+    assert.ok(['STALE_REVISION', 'MATCH_COMPLETED'].includes(stale.code), stale.code);
+    recoveryChecks.push({ operation: request.operation, revision: expected, lostAcknowledgement: true, reconnect: true, exactRetry: true, staleCode: stale.code });
+  }
   return waitRevision(expected);
+}
+async function choose(page, action, expected) {
+  if (integrated) {
+    const rejected = await raw(pages[1 - pages.indexOf(page)], { version: 1, type: 'setup', operation: 'action', requestId: randomUUID(), matchId, expectedRevision: expected - 1, actionId: action.id });
+    assert.equal(rejected.code, 'WRONG_ACTOR');
+  }
+  await page.getByLabel('Server action', { exact: true }).selectOption(action.id);
+  return submit(page, page.getByRole('button', { name: 'Execute action', exact: true }), expected);
 }
 
 async function arrange(view) {
@@ -74,11 +109,9 @@ async function arrange(view) {
     const x = i < 3 ? 12 : 10, y = i < 3 ? 6 + i : 1 + i;
     await page.getByLabel('Setup X', { exact: true }).fill(String(role === 'home' ? x : 25 - x));
     await page.getByLabel('Setup Y', { exact: true }).fill(String(y));
-    await page.getByRole('button', { name: 'Place on empty own-half square', exact: true }).click();
-    view = await waitRevision(view.revision + 1);
+    view = await submit(page, page.getByRole('button', { name: 'Place on empty own-half square', exact: true }), view.revision + 1, integrated && i === 0);
   }
-  await page.getByRole('button', { name: 'Confirm legal setup', exact: true }).click();
-  return waitRevision(view.revision + 1);
+  return submit(page, page.getByRole('button', { name: 'Confirm legal setup', exact: true }), view.revision + 1);
 }
 const distance = (a,b) => Math.max(Math.abs(a.x-b.x), Math.abs(a.y-b.y));
 const attemptedTurns = new Set();
@@ -124,7 +157,13 @@ try {
   for (let index=0; index<2; index++) {
     const listed = await saved(pages[index], { operation:'list' });
     let selected;
+    if (integrated) {
+      const created = await saved(pages[index], { operation: 'create', draft: draft() });
+      assert.equal(created.code, 'OK', 'integrated demo requires capacity for its own synthetic source team');
+      selected = created.document;
+    }
     for (const team of listed.teams) {
+      if (selected) break;
       const result = await saved(pages[index], { operation:'load', teamId:team.teamId });
       const d = result.document?.draft;
       if (d && d.players.length === 11 && d.players.every(p => p.positionId === 'lineman' && p.skillIds.length === 0) && d.captainId === null) { selected=result.document; break; }
@@ -134,7 +173,7 @@ try {
     await pages[index].getByRole('button',{name:'Refresh saved teams',exact:true}).click();
     await pages[index].getByLabel('Saved team',{exact:true}).selectOption(selected.teamId);
   }
-  await pages[0].getByLabel('Invite intended opponent',{exact:true}).selectOption('home');
+  await pages[0].getByLabel('Invite intended opponent',{exact:true}).selectOption(subjects[1]);
   await pages[0].getByRole('button',{name:'Create match and freeze team',exact:true}).click();
   await pages[0].getByRole('region',{name:'Authoritative prepared match'}).waitFor();
   matchId = await pages[0].getByLabel('Match ID',{exact:true}).inputValue();
@@ -145,20 +184,32 @@ try {
   await pages[0].getByRole('button',{name:'Reload authoritative match',exact:true}).click();
   await pages[0].getByRole('button',{name:'Activate setup',exact:true}).click();
   await pages[0].getByRole('link',{name:'Open match setup',exact:true}).waitFor();
+  if (integrated) {
+    const frozen = await raw(pages[0], { ...base('load'), matchId });
+    for (let index = 0; index < 2; index++) {
+      const changed = structuredClone(teams[index].draft); changed.resources.rerolls = 1;
+      const updated = await saved(pages[index], { operation: 'update', teamId: teams[index].teamId, expectedDocumentVersion: teams[index].documentVersion, draft: changed });
+      assert.equal(updated.code, 'OK');
+      const imported = structuredClone(updated.document); imported.draft.resources.rerolls = 2;
+      assert.equal((await saved(pages[index], { operation: 'import', document: imported })).code, 'OK');
+    }
+    assert.deepEqual((await raw(pages[0], { ...base('load'), matchId })).document, frozen.document, 'active frozen rosters remain byte-for-byte stable after source edits');
+  }
   await Promise.all(pages.map((page,index) => connect(page,index,`/setup?matchId=${matchId}`)));
   let view = await waitRevision(0);
+  if (integrated) { await reconnect(pages[0]); await reconnect(pages[1]); view = await waitRevision(0); }
   const checkpoints = []; console.log(`Started match ${matchId}`);
   for (let i=0; i<600 && view.phase !== 'FULL_TIME'; i++) {
     const before = view; if(i%50===0) console.log(JSON.stringify({actions:i,revision:view.revision,half:view.half,homeTurn:view.homeTurn,awayTurn:view.awayTurn,score:[view.homeScore,view.awayScore]}));
     if (view.prompt) {
-      await pages[indexFor(view.prompt.actor)].getByRole('button',{name:view.prompt.kind==='coin'?'heads':'receive',exact:true}).click();
-      view = await waitRevision(view.revision+1);
+      const chooser = pages[indexFor(view.prompt.actor)];
+      view = await submit(chooser, chooser.getByRole('button',{name:view.prompt.kind==='coin'?'heads':'receive',exact:true}), view.revision + 1);
     } else if (view.phase==='SETUP') view=await arrange(view);
     else { const action=selectAction(view); assert.ok(action, `No action at ${view.phase}/${view.turnMode}`); view=await choose(pages[indexFor(action.actor)],action,view.revision+1); }
     if (before.half !== view.half || before.homeScore !== view.homeScore || before.awayScore !== view.awayScore || view.phase==='FULL_TIME') {
       checkpoints.push({ revision:view.revision,half:view.half,drive:view.drive,phase:view.phase,homeScore:view.homeScore,awayScore:view.awayScore });
       const last = await pages[indexFor(before.actor)].evaluate(() => window.__m3b.outgoing.filter(v=>v.type==='setup' && v.operation!=='load').at(-1));
-      if (last?.expectedRevision === before.revision) {
+      if (!integrated && last?.expectedRevision === before.revision) {
         const repeated=await raw(pages[indexFor(before.actor)],last); assert.equal(repeated.code,'ACCEPTED'); assert.equal(repeated.duplicate,true); assert.equal(repeated.state.revision,view.revision);
       }
       await pages[0].screenshot({path:resolve(out,`transition-${view.revision}.png`),fullPage:true});
@@ -170,7 +221,8 @@ try {
   for (let index=0;index<2;index++) {
     const trace = await pages[index].evaluate(()=>window.__m3b);
     await writeFile(resolve(out,`gameplay-${index}.json`),JSON.stringify({incoming:trace.incoming,outgoing:trace.outgoing},null,2));
-    await pages[index].goto(`http://127.0.0.1:5173/results?matchId=${matchId}`);
+    await pages[index].getByRole('link', { name: 'Open final result and replay', exact: true }).press('Enter');
+    assert.equal(new URL(pages[index].url()).searchParams.get('matchId'), matchId);
     await pages[index].getByLabel('Local credential',{exact:true}).fill(tokens[index]);
     await pages[index].getByRole('button',{name:'Load completed match',exact:true}).click();
     await pages[index].getByRole('heading',{name:'Final score',exact:true}).waitFor();
@@ -183,7 +235,7 @@ try {
     await pages[index].screenshot({path:resolve(out,`result-${index}.png`),fullPage:true});
   }
   assert.deepEqual(metadata[0],metadata[1]);
-  await writeFile(resolve(out,'completed-match.json'),JSON.stringify({matchId,result:metadata[0],checkpoints},null,2));
+  await writeFile(resolve(out,'completed-match.json'),JSON.stringify({matchId,subjects,result:metadata[0],checkpoints,recoveryChecks},null,2));
   assert.deepEqual(errors,[]);
   console.log(JSON.stringify({pass:true,matchId,result:metadata[0],checkpoints,browser:browser.version()}));
 } finally {

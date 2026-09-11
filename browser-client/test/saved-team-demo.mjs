@@ -7,7 +7,7 @@ import { chromium } from 'playwright';
 // only this driver's generated document and identifier, never credentials/list data.
 const mode = process.argv[2] ?? 'prepare';
 if (!['prepare', 'check'].includes(mode)) throw Error('Usage: node test/saved-team-demo.mjs prepare|check');
-const output = resolve('../.notes/overhaul-analysis/verification/m2b');
+const output = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m2b');
 const artifact = resolve(output, 'saved-team-restart.json');
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 'chrome', headless: true });

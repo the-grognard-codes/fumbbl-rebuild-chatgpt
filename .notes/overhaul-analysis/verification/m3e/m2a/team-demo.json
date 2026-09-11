@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "browser": "152.0.7977.83",
+  "validTotal": 700000,
+  "overBudgetTotal": 1250000,
+  "negativeWireCases": [
+    "claimed-total",
+    "unknown-version",
+    "duplicate-id",
+    "duplicate-slot",
+    "unknown-position",
+    "unknown-skill",
+    "fraction",
+    "oversized-draft"
+  ],
+  "noPixi": true,
+  "errors": []
+}

@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
 
-const out = resolve('../.notes/overhaul-analysis/verification/m3c/live');
+const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3c/live');
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 'chrome', headless: true });
 const contexts = await Promise.all([browser.newContext({ viewport: { width: 1440, height: 1080 } }), browser.newContext({ viewport: { width: 1440, height: 1080 } })]);
@@ -124,7 +124,9 @@ function unmarkedSelect(view) {
     const marker = action.id.indexOf('select-');
     if (marker < 0) return false;
     const player = view.players.find(item => item.id === action.id.slice(marker + 'select-'.length));
-    return player && player.x !== null && !view.players.some(other => other.role !== action.actor && other.x !== null
+    // This driver's guaranteed movement check uses a non-Ogre from its fixed draft.
+    // Ogre activation can legitimately pause for Bone Head before any displacement.
+    return player && draft().players[player.slot - 1].positionId !== 'ogre' && player.x !== null && !view.players.some(other => other.role !== action.actor && other.x !== null
       && Math.max(Math.abs(player.x - other.x), Math.abs(player.y - other.y)) <= 1);
   });
 }

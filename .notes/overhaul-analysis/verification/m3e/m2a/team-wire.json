@@ -1,0 +1,1868 @@
+{
+  "incoming": [
+    {
+      "type": "connected"
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "d2db3424-0812-4f39-b4fc-4fb6db64be39",
+      "status": "accepted",
+      "code": "JOINED",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "snapshot",
+      "revision": 0,
+      "matchId": "1acf3ad2-b348-433c-adee-45e3c278762b",
+      "actor": "home",
+      "players": [
+        {
+          "id": "home-runner",
+          "role": "home",
+          "x": 7,
+          "y": 7,
+          "movementUsed": 0,
+          "movementAllowance": 6,
+          "state": "other"
+        },
+        {
+          "id": "away-runner",
+          "role": "away",
+          "x": 8,
+          "y": 7,
+          "movementUsed": 0,
+          "movementAllowance": 6,
+          "state": "other"
+        }
+      ],
+      "ball": {
+        "x": 12,
+        "y": 7
+      },
+      "turnOwner": "home",
+      "prompt": {
+        "id": "1acf3ad2-b348-433c-adee-45e3c278762b-choice-0",
+        "type": "block",
+        "actor": "home",
+        "revision": 0,
+        "options": [
+          {
+            "id": "die-0",
+            "label": "Both Down"
+          }
+        ]
+      },
+      "resources": {
+        "home": {
+          "rerolls": 0,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        },
+        "away": {
+          "rerolls": 0,
+          "rerollUsed": false,
+          "blitzUsed": false,
+          "passUsed": false,
+          "handOverUsed": false,
+          "foulUsed": false
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "catalog",
+      "requestId": "636f2eb2-98e1-4eaa-bfba-7280dd6885fa",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "rosterId": "human",
+      "name": "Human",
+      "presetId": "human-exhibition-1150",
+      "budget": 1150000,
+      "minPlayers": 11,
+      "maxPlayers": 16,
+      "skillPoints": 8,
+      "maxSecondary": 2,
+      "maxElite": 4,
+      "league": "Old World Classic",
+      "specialRule": "Team Captain",
+      "positions": [
+        {
+          "id": "lineman",
+          "name": "Human Lineman",
+          "maximum": 16,
+          "cost": 50000,
+          "ma": 6,
+          "st": 3,
+          "ag": 3,
+          "pa": 4,
+          "av": 9,
+          "role": "Lineman",
+          "race": "Human",
+          "primary": "G",
+          "secondary": "ADS",
+          "baseSkills": [],
+          "canCaptain": true
+        },
+        {
+          "id": "halfling",
+          "name": "Halfling Hopeful",
+          "maximum": 3,
+          "cost": 30000,
+          "ma": 5,
+          "st": 2,
+          "ag": 3,
+          "pa": 4,
+          "av": 7,
+          "role": "Lineman",
+          "race": "Halfling",
+          "primary": "A",
+          "secondary": "DGS",
+          "baseSkills": [
+            {
+              "id": "dodge",
+              "value": 0
+            },
+            {
+              "id": "right-stuff",
+              "value": 0
+            },
+            {
+              "id": "stunty",
+              "value": 0
+            }
+          ],
+          "canCaptain": true
+        },
+        {
+          "id": "catcher",
+          "name": "Human Catcher",
+          "maximum": 2,
+          "cost": 75000,
+          "ma": 8,
+          "st": 3,
+          "ag": 3,
+          "pa": 4,
+          "av": 8,
+          "role": "Catcher",
+          "race": "Human",
+          "primary": "AG",
+          "secondary": "DPS",
+          "baseSkills": [
+            {
+              "id": "catch",
+              "value": 0
+            },
+            {
+              "id": "dodge",
+              "value": 0
+            }
+          ],
+          "canCaptain": true
+        },
+        {
+          "id": "thrower",
+          "name": "Human Thrower",
+          "maximum": 2,
+          "cost": 75000,
+          "ma": 6,
+          "st": 3,
+          "ag": 3,
+          "pa": 3,
+          "av": 9,
+          "role": "Thrower",
+          "race": "Human",
+          "primary": "GP",
+          "secondary": "ADS",
+          "baseSkills": [
+            {
+              "id": "pass",
+              "value": 0
+            },
+            {
+              "id": "sure-hands",
+              "value": 0
+            }
+          ],
+          "canCaptain": true
+        },
+        {
+          "id": "blitzer",
+          "name": "Human Blitzer",
+          "maximum": 2,
+          "cost": 85000,
+          "ma": 7,
+          "st": 3,
+          "ag": 3,
+          "pa": 4,
+          "av": 9,
+          "role": "Blitzer",
+          "race": "Human",
+          "primary": "GS",
+          "secondary": "AD",
+          "baseSkills": [
+            {
+              "id": "block",
+              "value": 0
+            },
+            {
+              "id": "tackle",
+              "value": 0
+            }
+          ],
+          "canCaptain": true
+        },
+        {
+          "id": "ogre",
+          "name": "Ogre",
+          "maximum": 1,
+          "cost": 140000,
+          "ma": 5,
+          "st": 5,
+          "ag": 4,
+          "pa": 5,
+          "av": 10,
+          "role": "Big Guy",
+          "race": "Ogre",
+          "primary": "S",
+          "secondary": "AG",
+          "baseSkills": [
+            {
+              "id": "bone-head",
+              "value": 0
+            },
+            {
+              "id": "loner",
+              "value": 3
+            },
+            {
+              "id": "mighty-blow",
+              "value": 1
+            },
+            {
+              "id": "thick-skull",
+              "value": 0
+            },
+            {
+              "id": "throw-team-mate",
+              "value": 0
+            }
+          ],
+          "canCaptain": false
+        }
+      ],
+      "skills": [
+        {
+          "id": "block",
+          "name": "Block",
+          "category": "G",
+          "selectable": true,
+          "elite": true
+        },
+        {
+          "id": "dodge",
+          "name": "Dodge",
+          "category": "A",
+          "selectable": true,
+          "elite": true
+        },
+        {
+          "id": "catch",
+          "name": "Catch",
+          "category": "A",
+          "selectable": true,
+          "elite": false
+        },
+        {
+          "id": "pass",
+          "name": "Pass",
+          "category": "P",
+          "selectable": true,
+          "elite": false
+        },
+        {
+          "id": "sure-hands",
+          "name": "Sure Hands",
+          "category": "G",
+          "selectable": true,
+          "elite": false
+        },
+        {
+          "id": "tackle",
+          "name": "Tackle",
+          "category": "G",
+          "selectable": true,
+          "elite": false
+        },
+        {
+          "id": "pro",
+          "name": "Pro",
+          "category": "G",
+          "selectable": true,
+          "elite": false
+        },
+        {
+          "id": "right-stuff",
+          "name": "Right Stuff",
+          "category": "T",
+          "selectable": false,
+          "elite": false
+        },
+        {
+          "id": "stunty",
+          "name": "Stunty",
+          "category": "T",
+          "selectable": false,
+          "elite": false
+        },
+        {
+          "id": "bone-head",
+          "name": "Bone Head",
+          "category": "T",
+          "selectable": false,
+          "elite": false
+        },
+        {
+          "id": "loner",
+          "name": "Loner",
+          "category": "T",
+          "selectable": false,
+          "elite": false
+        },
+        {
+          "id": "mighty-blow",
+          "name": "Mighty Blow",
+          "category": "S",
+          "selectable": false,
+          "elite": true
+        },
+        {
+          "id": "thick-skull",
+          "name": "Thick Skull",
+          "category": "S",
+          "selectable": false,
+          "elite": false
+        },
+        {
+          "id": "throw-team-mate",
+          "name": "Throw Team-Mate",
+          "category": "T",
+          "selectable": false,
+          "elite": false
+        }
+      ],
+      "resources": [
+        {
+          "id": "rerolls",
+          "name": "Team re-rolls",
+          "cost": 50000,
+          "maximum": 8
+        },
+        {
+          "id": "assistantCoaches",
+          "name": "Assistant coaches",
+          "cost": 10000,
+          "maximum": 6
+        },
+        {
+          "id": "cheerleaders",
+          "name": "Cheerleaders",
+          "cost": 10000,
+          "maximum": 6
+        },
+        {
+          "id": "apothecary",
+          "name": "Apothecary",
+          "cost": 50000,
+          "maximum": 1
+        },
+        {
+          "id": "dedicatedFans",
+          "name": "Dedicated fans",
+          "cost": 5000,
+          "maximum": 3
+        }
+      ],
+      "unsupported": "All other rosters, skills for purchase, star players, inducements, progression and match creation are unsupported. Unspent budget is lost."
+    },
+    {
+      "version": 1,
+      "type": "savedTeam",
+      "requestId": "540a0a74-f5a2-4546-a0aa-b9929077eda6",
+      "code": "OK",
+      "document": null,
+      "versionStatus": null,
+      "validation": null,
+      "teams": [
+        {
+          "teamId": "38ee0d41-ff8e-47ce-acc6-d087d1e736fd",
+          "documentVersion": 3,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "4402d89c-c8ee-4577-834b-bc65eafdae53",
+          "documentVersion": 2,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "4a23a72c-847b-4749-aef3-b98226984ea8",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "51a69cea-a064-4f3e-8be0-f2dba9b08942",
+          "documentVersion": 2,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "52156908-6931-43af-a38a-1b3d1f10a52e",
+          "documentVersion": 3,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "5d548d1d-3957-4bfe-b695-49391b791656",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "6e05e701-753c-436a-b651-37993b0c48f4",
+          "documentVersion": 2,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "75815776-8412-46d4-a31a-cb489e808c52",
+          "documentVersion": 3,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "80a339ef-5635-4ccd-984f-5c6aa9a1eee1",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "814b8fbe-55e5-4f69-9a2c-8b8cfc475176",
+          "documentVersion": 2,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "859d1154-fb79-4335-aae0-0494afce3357",
+          "documentVersion": 3,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "881f28d6-6104-469a-a4f6-fa1e45c5b1ba",
+          "documentVersion": 3,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "8956ba9e-fd8f-4874-a397-63783f002261",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "8b7f4b16-f63a-444f-b200-ff78886ec1f6",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "8cca5414-9930-4d0c-b018-c8e8a41679cc",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "8db8e6c4-c8bd-457e-b16b-7466c8dc9670",
+          "documentVersion": 3,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "b38fa2a1-d6c9-4c70-98bb-26a371588582",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "b96294b2-4093-4694-a4d1-9cb2d9bb16bb",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "c1dfc47b-af7c-498c-a22e-efaf1c7ac7e3",
+          "documentVersion": 2,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "cd8805cb-126c-4596-91c9-64f4cd84b0d4",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "f083cfe1-ec10-41f3-b0c2-b09e00f8cea9",
+          "documentVersion": 2,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "fb6d0783-8dbd-41e5-b2f6-2ef00d17c830",
+          "documentVersion": 3,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        },
+        {
+          "teamId": "fd03a82f-33c0-434b-a132-18a856d0f953",
+          "documentVersion": 1,
+          "catalogVersion": "bb2025-human-2026-09-08.1"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "51df5cce-7020-4139-960c-35b141748418",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": false,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [
+        {
+          "code": "PLAYER_COUNT",
+          "path": "players",
+          "text": "A draft must contain 11 to 16 players."
+        }
+      ],
+      "total": 0
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "d93cb857-6b78-4c32-9f05-0bb4de829e0d",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": true,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [],
+      "total": 700000
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "fbb60c3c-5c8f-4cb3-81f0-35515a511bb7",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": false,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [
+        {
+          "code": "SKILL_INELIGIBLE",
+          "path": "players[0]",
+          "text": "This skill is unsupported or unavailable to this position."
+        }
+      ],
+      "total": 700000
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "claimed-total",
+      "status": "rejected",
+      "code": "MALFORMED_TEAM_REQUEST",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "unknown-version",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": false,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [
+        {
+          "code": "CATALOG_VERSION",
+          "path": "catalogVersion",
+          "text": "Unsupported catalog version."
+        }
+      ],
+      "total": null
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "duplicate-id",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": false,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [
+        {
+          "code": "DUPLICATE_PLAYER",
+          "path": "players[1]",
+          "text": "Player IDs must be unique."
+        }
+      ],
+      "total": 700000
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "duplicate-slot",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": false,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [
+        {
+          "code": "DUPLICATE_SLOT",
+          "path": "players[1]",
+          "text": "Player slots must be unique."
+        }
+      ],
+      "total": 700000
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "unknown-position",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": false,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [
+        {
+          "code": "POSITION",
+          "path": "players[0]",
+          "text": "Unknown or unsupported position."
+        },
+        {
+          "code": "CAPTAIN",
+          "path": "captainId",
+          "text": "Captain must reference a player in this draft."
+        }
+      ],
+      "total": null
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "unknown-skill",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": false,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [
+        {
+          "code": "SKILL",
+          "path": "players[1]",
+          "text": "Unknown skill identifier."
+        }
+      ],
+      "total": 700000
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "fraction",
+      "status": "rejected",
+      "code": "MALFORMED_TEAM_REQUEST",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "result",
+      "requestId": "oversized-draft",
+      "status": "rejected",
+      "code": "MALFORMED_TEAM_REQUEST",
+      "revision": 0,
+      "duplicate": false
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "b646733e-b596-4f30-aec9-291b0572b838",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": true,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [],
+      "total": 700000
+    },
+    {
+      "version": 1,
+      "type": "teamValidation",
+      "requestId": "6f8a91ff-0ea9-4e49-9f2a-5db891a3b1cd",
+      "catalogVersion": "bb2025-human-2026-09-08.1",
+      "ruleset": "BB2025",
+      "valid": false,
+      "budget": 1150000,
+      "skillPoints": 0,
+      "messages": [
+        {
+          "code": "OVER_BUDGET",
+          "path": "resources",
+          "text": "Total exceeds the preset budget."
+        }
+      ],
+      "total": 1250000
+    }
+  ],
+  "outgoing": [
+    {
+      "version": 1,
+      "type": "catalog",
+      "requestId": "636f2eb2-98e1-4eaa-bfba-7280dd6885fa"
+    },
+    {
+      "version": 1,
+      "type": "savedTeam",
+      "requestId": "540a0a74-f5a2-4546-a0aa-b9929077eda6",
+      "operation": "list"
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "51df5cce-7020-4139-960c-35b141748418",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": null,
+        "players": [],
+        "resources": {
+          "rerolls": 0,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 0,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "d93cb857-6b78-4c32-9f05-0bb4de829e0d",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "fbb60c3c-5c8f-4cb3-81f0-35515a511bb7",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": [
+              "pass"
+            ]
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "claimed-total",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        },
+        "total": 1
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "unknown-version",
+      "draft": {
+        "catalogVersion": "unknown",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "duplicate-id",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "duplicate-slot",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "unknown-position",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "fixture.lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "unknown-skill",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": [
+              "unknown"
+            ]
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "fraction",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 0.5,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "oversized-draft",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "b646733e-b596-4f30-aec9-291b0572b838",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 2,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    },
+    {
+      "version": 1,
+      "type": "validateTeam",
+      "requestId": "6f8a91ff-0ea9-4e49-9f2a-5db891a3b1cd",
+      "draft": {
+        "catalogVersion": "bb2025-human-2026-09-08.1",
+        "ruleset": "BB2025",
+        "rosterId": "human",
+        "presetId": "human-exhibition-1150",
+        "captainId": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+        "players": [
+          {
+            "id": "3c762618-9dc5-41fe-9b03-a69d3d1434fe",
+            "slot": 1,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "eaa51b58-9aaf-48d3-b07c-73801724819f",
+            "slot": 2,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4b8ac196-ec8f-4b1e-8d20-bc0c2d1796be",
+            "slot": 3,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "52c25971-64a5-44c9-a20a-50a5f24932b3",
+            "slot": 4,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "4eaec585-5a11-4e02-8be1-dd56217f06ea",
+            "slot": 5,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "479978f2-6ad0-4220-86c7-d3e51e6173f2",
+            "slot": 6,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c73f11bb-9be6-4865-be63-db3f93b6c6c9",
+            "slot": 7,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "ab1fb3ef-0161-4ea8-94d2-d066eaaacf22",
+            "slot": 8,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "33732bc9-dee9-4d1e-9880-176eca1b1ef6",
+            "slot": 9,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "78b0ab25-351b-4bee-92d9-2f8965ae2749",
+            "slot": 10,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "19f6a08b-4fcd-453d-8559-e2aeeb607c80",
+            "slot": 11,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "8bb52244-7316-4cdf-aa59-4840114d279d",
+            "slot": 12,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "c9857ddb-8caa-4c6b-aeca-7a76a5f4768e",
+            "slot": 13,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "bddd0794-803f-42cb-9b84-4fd0e89851b2",
+            "slot": 14,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "557b32d5-f74d-419d-b64f-e1cdc65239a9",
+            "slot": 15,
+            "positionId": "lineman",
+            "skillIds": []
+          },
+          {
+            "id": "edcf1049-4ac0-422f-a9fb-c4046a958d4f",
+            "slot": 16,
+            "positionId": "lineman",
+            "skillIds": []
+          }
+        ],
+        "resources": {
+          "rerolls": 8,
+          "assistantCoaches": 0,
+          "cheerleaders": 0,
+          "apothecary": 1,
+          "dedicatedFans": 0
+        }
+      }
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
 
 const mode = process.argv[2] ?? 'prepare';
-const out = resolve('../.notes/overhaul-analysis/verification/m3a');
+const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3a');
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const contexts = await Promise.all([browser.newContext({ viewport: { width: 1440, height: 1080 } }), browser.newContext({ viewport: { width: 1440, height: 1080 } })]);

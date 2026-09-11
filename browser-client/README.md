@@ -1,5 +1,10 @@
 # Local browser prototype — movement, choices and robustness
 
+**Current product flow:** saved teams ? invited preparation ? setup/play ?
+completed result and private replay. See [M3e connection and keyboard guide](disconnect.md)
+and [M2/M3 acceptance](../.notes/overhaul-analysis/verification/m3e/README.md).
+The synthetic movement/choice board below is a separate diagnostic route.
+
 TypeScript + React DOM controls + PixiJS 8 WebGL board over the Java BB2025 engine.
 This is a synthetic two-token fixture, not a playable full match or legal roster.
 Home starts the turn; the engine assigns each block choice to home or away.
