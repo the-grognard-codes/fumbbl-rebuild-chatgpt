@@ -1,0 +1,68 @@
+# Standalone R2 project: dedicated new database/backup volumes and networks.
+# Do not combine with compose.yaml or override the project name.
+name: ffb-local-r2b
+services:
+  database:
+    image: mariadb:11.8.9@sha256:2439dcd7d14010ecd1ff7a4e1c5abe8e208c34fe35290744deeeaac3569043c3
+    command: ["--max-allowed-packet=64M"]
+    environment:
+      MARIADB_DATABASE: ffb_local
+      MARIADB_USER: ffb_local
+      MARIADB_PASSWORD_FILE: /run/secrets/db_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    secrets: [db_password, db_root_password]
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+    networks: [isolated]
+  server:
+    image: ffb-server:3.4.0-r2.2
+    build:
+      context: ../..
+      dockerfile: containers/local/Dockerfile
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:22230:22227"
+    secrets: [db_password, admin_password, coach_password, browser_home_token, browser_away_token]
+    volumes:
+      - ./server.ini:/config/server.ini:ro
+      - ./fixtures/teams:/app/teams:ro
+      - ./fixtures/rosters:/app/rosters:ro
+      - backup:/data/backup
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    stop_grace_period: 30s
+    healthcheck:
+      test: [CMD, java, -cp, "FantasyFootballServer.jar:lib/*", com.fumbbl.ffb.server.local.LocalAcceptanceDemo, ready]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks: [isolated, loopback]
+networks:
+  isolated:
+    internal: true
+  loopback:
+volumes:
+  database:
+  backup:
+secrets:
+  db_password:
+    file: ./.secrets/db_password
+  db_root_password:
+    file: ./.secrets/db_root_password
+  admin_password:
+    file: ./.secrets/admin_password
+  coach_password:
+    file: ./.secrets/coach_password
+  browser_home_token:
+    file: ./.secrets/browser_home_token
+  browser_away_token:
+    file: ./.secrets/browser_away_token

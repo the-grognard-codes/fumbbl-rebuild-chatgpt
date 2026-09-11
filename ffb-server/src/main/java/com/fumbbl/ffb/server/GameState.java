@@ -167,6 +167,9 @@ public class GameState implements IModelChangeObserver, IJsonSerializable {
 		return (int) fCommandNrGenerator.generateId();
 	}
 
+	/** Recovery envelope only; the existing native/replay JSON contract is unchanged. */
+	public long getLastCommandNr() { return fCommandNrGenerator.lastId(); }
+
 	public void initCommandNrGenerator(long pLastId) {
 		fCommandNrGenerator = new IdGenerator(pLastId);
 	}

@@ -96,3 +96,14 @@ directions passed, including lost acknowledgements, prompts, setup/drive/half/
 completion reconnect and exact retry. See [M3e assessment](../.notes/overhaul-analysis/verification/m3e/README.md).
 In-progress JVM recovery and completed-session capacity release are M4 handoff
 items; same-JVM browser reconnect and committed result durability are supported.
+
+## M4 R2 recovery characterization
+
+The frozen catalog and native action families above remain unchanged. Format-2
+recoverable sessions sort projected actions by role/id to keep presentation stable
+across JVMs; action identity and legality still come from the native engine.
+Recovery tests cover native stack/dialog, private dice continuation, request
+history and both role projections, including a defending-team block decision.
+Seven real kills verify pre-match, placement, defending decision, drive, half and
+both terminal persistence boundaries. See [R2 evidence](../.notes/overhaul-analysis/verification/r2/README.md)
+for the exact fixtures and limits. Completed-session capacity release remains R4 work.

@@ -10,10 +10,12 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** Invoked on the existing communication worker. No recovery or reconstruction of activated engines. */
+/** Invoked on the existing communication worker; optional private checkpoints preserve activated engines. */
 public final class SetupApplication {
 	private final FantasyFootballServer server;
 	private final MatchService matches;
+	private final RecoveryRepository recovery;
+	private final Map<String, Long> generations = new LinkedHashMap<>();
 	private final Map<String, SetupSession> sessions = new LinkedHashMap<>();
 	private final Map<String, String> pendingActivations = new LinkedHashMap<>();
 	private long engineId = -2;
@@ -22,7 +24,11 @@ public final class SetupApplication {
 	public boolean takeCompletionBroadcast(String matchId) { return completionBroadcasts.remove(matchId); }
 
 	public SetupApplication(FantasyFootballServer server, MatchService matches) {
-		this.server = server; this.matches = matches;
+		this(server, matches, null);
+	}
+
+	public SetupApplication(FantasyFootballServer server, MatchService matches, RecoveryRepository recovery) {
+		this.server = server; this.matches = matches; this.recovery = recovery;
 	}
 
 	public JsonObject activate(String owner, String text) {
@@ -36,6 +42,7 @@ public final class SetupApplication {
 			matchId = request.get("matchId").asString();
 			key = owner + "|" + request.get("requestId").asString() + "|" + request.get("expectedRevision").asInt();
 		} catch (RuntimeException invalid) { return new MatchJson().handle(matches, owner, text); }
+		if (recovery != null) return activateRecoverable(owner, text, request, matchId);
 		// Keep resident engines bounded; never evict a live lifetime and permit reinitialization.
 		try {
 			MatchDocument document = matches.load(owner, matchId).document;
@@ -70,6 +77,58 @@ public final class SetupApplication {
 		return response;
 	}
 
+	private JsonObject activateRecoverable(String owner, String text, JsonObject request, String id) {
+		try {
+			MatchDocument document = matches.load(owner, id).document;
+			if (document.lifecycle == MatchDocument.Lifecycle.AWAITING_SETUP
+				&& document.documentVersion == request.get("expectedRevision").asInt()
+				&& request.get("requestId").asString().matches("[A-Za-z0-9_-]{1,100}")
+				&& document.request(owner, request.get("requestId").asString()) == null) {
+				if (sessions.size() >= 32 && !sessions.containsKey(id)) return preparedFailure(request, "ACTIVATION_LIMIT");
+				RecoveryRepository.Record staged = recovery.find(id);
+				if (staged == null) {
+					// Persist an unpublished initial checkpoint first. Activation can then be retried after any crash.
+					SetupSession initial = new SetupSession(server, document, engineId--, true);
+					if (!recovery.save(new RecoveryRepository.Record(id, 1, initial.recoveryArtifact()), 0))
+						return preparedFailure(request, "CONFLICT");
+				} else new SetupSession(server, document, staged.json); // Reject incompatible staged state before activation.
+			}
+			JsonObject response = new MatchJson().handle(matches, owner, text);
+			if ("ACCEPTED".equals(response.getString("code", null)) && !sessions.containsKey(id))
+				restore(id, matches.load(owner, id).document);
+			return response;
+		} catch (RecoveryRepository.OutcomeUnknown unknown) { return preparedFailure(request, "MATCH_OUTCOME_UNKNOWN"); }
+		catch (SQLException unavailable) { return preparedFailure(request, "PERSISTENCE_FAILED"); }
+		catch (MatchService.Failure rejected) { return preparedFailure(request, rejected.code); }
+		catch (RuntimeException invalid) { return preparedFailure(request, "RECOVERY_CORRUPT"); }
+	}
+
+	private SetupSession restore(String id, MatchDocument document) throws SQLException {
+		RecoveryRepository.Record record = recovery.find(id);
+		if (record == null) return null; // Never initialize an already active pre-R2 match.
+		if (sessions.size() >= 32) throw new MatchService.Failure("ACTIVATION_LIMIT");
+		SetupSession session = new SetupSession(server, document, record.json);
+		sessions.put(id, session);
+		generations.put(id, record.generation);
+		return session;
+	}
+
+	private void checkpoint(String owner, String id, SetupSession session, String before) throws SQLException {
+		if (recovery == null) return;
+		try {
+			matches.load(owner, id); // Reauthorize before the durable mutation as well as before engine execution.
+			String after = session.recoveryArtifact();
+			if (after.equals(before)) return;
+			long generation = generations.get(id);
+			if (!recovery.save(new RecoveryRepository.Record(id, generation + 1, after), generation))
+				throw new MatchService.Failure("RECOVERY_CONFLICT");
+			generations.put(id, generation + 1);
+		} catch (SQLException | RuntimeException failure) {
+			sessions.remove(id); generations.remove(id); // Reconcile the durable outcome before any further use.
+			throw failure;
+		}
+	}
+
 	private JsonObject preparedFailure(JsonObject request, String code) {
 		return new JsonObject().add("version", 1).add("type", "preparedMatch").add("requestId", request.get("requestId"))
 			.add("code", code).add("duplicate", false).add("callerRole", JsonValue.NULL)
@@ -85,6 +144,8 @@ public final class SetupApplication {
 			String role = owner.equals(document.home.owner) ? "home"
 				: document.away != null && owner.equals(document.away.owner) ? "away" : null;
 			if (role == null) throw new MatchService.Failure("NOT_FOUND");
+			if (recovery != null && !sessions.containsKey(id)
+				&& (document.lifecycle == MatchDocument.Lifecycle.ACTIVATED || document.lifecycle == MatchDocument.Lifecycle.COMPLETED)) restore(id, document);
 			if (document.lifecycle == MatchDocument.Lifecycle.COMPLETED && !sessions.containsKey(id)) {
                 if (!"load".equals(request.getString("operation", null))) throw new MatchService.Failure("MATCH_COMPLETED");
                 JsonObject artifact = JsonObject.readFrom(matches.result(owner, id).json());
@@ -96,15 +157,24 @@ public final class SetupApplication {
             if (document.lifecycle != MatchDocument.Lifecycle.COMPLETED && document.lifecycle != MatchDocument.Lifecycle.ACTIVATED) throw new MatchService.Failure("NOT_ACTIVATED");
 			SetupSession session = sessions.get(id);
 			if (session == null) throw new MatchService.Failure("SESSION_UNAVAILABLE");
-			JsonObject response = "load".equals(request.getString("operation", null))
-                ? session.reply(requestId, "ACCEPTED", false, role) : session.apply(role, request);
+			String before = recovery == null ? null : session.recoveryArtifact();
+			JsonObject response;
+			try {
+				response = "load".equals(request.getString("operation", null))
+					? session.reply(requestId, "ACCEPTED", false, role) : session.apply(role, request);
+			} catch (RuntimeException failure) {
+				checkpoint(owner, id, session, before);
+				throw failure;
+			}
+			checkpoint(owner, id, session, before);
             // Persist before acknowledging terminal success. A retry/load reconciles without executing the engine again.
             if (session.isComplete()) {
                 matches.complete(owner, id, session.completedMatch());
                 if (completionAcknowledged.add(id)) completionBroadcasts.add(id);
             }
             return response;
-		} catch (MatchService.OutcomeUnknown failure) { return failure(requestId, "MATCH_OUTCOME_UNKNOWN"); }
+		} catch (RecoveryRepository.OutcomeUnknown failure) { return failure(requestId, "MATCH_OUTCOME_UNKNOWN"); }
+		catch (MatchService.OutcomeUnknown failure) { return failure(requestId, "MATCH_OUTCOME_UNKNOWN"); }
         catch (MatchService.Failure failure) { return failure(requestId, failure.code); }
 		catch (SQLException failure) { return failure(requestId, "PERSISTENCE_FAILED"); }
 		catch (RuntimeException failure) { return failure(requestId, "INVALID_REQUEST"); }

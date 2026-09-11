@@ -35,3 +35,9 @@ test('illegal formation replies and retries preserve their authoritative correct
   assert.equal(decodeSetupState(JSON.stringify({ ...response, code: 'SESSION_UNAVAILABLE', state: null })).state, null);
   assert.throws(() => decodeSetupState(JSON.stringify({ ...response, code: 'SESSION_UNAVAILABLE' })));
 });
+test('accepts bounded recovery error codes without accepting unknown codes', () => {
+  for (const code of ['RECOVERY_UNSUPPORTED', 'RECOVERY_CORRUPT', 'RECOVERY_CONFLICT', 'RECOVERY_LIMIT', 'ACTIVATION_LIMIT']) {
+    assert.equal(decodeSetupState(JSON.stringify({ ...response, code, state: null })).code, code);
+  }
+  assert.throws(() => decodeSetupState(JSON.stringify({ ...response, code: 'RECOVERY_UNKNOWN', state: null })));
+});

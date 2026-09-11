@@ -9,7 +9,7 @@ WORKDIR /out
 RUN jar xf /source/ffb-server/target/ffb-server.zip && rm server.ini
 
 FROM eclipse-temurin:21.0.11_10-jre-jammy@sha256:9af01c30e85b5a9b15fe249a84fb6dcb19e06ee84fbf23ea2d116b0e195c2ce9
-LABEL org.opencontainers.image.version="3.4.0-r1.1"
+LABEL org.opencontainers.image.version="3.4.0-r2.2"
 WORKDIR /app
 COPY --from=build /out/ /app/
 RUN mkdir -p /data/backup /app/htdocs && chown -R 10001:10001 /data /app

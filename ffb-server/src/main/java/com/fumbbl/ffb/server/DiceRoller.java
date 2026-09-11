@@ -24,6 +24,10 @@ public class DiceRoller {
 
 	private final GameState fGameState;
 	private final Map<String, List<DiceCategory>> testRolls;
+	private java.util.function.IntUnaryOperator recoveryRoll;
+
+	/** Opt-in only for a newly created or restored versioned recovery lifetime. */
+	public void setRecoveryRoll(java.util.function.IntUnaryOperator roll) { recoveryRoll = roll; }
 
 
 
@@ -47,7 +51,7 @@ public class DiceRoller {
 				}
 			}
 		}
-		return fortuna.getDieRoll(pType);
+		return recoveryRoll == null ? fortuna.getDieRoll(pType) : recoveryRoll.applyAsInt(pType);
 	}
 	
 	public int rollDice(DiceCategory category) {	

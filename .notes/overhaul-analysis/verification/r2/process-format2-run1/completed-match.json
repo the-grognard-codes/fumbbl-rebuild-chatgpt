@@ -1,0 +1,47 @@
+{
+  "matchId": "7d039e43-eb99-3eb1-8bbd-c457a4b16876",
+  "subjects": [
+    "away",
+    "home"
+  ],
+  "result": {
+    "awayScore": 0,
+    "catalogVersion": "bb2025-human-2026-09-08.1",
+    "engineVersion": "ffb-3.4.0-bb2025-m3d.1",
+    "finalRevision": 142,
+    "formatVersion": 1,
+    "homeScore": 1,
+    "matchId": "7d039e43-eb99-3eb1-8bbd-c457a4b16876",
+    "presetId": "human-exhibition-1150",
+    "presetVersion": "bb2025-human-2026-09-08.1",
+    "ruleset": "BB2025",
+    "eventCount": 143
+  },
+  "checkpoints": [
+    {
+      "revision": 65,
+      "half": 1,
+      "drive": 2,
+      "phase": "SETUP",
+      "homeScore": 1,
+      "awayScore": 0
+    },
+    {
+      "revision": 100,
+      "half": 2,
+      "drive": 3,
+      "phase": "SETUP",
+      "homeScore": 1,
+      "awayScore": 0
+    },
+    {
+      "revision": 142,
+      "half": 2,
+      "drive": 3,
+      "phase": "FULL_TIME",
+      "homeScore": 1,
+      "awayScore": 0
+    }
+  ],
+  "recoveryChecks": []
+}

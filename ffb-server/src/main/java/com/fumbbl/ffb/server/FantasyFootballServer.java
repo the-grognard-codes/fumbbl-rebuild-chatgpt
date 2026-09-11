@@ -242,7 +242,8 @@ public class FantasyFootballServer implements IFactorySource {
 					browserMatch.setSavedTeams(new BrowserSavedTeamJson(savedTeamService));
 					browserMatch.setPreparedMatches(new MatchService(new JdbcMatchRepository(
 						() -> java.sql.DriverManager.getConnection(dbConnectionManager.getDbUrl(), dbConnectionManager.getDbUser(), dbConnectionManager.getDbPassword())),
-						savedTeamService, catalog));
+						savedTeamService, catalog), new com.fumbbl.ffb.server.match.JdbcRecoveryRepository(
+						() -> java.sql.DriverManager.getConnection(dbConnectionManager.getDbUrl(), dbConnectionManager.getDbUser(), dbConnectionManager.getDbPassword())));
 					context.addServlet(new ServletHolder(new BrowserMatchServlet(this, browserMatch)), "/browser/v1/*");
 				}
 				ServletHolder fileServletHolder = new ServletHolder(new FileServlet(this));

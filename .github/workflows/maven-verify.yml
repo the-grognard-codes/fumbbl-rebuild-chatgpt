@@ -18,7 +18,8 @@ concurrency:
 
 jobs:
   baseline:
-    name: Java 8 characterization baseline
+    # Keep the established required-check context used by PR branch protection.
+    name: Validate
     runs-on: ubuntu-24.04
     timeout-minutes: 30
 

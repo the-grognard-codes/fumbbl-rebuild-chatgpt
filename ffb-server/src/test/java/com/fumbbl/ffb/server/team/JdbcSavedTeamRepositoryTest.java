@@ -63,4 +63,14 @@ class JdbcSavedTeamRepositoryTest {
 		when(rows.next()).thenReturn(true); when(rows.getInt(1)).thenReturn(2, 50);
 		assertThrows(SQLException.class, () -> repository.insert(record)); verify(statement, never()).executeUpdate(); verify(connection).rollback();
 	}
+	@Test
+	void recoverySchemaPermitsSavedTeamCreationAndFutureSchemaStillFailsClosed() throws Exception {
+		ResultSet rows = mock(ResultSet.class); when(statement.executeQuery()).thenReturn(rows);
+		when(rows.next()).thenReturn(true); when(rows.getInt(1)).thenReturn(5, 0);
+		when(statement.executeUpdate()).thenReturn(1);
+		repository.insert(record); verify(connection).commit();
+		setup(); rows = mock(ResultSet.class); when(statement.executeQuery()).thenReturn(rows);
+		when(rows.next()).thenReturn(true); when(rows.getInt(1)).thenReturn(6);
+		assertThrows(SQLException.class, () -> repository.insert(record)); verify(statement, never()).executeUpdate();
+	}
 }

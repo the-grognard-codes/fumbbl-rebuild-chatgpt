@@ -86,3 +86,18 @@ M4 work. Local acceptance does not imply public-service readiness.
 
 See [M2/M3 acceptance and exact evidence](../.notes/overhaul-analysis/verification/m3e/README.md)
 and the [M4 handoff](../.notes/overhaul-analysis/verification/m3e/m4-handoff.md).
+
+## M4 R2 opt-in runtime boundary
+
+The table above records the accepted M3e runtime. New matches created by the
+isolated R2 runtime persist a private format-2 engine checkpoint before acknowledging
+actions. After a process kill, authorized clients recover the original decision,
+actor, resources and revision; exact accepted-request retries retain their original
+outcome without another engine execution. Pending terminal results reconcile after
+restart. Unsupported or corrupt checkpoints fail closed and remain stored.
+
+Existing Java 8, R1 and trial format-1 lifetimes are not upgraded. An activated
+match without a compatible checkpoint remains unavailable instead of restarting
+at setup. See the [compatibility policy](../containers/local/recovery.md) and
+[seven real process-kill checks and rejection evidence](../.notes/overhaul-analysis/verification/r2/README.md).
+This is local process recovery, not a capacity, public authentication or deployment gate.
