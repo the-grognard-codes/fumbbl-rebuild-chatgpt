@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/** One in-memory engine lifetime. Construction is allowed only after a fresh durable activation. */
+/** One authoritative engine lifetime, initialized once or restored from a versioned private checkpoint. */
 public final class SetupSession {
 	private final GameState state;
 	private final String matchId;
@@ -54,13 +54,22 @@ public final class SetupSession {
 	private final JsonArray events = new JsonArray();
 	private final MatchDocument document;
 	private boolean failed;
+	private RecoveryDice recoveryDice;
 
 	public SetupSession(FantasyFootballServer server, MatchDocument document, long engineId) {
+		this(server, document, engineId, false);
+	}
+
+	public SetupSession(FantasyFootballServer server, MatchDocument document, long engineId, boolean recoverable) {
 		this.document = document;
 		matchId = document.matchId;
 		state = new GameState(server) {
 			@Override public boolean usesLegacyPersistence() { return false; }
 		};
+		if (recoverable) {
+			recoveryDice = new RecoveryDice();
+			state.getDiceRoller().setRecoveryRoll(recoveryDice::roll);
+		}
 		Game game = state.getGame();
 		game.setId(engineId);
 		game.getOptions().addOption(new GameOptionString(GameOptionId.RULESVERSION).setValue("BB2025"));
@@ -86,7 +95,137 @@ public final class SetupSession {
 			.pushSequence(new SequenceGenerator.SequenceParams(state));
 		state.startNextStep();
 		assertSupported();
-		recordEvent("START");
+		 recordEvent("START");
+	}
+
+	/** Recovery uses native deserialization only: never start a sequence or execute a command. */
+	public SetupSession(FantasyFootballServer server, MatchDocument document, String artifact) {
+		this.document = document;
+		matchId = document.matchId;
+		state = new GameState(server) {
+			@Override public boolean usesLegacyPersistence() { return false; }
+		};
+		try {
+			JsonObject envelope = new MatchJson().parse(artifact, 33554432, 128);
+			JsonObject payload = envelope.get("payload").asObject();
+			if (envelope.size() != 2 || !digest(payload.toString()).equals(envelope.getString("sha256", null)))
+				throw new IllegalArgumentException("Recovery checksum mismatch");
+			if (payload.getInt("recoveryVersion", -1) != 2
+				|| !"ffb-3.4.0-bb2025-r2.2".equals(payload.getString("runtimeVersion", null))
+				|| !"ffb-3.4.0-bb2025-m3d.1".equals(payload.getString("engineVersion", null))
+				|| payload.getInt("replayVersion", -1) != 1)
+				throw new MatchService.Failure("RECOVERY_UNSUPPORTED");
+			exactRecovery(payload, "recoveryVersion", "runtimeVersion", "engineVersion", "replayVersion", "matchId", "frozen",
+				"revision", "drive", "failed", "native", "dice", "testRolls", "turnTimeStarted", "lastCommandNr", "history",
+				"kickoffSelection", "eventsJson", "pendingTerminal", "homeView", "awayView");
+			if (!matchId.equals(payload.getString("matchId", null)) || !ordered(frozen()).equals(payload.get("frozen")))
+				throw new IllegalArgumentException("Recovery frozen inputs differ");
+			revision = payload.get("revision").asInt();
+			drive = payload.get("drive").asInt();
+			failed = payload.get("failed").asBoolean();
+			if (revision < 0 || drive < 1) throw new IllegalArgumentException("Invalid recovery counters");
+			recoveryDice = new RecoveryDice(payload.get("dice").asObject());
+			state.getDiceRoller().setRecoveryRoll(recoveryDice::roll);
+			state.initFrom(server.getFactorySource(), payload.get("native"));
+			UtilSkillBehaviours.registerBehaviours(state.getGame(), server.getDebugLog());
+			state.setTurnTimeStarted(payload.get("turnTimeStarted").asLong());
+			state.initCommandNrGenerator(payload.get("lastCommandNr").asLong());
+			for (JsonObject.Member queue : payload.get("testRolls").asObject()) {
+				java.util.ArrayList<com.fumbbl.ffb.DiceCategory> rolls = new java.util.ArrayList<>();
+				for (JsonValue roll : queue.getValue().asArray()) {
+					com.fumbbl.ffb.DiceCategory category = new com.fumbbl.ffb.DiceCategory();
+					category.parseCommand(Integer.toString(roll.asInt()), state.getGame(), state.getGame().getTeamHome());
+					rolls.add(category);
+				}
+				state.getDiceRoller().getTestRolls().put(queue.getName(), rolls);
+			}
+			for (JsonValue item : payload.get("history").asArray()) {
+				JsonObject entry = item.asObject();
+				exactRecovery(entry, "key", "fingerprint", "code");
+				if (!entry.get("key").asString().matches("(home|away)\\n[A-Za-z0-9_-]{1,100}")
+					|| !("ACCEPTED".equals(entry.getString("code", null)) || "ILLEGAL_SETUP".equals(entry.getString("code", null))))
+					throw new IllegalArgumentException("Invalid recovery request history");
+				if (history.put(entry.get("key").asString(), new Record(entry.get("fingerprint").asString(), entry.get("code").asString())) != null)
+					throw new IllegalArgumentException("Duplicate recovery history");
+			}
+			if (history.size() > 8192) throw new IllegalArgumentException("Recovery history limit");
+			for (JsonValue selection : payload.get("kickoffSelection").asArray()) kickoffSelection.add(selection.asString());
+			for (JsonValue event : JsonArray.readFrom(payload.get("eventsJson").asString())) {
+				events.add(event);
+				replayBytes += event.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8).length;
+			}
+			if (replayBytes > 16 * 1024 * 1024 || events.size() != revision + 1
+				|| payload.get("pendingTerminal").asBoolean() != isComplete()) throw new IllegalArgumentException("Recovery event boundary");
+			assertSupported();
+			if (!ordered(recoveryNative()).equals(payload.get("native"))) throw new IllegalArgumentException("Native state did not round-trip");
+			if (!ordered(view("home")).equals(payload.get("homeView")) || !ordered(view("away")).equals(payload.get("awayView")))
+				throw new IllegalArgumentException("Recovered decision differs");
+		} catch (MatchService.Failure failure) { throw failure; }
+		catch (RuntimeException invalid) { throw new MatchService.Failure("RECOVERY_CORRUPT"); }
+	}
+
+	public String recoveryArtifact() {
+		if (recoveryDice == null) throw new IllegalStateException("Legacy lifetime cannot be upgraded");
+		JsonArray requests = new JsonArray(), selections = new JsonArray();
+		history.forEach((key, entry) -> requests.add(new JsonObject().add("key", key).add("fingerprint", entry.fingerprint).add("code", entry.code)));
+		kickoffSelection.forEach(selections::add);
+		JsonObject rolls = new JsonObject();
+		state.getDiceRoller().getTestRolls().entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+			JsonArray queue = new JsonArray(); entry.getValue().forEach(roll -> queue.add(roll.testRoll())); rolls.add(entry.getKey(), queue);
+		});
+		JsonObject payload = new JsonObject().add("recoveryVersion", 2).add("runtimeVersion", "ffb-3.4.0-bb2025-r2.2")
+			.add("engineVersion", "ffb-3.4.0-bb2025-m3d.1").add("replayVersion", 1).add("matchId", matchId)
+			.add("frozen", frozen()).add("revision", revision).add("drive", drive).add("failed", failed)
+			.add("native", recoveryNative()).add("dice", recoveryDice.snapshot()).add("testRolls", rolls)
+			.add("turnTimeStarted", state.getTurnTimeStarted()).add("lastCommandNr", state.getLastCommandNr()).add("history", requests).add("kickoffSelection", selections)
+			.add("eventsJson", events.toString()).add("pendingTerminal", isComplete()).add("homeView", view("home")).add("awayView", view("away"));
+		payload = ordered(payload).asObject();
+		String artifact = new JsonObject().add("payload", payload).add("sha256", digest(payload.toString())).toString();
+		if (artifact.getBytes(java.nio.charset.StandardCharsets.UTF_8).length > 33554432) throw new MatchService.Failure("RECOVERY_LIMIT");
+		return artifact;
+	}
+
+	private JsonObject frozen() {
+		JsonObject encoded = new MatchJson().encode(document);
+		return new JsonObject().add("home", encoded.get("home")).add("away", encoded.get("away"))
+			.add("homeOwner", document.home.owner).add("awayOwner", document.away.owner);
+	}
+
+	private JsonObject recoveryNative() {
+		JsonObject snapshot = state.toJsonValue(true, 0);
+		// Native initFrom maps absent distance to zero. Before kickoff execution this value
+		// is always overwritten by the scatter roll; normalize only this versioned boundary.
+		for (JsonValue step : snapshot.get("stepStack").asObject().get("steps").asArray()) normalizeRecoveryStep(step.asObject());
+		if (snapshot.get("currentStep") != null) normalizeRecoveryStep(snapshot.get("currentStep").asObject());
+		return new RecoveryNativeJson().normalize(snapshot);
+	}
+
+	private void normalizeRecoveryStep(JsonObject step) {
+		if ("kickoffScatterRoll".equals(step.getString("stepId", null)) && step.get("scatterDistance") == null) step.add("scatterDistance", 0);
+	}
+
+	private String digest(String text) {
+		try {
+			return java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256")
+				.digest(text.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+		} catch (java.security.NoSuchAlgorithmException unavailable) { throw new IllegalStateException(unavailable); }
+	}
+
+	private JsonValue ordered(JsonValue value) {
+		if (value.isObject()) {
+			JsonObject result = new JsonObject();
+			value.asObject().names().stream().sorted().forEach(name -> result.add(name, ordered(value.asObject().get(name))));
+			return result;
+		}
+		if (value.isArray()) {
+			JsonArray result = new JsonArray(); for (JsonValue item : value.asArray()) result.add(ordered(item)); return result;
+		}
+		return value;
+	}
+
+	private void exactRecovery(JsonObject object, String... names) {
+		if (object.size() != names.length || !new java.util.HashSet<>(object.names()).equals(new java.util.HashSet<>(java.util.Arrays.asList(names))))
+			throw new IllegalArgumentException("Unsupported recovery shape");
 	}
 
 	private void initializeTeam(Team team, String owner, String name) {
@@ -262,6 +401,7 @@ public final class SetupSession {
         List<Action> result = new KickoffActions(state, kickoffSelection).actions();
         if (result.isEmpty()) result = new CorePromptActions(state).actions();
         if (result.isEmpty()) result = new CoreTurnActions(state).actions();
+        if (recoveryDice != null) result.sort(java.util.Comparator.comparing(action -> action.role + "\n" + action.id));
         return result;
     }
 

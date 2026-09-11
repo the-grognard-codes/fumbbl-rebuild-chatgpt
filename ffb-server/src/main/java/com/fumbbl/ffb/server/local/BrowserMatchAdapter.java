@@ -76,8 +76,11 @@ public class BrowserMatchAdapter {
 
 	public synchronized void setSavedTeams(BrowserSavedTeamJson savedTeams) { this.savedTeams = savedTeams; }
 	public synchronized void setPreparedMatches(MatchService preparedMatches) {
+		setPreparedMatches(preparedMatches, null);
+	}
+	public synchronized void setPreparedMatches(MatchService preparedMatches, com.fumbbl.ffb.server.match.RecoveryRepository recovery) {
 		this.preparedMatches = preparedMatches;
-		this.setup = new SetupApplication(server, preparedMatches);
+		this.setup = new SetupApplication(server, preparedMatches, recovery);
 	}
 
 	public BrowserMatchAdapter(FantasyFootballServer server, String homeToken, String awayToken) {

@@ -1,0 +1,21 @@
+{
+  "incoming": [
+    {
+      "version": 1,
+      "type": "setupState",
+      "requestId": "8dfba0aa-472a-47b5-936a-001c5a29eecc",
+      "code": "RECOVERY_CORRUPT",
+      "duplicate": false,
+      "state": null
+    }
+  ],
+  "outgoing": [
+    {
+      "version": 1,
+      "type": "setup",
+      "operation": "load",
+      "requestId": "8dfba0aa-472a-47b5-936a-001c5a29eecc",
+      "matchId": "330309d2-6646-307c-95e5-c6b474bd46f9"
+    }
+  ]
+}

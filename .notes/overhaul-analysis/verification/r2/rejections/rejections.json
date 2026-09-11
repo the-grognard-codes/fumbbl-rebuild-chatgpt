@@ -1,0 +1,58 @@
+{
+  "pass": true,
+  "exitCode": 137,
+  "image": "sha256:a167432242b8b2764fdf8c91d7228dfabbef8a471f039338e93c14af6fc997b8",
+  "browser": "152.0.7977.83",
+  "results": [
+    {
+      "kind": "unsupported-version",
+      "matchId": "781cc106-cf10-392b-9252-ac8a10189fcc",
+      "originalSha256": "d6e2c462570248196efb7a627e9d98ce6542fa8c1137946410cdb5622494d8af",
+      "rejectedSha256": "35cea17d024621abe7802f1dadf878ca2a12634a7a46c827f6b16f4798b333d3",
+      "replies": [
+        {
+          "version": 1,
+          "type": "setupState",
+          "requestId": "f3a1df0b-1bf0-4dc6-a68a-dbc73e8c1ff7",
+          "code": "RECOVERY_UNSUPPORTED",
+          "duplicate": false,
+          "state": null
+        },
+        {
+          "version": 1,
+          "type": "setupState",
+          "requestId": "10a5ff7d-7211-4d96-8299-0e61e042829b",
+          "code": "RECOVERY_UNSUPPORTED",
+          "duplicate": false,
+          "state": null
+        }
+      ],
+      "storedArtifactUnchanged": true
+    },
+    {
+      "kind": "corrupt-checksum",
+      "matchId": "d8d3e1e6-913c-31c1-bf99-7f0cfe09f51d",
+      "originalSha256": "e9eff9cff6acfee37dfb2f55b98bc80525eafa2368a4227939f9f2d6a851b96a",
+      "rejectedSha256": "129251094333af17a1ce9c7811d5b3055ffe5172e60694c9e2fa6a366cbd1b46",
+      "replies": [
+        {
+          "version": 1,
+          "type": "setupState",
+          "requestId": "339b963c-4bd6-4fa2-8d08-1740e34b8acd",
+          "code": "RECOVERY_CORRUPT",
+          "duplicate": false,
+          "state": null
+        },
+        {
+          "version": 1,
+          "type": "setupState",
+          "requestId": "b9ddce07-1986-4ed8-bc6d-7bd2ff7d4cc6",
+          "code": "RECOVERY_CORRUPT",
+          "duplicate": false,
+          "state": null
+        }
+      ],
+      "storedArtifactUnchanged": true
+    }
+  ]
+}

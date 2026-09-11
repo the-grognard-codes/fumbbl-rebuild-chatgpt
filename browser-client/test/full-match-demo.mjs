@@ -4,10 +4,12 @@ import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
 import { selectLocalRuntime } from './local-runtime-endpoint.mjs';
+import { processKillChecks } from './r2-process-kill.mjs';
 
 const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3d/live');
 const integrated = process.env.M3_INTEGRATED === '1';
 const recoveryChecks = [];
+let killChecks;
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 'chrome', headless: true });
 const contexts = await Promise.all([browser.newContext({ viewport: { width: 1440, height: 1080 } }), browser.newContext({ viewport: { width: 1440, height: 1080 } })]);
@@ -33,7 +35,7 @@ for (const page of pages) {
 }
 
 const base = operation => ({ version: 1, type: 'preparedMatch', operation, requestId: randomUUID() });
-const draft = () => ({ catalogVersion: 'bb2025-human-2026-09-08.1', ruleset: 'BB2025', rosterId: 'human', presetId: 'human-exhibition-1150', captainId: null, players: Array(11).fill('lineman').map((positionId, index) => ({ id: `p${index + 1}`, slot: index + 1, positionId, skillIds: [] })), resources: { rerolls: 4, assistantCoaches: 0, cheerleaders: 0, apothecary: 1, dedicatedFans: 0 } });
+const draft = (teamIndex) => ({ catalogVersion: 'bb2025-human-2026-09-08.1', ruleset: 'BB2025', rosterId: 'human', presetId: 'human-exhibition-1150', captainId: null, players: Array(11).fill('lineman').map((positionId, index) => ({ id: `p${index + 1}`, slot: index + 1, positionId: process.env.M4_PROCESS_KILL === '1' && teamIndex === 1 && index === 0 ? 'ogre' : positionId, skillIds: [] })), resources: { rerolls: process.env.M4_PROCESS_KILL === '1' && teamIndex === 0 ? 0 : 4, assistantCoaches: 0, cheerleaders: 0, apothecary: 1, dedicatedFans: 0 } });
 const indexFor = role => role === 'home' ? 0 : 1;
 
 async function connect(page, index, path) {
@@ -59,6 +61,7 @@ async function waitRevision(expected) {
   const [home, away] = await Promise.all(pages.map(state));
   assert.equal(home.revision, away.revision, 'both browser views must share the authoritative revision');
   assert.deepEqual({ ...home, callerRole: 'home' }, { ...away, callerRole: 'home' }, 'full projected states agree except persisted caller role');
+  await killChecks?.inspect(home);
   return home;
 }
 async function reconnect(page) {
@@ -71,8 +74,15 @@ async function reconnect(page) {
   await page.getByTestId('setup-status').waitFor();
 }
 async function submit(page, button, expected, fault = integrated) {
+  const killLostAck = Boolean(killChecks) && expected === 3;
+  if (killLostAck) await page.evaluate(() => { window.__m3b.dropSetup = true; });
   if (fault) await page.evaluate(() => { window.__m3b.dropSetup = true; });
   await button.press('Enter');
+  if (killChecks?.pending) { await killChecks.pending; killChecks.pending = null; }
+  if (killLostAck) {
+    await page.waitForFunction(expected => window.__m3b.incoming.some(value => value.state?.revision === expected), expected);
+    await killChecks.inspect(await state(page), { lostAcknowledgementAtProcessKill: true });
+  }
   if (fault) {
     await page.waitForFunction(expected => window.__m3b.incoming.some(value => value.state?.revision === expected), expected);
     const request = await page.evaluate(() => window.__m3b.outgoing.filter(value => value.type === 'setup' && value.operation !== 'load').at(-1));
@@ -90,6 +100,7 @@ async function submit(page, button, expected, fault = integrated) {
   return waitRevision(expected);
 }
 async function choose(page, action, expected) {
+  await killChecks?.beforeAction(await state(page), action);
   if (integrated) {
     const rejected = await raw(pages[1 - pages.indexOf(page)], { version: 1, type: 'setup', operation: 'action', requestId: randomUUID(), matchId, expectedRevision: expected - 1, actionId: action.id });
     assert.equal(rejected.code, 'WRONG_ACTOR');
@@ -118,6 +129,14 @@ async function arrange(view) {
 const distance = (a,b) => Math.max(Math.abs(a.x-b.x), Math.abs(a.y-b.y));
 const attemptedTurns = new Set();
 function selectAction(view) {
+  if (killChecks && !killChecks.results.some(result => result.point === 'defending-team-decision') && view.actor === 'home') {
+    const target = view.players.find(player => player.role === 'away' && player.slot === 1);
+    const block = view.actions.find(action => action.kind === 'block' && action.id.endsWith(target?.id));
+    if (block) return block;
+    const attacker = view.players.find(player => player.role === 'home' && player.slot === 2);
+    const startBlock = view.actions.find(action => action.kind === 'selectBlock' && action.id.endsWith(attacker?.id));
+    if (startBlock && !view.activePlayerId) return startBlock;
+  }
   if (view.phase === 'READY_FOR_KICKOFF') return view.actions.find(a => a.id.endsWith(view.actor === 'home' ? 'kick-17-7' : 'kick-8-7'));
   for (const suffix of [':decline-event', ':end-event', ':reroll:team', ':skill:true']) {
     const action = view.actions.find(a => a.id.endsWith(suffix)); if (action) return action;
@@ -153,6 +172,11 @@ function selectAction(view) {
   return view.actions.find(a => a.kind === 'endAction') ?? view.actions.find(a => a.kind === 'endTurn') ?? view.actions.find(a => a.kind === 'reroll' && /^Do not/i.test(a.label)) ?? view.actions[0];
 }
 let matchId;
+if (process.env.M4_PROCESS_KILL === '1') {
+  assert.equal(process.env.M4_WS_ENDPOINT, 'ws://127.0.0.1:22230/browser/v1');
+  assert.equal(integrated, false, 'R2 process faults have their own acknowledgment interception');
+  killChecks = processKillChecks({ pages, out, matchId: () => matchId, connect, state, raw });
+}
 try {
   await Promise.all(pages.map((page,index) => connect(page,index,'/matches')));
   const teams = [];
@@ -170,7 +194,9 @@ try {
       const d = result.document?.draft;
       if (d && d.players.length === 11 && d.players.every(p => p.positionId === 'lineman' && p.skillIds.length === 0) && d.captainId === null) { selected=result.document; break; }
     }
-    if (!selected) { const result=await saved(pages[index],{operation:'create',draft:draft()}); assert.equal(result.code,'OK'); selected=result.document; }
+    if (killChecks && index === 1 && selected?.draft.players[0].positionId !== 'ogre') selected = null;
+    if (killChecks && index === 0 && selected?.draft.resources.rerolls !== 0) selected = null;
+    if (!selected) { const result=await saved(pages[index],{operation:'create',draft:draft(index)}); assert.equal(result.code,'OK'); selected=result.document; }
     teams.push(selected);
     // A fresh isolated database initially renders the empty-team state. Reload
     // through the real connection flow so the newly created source is listed.

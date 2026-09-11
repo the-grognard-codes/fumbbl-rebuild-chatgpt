@@ -44,7 +44,7 @@ public final class JdbcSavedTeamRepository implements SavedTeamRepository {
 					ResultSet rows = lock.executeQuery()) {
 					if (!rows.next()) throw new SQLException("Saved-team schema unavailable");
 					int schemaVersion = rows.getInt(1);
-					if (schemaVersion != 2 && schemaVersion != 3 && schemaVersion != 4) throw new SQLException("Saved-team schema unavailable");
+					if (schemaVersion != 2 && schemaVersion != 3 && schemaVersion != 4 && schemaVersion != 5) throw new SQLException("Saved-team schema unavailable");
 				}
 				try (PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) FROM ffb_saved_teams WHERE owner_subject=?")) {
 					count.setString(1, record.owner);

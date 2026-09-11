@@ -358,7 +358,7 @@ public final class MatchJson {
 	private int positive(JsonValue value) { int number = value.asInt(); if (number < 1 || number > 2147483646) throw new IllegalArgumentException(); return number; }
 	private int amount(JsonValue value) { int number = value.asInt(); if (number < 0 || number > 5000000) throw new IllegalArgumentException(); return number; }
 	private void exact(JsonObject object, String... fields) { if (object.size() != fields.length || !new HashSet<>(object.names()).equals(new HashSet<>(Arrays.asList(fields)))) throw new IllegalArgumentException(); }
-	private JsonObject parse(String text, int bytes, int maximumDepth) {
+	JsonObject parse(String text, int bytes, int maximumDepth) {
 		if (text == null || text.length() > bytes || text.getBytes(StandardCharsets.UTF_8).length > bytes) throw new IllegalArgumentException();
 		boolean quoted = false, escaped = false; int depth = 0;
 		for (int index = 0; index < text.length(); index++) {

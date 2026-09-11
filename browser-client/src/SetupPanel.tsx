@@ -28,6 +28,11 @@ const explanation = (code: SetupCode) => ({
   AUTHENTICATION_REQUIRED: 'Re-enter a local credential and reconnect.',
   SESSION_UNAVAILABLE: 'This activated session is unavailable. Setup cannot recover after a server restart or engine failure. Prepare a new match to play again.',
   NOT_ACTIVATED: 'Activate this match from match preparation first.',
+  RECOVERY_UNSUPPORTED: 'This retained match cannot be recovered by this server. Stored data is retained; use a compatible runtime.',
+  RECOVERY_CORRUPT: 'The retained match data is corrupt and could not be recovered. Stored data is retained for investigation.',
+  RECOVERY_CONFLICT: 'Recovery found a conflicting match state. Stored data is retained; reload to reconcile the match.',
+  RECOVERY_LIMIT: 'The server recovery limit was reached. Stored data is retained; retry after reconciling the match.',
+  ACTIVATION_LIMIT: 'The local server has reached its activation capacity. Stored match data is retained.',
 } as Partial<Record<SetupCode, string>>)[code] ?? 'The server rejected this request.';
 
 export function SetupPanel() {

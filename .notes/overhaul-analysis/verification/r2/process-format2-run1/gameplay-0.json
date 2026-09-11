@@ -1,0 +1,727 @@
+{
+  "incoming": [
+    {
+      "version": 1,
+      "type": "setupState",
+      "requestId": "bd9223e6-f9be-474d-ab58-c9e6f72b35bb",
+      "code": "ACCEPTED",
+      "duplicate": false,
+      "state": {
+        "half": 2,
+        "drive": 3,
+        "homeScore": 1,
+        "awayScore": 0,
+        "homeTurn": 8,
+        "awayTurn": 8,
+        "actions": [],
+        "turn": 8,
+        "turnMode": "END_GAME",
+        "activePlayerId": null,
+        "ball": {
+          "x": 16,
+          "y": 11
+        },
+        "matchId": "7d039e43-eb99-3eb1-8bbd-c457a4b16876",
+        "revision": 142,
+        "callerRole": "home",
+        "phase": "FULL_TIME",
+        "actor": "home",
+        "prompt": null,
+        "players": [
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p1",
+            "name": "p1",
+            "slot": 1,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p2",
+            "name": "p2",
+            "slot": 2,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p3",
+            "name": "p3",
+            "slot": 3,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p4",
+            "name": "p4",
+            "slot": 4,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p5",
+            "name": "p5",
+            "slot": 5,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p6",
+            "name": "p6",
+            "slot": 6,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p7",
+            "name": "p7",
+            "slot": 7,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p8",
+            "name": "p8",
+            "slot": 8,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p9",
+            "name": "p9",
+            "slot": 9,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p10",
+            "name": "p10",
+            "slot": 10,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p11",
+            "name": "p11",
+            "slot": 11,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p1",
+            "name": "p1",
+            "slot": 1,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p2",
+            "name": "p2",
+            "slot": 2,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p3",
+            "name": "p3",
+            "slot": 3,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p4",
+            "name": "p4",
+            "slot": 4,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p5",
+            "name": "p5",
+            "slot": 5,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p6",
+            "name": "p6",
+            "slot": 6,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p7",
+            "name": "p7",
+            "slot": 7,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p8",
+            "name": "p8",
+            "slot": 8,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p9",
+            "name": "p9",
+            "slot": 9,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p10",
+            "name": "p10",
+            "slot": 10,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p11",
+            "name": "p11",
+            "slot": 11,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          }
+        ],
+        "weather": "NICE",
+        "homeRerolls": 0,
+        "awayRerolls": 4
+      }
+    },
+    {
+      "version": 1,
+      "type": "setupState",
+      "requestId": "e77e9fc4-ee79-4cd4-9a0e-b7d82224df9e",
+      "code": "ACCEPTED",
+      "duplicate": true,
+      "state": {
+        "half": 2,
+        "drive": 3,
+        "homeScore": 1,
+        "awayScore": 0,
+        "homeTurn": 8,
+        "awayTurn": 8,
+        "actions": [],
+        "turn": 8,
+        "turnMode": "END_GAME",
+        "activePlayerId": null,
+        "ball": {
+          "x": 16,
+          "y": 11
+        },
+        "matchId": "7d039e43-eb99-3eb1-8bbd-c457a4b16876",
+        "revision": 142,
+        "callerRole": "home",
+        "phase": "FULL_TIME",
+        "actor": "home",
+        "prompt": null,
+        "players": [
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p1",
+            "name": "p1",
+            "slot": 1,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p2",
+            "name": "p2",
+            "slot": 2,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p3",
+            "name": "p3",
+            "slot": 3,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p4",
+            "name": "p4",
+            "slot": 4,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p5",
+            "name": "p5",
+            "slot": 5,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p6",
+            "name": "p6",
+            "slot": 6,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p7",
+            "name": "p7",
+            "slot": 7,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p8",
+            "name": "p8",
+            "slot": 8,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p9",
+            "name": "p9",
+            "slot": 9,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p10",
+            "name": "p10",
+            "slot": 10,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p11",
+            "name": "p11",
+            "slot": 11,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p1",
+            "name": "p1",
+            "slot": 1,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p2",
+            "name": "p2",
+            "slot": 2,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p3",
+            "name": "p3",
+            "slot": 3,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p4",
+            "name": "p4",
+            "slot": 4,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p5",
+            "name": "p5",
+            "slot": 5,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p6",
+            "name": "p6",
+            "slot": 6,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p7",
+            "name": "p7",
+            "slot": 7,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p8",
+            "name": "p8",
+            "slot": 8,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p9",
+            "name": "p9",
+            "slot": 9,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p10",
+            "name": "p10",
+            "slot": 10,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p11",
+            "name": "p11",
+            "slot": 11,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          }
+        ],
+        "weather": "NICE",
+        "homeRerolls": 0,
+        "awayRerolls": 4
+      }
+    },
+    {
+      "version": 1,
+      "type": "setupState",
+      "requestId": "e77e9fc4-ee79-4cd4-9a0e-b7d82224df9e",
+      "code": "ACCEPTED",
+      "duplicate": true,
+      "state": {
+        "half": 2,
+        "drive": 3,
+        "homeScore": 1,
+        "awayScore": 0,
+        "homeTurn": 8,
+        "awayTurn": 8,
+        "actions": [],
+        "turn": 8,
+        "turnMode": "END_GAME",
+        "activePlayerId": null,
+        "ball": {
+          "x": 16,
+          "y": 11
+        },
+        "matchId": "7d039e43-eb99-3eb1-8bbd-c457a4b16876",
+        "revision": 142,
+        "callerRole": "home",
+        "phase": "FULL_TIME",
+        "actor": "home",
+        "prompt": null,
+        "players": [
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p1",
+            "name": "p1",
+            "slot": 1,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p2",
+            "name": "p2",
+            "slot": 2,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p3",
+            "name": "p3",
+            "slot": 3,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p4",
+            "name": "p4",
+            "slot": 4,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p5",
+            "name": "p5",
+            "slot": 5,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p6",
+            "name": "p6",
+            "slot": 6,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p7",
+            "name": "p7",
+            "slot": 7,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p8",
+            "name": "p8",
+            "slot": 8,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p9",
+            "name": "p9",
+            "slot": 9,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p10",
+            "name": "p10",
+            "slot": 10,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "d0c572ec-8b50-4a2a-9290-98007a9e7a17:p11",
+            "name": "p11",
+            "slot": 11,
+            "role": "home",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p1",
+            "name": "p1",
+            "slot": 1,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p2",
+            "name": "p2",
+            "slot": 2,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p3",
+            "name": "p3",
+            "slot": 3,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p4",
+            "name": "p4",
+            "slot": 4,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p5",
+            "name": "p5",
+            "slot": 5,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p6",
+            "name": "p6",
+            "slot": 6,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p7",
+            "name": "p7",
+            "slot": 7,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p8",
+            "name": "p8",
+            "slot": 8,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p9",
+            "name": "p9",
+            "slot": 9,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p10",
+            "name": "p10",
+            "slot": 10,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          },
+          {
+            "id": "c49896d9-982c-4683-84ea-c962ec59b682:p11",
+            "name": "p11",
+            "slot": 11,
+            "role": "away",
+            "state": "is in reserve",
+            "x": null,
+            "y": null
+          }
+        ],
+        "weather": "NICE",
+        "homeRerolls": 0,
+        "awayRerolls": 4
+      }
+    }
+  ],
+  "outgoing": [
+    {
+      "version": 1,
+      "type": "setup",
+      "operation": "load",
+      "requestId": "bd9223e6-f9be-474d-ab58-c9e6f72b35bb",
+      "matchId": "7d039e43-eb99-3eb1-8bbd-c457a4b16876"
+    },
+    {
+      "version": 1,
+      "type": "setup",
+      "operation": "action",
+      "requestId": "e77e9fc4-ee79-4cd4-9a0e-b7d82224df9e",
+      "matchId": "7d039e43-eb99-3eb1-8bbd-c457a4b16876",
+      "expectedRevision": 141,
+      "actionId": "141:end-turn"
+    },
+    {
+      "version": 1,
+      "type": "setup",
+      "operation": "action",
+      "requestId": "e77e9fc4-ee79-4cd4-9a0e-b7d82224df9e",
+      "matchId": "7d039e43-eb99-3eb1-8bbd-c457a4b16876",
+      "expectedRevision": 141,
+      "actionId": "141:end-turn"
+    }
+  ]
+}
