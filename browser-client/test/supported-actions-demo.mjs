@@ -7,7 +7,7 @@ import { chromium } from 'playwright';
 const frames = JSON.parse(await readFile('test/fixtures/supported-actions-v1.json', 'utf8'));
 const wire = JSON.parse(await readFile('test/fixtures/wire-v1.json', 'utf8'));
 const join = wire[0].messages.find(message => message.type === 'snapshot');
-const out = resolve('../.notes/overhaul-analysis/verification/m3c');
+const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3c');
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const contexts = await Promise.all([browser.newContext({ viewport: { width: 1440, height: 1080 } }), browser.newContext({ viewport: { width: 1440, height: 1080 } })]);

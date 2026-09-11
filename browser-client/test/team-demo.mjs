@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 
 // Local test driver. Never copy join credentials into evidence or production code.
-const output = resolve('../.notes/overhaul-analysis/verification/m2a');
+const output = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m2a');
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1080 } });

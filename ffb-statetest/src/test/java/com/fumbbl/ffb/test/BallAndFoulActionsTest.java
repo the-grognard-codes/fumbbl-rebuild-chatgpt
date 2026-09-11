@@ -24,6 +24,7 @@ import org.junit.jupiter.api.AfterAll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BallAndFoulActionsTest {
@@ -67,13 +68,34 @@ class BallAndFoulActionsTest {
         performId(state, "skill:true");
         assertTrue(UtilPlayer.hasBall(state.getGame(), state.getGame().getPlayerById("mate")));
     }
-    @Test void secureLooseBallUsesNativeAutomaticPickupAndEndsActivation() throws Exception {
+    @Test void secureLooseBallUsesNativePickupRollAndEndsActivation() throws Exception {
         GameState state = fixture(true, false);
         state.getGame().getFieldModel().setBallCoordinate(new FieldCoordinate(8, 7));
         state.getGame().getFieldModel().setBallMoving(true);
+        // Secure the Ball still rolls against 2+; an unseeded natural 1 makes this test flaky.
+        TestRolls.on(state).general(2);
         perform(state, "secureBall"); performId(state, "move-8-7");
         assertTrue(UtilPlayer.hasBall(state.getGame(), state.getGame().getPlayerById("actor")));
         assertTrue(state.getGame().getTurnDataHome().isSecureTheBallUsed());
+        assertNull(state.getGame().getActingPlayer().getPlayer());
+        assertTrue(actions(state).stream().noneMatch(a -> a.kind.equals("secureBall")));
+    }
+    @Test void failedSecureBallPickupOffersNativeTeamRerollAndResolvesOnce() throws Exception {
+        GameState state = fixture(true, false);
+        Game game = state.getGame();
+        game.getFieldModel().setBallCoordinate(new FieldCoordinate(8, 7));
+        game.getFieldModel().setBallMoving(true);
+        game.getTurnDataHome().setReRolls(1);
+        TestRolls.on(state).general(1, 2);
+        perform(state, "secureBall"); performId(state, "move-8-7");
+        assertFalse(UtilPlayer.hasBall(game, game.getPlayerById("actor")));
+        assertTrue(actions(state).stream().anyMatch(a -> a.id.equals("reroll:team")));
+        assertEquals(1, game.getTurnDataHome().getReRolls());
+        performId(state, "reroll:team");
+        assertTrue(UtilPlayer.hasBall(game, game.getPlayerById("actor")));
+        assertEquals(0, game.getTurnDataHome().getReRolls());
+        assertTrue(game.getTurnDataHome().isSecureTheBallUsed());
+        assertNull(game.getActingPlayer().getPlayer());
         assertTrue(actions(state).stream().noneMatch(a -> a.kind.equals("secureBall")));
     }
     @Test void sureHandsPickupFailureOffersSkillAndRecovers() throws Exception {

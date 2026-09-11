@@ -53,6 +53,11 @@ Use the same task for closely related work when convenient. A new task can conti
 
 ## Current status
 
+**Latest, M3e (2026-09-10 local): M2 and M3 meet bounded local Human-preset
+acceptance in desktop Chrome. M4/public-service readiness remains incomplete.**
+See [integrated acceptance](verification/m3e/README.md) and
+[M4 handoff](verification/m3e/m4-handoff.md). Earlier slice status below is historical.
+
 - **M2a implemented and validated, 2026-09-07 local / 2026-09-08 UTC.** The owner
   approved Blood Bowl Base BB2025 as source of truth and selected a 1,150,000-gold
   preset. A versioned Human catalog, immutable draft/validation seams and React
@@ -399,3 +404,31 @@ In-progress engine recovery, resident-session cleanup and remaining general M3
 reliability work are not declared complete. Completed results survive restart;
 an uncommitted terminal engine cannot recover after JVM loss. No commit, push,
 public deployment, volume reset or credential change occurred.
+
+### M3e integrated acceptance and disconnect experience ? 2026-09-10
+
+M2/M3 local acceptance is satisfied for the unchanged Human exhibition preset.
+Pending setup/play requests survive same-tab reload, storage/unknown completion
+outcomes keep new mutations locked, and foreign-match responses fail closed.
+Connection/error/status text, match-preserving result links and keyboard pitch
+navigation complete this bounded disconnect experience. Every product mutation
+continues to use persisted membership and frozen team inputs; engine rules,
+Java 8/Maven, MariaDB/JDBC, schema 4 and catalog remain unchanged.
+
+Evidence: 9 tooling checks; 128 focused Java tests; offline clean install/verify
+with 484 passing tests; 36 browser tests/build; final 88-frame native-wire matrix;
+real MariaDB rollback/CAS/lost-ack checks; current M2 live round trips and durable
+preparation; live six-position actions; both creator directions and a final
+reviewed-source full match (three completed games, 231 recovery cycles). All 273
+replay states from the first two games matched after JVM restart. An unfinished
+setup returned SESSION_UNAVAILABLE to both participants; exact activation retry
+could not recreate it. Final match fbc14ead-1c82-318f-a9c2-697b51720b42 finished
+home 0?1 away, revision 140, 141 events.
+
+See [exact evidence, failures and acceptance](verification/m3e/README.md),
+[connection contract](../../browser-client/disconnect.md), and
+[M4 handoff](verification/m3e/m4-handoff.md). Public accounts/TLS, maintained
+runtime/Jetty, durable in-progress process recovery, capacity release/retention,
+backup restore, measured load and cross-browser/accessibility certification
+remain incomplete. No commit, push, deployment, volume reset, credential change
+or public service was introduced.

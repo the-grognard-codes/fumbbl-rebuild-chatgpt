@@ -9,7 +9,7 @@ rolls, modifiers, eligibility, injuries, resources and transitions.
 
 ## Evidence keys
 
-- **B**: [BallAndFoulActionsTest](../ffb-statetest/src/test/java/com/fumbbl/ffb/test/BallAndFoulActionsTest.java), 19 native engine characterizations. Each submitted action also passes through
+- **B**: [BallAndFoulActionsTest](../ffb-statetest/src/test/java/com/fumbbl/ffb/test/BallAndFoulActionsTest.java), 20 native engine characterizations (including the subsequent Secure the Ball CI regression). Each submitted action also passes through
   [BrowserActionEvidence](../ffb-statetest/src/test/java/com/fumbbl/ffb/test/BrowserActionEvidence.java)
   and the real SetupSession adapter: wrong actor and stale revision leave engine
   and dice unchanged; reconnect preserves choices; exact retry executes once.
@@ -41,7 +41,7 @@ not enumerate every possible board arrangement or dice sequence. S/C and prior
 | Foul declaration/movement/target, assists, armor/injury, sending off, argue or decline | B foulUsesOpponentInCanonicalAwayOrientation, doublesFoulOffersNativeArgueCallAndDeclineResolvesBan | BallAndFoulActions/CorePromptActions; native eligible argue IDs | M declareFoul/foul/argueTheCall |
 | Throw team-mate declaration/movement, lift eligible teammate, native quick/short target, scatter/landing/collision, rerolls | B throwTeamMateOffersOnlyNativeRangeAndResolvesLanding | BallAndFoulActions, TtmMechanic and PassMechanic | M declareThrowTeamMate/liftTeamMate/throwTeamMate; L throwTeamMate |
 | Jump over prone player, jump mode toggle and valid native squares | B jumpOverPronePlayerUsesNativeJumpSquares | CoreTurnActions/JumpMechanic | M jumpMode/jump |
-| Secure the ball, automatic pickup, activation ends | B secureLooseBallUsesNativeAutomaticPickupAndEndsActivation | BallAndFoulActions/native SECURE_THE_BALL | M secureBall |
+| Secure the ball, native pickup roll and reroll, activation ends on success | B secureLooseBallUsesNativePickupRollAndEndsActivation, failedSecureBallPickupOffersNativeTeamRerollAndResolvesOnce | BallAndFoulActions/native SECURE_THE_BALL | M secureBall; failed-roll/reroll regression in B |
 | Forgo activation | B forgoActivationUsesNativeActionAndLeavesNextPlayerSelectable | CoreTurnActions/native FORGO | M forgo |
 | Generic reroll decline/team/Pro/offered skill; optional skill yes/no, modifying alternative or never for action | B pass, Pro, Bone Head and Loner tests; C nativeSkillPromptRetainsModifyingAlternativeAndNeverUseFlag | CorePromptActions/native dialog properties | M reroll/skill; all options visible and owner-bound |
 | KO/casualty apothecary decline/use, retain old or choose new injury | B apothecaryKoAndCasualtyChoicesResolveForInjuredParticipant | CorePromptActions/native player and injury choice | M apothecary, including casualty choice |
@@ -86,3 +86,13 @@ declared scope. M3d adds [drives, halves, results and replay](results-replay.md)
 and durable in-progress JVM restart recovery remain later M3 work; completion
 acceptance is recorded in the linked M3d evidence. Same-JVM reconnect is supported. Synthetic
 states and deterministic dice exist only in tests, never the product contract.
+
+
+## M3e integrated acceptance
+
+The unchanged matrix was rerun: 128 focused Java tests and all 88 mounted native
+traces passed. Live six-position actions and complete matches in both creator
+directions passed, including lost acknowledgements, prompts, setup/drive/half/
+completion reconnect and exact retry. See [M3e assessment](../.notes/overhaul-analysis/verification/m3e/README.md).
+In-progress JVM recovery and completed-session capacity release are M4 handoff
+items; same-JVM browser reconnect and committed result durability are supported.

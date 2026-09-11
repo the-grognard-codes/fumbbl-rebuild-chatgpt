@@ -1,0 +1,33 @@
+{
+  "pass": true,
+  "matchId": "97db29bb-1faf-3aae-99f4-b3d1e348aa2c",
+  "browser": "152.0.7977.83",
+  "results": [
+    {
+      "unauthenticatedOperations": [
+        "setup/choice",
+        "setup/place",
+        "setup/confirm",
+        "setup/action",
+        "preparedMatch/activate",
+        "matchResult/load",
+        "matchResult/replay"
+      ],
+      "denied": true
+    },
+    {
+      "subject": "away",
+      "callerRole": "home",
+      "forbiddenRoleDiceFixture": true,
+      "unknownMatch": true,
+      "unchanged": true
+    },
+    {
+      "subject": "home",
+      "callerRole": "away",
+      "forbiddenRoleDiceFixture": true,
+      "unknownMatch": true,
+      "unchanged": true
+    }
+  ]
+}

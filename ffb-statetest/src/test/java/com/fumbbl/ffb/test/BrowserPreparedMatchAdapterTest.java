@@ -25,6 +25,91 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BrowserPreparedMatchAdapterTest {
 	@Test
+	void reversedMembershipAndFrozenSourcesProtectPlacementConfirmationAndKickoff() throws Exception {
+		RosterCatalog catalog = new RosterCatalog();
+		Teams sources = new Teams();
+		SavedTeamService teams = new SavedTeamService(sources, catalog);
+		Matches repository = new Matches();
+		MatchService matches = new MatchService(repository, teams, catalog);
+		String home = teams.create("away", draft(catalog)).document.teamId;
+		String away = teams.create("home", draft(catalog)).document.teamId;
+		String id = matches.create("away", "create", home, 1, "home").document.matchId;
+		matches.join("home", "join", id, 1, away, 1);
+		// Frozen snapshots, including all player data, must suffice without either source document.
+		sources.rows.clear();
+		SetupApplication app = new SetupApplication(new TestServer().getServer(), matches);
+		assertEquals("ACCEPTED", app.activate("away", new JsonObject().add("version", 1).add("type", "preparedMatch")
+			.add("operation", "activate").add("requestId", "activate").add("matchId", id).add("expectedRevision", 2).toString()).getString("code", null));
+		Object session = ((Map<?, ?>) field(app, "sessions")).get(id);
+		GameState engine = (GameState) field(session, "state");
+		assertEquals(home, engine.getGame().getTeamHome().getId());
+		assertEquals(away, engine.getGame().getTeamAway().getId());
+		JsonObject load = new JsonObject().add("version", 1).add("type", "setup").add("operation", "load").add("requestId", "load").add("matchId", id);
+		JsonObject view = app.handle("away", load).get("state").asObject();
+		List<JsonObject> submitted = new ArrayList<>();
+		int number = 0;
+		while (!view.get("prompt").isNull()) {
+			JsonObject prompt = view.get("prompt").asObject();
+			JsonObject request = setupRequest(id, "choice", number++, view).add("promptId", prompt.get("id"))
+				.add("optionId", prompt.getString("kind", "").equals("coin") ? "heads" : "receive");
+			assertEquals("ACCEPTED", app.handle(subjectFor(view.getString("actor", null)), request).getString("code", null));
+			submitted.add(request);
+			view = app.handle("away", load).get("state").asObject();
+		}
+		for (int formation = 0; formation < 2; formation++) {
+			String role = view.getString("actor", null);
+			int position = 0;
+			for (com.eclipsesource.json.JsonValue value : view.get("players").asArray()) {
+				JsonObject player = value.asObject();
+				if (!role.equals(player.getString("role", null))) continue;
+				int x = position < 3 ? 12 : 10;
+				int y = position < 3 ? 6 + position : 1 + position;
+				if (role.equals("away")) x = 25 - x;
+				JsonObject request = setupRequest(id, "place", number++, view).add("playerId", player.get("id"))
+					.add("to", new JsonObject().add("x", x).add("y", y));
+				assertReversedMutation(app, engine, request, role);
+				submitted.add(request);
+				view = app.handle("away", load).get("state").asObject();
+				position++;
+			}
+			assertEquals(11, position);
+			JsonObject confirm = setupRequest(id, "confirm", number++, view);
+			assertReversedMutation(app, engine, confirm, role);
+			submitted.add(confirm);
+			view = app.handle("away", load).get("state").asObject();
+		}
+		assertEquals("READY_FOR_KICKOFF", view.getString("phase", null));
+		JsonObject action = view.get("actions").asArray().get(0).asObject();
+		JsonObject kick = setupRequest(id, "action", number, view).add("actionId", action.get("id"));
+		assertReversedMutation(app, engine, kick, action.getString("actor", null));
+		submitted.add(kick);
+		String before = engine.toJsonValue().toString();
+		repository.rows.remove(id);
+		for (JsonObject denied : submitted) {
+			assertEquals("NOT_FOUND", app.handle("away", denied).getString("code", null));
+		}
+		assertEquals(before, engine.toJsonValue().toString());
+	}
+
+	private String subjectFor(String role) { return "home".equals(role) ? "away" : "home"; }
+	private JsonObject setupRequest(String id, String operation, int number, JsonObject view) {
+		return new JsonObject().add("version", 1).add("type", "setup").add("operation", operation)
+			.add("requestId", "input-" + number).add("matchId", id).add("expectedRevision", view.get("revision"));
+	}
+	private void assertReversedMutation(SetupApplication app, GameState engine, JsonObject request, String role) {
+		String before = engine.toJsonValue().toString();
+		assertEquals("WRONG_ACTOR", app.handle(role, request).getString("code", null));
+		assertEquals(before, engine.toJsonValue().toString());
+		assertEquals("ACCEPTED", app.handle(subjectFor(role), request).getString("code", null));
+		String after = engine.toJsonValue().toString();
+		assertTrue(app.handle(subjectFor(role), request).getBoolean("duplicate", false));
+		assertEquals(after, engine.toJsonValue().toString());
+		JsonObject stale = JsonObject.readFrom(request.toString()).set("requestId", request.getString("requestId", "") + "-stale");
+		assertEquals("STALE_REVISION", app.handle(subjectFor(role), stale).getString("code", null));
+		assertEquals(after, engine.toJsonValue().toString());
+	}
+
+	@Test
 	void activationUsesPersistedReversedRolesAndNeverReinitializesAfterRetryOrRestart() throws Exception {
 		RosterCatalog catalog = new RosterCatalog();
 		SavedTeamService teams = new SavedTeamService(new Teams(), catalog);

@@ -1,0 +1,1406 @@
+{
+  "passed": true,
+  "browser": "152.0.7977.83",
+  "matchId": "97db29bb-1faf-3aae-99f4-b3d1e348aa2c",
+  "reversedCreator": true,
+  "sourceEditsIsolated": true,
+  "activatedRerollsUnchanged": true,
+  "exactRetry": true,
+  "pendingReconnect": true,
+  "wrongRoleRejected": true,
+  "staleRejected": true,
+  "final": {
+    "half": 1,
+    "drive": 1,
+    "homeScore": 0,
+    "awayScore": 0,
+    "homeTurn": 0,
+    "awayTurn": 0,
+    "actions": [
+      {
+        "id": "26:kick-13-0",
+        "kind": "kickoff",
+        "label": "Kick to 13, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-1",
+        "kind": "kickoff",
+        "label": "Kick to 13, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-2",
+        "kind": "kickoff",
+        "label": "Kick to 13, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-3",
+        "kind": "kickoff",
+        "label": "Kick to 13, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-4",
+        "kind": "kickoff",
+        "label": "Kick to 13, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-5",
+        "kind": "kickoff",
+        "label": "Kick to 13, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-6",
+        "kind": "kickoff",
+        "label": "Kick to 13, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-7",
+        "kind": "kickoff",
+        "label": "Kick to 13, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-8",
+        "kind": "kickoff",
+        "label": "Kick to 13, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-9",
+        "kind": "kickoff",
+        "label": "Kick to 13, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-10",
+        "kind": "kickoff",
+        "label": "Kick to 13, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-11",
+        "kind": "kickoff",
+        "label": "Kick to 13, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-12",
+        "kind": "kickoff",
+        "label": "Kick to 13, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-13",
+        "kind": "kickoff",
+        "label": "Kick to 13, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-13-14",
+        "kind": "kickoff",
+        "label": "Kick to 13, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-0",
+        "kind": "kickoff",
+        "label": "Kick to 14, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-1",
+        "kind": "kickoff",
+        "label": "Kick to 14, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-2",
+        "kind": "kickoff",
+        "label": "Kick to 14, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-3",
+        "kind": "kickoff",
+        "label": "Kick to 14, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-4",
+        "kind": "kickoff",
+        "label": "Kick to 14, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-5",
+        "kind": "kickoff",
+        "label": "Kick to 14, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-6",
+        "kind": "kickoff",
+        "label": "Kick to 14, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-7",
+        "kind": "kickoff",
+        "label": "Kick to 14, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-8",
+        "kind": "kickoff",
+        "label": "Kick to 14, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-9",
+        "kind": "kickoff",
+        "label": "Kick to 14, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-10",
+        "kind": "kickoff",
+        "label": "Kick to 14, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-11",
+        "kind": "kickoff",
+        "label": "Kick to 14, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-12",
+        "kind": "kickoff",
+        "label": "Kick to 14, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-13",
+        "kind": "kickoff",
+        "label": "Kick to 14, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-14-14",
+        "kind": "kickoff",
+        "label": "Kick to 14, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-0",
+        "kind": "kickoff",
+        "label": "Kick to 15, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-1",
+        "kind": "kickoff",
+        "label": "Kick to 15, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-2",
+        "kind": "kickoff",
+        "label": "Kick to 15, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-3",
+        "kind": "kickoff",
+        "label": "Kick to 15, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-4",
+        "kind": "kickoff",
+        "label": "Kick to 15, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-5",
+        "kind": "kickoff",
+        "label": "Kick to 15, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-6",
+        "kind": "kickoff",
+        "label": "Kick to 15, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-7",
+        "kind": "kickoff",
+        "label": "Kick to 15, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-8",
+        "kind": "kickoff",
+        "label": "Kick to 15, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-9",
+        "kind": "kickoff",
+        "label": "Kick to 15, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-10",
+        "kind": "kickoff",
+        "label": "Kick to 15, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-11",
+        "kind": "kickoff",
+        "label": "Kick to 15, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-12",
+        "kind": "kickoff",
+        "label": "Kick to 15, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-13",
+        "kind": "kickoff",
+        "label": "Kick to 15, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-15-14",
+        "kind": "kickoff",
+        "label": "Kick to 15, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-0",
+        "kind": "kickoff",
+        "label": "Kick to 16, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-1",
+        "kind": "kickoff",
+        "label": "Kick to 16, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-2",
+        "kind": "kickoff",
+        "label": "Kick to 16, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-3",
+        "kind": "kickoff",
+        "label": "Kick to 16, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-4",
+        "kind": "kickoff",
+        "label": "Kick to 16, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-5",
+        "kind": "kickoff",
+        "label": "Kick to 16, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-6",
+        "kind": "kickoff",
+        "label": "Kick to 16, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-7",
+        "kind": "kickoff",
+        "label": "Kick to 16, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-8",
+        "kind": "kickoff",
+        "label": "Kick to 16, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-9",
+        "kind": "kickoff",
+        "label": "Kick to 16, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-10",
+        "kind": "kickoff",
+        "label": "Kick to 16, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-11",
+        "kind": "kickoff",
+        "label": "Kick to 16, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-12",
+        "kind": "kickoff",
+        "label": "Kick to 16, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-13",
+        "kind": "kickoff",
+        "label": "Kick to 16, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-16-14",
+        "kind": "kickoff",
+        "label": "Kick to 16, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-0",
+        "kind": "kickoff",
+        "label": "Kick to 17, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-1",
+        "kind": "kickoff",
+        "label": "Kick to 17, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-2",
+        "kind": "kickoff",
+        "label": "Kick to 17, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-3",
+        "kind": "kickoff",
+        "label": "Kick to 17, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-4",
+        "kind": "kickoff",
+        "label": "Kick to 17, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-5",
+        "kind": "kickoff",
+        "label": "Kick to 17, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-6",
+        "kind": "kickoff",
+        "label": "Kick to 17, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-7",
+        "kind": "kickoff",
+        "label": "Kick to 17, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-8",
+        "kind": "kickoff",
+        "label": "Kick to 17, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-9",
+        "kind": "kickoff",
+        "label": "Kick to 17, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-10",
+        "kind": "kickoff",
+        "label": "Kick to 17, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-11",
+        "kind": "kickoff",
+        "label": "Kick to 17, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-12",
+        "kind": "kickoff",
+        "label": "Kick to 17, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-13",
+        "kind": "kickoff",
+        "label": "Kick to 17, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-17-14",
+        "kind": "kickoff",
+        "label": "Kick to 17, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-0",
+        "kind": "kickoff",
+        "label": "Kick to 18, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-1",
+        "kind": "kickoff",
+        "label": "Kick to 18, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-2",
+        "kind": "kickoff",
+        "label": "Kick to 18, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-3",
+        "kind": "kickoff",
+        "label": "Kick to 18, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-4",
+        "kind": "kickoff",
+        "label": "Kick to 18, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-5",
+        "kind": "kickoff",
+        "label": "Kick to 18, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-6",
+        "kind": "kickoff",
+        "label": "Kick to 18, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-7",
+        "kind": "kickoff",
+        "label": "Kick to 18, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-8",
+        "kind": "kickoff",
+        "label": "Kick to 18, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-9",
+        "kind": "kickoff",
+        "label": "Kick to 18, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-10",
+        "kind": "kickoff",
+        "label": "Kick to 18, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-11",
+        "kind": "kickoff",
+        "label": "Kick to 18, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-12",
+        "kind": "kickoff",
+        "label": "Kick to 18, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-13",
+        "kind": "kickoff",
+        "label": "Kick to 18, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-18-14",
+        "kind": "kickoff",
+        "label": "Kick to 18, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-0",
+        "kind": "kickoff",
+        "label": "Kick to 19, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-1",
+        "kind": "kickoff",
+        "label": "Kick to 19, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-2",
+        "kind": "kickoff",
+        "label": "Kick to 19, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-3",
+        "kind": "kickoff",
+        "label": "Kick to 19, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-4",
+        "kind": "kickoff",
+        "label": "Kick to 19, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-5",
+        "kind": "kickoff",
+        "label": "Kick to 19, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-6",
+        "kind": "kickoff",
+        "label": "Kick to 19, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-7",
+        "kind": "kickoff",
+        "label": "Kick to 19, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-8",
+        "kind": "kickoff",
+        "label": "Kick to 19, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-9",
+        "kind": "kickoff",
+        "label": "Kick to 19, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-10",
+        "kind": "kickoff",
+        "label": "Kick to 19, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-11",
+        "kind": "kickoff",
+        "label": "Kick to 19, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-12",
+        "kind": "kickoff",
+        "label": "Kick to 19, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-13",
+        "kind": "kickoff",
+        "label": "Kick to 19, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-19-14",
+        "kind": "kickoff",
+        "label": "Kick to 19, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-0",
+        "kind": "kickoff",
+        "label": "Kick to 20, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-1",
+        "kind": "kickoff",
+        "label": "Kick to 20, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-2",
+        "kind": "kickoff",
+        "label": "Kick to 20, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-3",
+        "kind": "kickoff",
+        "label": "Kick to 20, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-4",
+        "kind": "kickoff",
+        "label": "Kick to 20, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-5",
+        "kind": "kickoff",
+        "label": "Kick to 20, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-6",
+        "kind": "kickoff",
+        "label": "Kick to 20, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-7",
+        "kind": "kickoff",
+        "label": "Kick to 20, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-8",
+        "kind": "kickoff",
+        "label": "Kick to 20, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-9",
+        "kind": "kickoff",
+        "label": "Kick to 20, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-10",
+        "kind": "kickoff",
+        "label": "Kick to 20, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-11",
+        "kind": "kickoff",
+        "label": "Kick to 20, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-12",
+        "kind": "kickoff",
+        "label": "Kick to 20, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-13",
+        "kind": "kickoff",
+        "label": "Kick to 20, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-20-14",
+        "kind": "kickoff",
+        "label": "Kick to 20, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-0",
+        "kind": "kickoff",
+        "label": "Kick to 21, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-1",
+        "kind": "kickoff",
+        "label": "Kick to 21, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-2",
+        "kind": "kickoff",
+        "label": "Kick to 21, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-3",
+        "kind": "kickoff",
+        "label": "Kick to 21, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-4",
+        "kind": "kickoff",
+        "label": "Kick to 21, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-5",
+        "kind": "kickoff",
+        "label": "Kick to 21, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-6",
+        "kind": "kickoff",
+        "label": "Kick to 21, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-7",
+        "kind": "kickoff",
+        "label": "Kick to 21, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-8",
+        "kind": "kickoff",
+        "label": "Kick to 21, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-9",
+        "kind": "kickoff",
+        "label": "Kick to 21, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-10",
+        "kind": "kickoff",
+        "label": "Kick to 21, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-11",
+        "kind": "kickoff",
+        "label": "Kick to 21, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-12",
+        "kind": "kickoff",
+        "label": "Kick to 21, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-13",
+        "kind": "kickoff",
+        "label": "Kick to 21, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-21-14",
+        "kind": "kickoff",
+        "label": "Kick to 21, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-0",
+        "kind": "kickoff",
+        "label": "Kick to 22, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-1",
+        "kind": "kickoff",
+        "label": "Kick to 22, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-2",
+        "kind": "kickoff",
+        "label": "Kick to 22, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-3",
+        "kind": "kickoff",
+        "label": "Kick to 22, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-4",
+        "kind": "kickoff",
+        "label": "Kick to 22, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-5",
+        "kind": "kickoff",
+        "label": "Kick to 22, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-6",
+        "kind": "kickoff",
+        "label": "Kick to 22, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-7",
+        "kind": "kickoff",
+        "label": "Kick to 22, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-8",
+        "kind": "kickoff",
+        "label": "Kick to 22, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-9",
+        "kind": "kickoff",
+        "label": "Kick to 22, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-10",
+        "kind": "kickoff",
+        "label": "Kick to 22, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-11",
+        "kind": "kickoff",
+        "label": "Kick to 22, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-12",
+        "kind": "kickoff",
+        "label": "Kick to 22, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-13",
+        "kind": "kickoff",
+        "label": "Kick to 22, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-22-14",
+        "kind": "kickoff",
+        "label": "Kick to 22, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-0",
+        "kind": "kickoff",
+        "label": "Kick to 23, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-1",
+        "kind": "kickoff",
+        "label": "Kick to 23, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-2",
+        "kind": "kickoff",
+        "label": "Kick to 23, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-3",
+        "kind": "kickoff",
+        "label": "Kick to 23, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-4",
+        "kind": "kickoff",
+        "label": "Kick to 23, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-5",
+        "kind": "kickoff",
+        "label": "Kick to 23, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-6",
+        "kind": "kickoff",
+        "label": "Kick to 23, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-7",
+        "kind": "kickoff",
+        "label": "Kick to 23, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-8",
+        "kind": "kickoff",
+        "label": "Kick to 23, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-9",
+        "kind": "kickoff",
+        "label": "Kick to 23, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-10",
+        "kind": "kickoff",
+        "label": "Kick to 23, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-11",
+        "kind": "kickoff",
+        "label": "Kick to 23, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-12",
+        "kind": "kickoff",
+        "label": "Kick to 23, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-13",
+        "kind": "kickoff",
+        "label": "Kick to 23, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-23-14",
+        "kind": "kickoff",
+        "label": "Kick to 23, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-0",
+        "kind": "kickoff",
+        "label": "Kick to 24, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-1",
+        "kind": "kickoff",
+        "label": "Kick to 24, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-2",
+        "kind": "kickoff",
+        "label": "Kick to 24, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-3",
+        "kind": "kickoff",
+        "label": "Kick to 24, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-4",
+        "kind": "kickoff",
+        "label": "Kick to 24, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-5",
+        "kind": "kickoff",
+        "label": "Kick to 24, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-6",
+        "kind": "kickoff",
+        "label": "Kick to 24, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-7",
+        "kind": "kickoff",
+        "label": "Kick to 24, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-8",
+        "kind": "kickoff",
+        "label": "Kick to 24, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-9",
+        "kind": "kickoff",
+        "label": "Kick to 24, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-10",
+        "kind": "kickoff",
+        "label": "Kick to 24, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-11",
+        "kind": "kickoff",
+        "label": "Kick to 24, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-12",
+        "kind": "kickoff",
+        "label": "Kick to 24, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-13",
+        "kind": "kickoff",
+        "label": "Kick to 24, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-24-14",
+        "kind": "kickoff",
+        "label": "Kick to 24, 14",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-0",
+        "kind": "kickoff",
+        "label": "Kick to 25, 0",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-1",
+        "kind": "kickoff",
+        "label": "Kick to 25, 1",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-2",
+        "kind": "kickoff",
+        "label": "Kick to 25, 2",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-3",
+        "kind": "kickoff",
+        "label": "Kick to 25, 3",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-4",
+        "kind": "kickoff",
+        "label": "Kick to 25, 4",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-5",
+        "kind": "kickoff",
+        "label": "Kick to 25, 5",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-6",
+        "kind": "kickoff",
+        "label": "Kick to 25, 6",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-7",
+        "kind": "kickoff",
+        "label": "Kick to 25, 7",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-8",
+        "kind": "kickoff",
+        "label": "Kick to 25, 8",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-9",
+        "kind": "kickoff",
+        "label": "Kick to 25, 9",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-10",
+        "kind": "kickoff",
+        "label": "Kick to 25, 10",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-11",
+        "kind": "kickoff",
+        "label": "Kick to 25, 11",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-12",
+        "kind": "kickoff",
+        "label": "Kick to 25, 12",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-13",
+        "kind": "kickoff",
+        "label": "Kick to 25, 13",
+        "actor": "home"
+      },
+      {
+        "id": "26:kick-25-14",
+        "kind": "kickoff",
+        "label": "Kick to 25, 14",
+        "actor": "home"
+      }
+    ],
+    "turn": 0,
+    "turnMode": "KICKOFF",
+    "activePlayerId": null,
+    "ball": null,
+    "matchId": "97db29bb-1faf-3aae-99f4-b3d1e348aa2c",
+    "revision": 26,
+    "callerRole": "home",
+    "phase": "READY_FOR_KICKOFF",
+    "actor": "home",
+    "prompt": null,
+    "players": [
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p1",
+        "name": "p1",
+        "slot": 1,
+        "role": "home",
+        "state": "is standing",
+        "x": 12,
+        "y": 6
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p2",
+        "name": "p2",
+        "slot": 2,
+        "role": "home",
+        "state": "is standing",
+        "x": 12,
+        "y": 7
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p3",
+        "name": "p3",
+        "slot": 3,
+        "role": "home",
+        "state": "is standing",
+        "x": 12,
+        "y": 8
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p4",
+        "name": "p4",
+        "slot": 4,
+        "role": "home",
+        "state": "is standing",
+        "x": 10,
+        "y": 4
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p5",
+        "name": "p5",
+        "slot": 5,
+        "role": "home",
+        "state": "is standing",
+        "x": 10,
+        "y": 5
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p6",
+        "name": "p6",
+        "slot": 6,
+        "role": "home",
+        "state": "is standing",
+        "x": 10,
+        "y": 6
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p7",
+        "name": "p7",
+        "slot": 7,
+        "role": "home",
+        "state": "is standing",
+        "x": 10,
+        "y": 7
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p8",
+        "name": "p8",
+        "slot": 8,
+        "role": "home",
+        "state": "is standing",
+        "x": 10,
+        "y": 8
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p9",
+        "name": "p9",
+        "slot": 9,
+        "role": "home",
+        "state": "is standing",
+        "x": 10,
+        "y": 9
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p10",
+        "name": "p10",
+        "slot": 10,
+        "role": "home",
+        "state": "is standing",
+        "x": 10,
+        "y": 10
+      },
+      {
+        "id": "90549cf7-dbdf-4d90-9514-d5c0a5d4568d:p11",
+        "name": "p11",
+        "slot": 11,
+        "role": "home",
+        "state": "is standing",
+        "x": 10,
+        "y": 11
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p1",
+        "name": "p1",
+        "slot": 1,
+        "role": "away",
+        "state": "is standing",
+        "x": 13,
+        "y": 6
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p2",
+        "name": "p2",
+        "slot": 2,
+        "role": "away",
+        "state": "is standing",
+        "x": 13,
+        "y": 7
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p3",
+        "name": "p3",
+        "slot": 3,
+        "role": "away",
+        "state": "is standing",
+        "x": 13,
+        "y": 8
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p4",
+        "name": "p4",
+        "slot": 4,
+        "role": "away",
+        "state": "is standing",
+        "x": 15,
+        "y": 4
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p5",
+        "name": "p5",
+        "slot": 5,
+        "role": "away",
+        "state": "is standing",
+        "x": 15,
+        "y": 5
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p6",
+        "name": "p6",
+        "slot": 6,
+        "role": "away",
+        "state": "is standing",
+        "x": 15,
+        "y": 6
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p7",
+        "name": "p7",
+        "slot": 7,
+        "role": "away",
+        "state": "is standing",
+        "x": 15,
+        "y": 7
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p8",
+        "name": "p8",
+        "slot": 8,
+        "role": "away",
+        "state": "is standing",
+        "x": 15,
+        "y": 8
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p9",
+        "name": "p9",
+        "slot": 9,
+        "role": "away",
+        "state": "is standing",
+        "x": 15,
+        "y": 9
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p10",
+        "name": "p10",
+        "slot": 10,
+        "role": "away",
+        "state": "is standing",
+        "x": 15,
+        "y": 10
+      },
+      {
+        "id": "f0394bbe-2208-4f19-a6f9-1eb98ebf7b96:p11",
+        "name": "p11",
+        "slot": 11,
+        "role": "away",
+        "state": "is standing",
+        "x": 15,
+        "y": 11
+      }
+    ],
+    "weather": "NICE",
+    "homeRerolls": 2,
+    "awayRerolls": 2
+  },
+  "errors": []
+}

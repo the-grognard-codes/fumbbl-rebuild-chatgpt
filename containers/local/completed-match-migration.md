@@ -1,5 +1,10 @@
 # M3d completed matches: schema 4
 
+M3e retains this server image/schema and adds browser integration/recovery
+hardening. No new DDL, format conversion or engine change is needed. Its
+[acceptance/M4 handoff](../../.notes/overhaul-analysis/verification/m3e/README.md)
+separates browser reconnect from unavailable in-progress JVM recovery.
+
 Pair `ffb-server:3.4.0-m3d.1` with the M3d browser. Java 8/Maven, MariaDB/JDBC,
 React/Vite, credentials and catalog are unchanged. Startup applies migration
 004 to `ffb_prepared_matches`: widen `document_json` from MEDIUMTEXT to LONGTEXT

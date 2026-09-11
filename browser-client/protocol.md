@@ -1,5 +1,13 @@
 # Browser protocol v1 — movement, choices and M1c transport bounds
 
+Current product flow: [M3e connection/recovery](disconnect.md), [setup](setup.md),
+[supported actions](action-coverage.md), and [completion/private replay](results-replay.md).
+Earlier M1/M2 sections record historical slice boundaries. M3e adds no wire fields
+or rules. Uncertain setup/play requests survive same-tab reload in session storage
+and stay locked until exact reconciliation. Foreign-match replies fail closed.
+Browser reconnect requires the same JVM; completed-result durability does not
+imply in-progress process recovery.
+
 ## M2a catalog and draft evaluation
 
 The same authenticated local WebSocket now accepts two read-only operations:

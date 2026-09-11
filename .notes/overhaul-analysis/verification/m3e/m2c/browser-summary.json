@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "mode": "check",
+  "browser": "152.0.7977.83",
+  "viewport": {
+    "width": 1440,
+    "height": 1080
+  },
+  "reversedRoles": true,
+  "authoritativeDocumentEquality": true,
+  "originalRequestRetries": true,
+  "syntheticOnly": true
+}

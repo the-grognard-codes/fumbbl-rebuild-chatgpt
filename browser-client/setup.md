@@ -1,4 +1,9 @@
-﻿# Browser setup protocol v1 (M3a)
+# Browser setup protocol v1 (M3a)
+
+This file preserves the original M3a boundary. The current [M3e reconnect
+contract](disconnect.md) supersedes its memory-only retry description: uncertain
+requests survive same-tab reload in session storage. Linked M3b/M3c/M3d contracts
+extend phase/action/history fields. In-progress JVM recovery remains unavailable.
 
 The local `/browser/v1` socket now activates persisted prepared matches and drives
 BB2025 pre-match/setup. It retains Java 8/Maven, MariaDB/JDBC, the current Human

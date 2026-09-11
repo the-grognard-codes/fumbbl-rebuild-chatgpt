@@ -1,5 +1,10 @@
 # M3d completion and private replay
 
+[M3e connection/recovery](disconnect.md) adds match-preserving navigation,
+pending/read-only text and fail-closed foreign-match responses. Terminal storage
+uncertainty keeps new actions locked until exact reconciliation. Result, replay
+and database formats remain unchanged.
+
 The unchanged `human-exhibition-1150` preset uses native BB2025 scoring, two
 eight-turn halves, subsequent drive setup/kickoff and halftime recovery/rerolls.
 Overtime is disabled (the existing default); draws are final results. There is

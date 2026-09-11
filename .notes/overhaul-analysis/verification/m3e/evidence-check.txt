@@ -1,0 +1,3 @@
+Current browser credential matches: 0
+Files scanned: 141
+Total bytes: 24126964

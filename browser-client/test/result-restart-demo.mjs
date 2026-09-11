@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
 
-const out = resolve('../.notes/overhaul-analysis/verification/m3d/restart');
+const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3d/restart');
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 'chrome', headless: true });
 const contexts = await Promise.all([browser.newContext({ viewport: { width: 1440, height: 1080 } }), browser.newContext({ viewport: { width: 1440, height: 1080 } })]);
@@ -63,8 +63,8 @@ async function choose(page, action, expected) {
 
 
 try {
-  const savedMatch=JSON.parse(await readFile(resolve('../.notes/overhaul-analysis/verification/m3d/live/completed-match.json'),'utf8'));
-  const original=JSON.parse(await readFile(resolve('../.notes/overhaul-analysis/verification/m3d/live/gameplay-0.json'),'utf8'));
+  const savedMatch=JSON.parse(await readFile(resolve(process.env.M3_LIVE_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3d/live', 'completed-match.json'),'utf8'));
+  const original=JSON.parse(await readFile(resolve(process.env.M3_LIVE_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3d/live', 'gameplay-0.json'),'utf8'));
   const expected=new Map(original.incoming.filter(v=>v.state).map(v=>[v.state.revision,{...v.state,callerRole:'home',actions:[],prompt:null}]));
   const resultId=savedMatch.matchId;
   for(let index=0;index<2;index++) {
