@@ -6,9 +6,9 @@ import com.eclipsesource.json.JsonValue;
 import com.fumbbl.ffb.ClientMode;
 import com.fumbbl.ffb.PasswordChallenge;
 import com.fumbbl.ffb.net.commands.ClientCommandJoin;
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.client.WebSocketClient;
+import org.eclipse.jetty.ee8.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.WebSocketAdapter;
+import org.eclipse.jetty.ee8.websocket.client.WebSocketClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;

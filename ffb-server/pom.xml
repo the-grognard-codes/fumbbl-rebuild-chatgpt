@@ -13,6 +13,11 @@
     <artifactId>ffb-server</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <jetty.version>12.1.13</jetty.version>
+        <maven.compiler.release>21</maven.compiler.release>
+    </properties>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -93,14 +98,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <version>9.4.0.v20161208</version>
-            <artifactId>websocket-server</artifactId>
+            <groupId>org.eclipse.jetty.ee8.websocket</groupId>
+            <version>${jetty.version}</version>
+            <artifactId>jetty-ee8-websocket-jetty-server</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <version>9.4.0.v20161208</version>
-            <artifactId>websocket-client</artifactId>
+            <groupId>org.eclipse.jetty.ee8.websocket</groupId>
+            <version>${jetty.version}</version>
+            <artifactId>jetty-ee8-websocket-jetty-client</artifactId>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>

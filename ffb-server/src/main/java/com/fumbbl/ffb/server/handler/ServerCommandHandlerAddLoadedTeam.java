@@ -11,7 +11,7 @@ import com.fumbbl.ffb.server.net.ReceivedCommand;
 import com.fumbbl.ffb.server.net.commands.InternalServerCommandAddLoadedTeam;
 import com.fumbbl.ffb.server.net.commands.InternalServerCommandFumbblTeamLoaded;
 import com.fumbbl.ffb.util.StringTool;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 /**
  * @author Kalimar

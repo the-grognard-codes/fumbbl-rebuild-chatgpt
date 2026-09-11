@@ -13,7 +13,7 @@ import com.fumbbl.ffb.server.net.commands.InternalServerCommandReplayLoaded;
 import com.fumbbl.ffb.server.net.commands.InternalServerCommandUploadGame;
 import com.fumbbl.ffb.server.util.UtilServerHttpClient;
 import com.fumbbl.ffb.util.StringTool;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 /**
  * 

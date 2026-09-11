@@ -15,7 +15,7 @@ import com.fumbbl.ffb.server.step.generator.Select;
 import com.fumbbl.ffb.server.step.generator.SequenceGenerator;
 import com.fumbbl.ffb.server.step.mixed.pass.state.PassState;
 import com.fumbbl.ffb.util.UtilActingPlayer;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public class TalkHandlerResetStateLive extends TalkHandler {
 

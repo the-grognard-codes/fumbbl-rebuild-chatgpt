@@ -2,7 +2,7 @@ package com.fumbbl.ffb.server.net;
 
 import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.IServerLogLevel;
-import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.ee8.servlet.DefaultServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

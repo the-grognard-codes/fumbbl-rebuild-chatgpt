@@ -104,6 +104,9 @@
         <!-- Profile for Java 21 builds (overrides properties for Mockito and compiler) -->
         <profile>
             <id>mockito5</id>
+            <activation>
+                <jdk>[21,)</jdk>
+            </activation>
             <properties>
                 <!-- Override Mockito for Java 21+ -->
                 <mockito.artifact>mockito-core</mockito.artifact>

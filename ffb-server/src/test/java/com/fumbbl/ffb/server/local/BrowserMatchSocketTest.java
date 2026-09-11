@@ -2,7 +2,7 @@ package com.fumbbl.ffb.server.local;
 
 import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.net.ServerCommunication;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class BrowserMatchSocketTest {
 		for (int index = 0; index < 32; index++) {
 			Session broken = mock(Session.class);
 			when(broken.isOpen()).thenReturn(true);
-			doThrow(new IllegalStateException("closed during setup")).when(broken).setIdleTimeout(300000);
+			doThrow(new IllegalStateException("closed during setup")).when(broken).setIdleTimeout(java.time.Duration.ofMinutes(5));
 			new BrowserMatchSocket(server, adapter, transport).onConnect(broken);
 		}
 		assertEquals(0, transport.getMetrics().toJson().getLong("activeConnections", -1));

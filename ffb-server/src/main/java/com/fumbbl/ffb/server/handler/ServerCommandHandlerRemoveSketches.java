@@ -4,7 +4,7 @@ import com.fumbbl.ffb.net.NetCommandId;
 import com.fumbbl.ffb.net.commands.ClientCommandRemoveSketches;
 import com.fumbbl.ffb.net.commands.ServerCommandRemoveSketches;
 import com.fumbbl.ffb.server.FantasyFootballServer;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public class ServerCommandHandlerRemoveSketches extends AbstractServerCommandHandlerSketch<ClientCommandRemoveSketches, ServerCommandRemoveSketches> {
 	protected ServerCommandHandlerRemoveSketches(FantasyFootballServer pServer) {

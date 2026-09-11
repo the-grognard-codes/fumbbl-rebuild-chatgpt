@@ -16,7 +16,7 @@ import com.fumbbl.ffb.server.net.ServerCommunication;
 import com.fumbbl.ffb.server.net.SessionManager;
 import com.fumbbl.ffb.server.request.fumbbl.FumbblRequestUploadTalk;
 import com.fumbbl.ffb.util.Scanner;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -20,7 +20,7 @@ import com.fumbbl.ffb.server.request.fumbbl.FumbblRequestResumeGamestate;
 import com.fumbbl.ffb.server.step.generator.SequenceGenerator;
 import com.fumbbl.ffb.server.step.generator.StartGame;
 import com.fumbbl.ffb.util.StringTool;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.*;
 

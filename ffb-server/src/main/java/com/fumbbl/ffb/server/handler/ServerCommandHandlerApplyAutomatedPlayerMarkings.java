@@ -13,7 +13,7 @@ import com.fumbbl.ffb.server.net.ReceivedCommand;
 import com.fumbbl.ffb.server.net.SessionManager;
 import com.fumbbl.ffb.server.net.commands.InternalServerCommandApplyAutomatedPlayerMarkings;
 import com.fumbbl.ffb.server.util.UtilServerGame;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.Arrays;
 import java.util.List;

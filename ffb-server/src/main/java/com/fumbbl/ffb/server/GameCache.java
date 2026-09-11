@@ -40,7 +40,7 @@ import com.fumbbl.ffb.util.DateTool;
 import com.fumbbl.ffb.util.StringTool;
 import com.fumbbl.ffb.util.UtilBox;
 import com.fumbbl.ffb.util.UtilTeamValue;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.io.File;
 import java.io.IOException;

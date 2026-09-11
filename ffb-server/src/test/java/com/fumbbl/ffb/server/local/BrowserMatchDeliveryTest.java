@@ -12,6 +12,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BrowserMatchDeliveryTest {
 	@Test
+	public void repeatedOldCallbackCannotCompleteTheNextWrite() {
+		DelayedSink sink = new DelayedSink();
+		BrowserMatchTransportMetrics metrics = new BrowserMatchTransportMetrics();
+		BrowserMatchDelivery delivery = new BrowserMatchDelivery(sink, metrics, 3, 100);
+		delivery.send("first");
+		delivery.send("second");
+		delivery.send("third");
+		BrowserMatchDelivery.Completion first = sink.completions.remove(0);
+		first.succeeded();
+		first.succeeded();
+		first.failed(new IllegalStateException("late failure"));
+		assertEquals(2, sink.messages.size());
+		assertEquals(2, metrics.toJson().getLong("deliveryQueueDepth", -1));
+		assertEquals(0, sink.closeCode);
+		sink.completeNext();
+		assertEquals("third", sink.messages.get(2));
+		delivery.close();
+		sink.completeNext();
+		assertEquals(0, metrics.toJson().getLong("deliveryQueueDepth", -1));
+	}
+
+	@Test
 	public void blockedWriterDoesNotPreventHealthyPeerDelivery() {
 		DelayedSink blocked = new DelayedSink();
 		ImmediateSink healthy = new ImmediateSink();

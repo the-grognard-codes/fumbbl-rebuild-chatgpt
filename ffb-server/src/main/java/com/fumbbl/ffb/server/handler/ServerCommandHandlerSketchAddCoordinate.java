@@ -4,7 +4,7 @@ import com.fumbbl.ffb.net.NetCommandId;
 import com.fumbbl.ffb.net.commands.ClientCommandSketchAddCoordinate;
 import com.fumbbl.ffb.net.commands.ServerCommandSketchAddCoordinate;
 import com.fumbbl.ffb.server.FantasyFootballServer;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public class ServerCommandHandlerSketchAddCoordinate extends AbstractServerCommandHandlerSketch<ClientCommandSketchAddCoordinate, ServerCommandSketchAddCoordinate> {
 	protected ServerCommandHandlerSketchAddCoordinate(FantasyFootballServer pServer) {

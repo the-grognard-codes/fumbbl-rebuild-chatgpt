@@ -37,7 +37,7 @@ import com.fumbbl.ffb.server.step.StepStack;
 import com.fumbbl.ffb.server.step.mixed.pass.state.PassState;
 import com.fumbbl.ffb.server.util.ReRollService;
 import com.fumbbl.ffb.server.util.UtilServerGame;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.ArrayList;
 import java.util.Arrays;

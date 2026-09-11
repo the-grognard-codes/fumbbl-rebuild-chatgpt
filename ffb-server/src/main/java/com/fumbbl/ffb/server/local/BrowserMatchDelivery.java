@@ -5,6 +5,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.LongSupplier;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /** Bounded, ordered asynchronous delivery for one browser connection. */
 public class BrowserMatchDelivery {
@@ -104,15 +105,17 @@ public class BrowserMatchDelivery {
 	}
 
 	private void write(String message) {
+		Completion completion = new Completion() {
+				private final AtomicBoolean completed = new AtomicBoolean();
+				@Override
+				public void failed(Throwable failure) { if (completed.compareAndSet(false, true)) complete(false); }
+				@Override
+				public void succeeded() { if (completed.compareAndSet(false, true)) complete(true); }
+			};
 		try {
-			sink.send(message, new Completion() {
-				@Override
-				public void failed(Throwable failure) { complete(false); }
-				@Override
-				public void succeeded() { complete(true); }
-			});
+			sink.send(message, completion);
 		} catch (RuntimeException exception) {
-			complete(false);
+			completion.failed(exception);
 		}
 	}
 

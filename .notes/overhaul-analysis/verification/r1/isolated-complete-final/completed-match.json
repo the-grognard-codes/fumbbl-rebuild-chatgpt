@@ -1,0 +1,648 @@
+{
+  "matchId": "37123a5c-092b-3c38-bcb1-a3c118289acd",
+  "subjects": [
+    "away",
+    "home"
+  ],
+  "result": {
+    "awayScore": 1,
+    "catalogVersion": "bb2025-human-2026-09-08.1",
+    "engineVersion": "ffb-3.4.0-bb2025-m3d.1",
+    "finalRevision": 135,
+    "formatVersion": 1,
+    "homeScore": 0,
+    "matchId": "37123a5c-092b-3c38-bcb1-a3c118289acd",
+    "presetId": "human-exhibition-1150",
+    "presetVersion": "bb2025-human-2026-09-08.1",
+    "ruleset": "BB2025",
+    "eventCount": 136
+  },
+  "checkpoints": [
+    {
+      "revision": 57,
+      "half": 1,
+      "drive": 2,
+      "phase": "SETUP",
+      "homeScore": 0,
+      "awayScore": 1
+    },
+    {
+      "revision": 93,
+      "half": 2,
+      "drive": 3,
+      "phase": "SETUP",
+      "homeScore": 0,
+      "awayScore": 1
+    },
+    {
+      "revision": 135,
+      "half": 2,
+      "drive": 3,
+      "phase": "FULL_TIME",
+      "homeScore": 0,
+      "awayScore": 1
+    }
+  ],
+  "recoveryChecks": [
+    {
+      "operation": "choice",
+      "revision": 1,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "choice",
+      "revision": 2,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "place",
+      "revision": 3,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "confirm",
+      "revision": 14,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "place",
+      "revision": 15,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "confirm",
+      "revision": 26,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 27,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 28,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 29,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 30,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 31,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 32,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 33,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 34,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 35,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 36,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 37,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 38,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 39,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 40,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 41,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 42,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 43,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 44,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 45,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 46,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 47,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 48,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 49,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 50,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 51,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 52,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 53,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 54,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 55,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 56,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 57,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "place",
+      "revision": 58,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "confirm",
+      "revision": 69,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "place",
+      "revision": 70,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "confirm",
+      "revision": 81,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 82,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 83,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 84,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 85,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 86,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 87,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 88,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 89,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 90,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 91,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 92,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 93,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "place",
+      "revision": 94,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "confirm",
+      "revision": 105,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "place",
+      "revision": 106,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "confirm",
+      "revision": 117,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 118,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 119,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 120,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 121,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 122,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 123,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 124,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 125,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 126,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 127,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 128,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 129,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 130,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 131,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 132,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 133,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 134,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "STALE_REVISION"
+    },
+    {
+      "operation": "action",
+      "revision": 135,
+      "lostAcknowledgement": true,
+      "reconnect": true,
+      "exactRetry": true,
+      "staleCode": "MATCH_COMPLETED"
+    }
+  ]
+}

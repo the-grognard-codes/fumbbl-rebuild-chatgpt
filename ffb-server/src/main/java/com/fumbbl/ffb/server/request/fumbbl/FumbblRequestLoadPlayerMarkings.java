@@ -8,7 +8,7 @@ import com.fumbbl.ffb.server.net.ReceivedCommand;
 import com.fumbbl.ffb.server.net.SessionManager;
 import com.fumbbl.ffb.server.net.commands.InternalServerCommandApplyAutomatedPlayerMarkings;
 import com.fumbbl.ffb.server.request.ServerRequestProcessor;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public class FumbblRequestLoadPlayerMarkings extends AbstractFumbblRequestLoadPlayerMarkings {
 

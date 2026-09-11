@@ -1,7 +1,7 @@
 package com.fumbbl.ffb.server;
 
 import com.fumbbl.ffb.net.commands.ServerCommand;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.ArrayList;
 import java.util.List;

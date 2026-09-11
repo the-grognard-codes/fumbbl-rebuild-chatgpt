@@ -5,7 +5,7 @@ import com.fumbbl.ffb.model.Game;
 import com.fumbbl.ffb.model.Team;
 import com.fumbbl.ffb.server.net.SessionManager;
 import com.fumbbl.ffb.util.StringTool;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.Arrays;
 import java.util.Set;

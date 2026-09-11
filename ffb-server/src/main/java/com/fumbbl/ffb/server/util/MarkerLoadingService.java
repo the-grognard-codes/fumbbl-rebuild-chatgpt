@@ -6,7 +6,7 @@ import com.fumbbl.ffb.server.db.DbStatementId;
 import com.fumbbl.ffb.server.db.IDbStatementFactory;
 import com.fumbbl.ffb.server.db.query.DbPlayerMarkersQuery;
 import com.fumbbl.ffb.server.request.fumbbl.FumbblRequestLoadPlayerMarkings;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public class MarkerLoadingService {
 

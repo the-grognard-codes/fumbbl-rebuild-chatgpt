@@ -2,7 +2,7 @@ package com.fumbbl.ffb.server;
 
 import com.fumbbl.ffb.FieldCoordinate;
 import com.fumbbl.ffb.model.sketch.Sketch;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.ArrayList;
 import java.util.HashMap;

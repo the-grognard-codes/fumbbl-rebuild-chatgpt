@@ -2,7 +2,8 @@
 
 FFB is the Fantasy Football software used by [FUMBBL](https://fumbbl.com)
 
-Client and server are both implemented using Java 8 with Swing/AWT.
+The desktop client uses Swing/AWT. The R1 server targets Java 21 and Jetty 12;
+the frozen Java 8 server remains a separate characterization reference.
 
 The [local browser client](browser-client/README.md) supports the declared BB2025
 Human exhibition catalog: saved teams, invited matches, setup/play, browser reconnect,
@@ -16,20 +17,22 @@ From the repository root in PowerShell:
 
 ```powershell
 ./tools/bootstrap.ps1
-./tools/build.ps1 focused
-./tools/build.ps1 install
-./tools/build.ps1 verify
+./tools/target-build.ps1 test -Module ffb-server -Test BrowserJettyContractTest
+./tools/target-build.ps1 install
+./tools/target-build.ps1 verify
 ```
 
-Setup pins Maven 3.9.9 and Temurin JDK 8u504-b01 without a global install.
-See [the build guide](tools/README.md) for prerequisites, checksums, offline setup,
-individual tests, CI commands and the Java 8 characterization limits.
+Bootstrap supplies Maven 3.9.9 and the Java 8 reference. The target launcher requires
+Temurin 21.0.11+10 and accepts `-JavaHome` (required on Linux).
+See [the runtime policy](containers/local/runtime-compatibility.md) and
+[Java 8 reproduction](.notes/overhaul-analysis/verification/r1/java8-baseline/README.md).
 
 ## Using newer Java versions
 
-In case you want to use newer Java versions, e.g. 21 or higher, you use the `mockito5` profile which ensures tests are 
-using mockito 5 which is supports these versions. Note that the compiler settings will still be using Java 8 until we decide 
-to officially drop the support for it.
+The `mockito5` profile activates on Java 21. The server compiles with release 21;
+shared engine/client modules retain their existing source/target level. Other JDK
+versions are not part of the recorded R1 compatibility evidence. Never replace
+a JVM with resident unfinished matches; use the separate local R1 Compose project.
 
 # Module structure
 

@@ -6,7 +6,7 @@ import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.ServerSketchManager;
 import com.fumbbl.ffb.server.net.ReceivedCommand;
 import com.fumbbl.ffb.server.net.ReplaySessionManager;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public abstract class AbstractServerCommandHandlerSketch<C extends ClientSketchCommand, S extends ServerCommand>
 	extends ServerCommandHandler {

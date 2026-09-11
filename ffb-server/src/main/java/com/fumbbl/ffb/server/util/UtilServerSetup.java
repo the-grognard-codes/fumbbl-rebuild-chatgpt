@@ -19,7 +19,7 @@ import com.fumbbl.ffb.server.db.query.DbTeamSetupsForTeamQuery;
 import com.fumbbl.ffb.server.db.query.DbTeamSetupsQuery;
 import com.fumbbl.ffb.util.StringTool;
 import com.fumbbl.ffb.util.UtilBox;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 /**
  * @author Kalimar

@@ -1,5 +1,12 @@
 # Isolated local server — M0b / M1a / M1b
 
+**R1:** Keep this retained Java 8 image/JVM for its resident matches. Current
+sources build Java 21/Jetty 12 through the standalone `compose.r1.yaml` project,
+with separate database/backup volumes and loopback port 22228. Follow the
+[runtime compatibility policy](runtime-compatibility.md); do not rebuild the old
+image tag or replace an active JVM. The historical startup commands below refer
+to the pre-R1 profile.
+
 This is the Java 8 development profile, using the existing JVM, JDBC and legacy
 HTTP/WebSocket commands. M1a/M1b add a [local browser movement and choice client](../../browser-client/README.md)
 and a separate in-memory two-token fixture. The two synthetic Human teams

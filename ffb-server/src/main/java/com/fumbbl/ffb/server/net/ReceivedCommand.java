@@ -1,6 +1,6 @@
 package com.fumbbl.ffb.server.net;
 
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import com.fumbbl.ffb.net.NetCommand;
 import com.fumbbl.ffb.net.NetCommandId;

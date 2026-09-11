@@ -5,7 +5,7 @@ import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.IServerProperty;
 import com.fumbbl.ffb.server.net.SessionManager;
 import com.fumbbl.ffb.util.StringTool;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public class TalkRequirements {
 

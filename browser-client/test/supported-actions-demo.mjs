@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 
 // Mounted UI evidence from native Java engine/SetupSession traces. No product fixture route or dice.
-const frames = JSON.parse(await readFile('test/fixtures/supported-actions-v1.json', 'utf8'));
+const frames = JSON.parse(await readFile(process.env.M4_ACTION_FIXTURE ?? 'test/fixtures/supported-actions-v1.json', 'utf8'));
 const wire = JSON.parse(await readFile('test/fixtures/wire-v1.json', 'utf8'));
 const join = wire[0].messages.find(message => message.type === 'snapshot');
 const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3c');

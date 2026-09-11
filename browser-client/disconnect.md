@@ -1,5 +1,10 @@
 # Match connection and recovery (M3e)
 
+R1 adds a separately tested Java 21/Jetty 12 runtime with the same match and retry
+formats. Its [compatibility policy](../containers/local/runtime-compatibility.md)
+requires retaining/draining resident JVMs; it does not add unfinished-match
+restart recovery. The product endpoint remains the retained local reference.
+
 Use `/teams` to validate/save a team, `/matches` to select an owned revision and
 invite/join an opponent, then `/setup?matchId=...` for setup and play. At full time,
 **Open final result and replay** keeps the match ID. Content remains the

@@ -2,13 +2,15 @@ import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
+import { selectLocalRuntime } from './local-runtime-endpoint.mjs';
 
 const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3e');
-const { matchId } = JSON.parse(await readFile(resolve(out, 'setup/setup-restart.json'), 'utf8'));
+const matchId = process.env.M4_MATCH_ID ?? JSON.parse(await readFile(resolve(out, 'setup/setup-restart.json'), 'utf8')).matchId;
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 'chrome', headless: true });
 const results = [];
 try {
   const page = await browser.newPage();
+  await selectLocalRuntime(page);
   await page.goto('http://127.0.0.1:5173/matches');
   const run = async (token, requests) => page.evaluate(({ token, requests }) => new Promise((resolve, reject) => {
     const socket = new WebSocket('ws://127.0.0.1:22227/browser/v1');
