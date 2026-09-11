@@ -26,7 +26,7 @@ import com.fumbbl.ffb.util.StringTool;
 import com.fumbbl.ffb.xml.UtilXml;
 import org.apache.http.HttpStatus;
 import org.apache.http.entity.ContentType;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 

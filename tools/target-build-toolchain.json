@@ -1,0 +1,13 @@
+{
+  "maven": {
+    "version": "3.9.9",
+    "directory": "apache-maven-3.9.9"
+  },
+  "java": {
+    "runtimeVersion": "21.0.11+10-LTS",
+    "vendor": "Eclipse Adoptium",
+    "defaultWindowsHome": "C:/Program Files/Eclipse Adoptium/jdk-21.0.11.10-hotspot"
+  },
+  "repositoryDirectory": "repository",
+  "mavenProfile": "mockito5"
+}

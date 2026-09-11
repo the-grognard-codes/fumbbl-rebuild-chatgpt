@@ -40,8 +40,8 @@ import com.fumbbl.ffb.util.ArrayTool;
 import com.fumbbl.ffb.util.DateTool;
 import com.fumbbl.ffb.util.StringTool;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.ee8.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee8.servlet.ServletHolder;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -224,6 +224,7 @@ public class FantasyFootballServer implements IFactorySource {
 				ServletContextHandler context = new ServletContextHandler();
 				context.setContextPath("/");
 				server.setHandler(context);
+				org.eclipse.jetty.ee8.websocket.server.config.JettyWebSocketServletContainerInitializer.configure(context, null);
 				File httpDir = new File(httpDirProperty);
 				context.addServlet(new ServletHolder(new AdminServlet(this)), "/admin/*");
 				context.addServlet(new ServletHolder(new GameStateServlet(this)), "/gamestate/*");

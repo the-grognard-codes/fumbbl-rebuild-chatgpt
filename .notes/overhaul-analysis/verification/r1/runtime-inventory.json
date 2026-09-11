@@ -1,0 +1,108 @@
+[
+  {
+    "Name": "ffb-local-m0b-server-1",
+    "Id": "98ad5e8537510b36e14220ec1180100fbba2290d0b58d7fafdf9d0d3a58a0ef7",
+    "Image": "sha256:89d626ff9e294d719a1f775eca51d211709be598d82040bd5643a92460984f70",
+    "State": "running",
+    "StartedAt": "2026-09-11T02:44:12.404172266Z",
+    "Ports": {
+      "22227/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "22227"
+        }
+      ]
+    },
+    "Volumes": [
+      {
+        "Name": "ffb-local-m0b_backup",
+        "Destination": "/data/backup"
+      }
+    ],
+    "Networks": [
+      "ffb-local-m0b_isolated",
+      "ffb-local-m0b_loopback"
+    ]
+  },
+  {
+    "Name": "ffb-local-m0b-database-1",
+    "Id": "e15c517d422101b849d07d0480c47d03e9910ec1e67db24b8d68545d4871d8ef",
+    "Image": "sha256:2439dcd7d14010ecd1ff7a4e1c5abe8e208c34fe35290744deeeaac3569043c3",
+    "State": "running",
+    "StartedAt": "2026-09-10T02:48:08.489414274Z",
+    "Ports": {
+      "3306/tcp": null
+    },
+    "Volumes": [
+      {
+        "Name": "ffb-local-m0b_database",
+        "Destination": "/var/lib/mysql"
+      }
+    ],
+    "Networks": [
+      "ffb-local-m0b_isolated"
+    ]
+  },
+  {
+    "Name": "ffb-local-m0b-server-r1-1",
+    "Id": "1326970433d8bd248a29709b27bc19202f440e121d427282026062ca72ac2f8d",
+    "Image": "sha256:264761923c5e0c8d161ce23475fdd6c74033e5b1b0a3a7f231cc36a7768252b4",
+    "State": "exited",
+    "StartedAt": "2026-09-11T04:34:56.352141706Z",
+    "Ports": {},
+    "Volumes": [
+      {
+        "Name": "ffb-local-m0b_backup",
+        "Destination": "/data/backup"
+      }
+    ],
+    "Networks": [
+      "ffb-local-m0b_isolated",
+      "ffb-local-m0b_loopback"
+    ]
+  },
+  {
+    "Name": "ffb-local-r1-server-1",
+    "Id": "9fc99674264277fbb6615453ba7243a6dd2ca1159dbcbb935e0a92549505ce66",
+    "Image": "sha256:264761923c5e0c8d161ce23475fdd6c74033e5b1b0a3a7f231cc36a7768252b4",
+    "State": "running",
+    "StartedAt": "2026-09-11T04:37:59.789362449Z",
+    "Ports": {
+      "22227/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "22228"
+        }
+      ]
+    },
+    "Volumes": [
+      {
+        "Name": "ffb-local-r1_backup",
+        "Destination": "/data/backup"
+      }
+    ],
+    "Networks": [
+      "ffb-local-r1_isolated",
+      "ffb-local-r1_loopback"
+    ]
+  },
+  {
+    "Name": "ffb-local-r1-database-1",
+    "Id": "2fab3df2a21dd8814024d20cb8a8fb6d7961863974d1e23b3c5eb71430136e43",
+    "Image": "sha256:2439dcd7d14010ecd1ff7a4e1c5abe8e208c34fe35290744deeeaac3569043c3",
+    "State": "running",
+    "StartedAt": "2026-09-11T04:37:49.958701002Z",
+    "Ports": {
+      "3306/tcp": null
+    },
+    "Volumes": [
+      {
+        "Name": "ffb-local-r1_database",
+        "Destination": "/var/lib/mysql"
+      }
+    ],
+    "Networks": [
+      "ffb-local-r1_isolated"
+    ]
+  }
+]

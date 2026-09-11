@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
+import { selectLocalRuntime } from './local-runtime-endpoint.mjs';
 
 const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3d/live');
 const integrated = process.env.M3_INTEGRATED === '1';
@@ -16,6 +17,7 @@ const tokens = await Promise.all(subjects.map(subject => readFile(resolve(`../co
 const errors = [];
 
 for (const page of pages) {
+  await selectLocalRuntime(page);
   page.on('pageerror', error => errors.push(error.message));
   await page.addInitScript(() => {
     const Native = window.WebSocket;
@@ -170,6 +172,9 @@ try {
     }
     if (!selected) { const result=await saved(pages[index],{operation:'create',draft:draft()}); assert.equal(result.code,'OK'); selected=result.document; }
     teams.push(selected);
+    // A fresh isolated database initially renders the empty-team state. Reload
+    // through the real connection flow so the newly created source is listed.
+    await connect(pages[index], index, '/matches');
     await pages[index].getByRole('button',{name:'Refresh saved teams',exact:true}).click();
     await pages[index].getByLabel('Saved team',{exact:true}).selectOption(selected.teamId);
   }

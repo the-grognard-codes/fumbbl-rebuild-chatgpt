@@ -4,7 +4,7 @@ import com.fumbbl.ffb.net.NetCommandId;
 import com.fumbbl.ffb.net.commands.ClientCommandSketchSetLabel;
 import com.fumbbl.ffb.net.commands.ServerCommandSketchSetLabel;
 import com.fumbbl.ffb.server.FantasyFootballServer;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public class ServerCommandHandlerSketchSetLabel extends AbstractServerCommandHandlerSketch<ClientCommandSketchSetLabel, ServerCommandSketchSetLabel> {
 	protected ServerCommandHandlerSketchSetLabel(FantasyFootballServer pServer) {

@@ -1,0 +1,11 @@
+{
+  "pass": true,
+  "frames": 91,
+  "mismatches": [],
+  "baselinePath": ".notes\\overhaul-analysis\\verification\\r1\\java8-actions.json",
+  "targetPath": ".notes\\overhaul-analysis\\verification\\r1\\target-actions.json",
+  "baselineSha256": "0a70a008064d1b3c2910e4ce2d024e4565b3b1dec865d6e86c2682a6e5796a98",
+  "targetSha256": "d8f34c61f43f3fd8a7ff1ac3f8e6efd1e1e6aeee54c4dcb06081cb3acd2a73de",
+  "normalizedSha256": "350bc3980ee905e8b90f62f966e0be5a8bd4895487a08c38911bed11cf60fe0f",
+  "normalization": "bijective ordinal replacement of UUID-valued matchId/requestId only; all other values and ordering compared exactly"
+}

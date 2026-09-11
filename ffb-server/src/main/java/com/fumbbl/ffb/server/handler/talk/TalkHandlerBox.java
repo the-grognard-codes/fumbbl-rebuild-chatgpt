@@ -14,7 +14,7 @@ import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.mechanic.RollMechanic;
 import com.fumbbl.ffb.server.net.ServerCommunication;
 import com.fumbbl.ffb.server.util.UtilServerGame;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public abstract class TalkHandlerBox extends TalkHandler {
 

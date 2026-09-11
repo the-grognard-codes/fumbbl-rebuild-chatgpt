@@ -15,7 +15,7 @@ import com.fumbbl.ffb.server.request.fumbbl.FumbblResult;
 import com.fumbbl.ffb.util.ArrayTool;
 import com.fumbbl.ffb.util.StringTool;
 import com.fumbbl.ffb.xml.UtilXml;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServlet;

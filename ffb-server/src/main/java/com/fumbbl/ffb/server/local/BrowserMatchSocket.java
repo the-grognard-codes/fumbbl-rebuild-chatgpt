@@ -2,12 +2,13 @@ package com.fumbbl.ffb.server.local;
 
 import com.fumbbl.ffb.server.FantasyFootballServer;
 
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WriteCallback;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
-import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+import org.eclipse.jetty.ee8.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.WriteCallback;
+import org.eclipse.jetty.ee8.websocket.api.annotations.OnWebSocketClose;
+import org.eclipse.jetty.ee8.websocket.api.annotations.OnWebSocketConnect;
+import org.eclipse.jetty.ee8.websocket.api.annotations.OnWebSocketMessage;
+import org.eclipse.jetty.ee8.websocket.api.annotations.OnWebSocketError;
+import org.eclipse.jetty.ee8.websocket.api.annotations.WebSocket;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -40,7 +41,7 @@ public class BrowserMatchSocket implements BrowserMatchAdapter.Connection {
 			return;
 		}
 		try {
-			session.setIdleTimeout(300000);
+			session.setIdleTimeout(java.time.Duration.ofMinutes(5));
 			delivery = new BrowserMatchDelivery(new SessionSink(session), transport.getMetrics(),
 				BrowserMatchTransport.MAX_OUTBOUND_MESSAGES, BrowserMatchTransport.MAX_OUTBOUND_BYTES);
 		} catch (RuntimeException exception) {
@@ -70,6 +71,17 @@ public class BrowserMatchSocket implements BrowserMatchAdapter.Connection {
 		if (wasActive) {
 			transport.disconnect(this, () -> adapter.disconnect(this));
 		}
+	}
+
+	@OnWebSocketMessage
+	public void onBinary(byte[] bytes, int offset, int length) {
+		retire(1003, "Browser protocol requires text JSON");
+	}
+
+	@OnWebSocketError
+	public void onError(Throwable failure) {
+		// Jetty may report a failure before its close notification. Release once.
+		retire(1011, "Browser transport failed; reconnect for a full snapshot");
 	}
 
 	@Override

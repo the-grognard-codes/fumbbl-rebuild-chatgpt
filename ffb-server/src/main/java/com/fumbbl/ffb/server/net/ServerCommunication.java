@@ -57,8 +57,8 @@ import com.fumbbl.ffb.server.net.commands.InternalServerCommand;
 import com.fumbbl.ffb.server.net.commands.InternalServerCommandSocketClosed;
 import com.fumbbl.ffb.util.ArrayTool;
 import com.fumbbl.ffb.util.StringTool;
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketException;
+import org.eclipse.jetty.ee8.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.exceptions.WebSocketException;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -402,9 +402,12 @@ public class ServerCommunication implements Runnable, IReceivedCommandHandler {
 		}
 
 		try {
-			// Future<Void> future = session.getRemote().sendStringByFuture(textMessage);
+			// Jetty 12 reports asynchronous failures through the completion callback.
 			session.getRemote()
-				.sendBytesByFuture(ByteBuffer.wrap(textMessage.getBytes(StandardCharsets.UTF_8)));
+				.sendBytes(ByteBuffer.wrap(textMessage.getBytes(StandardCharsets.UTF_8)), new org.eclipse.jetty.ee8.websocket.api.WriteCallback() {
+                    @Override public void writeSuccess() { }
+                    @Override public void writeFailed(Throwable failure) { close(session); }
+                });
 		} catch (WebSocketException webSocketException) {
 			// getServer().getDebugLog().log(IServerLogLevel.WARN,
 			// webSocketException.getMessage());

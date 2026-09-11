@@ -10,11 +10,11 @@ import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.handler.IReceivedCommandHandler;
 import com.fumbbl.ffb.server.net.commands.InternalServerCommandSocketClosed;
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
-import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+import org.eclipse.jetty.ee8.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.annotations.OnWebSocketClose;
+import org.eclipse.jetty.ee8.websocket.api.annotations.OnWebSocketConnect;
+import org.eclipse.jetty.ee8.websocket.api.annotations.OnWebSocketMessage;
+import org.eclipse.jetty.ee8.websocket.api.annotations.WebSocket;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -74,7 +74,7 @@ public class CommandSocket {
 
 	@OnWebSocketConnect
 	public void onConnect(Session pSession) {
-		pSession.setIdleTimeout(Long.MAX_VALUE);
+		pSession.setIdleTimeout(java.time.Duration.ZERO);
 	}
 
 	@OnWebSocketClose

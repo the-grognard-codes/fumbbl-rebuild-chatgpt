@@ -10,6 +10,7 @@ public class ChangeList {
 
 	public ChangeList() {
 		versions.add(new VersionChangeList("3.4.0")
+			.addImprovement("Local browser server supports Java 21 and Jetty 12 with bounded transport recovery")
 			.addBugfix("Local browser matches retain uncertain actions across reconnect and page reload, keep new actions locked until reconciliation, and link directly to final results")
 			.addFeature("Complete local browser matches through touchdowns, halftime and full time, with saved results and private event replay")
 			.addFeature("Local browser matches support passing, interceptions, hand-offs, fouls, throw team-mate, jumps and skill or injury choices, with searchable actions and reconnect recovery")

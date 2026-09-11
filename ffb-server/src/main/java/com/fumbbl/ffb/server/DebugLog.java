@@ -7,7 +7,7 @@ import com.fumbbl.ffb.server.net.ReplaySessionManager;
 import com.fumbbl.ffb.server.net.SessionManager;
 import com.fumbbl.ffb.util.ArrayTool;
 import com.fumbbl.ffb.util.StringTool;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.io.BufferedReader;
 import java.io.File;

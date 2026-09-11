@@ -3,13 +3,13 @@ package com.fumbbl.ffb.server.local;
 import com.eclipsesource.json.JsonObject;
 import com.fumbbl.ffb.server.FantasyFootballServer;
 
-import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
-import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
-import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
-import org.eclipse.jetty.websocket.servlet.WebSocketServlet;
-import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
+import org.eclipse.jetty.ee8.websocket.server.JettyServerUpgradeRequest;
+import org.eclipse.jetty.ee8.websocket.server.JettyServerUpgradeResponse;
+import org.eclipse.jetty.ee8.websocket.server.JettyWebSocketCreator;
+import org.eclipse.jetty.ee8.websocket.server.JettyWebSocketServlet;
+import org.eclipse.jetty.ee8.websocket.server.JettyWebSocketServletFactory;
 
-public class BrowserMatchServlet extends WebSocketServlet implements WebSocketCreator {
+public class BrowserMatchServlet extends JettyWebSocketServlet implements JettyWebSocketCreator {
 	private final BrowserMatchAdapter adapter;
 	private final FantasyFootballServer server;
 	private final BrowserMatchTransport transport;
@@ -22,8 +22,8 @@ public class BrowserMatchServlet extends WebSocketServlet implements WebSocketCr
 	}
 
 	@Override
-	public void configure(WebSocketServletFactory factory) {
-		factory.getPolicy().setAsyncWriteTimeout(2000);
+	public void configure(JettyWebSocketServletFactory factory) {
+		// The existing delivery watchdog bounds asynchronous writes to two seconds.
 		factory.setCreator(this);
 		if ("/tmp/ffb-browser-control".equals(server.getProperty("local.browser.control.file"))) {
 			fixtureControl = new BrowserFixtureControl(server, adapter, this);
@@ -32,12 +32,15 @@ public class BrowserMatchServlet extends WebSocketServlet implements WebSocketCr
 	}
 
 	@Override
-	public Object createWebSocket(ServletUpgradeRequest request, ServletUpgradeResponse response) {
+	public Object createWebSocket(JettyServerUpgradeRequest request, JettyServerUpgradeResponse response) {
 		String origin = request.getHeader("Origin");
-		if (!"http://127.0.0.1:5173".equals(origin) && !"http://localhost:5173".equals(origin)) {
-			response.setSuccess(false);
+		if (request.getHeaders("Origin").size() != 1
+			|| (!"http://127.0.0.1:5173".equals(origin) && !"http://localhost:5173".equals(origin))) {
+			response.setStatusCode(403);
 			return null;
 		}
+		// Version 1 is uncompressed text JSON; no negotiated decoding expansion.
+		response.setExtensions(java.util.Collections.emptyList());
 		return new BrowserMatchSocket(server, adapter, transport);
 	}
 

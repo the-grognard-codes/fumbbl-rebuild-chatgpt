@@ -10,7 +10,7 @@ import com.fumbbl.ffb.server.request.ServerRequestProcessor;
 import com.fumbbl.ffb.server.util.UtilServerHttpClient;
 import com.fumbbl.ffb.util.StringTool;
 import com.fumbbl.ffb.xml.XmlHandler;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 import org.xml.sax.InputSource;
 
 import java.io.BufferedReader;

@@ -27,7 +27,7 @@ import com.fumbbl.ffb.util.StringTool;
 import com.fumbbl.ffb.util.UtilActingPlayer;
 import com.fumbbl.ffb.util.UtilCards;
 
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.Arrays;
 import java.util.List;

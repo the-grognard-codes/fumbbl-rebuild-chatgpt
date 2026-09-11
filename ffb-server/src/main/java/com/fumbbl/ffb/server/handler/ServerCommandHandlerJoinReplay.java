@@ -18,7 +18,7 @@ import com.fumbbl.ffb.server.net.ReceivedCommand;
 import com.fumbbl.ffb.server.net.ReplaySessionManager;
 import com.fumbbl.ffb.server.net.ServerCommunication;
 import com.fumbbl.ffb.util.ArrayTool;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.Arrays;
 import java.util.List;

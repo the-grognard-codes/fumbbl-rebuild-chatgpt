@@ -1,10 +1,10 @@
 package com.fumbbl.ffb.server.local;
 
 import com.eclipsesource.json.JsonObject;
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
-import org.eclipse.jetty.websocket.client.WebSocketClient;
+import org.eclipse.jetty.ee8.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.WebSocketAdapter;
+import org.eclipse.jetty.ee8.websocket.client.ClientUpgradeRequest;
+import org.eclipse.jetty.ee8.websocket.client.WebSocketClient;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;

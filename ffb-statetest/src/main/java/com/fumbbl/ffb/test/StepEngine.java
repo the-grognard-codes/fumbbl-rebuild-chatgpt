@@ -4,7 +4,7 @@ import com.fumbbl.ffb.net.NetCommand;
 import com.fumbbl.ffb.server.GameState;
 import com.fumbbl.ffb.server.net.ReceivedCommand;
 import com.fumbbl.ffb.server.step.IStep;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public class StepEngine {
 	public static IStep start(GameState gameState) {

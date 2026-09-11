@@ -5,7 +5,7 @@ import com.fumbbl.ffb.SoundId;
 import com.fumbbl.ffb.model.Team;
 import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.GameState;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 @SuppressWarnings("unused")
 public class TalkHandlerEmote extends TalkHandler {

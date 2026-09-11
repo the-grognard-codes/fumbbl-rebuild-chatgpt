@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
+import { selectLocalRuntime } from './local-runtime-endpoint.mjs';
 
 const out = resolve(process.env.M3_EVIDENCE ?? '../.notes/overhaul-analysis/verification/m3d/restart');
 await mkdir(out, { recursive: true });
@@ -14,6 +15,7 @@ const tokens = await Promise.all(subjects.map(subject => readFile(resolve(`../co
 const errors = [];
 
 for (const page of pages) {
+  await selectLocalRuntime(page);
   page.on('pageerror', error => errors.push(error.message));
   await page.addInitScript(() => {
     const Native = window.WebSocket;

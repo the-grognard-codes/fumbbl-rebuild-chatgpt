@@ -1,5 +1,12 @@
 # Java 8 build baseline (M0a)
 
+**R1:** The Java 8 build instructions below now apply to frozen revision
+`56c19c80070861e89f465f1989be403d3aad0ffd`, not the current Jetty 12 server sources.
+Use [target-build.ps1](target-build.ps1) for current Java 21 sources, with
+`test -Module ... -Test ...`, `install`, or `verify` and optional `-Offline`.
+Supply `-JavaHome` on Linux. See [runtime policy](../containers/local/runtime-compatibility.md)
+and [exact baseline reproduction](../.notes/overhaul-analysis/verification/r1/java8-baseline/README.md).
+
 Run these commands from the repository root. Windows x64 setup needs only
 Windows PowerShell 5.1 (included with Windows) or PowerShell 7. No global Maven,
 JDK installation, administrator privileges, Node, Docker or database is needed.

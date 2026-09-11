@@ -51,12 +51,15 @@ class BallAndFoulActionsTest {
         Game game = state.getGame();
         game.getFieldModel().setPlayerCoordinate(game.getPlayerById("opponent"), new FieldCoordinate(8, 7));
         game.getFieldModel().setPlayerState(game.getPlayerById("opponent"), new PlayerState(PlayerState.PRONE));
-        TestRolls.on(state).armor(2, 2);
+        // The ejected ball carrier drops the ball; pin its D8 bounce north.
+        TestRolls.on(state).armor(2, 2).general(1);
         perform(state, "declareFoul"); perform(state, "foul");
         assertTrue(game.getDialogParameter() instanceof DialogArgueTheCallParameter);
         Action yes = actions(state).stream().filter(a -> a.id.equals("argue:actor")).findFirst().get();
         assertEquals("actor", ((ClientCommandArgueTheCall) yes.command).getPlayerIds()[0]);
         performId(state, "argue:no");
+        assertEquals(new FieldCoordinate(7, 6), game.getFieldModel().getBallCoordinate());
+        assertTrue(state.getDiceRoller().getTestRolls().get("General").isEmpty());
         assertFalse(game.isHomePlaying());
         assertFalse(actions(state).isEmpty());
     }

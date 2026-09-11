@@ -20,7 +20,7 @@ import com.fumbbl.ffb.test.StepEngine;
 import com.fumbbl.ffb.test.TestRolls;
 import com.fumbbl.ffb.test.TestServer;
 
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,0 +1,19 @@
+{
+  "pass": true,
+  "matchId": "a431f11b-3c7d-30cd-ade4-d361c982bd9b",
+  "result": {
+    "awayScore": 1,
+    "catalogVersion": "bb2025-human-2026-09-08.1",
+    "engineVersion": "ffb-3.4.0-bb2025-m3d.1",
+    "finalRevision": 138,
+    "formatVersion": 1,
+    "homeScore": 0,
+    "matchId": "a431f11b-3c7d-30cd-ade4-d361c982bd9b",
+    "presetId": "human-exhibition-1150",
+    "presetVersion": "bb2025-human-2026-09-08.1",
+    "ruleset": "BB2025",
+    "eventCount": 139
+  },
+  "verifiedEvents": 139,
+  "browser": "152.0.7977.83"
+}

@@ -1,10 +1,10 @@
 package com.fumbbl.ffb.server.net;
 
-import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
-import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
-import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
-import org.eclipse.jetty.websocket.servlet.WebSocketServlet;
-import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
+import org.eclipse.jetty.ee8.websocket.server.JettyServerUpgradeRequest;
+import org.eclipse.jetty.ee8.websocket.server.JettyServerUpgradeResponse;
+import org.eclipse.jetty.ee8.websocket.server.JettyWebSocketCreator;
+import org.eclipse.jetty.ee8.websocket.server.JettyWebSocketServlet;
+import org.eclipse.jetty.ee8.websocket.server.JettyWebSocketServletFactory;
 
 import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.IServerProperty;
@@ -14,7 +14,7 @@ import com.fumbbl.ffb.util.StringTool;
  * 
  * @author Kalimar
  */
-public class CommandServlet extends WebSocketServlet implements WebSocketCreator {
+public class CommandServlet extends JettyWebSocketServlet implements JettyWebSocketCreator {
 
 	private FantasyFootballServer fServer;
 
@@ -23,12 +23,12 @@ public class CommandServlet extends WebSocketServlet implements WebSocketCreator
 	}
 
 	@Override
-	public void configure(WebSocketServletFactory factory) {
-		factory.getPolicy().setIdleTimeout(10000);
+	public void configure(JettyWebSocketServletFactory factory) {
+		factory.setIdleTimeout(java.time.Duration.ofSeconds(10));
 		factory.setCreator(this);
 	}
 
-	public Object createWebSocket(ServletUpgradeRequest pRequest, ServletUpgradeResponse pResponse) {
+	public Object createWebSocket(JettyServerUpgradeRequest pRequest, JettyServerUpgradeResponse pResponse) {
 		String commandCompressionProperty = null;
 		if (fServer != null) {
 			commandCompressionProperty = fServer.getProperty(IServerProperty.SERVER_COMMAND_COMPRESSION);

@@ -2,7 +2,7 @@ package com.fumbbl.ffb.server.net;
 
 import com.fumbbl.ffb.ClientMode;
 import com.fumbbl.ffb.server.marking.AutoMarkingConfig;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.HashMap;
 import java.util.HashSet;

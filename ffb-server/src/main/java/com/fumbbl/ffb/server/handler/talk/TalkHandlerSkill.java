@@ -7,7 +7,7 @@ import com.fumbbl.ffb.model.Team;
 import com.fumbbl.ffb.model.skill.Skill;
 import com.fumbbl.ffb.server.FantasyFootballServer;
 import com.fumbbl.ffb.server.GameState;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 public abstract class TalkHandlerSkill extends TalkHandler {
 	private static final String _ADD = "add";

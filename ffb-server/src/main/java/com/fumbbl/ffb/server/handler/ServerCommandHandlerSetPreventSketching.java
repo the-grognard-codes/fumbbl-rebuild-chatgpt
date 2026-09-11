@@ -9,7 +9,7 @@ import com.fumbbl.ffb.server.ReplayState;
 import com.fumbbl.ffb.server.net.ReceivedCommand;
 import com.fumbbl.ffb.server.net.ReplaySessionManager;
 import com.fumbbl.ffb.server.net.ServerCommunication;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 import java.util.HashSet;
 import java.util.Set;

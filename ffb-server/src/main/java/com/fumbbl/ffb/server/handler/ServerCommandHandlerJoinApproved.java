@@ -25,7 +25,7 @@ import com.fumbbl.ffb.server.util.UtilServerStartGame;
 import com.fumbbl.ffb.server.util.UtilServerTimer;
 import com.fumbbl.ffb.server.util.UtilSkillBehaviours;
 import com.fumbbl.ffb.util.StringTool;
-import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.ee8.websocket.api.Session;
 
 /**
  * 

@@ -18,9 +18,8 @@ services:
     networks: [isolated]
   server:
     image: ffb-server:3.4.0-m3d.1
-    build:
-      context: ../..
-      dockerfile: containers/local/Dockerfile
+    # Retained Java 8 runtime: never rebuild this tag from R1 sources.
+    # Build/run the standalone R1 project in compose.r1.yaml instead.
     depends_on:
       database:
         condition: service_healthy
